@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="../Empleador.xhtml">
+
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Empresas" class="btn2" action="/empleador/empresa/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Ofertas" class="btn2 bbt" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
+                    <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
+                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}" ></img>
+                </p:commandLink>
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Empresas" action="/empleador/empresa/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Ofertas" style="color: #086A87;" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
+        </ui:define>
+
+        <ui:define name="caja">
+            <h3 class="titulo_p">Mis Ofertas Laborales</h3>
+            <h:form id="OfertaLaboralListForm" style="text-align: center">
+                <p:panel>
+                    <h:outputLabel value="Empresa: " style="font-weight: bold;font-size: 16px"/>
+                    <h:outputLabel value="#{ofertaLaboralController.empresa.nombreComercial}" style="font-size: 16px; "/>
+                    <p:dataTable id="datalist" class="tabla" value="#{ofertaLaboralController.lista}" var="item" style="margin-top: 5px"
+                                 selectionMode="single"
+                                 paginator="true"
+                                 rowKey="#{item.idOferta}"                             
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,15"
+                                 paginatorPosition="bottom"
+                                 emptyMessage="No hay datos."
+                                 sortBy="#{item.idOferta}"
+                                 sortOrder="descending">
+
+                        <p:ajax event="rowSelect"   update="createButton editButton viewButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton editButton viewButton deleteButton"/>
+
+                        <p:column sortBy="#{item.cargoSolicitado}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListOfertaLaboralTitle_cargoSolicitado}"/>
+                            </f:facet>
+                            <br/>
+                            <h:outputText style="font-size: 16px !important;" value="#{item.cargoSolicitado}" />
+                            <br/>               
+                            <br/>
+                            <h:outputText value="Desde " style="font-weight: bold"/>
+                            <h:outputText value="#{item.fechaInicio}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+
+                            <h:outputText value=" - "/>
+                            <h:outputText value="Hasta " style="font-weight: bold"/>
+                            <h:outputText value="#{item.fechaFin}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                            <br/>
+                            <br/>
+                        </p:column>
+
+                        <p:column style="width: 130px;" sortBy="#{item.fechaCreacion}">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha registro"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column style="width: 100px;" sortBy="#{item.estado}">
+                            <f:facet name="header">
+                                <h:outputText value="Estado"/>
+
+                            </f:facet>
+                            <p:commandButton styleClass="habilitar" id="habi" actionListener="#{ofertaLaboralController.setSelected(item)}"
+                                             oncomplete="PF('form_estado').show()"
+                                             value="#{item.estado==true ? 'DISPONIBLE':'NO DISPONIBLE'}"
+                                             style="#{item.estado==true ? 'color: #007bff;font-weight: bold;':'color: #e25555;font-weight: bold;'}"
+                                             update=":veri">
+                            </p:commandButton>
+                            <p:tooltip for="habi" value="Clic para cambiar" trackMouse="true" style="box-shadow: none" /> 
+                        </p:column>
+
+                        <p:column style="width: 120px;" sortBy="#{item.idOferta}">
+                            <f:facet name="header">
+                                <h:outputText value="Acción"/>
+                            </f:facet>
+
+                            <p:commandLink id="viewButton" style="text-decoration: none;outline: none;margin-right: 8px"
+                                           actionListener="#{ofertaLaboralController.setSelected(item)}"
+                                           action="/empleador/ofertaLaboral/verOferta?faces-redirect=true">
+                                <img src="#{request.contextPath}/resources/img/ver.png" width="28px" class="icono"></img> 
+                            </p:commandLink>
+                            <p:tooltip for="viewButton" value="Ver detalles" trackMouse="true" style="box-shadow: none" /> 
+                            <p:commandLink id="editButton" style="text-decoration: none;outline: none;margin-right: 8px"
+                                           actionListener="#{ofertaLaboralController.setSelected(item)}"
+                                           action="/empleador/ofertaLaboral/actualizarOferta?faces-redirect=true" >
+                                <img src="#{request.contextPath}/resources/img/editar.png" width="28px" class="icono"></img> 
+                            </p:commandLink>
+                            <p:tooltip for="editButton" value="Editar" trackMouse="true" style="box-shadow: none" />
+                            <p:commandLink id="deleteButton" style="text-decoration: none;outline: none"
+                                           actionListener="#{ofertaLaboralController.setSelected(item)}" 
+                                           oncomplete="PF('delete_oferta').show()">
+                                <img src="#{request.contextPath}/resources/img/eliminar.png" width="28px" class="icono"></img> 
+                            </p:commandLink>
+                            <p:tooltip for="deleteButton" value="Eliminar" trackMouse="true" style="box-shadow: none" />
+                        </p:column>
+
+                        <p:column style="width: 60px;" sortBy="#{item.idOferta}">
+                            <f:facet name="header">
+                                <h:outputText value="Reporte"/>
+                            </f:facet>
+                            <h:commandLink id="track2" style="text-decoration: none;font-size: 16px"   
+                                           actionListener="#{exportar.reporteIndividual_Oferta(item.idOferta,item.idEmpresa.logotipo)}">
+                                <img src="#{request.contextPath}/resources/img/pdf.png" width="30px"></img>  
+                            </h:commandLink>       
+                            <p:tooltip id="toolTipTrack2" for="track2" value="Descargar reporte" trackMouse="true" style="box-shadow: none"  />
+                        </p:column>
+                        <p:column style="width: 80px;" sortBy="#{item.idOferta}">
+                            <f:facet name="header">
+                                <h:outputText value="Postulantes"/>
+                            </f:facet>
+                            <h:commandLink id="track" actionListener="#{postulanteController.setOfertaLista(item)}" 
+                                           action="/empleador/ofertaLaboral/ListaPostulante?faces-redirect=true">
+                                <img src="#{request.contextPath}/resources/img/estudiante.png" width="40px"></img>   
+                            </h:commandLink>
+                            <p:tooltip id="toolTipTrack" for="track" value="Ver Postulantes" trackMouse="true" style="box-shadow: none"  />
+
+                        </p:column>
+                        <f:facet name="footer">
+                            <h:outputLabel value="Total Ofertas: "  style="font-size: 16px; font-weight: normal "/>
+                            <h:outputLabel value="#{ofertaLaboralController.lista.size()}"  style="font-size: 16px; "/>
+                            <br/>
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Crear Nueva Oferta" actionListener="#{ofertaLaboralController.prepareCreate}" action="/empleador/ofertaLaboral/crearOferta?faces-redirect=true"/>
+
+                        </f:facet>
+                    </p:dataTable>
+                    <br/>
+                    <c:if test="#{ofertaLaboralController.lista.size()!=0}">
+                        <div class="c_fechas" style="margin-top: 40px">
+                            <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                                font-size: 20px">Descargar Reporte por Fechas</h1>
+                            <br/>
+                            <br/>
+                            <p:outputLabel style="font-size: 16px !important" value="Seleccione las fechas de registro correspondientes."/>
+                            <br/>
+                            <br/>
+                            <div style="width: 180px;margin: auto;display: inline-block;margin-bottom: 20px">
+                                <h3 style="width: 100%;margin: auto;text-align: center;margin-bottom: 5px;">Fecha Inicio</h3>
+                                <p:calendar id="fechaInicio" locale="es" pattern="dd/MM/yyyy" navigator="true" mask="true" styleClass="fecha" 
+                                            value="#{ofertaLaboralController.fecha_inicio}"/>
+                            </div>
+                            <div style="width: 180px;margin: auto;display: inline-block;margin-bottom: 20px">
+                                <h3 style="width: 100%;margin: auto;text-align: center;margin-bottom: 5px;">Fecha Final</h3>
+                                <p:calendar id="fechaFinal" locale="es" pattern="dd/MM/yyyy" navigator="true" mask="true" styleClass="fecha" 
+                                            value="#{ofertaLaboralController.fecha_fin}"/>
+                            </div>
+                            <br/>
+                            <h:commandButton value="Ayer"  actionListener="#{ofertaLaboralController.fecha2()}" class="f1">
+                                <f:ajax execute="@form" render="fechaInicio" /> 
+                                <f:ajax render="fechaFinal" /> 
+                                <f:ajax render="mensaje" /> 
+                                <f:ajax render="des" /> 
+                            </h:commandButton>
+                            <h:commandButton value="Buscar" class="botonDescargar" 
+                                             actionListener="#{ofertaLaboralController.verificarReporte}" id="export" >
+                                <f:ajax execute="@form" render="mensaje" />                                                                       
+                                <f:ajax render="des" />                                                                       
+                            </h:commandButton>
+                            <h:commandButton value="Hoy"  actionListener="#{ofertaLaboralController.fecha1()}" class="f1">
+                                <f:ajax execute="@form" render="fechaInicio" /> 
+                                <f:ajax render="fechaFinal" /> 
+                                <f:ajax render="mensaje" /> 
+                                <f:ajax render="des" /> 
+                            </h:commandButton>
+                            <br/>
+                            <br/>
+                            <h:outputLabel id="mensaje" style="#{ofertaLaboralController.v==true ? 'color:green;font-size:14px;':'color:red;font-size:14px;'}"  
+                                           value="#{ofertaLaboralController.mensaje}">
+                                <br/>
+
+                                <h:outputLabel value="Total : #{ofertaLaboralController.listaE.size()} "
+                                               style="#{ofertaLaboralController.v==true ? 'color:#000;font-size:14px;':'display:none;'} "/>
+                                <h:outputLabel value="#{ofertaLaboralController.listaE.size()>1 ? 'registros':'registro'}"
+                                               style="#{ofertaLaboralController.v==true ? 'color:#000;font-size:14px;':'display:none;'} "/>
+                                <br/>
+
+                            </h:outputLabel>
+                            <p:commandButton  styleClass="editar"  value="Descargar reporte" ajax="false" id="des"
+                                              style="#{ofertaLaboralController.v==true ? 'margin-top:10px;':'display:none;'} "                                      
+                                              actionListener="#{ofertaLaboralController.descargarReporte()}">    
+                            </p:commandButton>
+                        </div>
+                        <br/>
+                        <div class="c_fechas">
+
+                            <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                                font-size: 20px">Descargar Reporte Total</h1>
+                            <br/>
+                            <p:commandButton styleClass="editar" ajax="false" icon="ui-icon-document" value="Descargar reporte"
+                                             actionListener="#{exportar.reporteOfertas(ofertaLaboralController.empresa.idEmpresa)}"/>
+
+                            <br/>
+                        </div>
+                        <br/>
+                        <br/>
+                    </c:if>
+                </p:panel>
+            </h:form>
+            <p:dialog id="delete_oferta" widgetVar="delete_oferta" modal="false" resizable="false" closeOnEscape="true"
+                      appendTo="@(body)"  showEffect="clip" hideEffect="clip" header="Aviso"
+                      style="background: #f2f2f2;box-shadow: none;box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.75) !important;" >
+                <h:form id="DeleteEmpresa">
+
+                    <h2 style="text-align: center; font-family: Arial">Eliminar oferta</h2>
+                    <p:commandButton styleClass="botonA" actionListener="#{ofertaLaboralController.destroy}" 
+                                     update=":growl,:OfertaLaboralListForm:datalist" value="Si"  oncomplete="PF('delete_oferta').hide()"/>
+                    <p:commandButton styleClass="botonC" value="No" oncomplete="PF('delete_oferta').hide()"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog id="form_estado" widgetVar="form_estado" modal="false" resizable="false" appendTo="@(body)" header="ACEPTACIÓN" 
+                      closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false"
+                      style="box-shadow: none; box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75) !important;background: white;">
+                <h:form id="veri" style="width: 200px;margin: auto;text-align: center;">
+                    <h3 style="#{ofertaLaboralController.selected.estado == true ? 'color:#007bff;font-family: Arial;font-size:20px;':'color:red;font-family: Arial;font-size:20px;'}">
+                        #{ofertaLaboralController.selected.estado == true ? 'DISPONIBLE':'NO DISPONIBLE'} </h3>
+                    <p:selectBooleanButton class="estado" value="#{ofertaLaboralController.selected.estado}"  onLabel="Deshabilitar" offLabel="Habilitar">
+                        <p:ajax update=":OfertaLaboralListForm,:growl" listener="#{ofertaLaboralController.update2}" oncomplete="PF('form_estado').hide()"/>
+
+                    </p:selectBooleanButton>  
+
+                    <br/>
+                    <p:commandButton value="Cerrar" styleClass="eliminar" style="margin-top: 10px;width: 90px;"
+                                     immediate="true" oncomplete="PF('form_estado').hide()"/>
+                    <br/>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+</html>

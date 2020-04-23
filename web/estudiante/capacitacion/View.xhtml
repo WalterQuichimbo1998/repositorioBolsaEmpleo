@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CapacitacionViewDlg" widgetVar="CapacitacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCapacitacionTitle}"
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="CapacitacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{capacitacionController.selected != null}">
+                         <h:outputText value="#{bundle.ViewCapacitacionLabel_institucion}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.institucion}" title="#{bundle.ViewCapacitacionTitle_institucion}"/>
+                        <h:outputText value="#{bundle.ViewCapacitacionLabel_nombreEvento}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.nombreEvento}" title="#{bundle.ViewCapacitacionTitle_nombreEvento}"/>
+                       <h:outputText value="#{bundle.ViewCapacitacionLabel_idTipoEvento}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.idTipoEvento.evento}" title="#{bundle.ViewCapacitacionTitle_idTipoEvento}"/>
+                   
+                        <h:outputText value="#{bundle.ViewCapacitacionLabel_fechaInicio}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.fechaInicio}" title="#{bundle.ViewCapacitacionTitle_fechaInicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCapacitacionLabel_fechaFin}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.fechaFin}" title="#{bundle.ViewCapacitacionTitle_fechaFin}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCapacitacionLabel_dias}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.dias}" title="#{bundle.ViewCapacitacionTitle_dias}"/>
+                        <h:outputText value="#{bundle.ViewCapacitacionLabel_idAreaEstudio}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.idAreaEstudio.areaEstudio}" title="#{bundle.ViewCapacitacionTitle_idAreaEstudio}"/>
+                        <h:outputText value="#{bundle.ViewCapacitacionLabel_idHorasCapacitaciones}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.idHorasCapacitaciones.horasCapacitaciones}" title="#{bundle.ViewCapacitacionTitle_idHorasCapacitaciones}"/>
+                        <h:outputText value="#{bundle.ViewCapacitacionLabel_idTipoCertificado}" style="font-weight: bold"/>
+                        <h:outputText value="#{capacitacionController.selected.idTipoCertificado.tipoCertificado}" title="#{bundle.ViewCapacitacionTitle_idTipoCertificado}"/>
+                         </p:panelGrid>
+                    <p:commandButton styleClass="btn_s" value="#{bundle.Close}" immediate="true" oncomplete="PF('CapacitacionViewDialog').hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

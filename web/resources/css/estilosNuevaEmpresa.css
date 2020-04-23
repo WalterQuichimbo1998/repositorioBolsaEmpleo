@@ -1,0 +1,210 @@
+.titulo_pE{
+    width: 100%; 
+    font-family: Arial;
+    color: white; 
+    text-shadow: 1px 1px #000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: auto;
+    text-align: center;
+    font-size: 40px;
+    background: #007bff;
+   
+}
+
+#formularioE{
+    width: 92%;
+    margin: auto;
+    background: #fafbfc;
+    padding: 0px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+
+}
+/*Estilos formulario crear empresa*/
+.infoE2{
+    width: 100%;
+}
+.infoE{
+    width: 48%;
+    padding-top: 20px;
+}
+
+.textoE{ 
+    width: 100%;
+    color: #039BE5; 
+    font-size: 20px !important; 
+    font-family:Arial;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 5px;
+    
+    
+}
+
+.textoE2{ 
+    width: 100%;
+    color: #039BE5; 
+    font-size: 20px !important; 
+    font-family:Arial;
+    margin: 0;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    
+    
+}
+.txtE0{
+     width: 99%;
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #454545;
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: normal;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding-left: 7px;
+    transition: all 300ms;
+    background: none;
+    border-bottom: 2px solid #f0f3f4;
+}
+.txtE0:hover{
+ 
+      border-bottom: 2px solid #98c2bb;
+     font-size: 21px !important;
+    color: #024959;
+    transform: translateY(-3px);
+}
+.txtE0:focus{
+    border-bottom: 2px solid #57a3f4;
+}
+
+.txtE{
+   width: 98%;
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #454545;
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: normal;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding-left: 7px;
+    transition: all 300ms;
+    background: none;
+    border-bottom: 2px solid #f0f3f4;
+    
+}
+.txtCE{
+    width: 100%;
+    height: 42px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #454545;
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: normal;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding-left: 7px;
+    transition: all 300ms;
+    background: none;
+    border-bottom: 2px solid #f0f3f4;
+
+}
+
+.txtE:hover{
+   border-bottom: 2px solid #98c2bb;
+    font-size: 21px;
+    color: #024959;
+    transform: translateY(-3px);
+}
+.txtE:focus{
+    border-bottom: 2px solid #57a3f4;
+}
+.txtCE:hover{
+    border-bottom: 2px solid #98c2bb;
+    font-size: 21px;
+    color: #024959;
+}
+.txtCE:focus{
+     border-bottom: 2px solid #57a3f4;
+}
+.txtEA{
+    width: 97%;
+    color: #454545;
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: normal;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding-left: 7px;
+    transition: all 300ms;
+    background: none;
+    border:2px solid #f0f3f4;
+    padding-top: 10px;
+
+}
+.txtEA:hover{
+    border:2px solid #98c2bb; 
+    color: #024959;
+    transform: translateY(-3px);
+}
+.txtEA:focus{
+    border:2px solid #57a3f4;
+}
+
+.btn_guardarE{
+   width: 80%;
+    margin: auto;
+    margin-top: 40px; 
+    padding: 10px; 
+    background: #57a3f4; 
+    cursor: pointer; 
+    border:none;
+    font-size: 20px !important;
+    padding: 0;
+    font-family: Arial;
+    text-shadow:none;
+    border-radius: 3px;
+    font-weight: bold; 
+    margin-bottom: 10px;
+    outline: none;
+    box-shadow:none;
+    transition: all .3s ease;
+    color: #263238;
+
+}
+.btn_guardarE:hover{
+    color: white;
+   background: #007bff;
+   transform: translateY(-3px);
+}
+/*-------------------------------------------------*/
+@media only screen and (max-width: 1024px){
+    #formularioE{
+        width: 92%;
+
+    }
+}
+@media only screen and (max-width: 820px){ 
+    #formularioE{
+        display: block;
+    }
+    .infoE{
+        width: 100%;
+        margin: auto;
+    }
+}
+
+
+

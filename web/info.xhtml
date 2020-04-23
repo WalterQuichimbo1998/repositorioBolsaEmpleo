@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">  
+
+    <ui:composition template="index.xhtml">
+        <ui:define name="caja">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style="width: 70%;height: auto;margin: auto;border:1px solid #ccc">
+                <h1 style="text-align: center;font-family:Arial;color:#454545">Recuperación de Clave</h1>
+                <h:form>
+                    <center>
+                        <h:outputText value="Ingrese el correo electrónico con el cuál se registro" style="font-size: 20px;font-family: Arial;"/>
+                        <br/>
+                        <br/>
+                        <p:inputText styleClass="inputText" value="#{personaController.correo}" required="true" requiredMessage="Ingrese su correo electrónico"/>                         
+                        <br/>
+                        <br/>
+                        <h:outputText value="Ingrese su número de cédula" style="font-size: 20px;font-family: Arial;"/>
+                        <br/>
+                        <br/>
+                        <p:inputText styleClass="inputText" value="#{personaController.cedula}" required="true" requiredMessage="Ingrese su número de cédula"/>                         
+                    </center>
+                    <br/>
+                    <center>
+                        <p:commandButton styleClass="enviar"  value="Enviar" ajax="false" actionListener="#{personaController.recuperarClave()}" style="outline: none"/> 
+                    </center>
+                    <br/>
+                    <center>
+                        <h:outputLabel style="#{personaController.cc==true? 'color:#007bff;font-family:Arial;':'color:red;font-family:Arial;'}" value="#{personaController.mensaje}"/>
+                        <br/>
+                        <br/>
+                        <h:outputLabel style="font-size: 22px; font-weight: bold;font-family:Arial;color:#999" value="Para más información" title="Info"/>
+                        <br/>
+                        <br/>
+                        <h:outputLabel style="font-size: 18px; font-weight: bold;font-family:Arial;color:#454545" value="INSTITUTO SUPERIOR TECNOLÓGICO LIMÓN" title="Instituto Superior Tecnológico Limón"/>
+                        <br/>
+                        <h:outputLabel value="Teléfono: " style="font-size: 16px; font-weight: bold;font-family:Arial;color:#454545" />
+                        <h:outputLabel value="(07) 277-1303" style="font-size: 16px;font-family: arial;"/>
+                        <br/>
+                        <h:outputLabel value="Correo: " style="font-size: 16px; font-weight: bold;font-family: Arial;;color:#454545" />
+                        <h:outputLabel value="tecnologicolimon@gmail.com" style="font-size: 16px;font-family: arial;"/>
+                        <br/>
+                        <h:outputLabel value="Dirección: " style="font-size: 16px; font-weight: bold;font-family: Arial;;color:#454545" />
+                        <h:outputLabel value="Av. 12 de Diciembre Limón, Morona-Santiago, Ecuador" style="font-size: 16px;font-family: arial;"/>
+                        <br/>
+                    </center>
+                </h:form>
+                <br/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

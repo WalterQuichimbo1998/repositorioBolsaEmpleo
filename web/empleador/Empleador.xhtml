@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      lang="es">
+    <h:head>
+        <title>Bolsa de Empleo ISTL</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/logo.png"/>
+        <h:outputStylesheet name="css/estilosEmpleador.css"/>
+        <h:outputStylesheet name="css/estilosNuevaEmpresa.css"/>
+        <h:outputStylesheet name="css/estilosNuevaOferta.css"/>
+        <h:outputStylesheet name="css/estilosLogout.css"/>
+        <h:outputStylesheet name="css/waves.css"/>
+        <h:outputScript library="js" name="spanishLocale.js"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+        <h:outputScript library="js" name="menu_1.js"/>
+        <h:outputScript library="js" name="waves.js"/>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" life="3000" />
+        <div class="contenedor">
+            <div class="cont">
+                <h:form>
+                    <div class="cont">
+                        <img src="#{request.contextPath}/resources/img/logo_sistema.jpg"  class="logo"/>
+                        <div class="menu_bar">
+                            <p:commandLink class="btn-menu" title="Menú" >
+                                <img style="width: 50px;object-fit:cover;object-position:center center;margin-top: 15px"
+                                     src="#{request.contextPath}/resources/img/internet.png" ></img>
+                            </p:commandLink>
+                        </div>
+                        <nav>
+                            <ul>
+                                <ui:insert name="link">
+                                    <li>
+                                        <p:commandButton value="Inicio" class="btn2 bbt" action="/empleador/Empleador?faces-redirect=true"/>
+                                    </li>
+                                    <li>
+                                        <p:commandButton value="Mis Empresas" class="btn2" action="/empleador/empresa/List?faces-redirect=true"/>
+                                    </li>
+                                    <li>
+                                        <p:commandButton value="Mis Postulantes" class="btn2" action="/empleador/ListaPostulante?faces-redirect=true"/>
+                                    </li>
+                                    <li id="ingresar0">
+                                        <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
+                                    </li>  
+                                    <li id="ingresar1">                                   
+                                        <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
+                                            <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle;"
+                                                 src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}" ></img>
+                                        </p:commandLink>
+                                    </li>
+                                </ui:insert>
+                            </ul>
+                        </nav>
+                    </div>
+                </h:form>
+            </div>
+            <br/>
+            <div class="cabecera">
+                <h:form>
+                    <ui:insert name="dir">
+                    </ui:insert>
+                </h:form>
+            </div>
+
+            <div id="caja2">
+                <ui:insert name="caja">     
+                    <br/>
+                    <h:form class="form_botones">
+                        <h:panelGrid columns="2" style="margin: auto; ">
+                            <h:panelGroup style="display: inline-block; text-align: center; "> 
+                                <div class="botones2" style="padding-top: 31px;">
+                                    <h:commandLink class="botones"  action="/empleador/verPerfilPersona_2?faces-redirect=true" >
+                                        <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}" ></img> 
+                                    </h:commandLink>
+                                    <div class="txt_boton">Mi Perfil</div>
+                                </div>                             
+                                <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/empresa.png" action="/empleador/empresa/List?faces-redirect=true" 
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Mis Empresas</div>
+                                </div>
+                                <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/estudiante.png"  action="/empleador/ListaPostulante?faces-redirect=true"
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Mis Postulantes</div>
+                                </div>
+
+                                <div class="botones2">
+                                    <h:commandButton class="botones"  image="../resources/img/pictures.png" action="/empleador/Logotipos?faces-redirect=true"
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Logotipos</div>
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </h:form>
+                </ui:insert> 
+            </div>
+        <span class="ir-arriba"><img src="#{request.contextPath}/resources/img/flecha_arriba.png" style="width: 16px;margin: auto"/></span> 
+             <footer id="head3">        
+                <h3 class="texto_f1">
+                    COPYRIGHT © 2020 <strong>|</strong> Decide ser un Profesional de éxito</h3>
+                <h3 class="texto_f2">
+                    <strong>Empleador </strong>#{accesoBean.usuarioLogueado()}</h3>
+            </footer>   
+        </div>
+        <p:dialog styleClass="logout" id="form_perfil" widgetVar="form_perfil" modal="true" resizable="false" appendTo="@(body)" header="Cerrar Sesión" 
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" >
+            <h:form style="margin: 0;padding: 0;padding-left: 40px;padding-right: 40px;display: block;" >            
+                <center>
+                    <c:if test="#{personaController.existeFoto(personaController.selected.foto) == false}">
+                        <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
+                            <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
+                                 src="#{request.contextPath}/resources/foto/sin_foto_perfil.png"></img>
+                        </div>
+                    </c:if>
+                    <c:if test="#{personaController.existeFoto(personaController.selected.foto) == true}">
+                        <br/>
+                        <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; box-shadow: 0px 0px 2px 1px #454545;">
+                            <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
+                                 src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
+                        </div>
+                    </c:if>
+                    <br/>
+                    <br/>
+                </center>
+                <p:commandButton value="Mi Perfil" icon="ui-icon-contact" action="/empleador/verPerfilPersona_2?faces-redirect=true" styleClass="b_1"/>
+                <br/>
+                <p:commandButton value="Cambiar Clave" icon="ui-icon-key" action="/empleador/cambiarClave?faces-redirect=true" styleClass="b_1"/>
+                <br/>
+                <p:commandButton value="Cambiar Foto" icon="ui-icon-image" action="/empleador/cambiarFoto?faces-redirect=true" styleClass="b_1"/> 
+                <br/>
+                <p:commandButton value="Cerrar Sesión"  styleClass="ss" icon="ui-icon-power"  action="#{accesoBean.logoutAdmin()}"/>
+                <br/>
+                <br/>
+                <p:commandButton  value="Cerrar" styleClass="b_2"   oncomplete="PF('form_perfil').hide()"/>
+            </h:form>	
+        </p:dialog>      
+        <script type="text/javascript">
+            Waves.init();
+            Waves.attach('.btn3', ['waves-button']);
+            Waves.attach('.botones2', ['waves-button']);
+            Waves.attach('.btn_guardar', ['waves-button']);
+            Waves.attach('.btn_guardar2', ['waves-button']);
+            Waves.attach('.b_1', ['waves-button']);
+            Waves.attach('.ss', ['waves-button']);
+        </script>  
+    </h:body>
+
+</html>
+
+
+
+
+
+

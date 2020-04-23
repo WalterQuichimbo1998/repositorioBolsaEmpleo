@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a961af3b-dba9-49f8-a43b-56c093d93887">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT empresa.nombre_comercial,empresa.fecha_creacion,empresa.direccion,empresa.telefono_oficina,
+persona.nombre,persona.apellido FROM empresa
+LEFT JOIN persona ON persona.id_persona=empresa.id_persona
+WHERE empresa.fecha_creacion BETWEEN $P{fecha1} AND $P{fecha2} 
+ORDER BY empresa.fecha_creacion DESC]]>
+	</queryString>
+	<field name="nombre_comercial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_creacion" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono_oficina" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="89" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="684" y="7" width="70" height="70" uuid="c2525c24-e954-4d93-84a4-5556dcc5c1b1"/>
+				<imageExpression><![CDATA["empresa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Transparent" x="186" y="4" width="430" height="79" backcolor="#FFFFFF" uuid="936b8be1-259e-46bc-a105-346f0e906c75"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE EMPRESAS]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="35" y="4" width="95" height="80" uuid="c45468b5-2953-4bb0-85c4-d8cf6b1aacc1"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="32" uuid="1e9f9ce5-2806-425c-9b1c-24cd1fb3a705"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Listado de empresas]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="32" width="802" height="20" uuid="f94a6040-b28a-4971-9e88-d8e01b67dabf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Desde "+$P{fecha1}+" Hasta "+$P{fecha2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="2" width="802" height="29" backcolor="#E9EAEA" uuid="12a9aa7e-a2c3-48d6-ac70-7d650b8bf9c9"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="8" y="5" width="222" height="24" uuid="1203a953-b977-44f3-afee-77990ff31dbc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Comercial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="5" width="192" height="24" uuid="18ed3c7a-f316-4a35-9a05-33fdcca016b4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Propietario(a)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="687" y="5" width="113" height="24" uuid="832f61b4-f8e4-49c6-a118-6a36b61165d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="424" y="5" width="108" height="24" uuid="404c7be9-4c97-4197-9bd7-55d4cd49fe3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefóno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="5" width="155" height="24" uuid="a66a9c30-8304-49b1-b59e-9fac72fd6f04"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="687" y="0" width="113" height="40" uuid="c2d0b627-244f-42db-b703-396f2e9a813a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_creacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="0" width="222" height="40" uuid="1a3c12af-036e-42f9-a6bf-a33c4f8d2391"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_comercial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="0" width="108" height="40" uuid="6563db48-90e7-4f4a-b7d6-7dddce971122"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{telefono_oficina}==null ? "" : $F{telefono_oficina}+"" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="532" y="0" width="155" height="40" uuid="a11a1877-20bd-4157-bafd-9272cc1bac1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{direccion}==null ? "" : $F{direccion}+"" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="0" width="192" height="40" uuid="e03bac95-8c5d-4413-aac8-70d3e9657215"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="761" y="0" width="40" height="20" uuid="e4f464c1-d93b-45e6-a6c2-03bda04a7b5c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="27" y="0" width="183" height="20" uuid="38396fc6-17c4-46e4-a778-285d644c6b6d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="681" y="0" width="80" height="20" uuid="1cb69f84-7dbd-4c0f-bc0d-afa27c734e6a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

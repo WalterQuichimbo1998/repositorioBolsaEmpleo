@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+ <ui:composition template="../administrador.xhtml">
+     <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true" />
+            </li>                    
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Provincias" class="btn2 bbt" action="/administrador/provincia/List?faces-redirect=true" />
+            </li>
+            <li>
+                 <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Provincias" style="color: #086A87;" action="/administrador/provincia/List?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+       
+            <h:form id="ProvinciaListForm" class="tablaCentro">
+                 <h3 class="titulo_p">Provincias del Ecuador</h3>
+                <p:panel>
+                    <p:dataTable id="datalist" value="#{provinciaController.items}" var="item"
+                                 selectionMode="single" selection="#{provinciaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idProvincia}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 paginatorPosition="bottom"
+                                 sortBy="#{item.idProvincia}"
+                                 sortOrder="descending"
+                                 emptyMessage="No hay datos."
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                
+                        <p:column sortBy="#{item.provincia}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProvinciaTitle_provincia}"/>
+                            </f:facet>
+                            <h:outputText  style="font-size: 16px"  value="#{item.provincia}"/>
+                        </p:column>
+                        <p:column style="width: 160px" sortBy="#{item.idProvincia}">
+                            <f:facet name="header">
+                                <h:outputText value="Lista de Cantones"/>
+                            </f:facet>
+                            <p:commandButton icon="ui-icon-search" styleClass="ver" value="Ver" style="margin: 5px" actionListener="#{cantonController.setSelectedP(item)}" action="/administrador/canton/List?faces-redirect=true" />
+                        </p:column>
+                        <f:facet name="footer">
+                            <h:outputLabel value="Total Provincias: "  style="font-size: 16px; font-weight: normal "/>
+                            <h:outputLabel value="#{provinciaController.items.size()}"  style="font-size: 16px; "/>
+                            <br/>
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{provinciaController.prepareCreate}" update=":ProvinciaCreateForm" oncomplete="PF('ProvinciaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton" styleClass="ver"  icon="ui-icon-search" value="#{bundle.View}" update=":ProvinciaViewForm" oncomplete="PF('ProvinciaViewDialog').show()" disabled="#{empty provinciaController.selected}"/>
+                            <p:commandButton id="editButton" styleClass="editar"  icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ProvinciaEditForm" oncomplete="PF('ProvinciaEditDialog').show()" disabled="#{empty provinciaController.selected}"/>
+                            <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{provinciaController.destroy}" update=":growl,datalist" disabled="#{empty provinciaController.selected}">
+                                <p:confirm message="Eliminar Provincia" header="Aviso" icon="ui-icon-alert"   > </p:confirm>                                
+                            </p:commandButton>                      
+                            <p:confirmDialog global="true" showEffect="clip" hideEffect="clip" style="background: #bbede3;font-size: 16px !important;font-weight: bold" id="iinfo">                             
+                                <p:commandButton style="width: 70px;margin-left: 17px;font-size: 16px !important;background: #29a0c7;outline: none;box-shadow: none" value="Si" type="button"  styleClass="ui-confirmdialog-yes"></p:commandButton>
+                                <p:commandButton style="width: 70px;font-size: 16px !important;background: #e26c6c;outline: none;box-shadow: none;" value="No" type="button" styleClass="ui-confirmdialog-no" immediate="true"></p:commandButton>
+                            </p:confirmDialog>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

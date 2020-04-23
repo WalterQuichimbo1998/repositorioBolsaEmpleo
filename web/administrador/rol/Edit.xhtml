@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RolEditDlg" widgetVar="RolEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRolTitle}"
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="RolEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rolController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRolLabel_rol}" for="rol" style="font-weight: bold"/>
+                        <p:inputText id="rol" value="#{rolController.selected.rol}" title="#{bundle.EditRolTitle_rol}" style="width: 200px;" onkeyup="javascript:this.value = this.value.toUpperCase();" />
+                        <p:outputLabel value="#{bundle.EditRolLabel_descripcion}" for="descripcion" style="font-weight: bold;"/>
+                        <p:inputText id="descripcion" value="#{rolController.selected.descripcion}" title="#{bundle.EditRolTitle_descripcion}" style="width: 200px;"/>
+                         <p:column/>
+                        <p:column>
+                            <p:commandButton styleClass="btn_g" actionListener="#{rolController.update}" value="#{bundle.Save}" update="display,:RolListForm:datalist,:growl" oncomplete="handleSubmit(args,'RolEditDialog');"/>
+                            <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('RolEditDialog').hide();"/>
+
+                        </p:column>
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

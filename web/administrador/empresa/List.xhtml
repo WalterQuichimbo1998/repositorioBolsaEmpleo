@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="../administrador.xhtml">
+
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true" />
+            </li>                    
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Empresas" class="btn2 bbt" action="/administrador/empresa/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" styleClass="btn2 cs"   oncomplete="PF('form_logout').show()"/>
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio"  action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Listado de  Empresas" style="color: #086A87;" action="/administrador/empresa/List?faces-redirect=true"/>
+        </ui:define>
+
+        <ui:define name="caja">
+            <h3 class="titulo_p">Listado de Empresas</h3>
+            <h:form id="EmpresaListForm" style="text-align: center">
+                <p:panel id="panelEmpresa">
+                    <p:dataTable id="datalist" styleClass="tablaPersonalizada" value="#{empresaController.items}" var="item"
+                                 selectionMode="single" 
+                                 paginator="true"
+                                 widgetVar="empresa"
+                                 rowKey="#{item.idEmpresa}"
+                                 rows="10"
+                                 rowsPerPageTemplate="5,10,15,20,25"
+                                 paginatorPosition="bottom"
+                                 emptyMessage="No hay datos."
+                                 sortBy="#{item.fechaCreacion}"
+                                 sortOrder="descending"
+                                 filteredValue="#{empresaController.listaBuscar}">
+
+
+                        <f:facet name="header">
+                            <p:inputText id="globalFilter"
+                                         placeholder="Buscar" 
+                                         onkeyup="PF('empresa').filter()" 
+                                         style="font-size: 18px !important;margin: 10px; text-align: center;border-radius: 20px;
+                                         padding: 7px 0px;width: 500px; "  /> 
+                        </f:facet> 
+                        <p:column sortBy="#{item.nombreComercial}" filterBy="#{item.nombreComercial}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEmpresaTitle_nombreComercial}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreComercial}"/>
+                        </p:column>
+
+                        <p:column style="width: 180px;" sortBy="#{item.direccion}" filterBy="#{item.direccion}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEmpresaTitle_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.direccion}"/>
+                        </p:column>
+
+                        <p:column style="width: 90px;" sortBy="#{item.telefonoOficina}" filterBy="#{item.telefonoOficina}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Teléfono"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefonoOficina}"/>
+                        </p:column>
+                        <p:column style="width: 160px;" sortBy="#{item.idPersona.nombre}" filterBy="#{item.idPersona.nombre}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Propietario(a)"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPersona.nombre} #{item.idPersona.apellido}"/>
+                        </p:column>
+                        <p:column style="width: 90px;" sortBy="#{item.fechaCreacion}">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Registro"/>
+                            </f:facet>
+                            <h:outputText value="#{empresaController.fecha(item.fechaCreacion)}"/>
+                        </p:column>
+                        <p:column style="width: 80px;" sortBy="#{item.idEmpresa}" filterBy="#{item.idPersona.apellido}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Reporte"/>
+                            </f:facet>
+                            <h:commandLink id="track2" style="text-decoration: none;font-size: 16px" 
+                                           actionListener="#{exportar.reporteIndividual_Empresa(item.idEmpresa,item.logotipo)}">
+                                <img src="#{request.contextPath}/resources/img/pdf.png" width="30px"></img>  
+                            </h:commandLink>       
+                            <p:tooltip id="toolTipTrack2" for="track2" value="Descargar reporte" trackMouse="true" style="box-shadow: none" />
+
+
+                        </p:column>
+                        <p:column style="width: 70px;" sortBy="#{item.idEmpresa}">
+                            <f:facet name="header">
+                                <h:outputText value="Info"/>
+                            </f:facet>
+                            <p:commandButton value="Ver" styleClass="ver" icon="ui-icon-search"
+                                             actionListener="#{empresaController.setSelected(item)}"                                      
+                                             action="/administrador/empresa/verEmpresa?faces-redirect=true" />
+
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <h:outputLabel value="Total de Empresas: "  style="font-size: 16px; font-weight: normal "/>
+                            <h:outputLabel value="#{empresaController.items.size()}"  style="font-size: 16px; "/>
+
+
+                        </f:facet>
+                    </p:dataTable>
+                    <br/>
+                    <c:if test="#{empresaController.items.size()!=0}">
+                        <div class="c_fechas" style="margin-top: 40px">
+                            <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                                font-size: 20px">Descargar Reporte por Fechas</h1>
+                            <br/>
+                            <br/>
+                            <p:outputLabel style="font-size: 14px !important" value="Seleccione las fechas de registro correspondientes."/>
+                            <br/>
+                            <br/>
+                            <div style="width: 180px;margin: auto;display: inline-block;margin-bottom: 20px">
+                                <h3 style="width: 100%;margin: auto;text-align: center;margin-bottom: 5px;">Fecha Inicio</h3>
+                                <p:calendar id="fechaInicio" locale="es" pattern="dd/MM/yyyy" navigator="true" mask="true" styleClass="fecha" 
+                                            value="#{empresaController.fecha_inicio}"/>
+                            </div>
+                            <div style="width: 180px;margin: auto;display: inline-block;margin-bottom: 20px">
+                                <h3 style="width: 100%;margin: auto;text-align: center;margin-bottom: 5px;">Fecha Final</h3>
+                                <p:calendar id="fechaFinal" locale="es" pattern="dd/MM/yyyy" navigator="true" mask="true" styleClass="fecha" 
+                                            value="#{empresaController.fecha_fin}"/>
+                            </div>
+                            <br/>
+                            <h:commandButton value="Ayer"  actionListener="#{empresaController.fecha2()}" class="f1">
+                                <f:ajax execute="@form" render="fechaInicio" /> 
+                                <f:ajax render="fechaFinal" /> 
+                                <f:ajax render="mensaje" /> 
+                                <f:ajax render="des" /> 
+                            </h:commandButton>
+
+                            <h:commandButton value="Buscar" class="botonDescargar" 
+                                             actionListener="#{empresaController.verificarReporteAdminFechas}" id="export" >
+                                <f:ajax execute="@form" render="mensaje" />                                                                       
+                                <f:ajax render="des" />                                                                       
+                            </h:commandButton>
+
+                            <h:commandButton value="Hoy"  actionListener="#{empresaController.fecha1()}" class="f1">
+                                <f:ajax execute="@form" render="fechaInicio" /> 
+                                <f:ajax render="fechaFinal" /> 
+                                <f:ajax render="mensaje" /> 
+                                <f:ajax render="des" /> 
+                            </h:commandButton>
+                            <br/>
+                            <br/>
+                            <h:outputLabel id="mensaje" style="#{empresaController.v==true ? 'color:green;font-size:14px;':'color:red;font-size:14px;'}"  
+                                           value="#{empresaController.mensaje}">
+                                <br/>
+
+                                <h:outputLabel value="Total : #{empresaController.listaE.size()} "
+                                               style="#{empresaController.v==true ? 'color:#000;font-size:14px;':'display:none;'} "/>
+                                <h:outputLabel value="#{empresaController.listaE.size()>1 ? 'registros':'registro'}"
+                                               style="#{empresaController.v==true ? 'color:#000;font-size:14px;':'display:none;'} "/>
+                                <br/>
+
+
+                            </h:outputLabel>
+                            <p:commandButton  styleClass="crear"  value="Descargar reporte" ajax="false" id="des"
+                                              style="#{empresaController.v==true ? 'margin-top:10px;':'display:none;'} "                                      
+                                              actionListener="#{empresaController.descargarReporteAdminFechas()}" >    
+                            </p:commandButton>
+                        </div>
+                        <br/>
+                        <div class="c_fechas">
+
+                            <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                                font-size: 20px">Descargar Reporte Total</h1>
+                            <br/>
+
+                            <p:commandButton styleClass="crear" ajax="false" icon="ui-icon-document" value="Descargar reporte"
+                                             actionListener="#{exportar.reporteEmpresasAdmin()}"/>
+
+                            <br/>
+                        </div>
+                        <br/>
+                        <br/>
+                    </c:if>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

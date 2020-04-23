@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition>
+
+        <p:dialog id="EmpresaViewDlg" widgetVar="EmpresaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEmpresaTitle}"
+                  showEffect="fade" hideEffect="fade">
+            <h:form id="EmpresaViewForm" >
+                <h2 style="text-align: center;width: 400px;margin: auto">#{empresaController.selected.nombreComercial}</h2>
+                <c:if test="#{empresaController.existeFoto(empresaController.selected.logotipo)==true}">
+                    <div style="width: 400px; height: auto;padding: 10px; ">
+                          <img style="border-radius: 10px;" width="100%" src="#{request.contextPath}/resources/#{empresaController.selected.logotipo}"></img>                                         
+                    </div>
+
+                </c:if>
+                <c:if test="#{empresaController.existeFoto(empresaController.selected.logotipo)==false}">
+                    <div style="width: 400px; height: auto;padding: 10px; ">
+                        <h2 style="text-align: center;margin: auto">Sin Logotipo</h2>
+                    </div>
+
+                </c:if>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

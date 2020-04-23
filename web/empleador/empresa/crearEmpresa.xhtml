@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+          
+      xmlns:p="http://primefaces.org/ui">      
+    <ui:composition template="../Empleador.xhtml">
+
+ <ui:define name="link">
+           <li>
+                <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Empresas" class="btn2 bbt" action="/empleador/empresa/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Postulantes" class="btn2" action="/empleador/ListaPostulante?faces-redirect=true"/>
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
+                    <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
+                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}" ></img>
+                </p:commandLink>
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+             <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Empresas" action="/empleador/empresa/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Nueva Empresa" style="color: #086A87;" action="/empleador/empresa/crearEmpresa?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+            <div class="caja_form">
+             <h3 class="titulo_pE">Nueva Empresa</h3>
+             <br/>
+               <br/>
+            <h:form id="formularioE">
+               
+                <div class="infoE2">
+                    <p:outputLabel class="textoE2" value="Nombre Comercial" for="nom"/>
+                    <br style="margin-bottom: 3px"/>
+                    <h:inputText id="nom" class="txtE0" value="#{empresaController.selected.nombreComercial}" 
+                                 onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                 required="true" requiredMessage="Ingrese al menos un NOMBRE COMERCIAL" />
+                </div>
+                <div class="infoE">
+                    <h3 class="textoE" >Cédula/Ruc</h3>
+                    <h:inputText class="txtE" value="#{empresaController.selected.rucCedula}" />
+
+                </div>
+                <div class="infoE">
+                    <h3 class="textoE" >Razón social</h3>
+                    <h:inputText class="txtE" value="#{empresaController.selected.razonSocial}" />
+                </div>
+
+                <div class="infoE">  
+                    <h3  class="textoE" >Tipo empresa</h3>
+                    <h:selectOneMenu class="txtCE" value="#{empresaController.selected.idTipoEmpresa}" >
+                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{tipoEmpresaController.itemsAvailableSelectOne}"
+                                       var="idTipoEmpresaItem"
+                                       itemValue="#{idTipoEmpresaItem}"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="infoE">  
+                    <h3  class="textoE" >Tipo persona</h3>
+                    <h:selectOneMenu class="txtCE" value="#{empresaController.selected.idTipoPersona}" >
+                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{tipoPersonaController.itemsAvailableSelectOne}"
+                                       var="idTipoPersonaItem"
+                                       itemValue="#{idTipoPersonaItem}"/>
+                    </h:selectOneMenu>
+                </div>
+                
+
+                <div class="infoE">
+                    <h3 class="textoE" >Provincia</h3>
+                    <h:selectOneMenu class="txtCE" id="combo" value="#{empresaController.selected.idProvincia}">
+                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{empresaController.listaProvincias}"
+                                       var="idProvinciaItem"
+                                       itemValue="#{idProvinciaItem}" />          
+                        <f:ajax execute="combo" render="combo2"/>
+                        <f:ajax render="menuParroquia"/>
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="infoE">
+                    <h3 class="textoE" >Cantón</h3>
+                    <h:selectOneMenu class="txtCE" id="combo2" value="#{empresaController.selected.idCanton}" >
+                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{empresaController.listaCanton}"
+                                       var="idCantonItem"
+                                       itemValue="#{idCantonItem}" />
+                        <f:ajax execute="combo2" render="menuParroquia" />
+                    </h:selectOneMenu>
+                </div>
+                <div class="infoE">
+                    <h3 class="textoE" >Parroquia</h3>
+                    <h:selectOneMenu class="txtCE" value="#{empresaController.selected.idParroquia}" id="menuParroquia" >
+                       <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                       <f:selectItems value="#{empresaController.listaParroquia}"
+                                       var="idParroquiaItem"
+                                       itemValue="#{idParroquiaItem}"/>
+                    </h:selectOneMenu>
+                </div>
+                
+                <div class="infoE">
+                    
+                    <p:outputLabel class="textoE" value="Dirección" for="dir"/>
+                    <br style="margin-bottom: 4px"/>
+                    <h:inputText id="dir" class="txtE" value="#{empresaController.selected.direccion}"  required="true" requiredMessage="Ingrese al menos una direccion"/>
+                </div>
+                <div class="infoE">
+                    <h3 class="textoE" >Teléfono oficina</h3>
+                    <h:inputText class="txtE" value="#{empresaController.selected.telefonoOficina}" />
+                </div>
+        
+                <div class="infoE">
+                    <h3 class="textoE" >Celular</h3>
+                    <h:inputText class="txtE"  value="#{empresaController.selected.celular}" />
+                </div>
+                <div class="infoE">
+                    <h3  class="textoE" >Página web</h3>
+                    <h:inputText class="txtE" value="#{empresaController.selected.paginaWeb}"/>
+                </div>
+                <div class="infoE">
+
+                </div>
+                <div class="infoE"> 
+                    <h3  class="textoE" >Servicios</h3>
+                    <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.servicios}" />
+                </div>
+                <div class="infoE"> 
+                    <h3  class="textoE" >Experiencias</h3>
+                    <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.experiencias}" />
+                </div>
+                <div class="infoE"> 
+                    <h3  class="textoE" >Actividades</h3>
+                    <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.actividades}" />
+                </div>
+
+                <div style="margin: auto; width: 100%; display: flex">       
+                    <p:commandButton  styleClass="btn_guardar" ajax="false" value="CREAR EMPRESA" actionListener="#{empresaController.create}" />
+                
+                </div>
+               
+            </h:form>
+                <br/>
+               <br/>
+             </div>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+
+</html>

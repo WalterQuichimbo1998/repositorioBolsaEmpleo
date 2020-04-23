@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./Estudiante.xhtml">
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/estudiante/Estudiante?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mi Curriculo Vitae" style="color: #086A87;"  action="/estudiante/curriculoVitae?faces-redirect=true"/>
+
+        </ui:define>
+        <ui:define name="caja">
+
+            <h:form>
+                <center>
+                        <p:commandButton styleClass="crear2" style="color: #000;" icon="ui-icon-document" value="Descargar Hoja de vida"
+                                         ajax="false"  actionListener="#{exportar.exportarHojaVida(personaController.selected.idPersona, personaController.selected.foto)}"/>
+                </center>
+
+            </h:form>
+            <br/>
+            <div id="cajaCurriculo">
+                <h3 class="titulo_p" style="margin-top: 0">Mi Curriculo Vitae</h3>
+                <h:form style="margin: auto; margin-bottom: 20px; background: #f2f2f2">
+                    <p:accordionPanel multiple="true" style="width: 94%; margin: auto;" > 
+                        <p:tab title="DATOS PERSONALES" titleStyle="font-size:20px; background:#f2f2f2;box-shadow:none;" >
+                            <div style="width: 90%;margin: auto;">
+                                <h1>#{personaController.selected.nombre} #{personaController.selected.apellido}</h1> 
+                                <div style="width: 100%;display:flex;">                                 
+                                    <div style="width: 180px; height: 200px;margin-left: 10px ">
+                                        <img style="width: 180px; height: 200px;object-fit:cover;object-position:center center;border-radius: 3px " 
+                                             src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto) == true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}"></img>
+                                    </div>
+                                    <div style="width: 60%; margin-left: 20px; ">                              
+                                        <h:outputText value="Edad: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.edad}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Estado civil: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.idEstadoCivil.estadoCivil}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Celular: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.celular}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Teléfono: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.telefono}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Correo: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.correo}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Provincia: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.idProvincia.provincia}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Cantón: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.idCanton.canton}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Parroquia: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.idParroquia.parroquia}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Dirección: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{personaController.selected.direccion}" style="font-size: 17px;"/>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                        </p:tab>
+
+                        <p:tab title=" MI INSTRUCCIÓN FORMAL" titleStyle="font-size:20px; background:#f2f2f2;box-shadow:none;" >
+                            <p:dataTable   id="datalist" class="tabla_c" value="#{instruccionFormalController.items}" var="item" emptyMessage="No hay datos">
+                                <p:column style="background:white; border:1px solid white; text-align: left;">      
+                                    <f:facet name="header">
+                                        <h:outputText value="Institución" style="font-size: 20px;font-weight: bold"/>
+                                    </f:facet>              
+                                    <h:outputText value="#{item.institucion}" style="font-size: 18px; "/>               
+                                </p:column>
+                                <p:column style="background:white; border:1px solid white; text-align: center">      
+                                    <f:facet name="header">
+                                        <h:outputText value="Nivel Académico" style="font-size: 20px;font-weight: bold"/>
+                                    </f:facet>  
+                                    <h:outputText value="#{item.idNivelAcademico.nivelAcademico}" style="font-size: 17px;"/>
+                                </p:column>
+                                <p:column style="background:white; border:1px solid white; text-align: center">      
+                                    <f:facet name="header">
+                                        <h:outputText value="Código Senescyt" style="font-size: 20px;font-weight: bold"/>
+                                    </f:facet>   
+                                    <h:outputText value="#{item.codigoSenescyt}"  style="font-size: 17px; "/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:tab title=" MIS OFICIOS" titleStyle="font-size:20px; background:#f2f2f2;box-shadow:none;">
+                            <p:dataTable id="datalist2" class="tabla_c" value="#{oficioController.items}" var="item" emptyMessage="No hay datos">
+                                <p:column style="background:white; border:1px solid white; text-align: left">      
+                                    <f:facet name="header">
+                                        <h:outputText value="Oficio" style="font-size: 20px;font-weight: bold"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.oficio}" style="font-size: 18px; "/>
+                                </p:column>
+                                <p:column style="background:white; border:1px solid white; text-align: left">      
+                                    <f:facet name="header">
+                                        <h:outputText value="Descripción" style="font-size: 20px;font-weight: bold"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.descripcion}" style="font-size: 17px"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:tab title=" MIS IDIOMAS" titleStyle="font-size:20px; background:#f2f2f2;box-shadow:none;">
+                            <p:dataTable id="datalist3" class="tabla_c" value="#{idiomaController.items}" var="item" style="text-align: center" emptyMessage="No hay datos" >
+                                <p:column style="background:white; border:1px solid white">      
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListIdiomaTitle_idListaIdiomas}" style="font-size: 20px;font-weight: bold"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idListaIdiomas.nombreIdioma}" style="font-size: 17px"/>
+                                </p:column>
+                                <p:column style="background:white; border:1px solid white">     
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListIdiomaTitle_idNivelEscrito}" style="font-size: 20px;font-weight: bold"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idNivelEscrito.nivelEscrito}" style="font-size: 17px"/>
+                                </p:column>
+                                <p:column style="background:white; border:1px solid white">       
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListIdiomaTitle_idNivelHablado}" style="font-size: 20px;font-weight: bold"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idNivelHablado.nivelHablado}" style="font-size: 17px"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:tab title=" MIS CAPACITACIONES" titleStyle="font-size:20px; background:#f2f2f2;box-shadow:none;">
+                            <p:dataTable id="datalist4" class="tabla_c" value="#{capacitacionController.items}" var="item" emptyMessage="No hay datos"  >
+                                <p:column style="background:white; border:1px solid white">      
+                                    <h:outputText value="Evento: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.nombreEvento}" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Institución: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.institucion}" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Tipo de evento:  " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.idTipoEvento.evento}" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Area de estudio:  " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.idAreaEstudio.areaEstudio}" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Horas de capacitación: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText rendered="#{item.idHorasCapacitaciones!=null}" value="#{item.idHorasCapacitaciones.horasCapacitaciones} Horas" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Fecha de inicio: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.fechaInicio}" style="font-size: 17px;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                    <br/>
+                                    <h:outputText value="Fecha de finalización: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.fechaFin}" style="font-size: 17px;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                    <br/>
+                                    <br/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:tab title=" MIS LOGROS PERSONALES" titleStyle="font-size:20px; background:#f2f2f2;box-shadow:none;">
+                            <p:dataTable id="datalist5" class="tabla_c" value="#{logroPersonalController.items}" var="item" emptyMessage="No hay datos"  >
+                                <p:column style="background:white; border:1px solid white">      
+                                    <h:outputText value="Tipo de Logro: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.idTipoLogro.tipoLogro}" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Descripción: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.descripcion}" style="font-size: 17px"/>
+                                    <br/>                     
+                                    <br/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:tab title=" MIS EXPERIENCIAS LABORALES" titleStyle="font-size:20px; background:#f2f2f2;box-shadow:none;">
+                            <p:dataTable id="datalist6" class="tabla_c" value="#{experienciaLaboralController.items}" var="item" emptyMessage="No hay datos"  >
+                                <p:column style="background:white; border:1px solid white">      
+                                    <h:outputText value="Institución: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.institucion}" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Area de trabajo: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.idAreaTrabajo.areaTrabajo}" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Puesto:  " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.puesto}" style="font-size: 17px"/>
+                                    <br/>
+                                    <h:outputText value="Fecha de Inicio:  " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.fechaInicio}" style="font-size: 17px;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                    <br/>
+                                    <h:outputText value="Fecha de Fin:  " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.fechaFin}" style="font-size: 17px;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                    <br/>
+                                    <h:outputText value="Actividades:  " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.actividades}" style="font-size: 17px"/>
+                                    <br/>              
+                                    <br/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+
+                        <p:tab title=" MIS REFERENCIAS PERSONALES" titleStyle="font-size:20px; background:#f2f2f2;box-shadow:none;">
+                            <p:dataTable id="datalist7" class="tabla_c" value="#{referenciaPersonalController.items}" var="item" emptyMessage="No hay datos">
+                                <p:column style="background:white; border:1px solid white;margin-bottom: 20px;">      
+                                    <h:outputText value="Nombre y Apellido: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.nombre} #{item.apellido}" style="font-size: 18px"/>
+                                    <br/>
+                                    <h:outputText value="Correo: " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.correoElectronico}" style="font-size: 18px"/>
+                                    <br/>
+                                    <h:outputText value="Teléfono:  " style="font-size: 20px;font-weight: bold"/>
+                                    <h:outputText value="#{item.telefono}" style="font-size: 18px"/>
+                                    <br/>          
+                                    <br/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+                    </p:accordionPanel>
+                </h:form>
+            </div>
+            <br/>         
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
+
+    <ui:composition template="../Empleador.xhtml">
+         <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Empresas" class="btn2" action="/empleador/empresa/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Ofertas" class="btn2 bbt" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
+                    <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
+                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}" ></img>
+                </p:commandLink>
+            </li>
+        </ui:define>
+           <ui:define name="dir">
+                <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Empresas" action="/empleador/empresa/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Ofertas" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Ver Oferta" style="color: #086A87;" action="/empleador/ofertaLaboral/verOferta?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+           <div style="width: 90%;margin: auto;background: #f2f2f2">
+            <h3 class="titulo_p">Oferta Laboral</h3>
+
+            <h:form class="verOfertaSelec">
+                <p:dataList id="datalist" value="#{ofertaLaboralController.listaOferta}" var="item" 
+                            class="tablaOferta" paginatorPosition="bottom" type="none" itemType="none">
+
+                    <br/>
+                    <p:fieldset legend="Cargo Solicitado" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+                        <h3 class="txtO22">#{item.cargoSolicitado}</h3>                                 
+                        <br/>
+                        <h3 class="txtO00">#{item.idEmpresa.nombreComercial}</h3>
+                        <br/>
+                        <c:if test="#{ofertaLaboralController.existeFoto(ofertaLaboralController.selected.idEmpresa.logotipo)==true}">
+                            <div style="width: 270px; height: auto; margin: auto; background: white; border-radius: 10px; padding: 10px">
+                                <img style="border-radius: 10px;"  width="100%" src="#{request.contextPath}/resources/#{item.idEmpresa.logotipo}"></img>
+                            </div>
+                        </c:if>
+
+                    </p:fieldset>
+                    <br/>
+                    <p:fieldset legend="Estado oferta" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+                      
+                        <h3 class="txtO00" style="#{item.estado==true ? 'color: #007bff;font-weight: bold;':'color: #e25555;font-weight: bold;'}">#{item.estado==true ? 'HABILITADO':'NO DISPONIBLE'}</h3> 
+                        <br/>
+                    </p:fieldset>
+                    <br/>
+
+                    <p:fieldset legend="Detalles" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+                        <div class="infoO22" > 
+                            <h3  class="textoOO" >Descripción</h3>
+                            <h3 class="txtOO" >#{item.descripcion}</h3>
+                        </div>
+                        <div class="infoO22"> 
+                            <h3  class="textoOO" >Actividades a desempeñar</h3>
+                            <h3 class="txtOO" >#{item.actividades}</h3>
+                        </div>
+                        <div class="infoO22" > 
+                            <h3  class="textoOO" >Experiencias</h3>
+                            <h3 class="txtOO" >#{item.experiencia}</h3>
+                        </div>
+
+                        <div class="infoO22" >  
+                            <h3  class="textoOO" >Tipo contrato</h3>
+                            <h3 class="txtOO" >#{item.idTipoContrato.tipoContrato}</h3>
+
+                        </div>
+
+                        <div class="infoO22" >
+                            <h3 class="textoOO" >Jornada de trabajo</h3>
+                           <c:if test="#{ofertaLaboralController.selected.jornadaTrabajo.length()!=0}">
+                                <h3 class="txtOO" >#{item.jornadaTrabajo} Horas</h3>
+                            </c:if>
+                            <c:if test="#{ofertaLaboralController.selected.jornadaTrabajo.length()==0}">
+                                <h3 class="txtOO" ></h3>
+                            </c:if>
+                        </div>
+                        <div class="infoO22" >
+                            <h3 class="textoOO" >Remuneración</h3>
+                            <c:if test="#{ofertaLaboralController.selected.remuneracion.length()!=0}">
+                                <h3 class="txtOO" >$ #{item.remuneracion}</h3>
+                            </c:if>
+                            <c:if test="#{ofertaLaboralController.selected.remuneracion.length()==0}">
+                                <h3 class="txtOO" ></h3>
+                            </c:if>
+                        </div>
+                        <div class="infoO22" >
+                            <h3 class="textoOO" >Fecha inicio</h3>
+                            <h3 class="txtOO" >#{ofertaLaboralController.fecha(item.fechaInicio)}</h3>
+
+                        </div>
+                        <div class="infoO22" >
+                            <h3 class="textoOO" >Fecha fin</h3>
+                            <h3 class="txtOO" >#{ofertaLaboralController.fecha(item.fechaFin)}</h3>
+                        </div>
+
+                        <div class="infoO22" >
+                            <h3 class="textoOO" >Provincia</h3>
+                            <h3 class="txtOO" >#{item.idEmpresa.idProvincia.provincia}</h3>
+
+                        </div>
+                        <div class="infoO22">
+                            <h3 class="textoOO" >Cantón</h3>
+                            <h3 class="txtOO" >#{item.idEmpresa.idCanton.canton}</h3>
+                        </div>
+                        <div class="infoO22" >   
+                            <h3 class="textoOO" >Parroquia</h3>
+                            <h3 class="txtOO" >#{item.idEmpresa.idParroquia.parroquia}</h3>
+                        </div>
+                        <div class="infoO22">
+                            <h3 class="textoOO" >Dirección</h3>
+                            <h3 class="txtOO" >#{item.idEmpresa.direccion}</h3>
+                        </div>
+
+                    </p:fieldset>
+                    <br/>
+                    <p:fieldset legend="Requerimientos" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+                        <div class="infoO22"  > 
+                            <h3  class="textoOO" >Conocimientos del cargo</h3>
+                            <h3 class="txtOO" >#{item.conocimientoCargo}</h3>
+                        </div>
+                        <div class="infoO22">  
+                            <h3  class="textoOO" >Nivel Académico</h3>
+                            <h3 class="txtOO" >#{item.idNivelAcademico.nivelAcademico}</h3>
+                        </div>
+                        <div class="infoO22" >
+                            <h3 class="textoOO" >Horas capacitacines</h3>
+                             <c:if test="#{ofertaLaboralController.selected.idHorasCapacitaciones!=null}">
+                                <h3 class="txtOO" >#{item.idHorasCapacitaciones.horasCapacitaciones} Horas</h3>
+                            </c:if>
+                            <c:if test="#{ofertaLaboralController.selected.idHorasCapacitaciones==null}">
+                                <h3 class="txtOO" ></h3>
+                            </c:if>
+                        </div>
+                        <div class="infoO22" >
+                            <h3 class="textoOO" >Años de Experiencia</h3>
+                            <h3 class="txtOO" >#{item.tiempo_experiencia}</h3>
+                        </div>
+
+                        <div class="infoO22" >
+                            <h3 class="textoOO" >Area de Estudio</h3>
+                            <h3 class="txtOO" >#{item.idAreaEstudio.areaEstudio}</h3>
+                        </div>
+                    </p:fieldset>
+                    <br/>
+                </p:dataList>
+            </h:form>
+           </div>
+            <br/>
+        </ui:define>
+    </ui:composition>
+</html>

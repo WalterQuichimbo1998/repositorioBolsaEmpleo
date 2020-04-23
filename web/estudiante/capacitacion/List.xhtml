@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../Estudiante.xhtml">
+
+
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/estudiante/Estudiante?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Capacitaciones" style="color: #086A87;" action="/estudiante/capacitacion/List?faces-redirect=true"/>
+         </ui:define>
+        <ui:define name="caja">
+            <div class="c_tablas">
+            <h3 class="titulo_p">Capacitaciones</h3>
+            <h:form id="CapacitacionListForm" style="text-align: center" >
+                <p:panel>
+                    <p:dataTable id="datalist" class="tabla" value="#{capacitacionController.items}" var="item"
+                                 selectionMode="single" selection="#{capacitacionController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idCapacitacion}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 paginatorPosition="bottom"
+                                 emptyMessage="No hay datos."
+                                 sortBy="#{item.idCapacitacion}"
+                                 sortOrder="descending"
+                                >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column sortBy="#{item.institucion}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_institucion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.institucion}"/>
+                        </p:column>
+                       
+                        <p:column sortBy="#{item.nombreEvento}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_nombreEvento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreEvento}"/>
+                        </p:column>
+                         <p:column sortBy="#{item.idTipoEvento.evento}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_idTipoEvento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoEvento.evento}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.fechaInicio}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_fechaInicio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaInicio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.fechaFin}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_fechaFin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaFin}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.dias}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_dias}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dias}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idAreaEstudio.areaEstudio}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_idAreaEstudio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idAreaEstudio.areaEstudio}"/>
+                        </p:column>
+                     
+                        <p:column sortBy="#{item.idHorasCapacitaciones.horasCapacitaciones}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_idHorasCapacitaciones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idHorasCapacitaciones.horasCapacitaciones}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idTipoCertificado.tipoCertificado}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_idTipoCertificado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoCertificado.tipoCertificado}"/>
+                        </p:column>
+                        
+                      
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{capacitacionController.prepareCreate}" update=":CapacitacionCreateForm" oncomplete="PF('CapacitacionCreateDialog').show()"/>
+                            <p:commandButton id="viewButton" styleClass="ver"  icon="ui-icon-search" value="#{bundle.View}" update=":CapacitacionViewForm" oncomplete="PF('CapacitacionViewDialog').show()" disabled="#{empty capacitacionController.selected}"/>
+                            <p:commandButton id="editButton" styleClass="editar"  icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CapacitacionEditForm" oncomplete="PF('CapacitacionEditDialog').show()" disabled="#{empty capacitacionController.selected}"/>
+                            <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{capacitacionController.destroy}" update=":growl,datalist" disabled="#{empty capacitacionController.selected}">
+                                 <p:confirm message="Eliminar Registro" header="Aviso" icon="ui-icon-alert"   > </p:confirm>                                
+                            </p:commandButton>                      
+                            <p:confirmDialog global="true" showEffect="clip"  hideEffect="clip" style="background: #f2f2f2;font-size: 18px !important;font-weight: bold;padding: 0t;margin: 0;">                                                           
+                                    <p:commandButton style="width: 70px;margin:0px !important;margin-left: 10px !important;font-size: 16px !important;background: #29a0c7;outline: none;box-shadow: none" value="Si" type="button"  styleClass="ui-confirmdialog-yes"></p:commandButton>
+                                    <p:commandButton style="width: 70px;margin:0px !important;margin-left: 5px !important;font-size: 16px !important;background: #e26c6c;outline: none;box-shadow: none;" value="No" type="button" styleClass="ui-confirmdialog-no" immediate="true"></p:commandButton>                              
+                                </p:confirmDialog>
+                           
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            </div>
+            
+          
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

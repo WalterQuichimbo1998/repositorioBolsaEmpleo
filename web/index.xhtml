@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      lang="es">
+    <h:head>
+        <title>Bolsa de Empleo ISTL</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/logo.png"/> 
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet name="css/estilosPrincipal.css"/>
+        <h:outputStylesheet name="css/estilosLogin.css"/>
+        <h:outputStylesheet name="css/waves.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+        <h:outputScript library="js" name="menu_1.js"/>
+        <h:outputScript library="js" name="waves.js"/>
+    </h:head>
+    <h:body> 
+        <p:growl id="growl" life="3000"/>   
+        <div class="contenedor">
+            <h:form>
+                <div class="cont">
+                    <img src="resources/img/logo_sistema.jpg"  class="logo"/>
+                    <div class="menu_bar">
+                        <p:commandLink class="btn-menu" title="Iniciar Sesión" >
+                            <img style="width: 50px;object-fit:cover;object-position:center center;vertical-align: middle"
+                                 src="#{request.contextPath}/resources/img/internet.png" ></img>
+                        </p:commandLink>
+                    </div>
+                    <nav>
+                        <ul>
+                            <ui:insert name="link">
+                                <li>
+                                    <p:commandButton value="Inicio" class="btn2 bbt" action="index?faces-redirect=true"/>
+                                </li>
+                                <li>
+                                    <p:commandButton value="Ofertas Laborales" class="btn2" actionListener="#{ofertaLaboralController.listaO()}" action="ofertas?faces-redirect=true" />
+                                </li>
+                                <li>
+                                    <p:commandButton value="Contacto" class="btn2" action="contacto?faces-redirect=true" />
+                                </li>
+                                <li id="ingresar0">
+                                    <p:commandButton value="Iniciar Sesión" class="btn2" oncomplete="PF('login_estudiante').show()" update=":datos"/>
+                                </li>  
+                                <li id="ingresar1">                                   
+                                    <p:commandLink title="Iniciar Sesión"  oncomplete="PF('login_estudiante').show()" update=":datos" >
+                                        <img style="width: 50px;object-fit:cover;object-position:center center;vertical-align: middle"
+                                             src="#{request.contextPath}/resources/img/internet.png" ></img>
+                                    </p:commandLink>
+                                </li>
+                            </ui:insert>
+                        </ul>
+                    </nav>
+                </div>
+            </h:form>
+            <div class="caja_central" >
+                <ui:insert name="caja">
+                    <br/>
+                    <br/>               
+                    <br/>               
+                    <div id="slider_main">
+                        <p:imageSwitch effect="fade" widgetVar="switcher" id="manuelSwitcher"
+                                       slideshowAuto="true" style="width: 100%;" speed="1000" slideshowSpeed="6000">
+                            <ui:repeat value="#{imagenPortadaController.items}" var="image" id="manuelSwitcherImages">
+                                <img src="resources/portada/#{image.imagen}"
+                                     style="width: 100%;height: auto;margin: auto;border-radius: 6px;box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.46);"/>
+                            </ui:repeat>
+                        </p:imageSwitch>
+
+                    </div>
+                    <h:form>
+                            <center>
+                                <p:commandButton type="button" onclick="PF('switcher').previous();"
+                                                 icon="	ui-icon-seek-prev" id="prev" styleClass="prev"/>
+                                                 
+                                <p:commandButton type="button" onclick="PF('switcher').next();"
+                                                 icon="ui-icon-seek-next" id="next" styleClass="prev" />                                
+
+                            </center>
+                        </h:form>
+                    <br/>
+                    <h1 style="margin: 0;font-family: Arial;font-size: 34px;font-weight: bold;
+                        margin-bottom: 10px;text-align: center;color: #039be5;">
+                        Sistema Bolsa de Empleo</h1>
+                    <h4 class="texto">
+                        El Instituto Superior Tecnológico Limón ofrece el sistema de Bolsa de Empleo 
+                        para alumnos graduados y egresados con la finalidad de agilizar su inserción con el sector empresarial 
+                        en base a su perfil, ofreciendo las mejores oportunidades laborales para aquellos que se 
+                        encuentren en la búsqueda de algún empleo en particular.
+                    </h4>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div style="width: 100%; margin: auto;padding-top: 15px;padding-bottom: 15px;background: #eceff1">
+                        <h1 style="width: 100%;margin: auto;font-family: Arial;font-size: 30px;text-align: center;color: #42A5F5">Módulos Administrativos</h1>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div class="imagenes">
+                        <h:panelGrid columns="2" style="margin: auto; ">
+                            <h:panelGroup style="display: inline-block; text-align: center; "> 
+                                <div class="c_img">
+                                    <img src="resources/img/estudiante_foto.jpg" class="img_portada"/>
+                                    <h1 class="texto_2">ESTUDIANTE</h1>
+                                    <p class="texto_3">
+                                        Actualiza tu información de perfil y postulate a las diferentes ofertas de trabajo de tu mayor interés.
+                                    </p>
+                                </div>
+                                <div class="c_img">
+                                    <img src="resources/img/empresa_foto.jpg" class="img_portada"/>
+                                    <h1 class="texto_2">EMPRESA</h1>
+                                    <p class="texto_3">
+                                        Empleador registra tus empresas o negocios para poder ofertar tus diferentes ofertas de trabajo.
+                                    </p>
+                                </div>
+                                <div class="c_img">
+                                    <img src="resources/img/job_search.jpg" class="img_portada"/>
+                                    <h1 class="texto_2">OFERTA</h1>
+                                    <p class="texto_3">
+                                        Las ofertas de trabajo son publicadas por las distintas empresas o negocios, y además podrás encontrar
+                                        ofertas de cualquier índole.
+                                    </p>
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                        <br/>      
+                    </div>
+                    <br/>
+                    <br/>
+                </ui:insert>   
+            </div>
+            <footer id="head3"> 
+                <br/>
+                <h3 style=" width: 100%;margin: auto; text-align: center;font-family: Tahoma;font-size: 17px;font-weight: normal;color: #000">
+                    COPYRIGHT © 2020 <strong>|</strong> Decide ser un Profesional de éxito</h3>
+                <img src="resources/img/logo_senescyt.png" style="width: 240px;margin: auto"/>
+            </footer>
+        </div>
+        <span class="ir-arriba"><img src="#{request.contextPath}/resources/img/flecha_arriba.png" style="width: 16px;margin: auto"/></span> 
+        <script type="text/javascript">
+            Waves.init();
+            Waves.attach('.btn3', ['waves-button']);
+            Waves.attach('.post', ['waves-button']);
+        </script> 
+        <script src="resources/js/sheetslider.min.js"></script>
+    </h:body>
+    <ui:include src="login.xhtml"/>
+</html>
+
+
+
+
+
+

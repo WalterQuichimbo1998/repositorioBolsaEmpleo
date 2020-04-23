@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../administrador.xhtml">
+
+
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Personas" class="btn2 bbt" action="/administrador/persona/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Habilitación Perfil" class="btn2" action="/administrador/hojaVidaEstudiante/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
+            </li> 
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Personas" style="color: #086A87;" action="/administrador/persona/List?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+
+            <h3 class="titulo_p">Registro de Personas</h3>
+            <h:form id="PersonaListForm" style="text-align: center">
+                <p:panel id="p">
+                    <p:dataTable styleClass="tablaPersonalizada" id="datalist" value="#{personaController.items}" var="item"
+                                 selectionMode="single" selection="#{personaController.selected}"
+                                 paginator="true"
+                                 widgetVar="persona"
+                                 rowKey="#{item.idPersona}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 paginatorPosition="bottom"
+                                 emptyMessage="No se encontraron datos..."
+                                 filteredValue="#{personaController.listaPersona}"
+                                 sortBy="#{item.idPersona}"
+                                 sortOrder="descending"
+                                 >
+
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <f:facet name="header">
+                            <p:inputText id="globalFilter"
+                                         placeholder="Buscar" 
+                                         onkeyup="PF('persona').filter()" 
+                                         style="font-size: 18px !important;margin: 10px; text-align: center;border-radius: 20px;
+                                         padding: 7px 0px;width: 500px; "  /> 
+                        </f:facet> 
+                        <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}"  filterMatchMode="contains">  
+
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_nombre}"/>
+
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.apellido}" filterBy="#{item.apellido}" filterMatchMode="contains"> 
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_apellido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellido}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.cedula}" filterBy="#{item.cedula}" filterMatchMode="contains"> 
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_cedula}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cedula}"/>
+                        </p:column>
+
+
+                        <p:column sortBy="#{item.correo}" filterBy="#{item.correo}" filterMatchMode="contains"> 
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_correo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+
+                        <p:column sortBy="#{item.direccion}" filterBy="#{item.direccion}" filterMatchMode="contains"> 
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaTitle_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.direccion}" />
+                        </p:column>
+
+
+
+                        <f:facet name="footer">
+                            <h:outputLabel value="Total Personas registradas: " style="font-size: 17px; font-weight: normal"/>
+                            <h:outputLabel value="#{personaController.items.size()}" style="font-size: 17px;"/>
+                            <br/>
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{personaController.prepareCreate}" update=":PersonaCreateForm" oncomplete="PF('PersonaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton" styleClass="ver"  icon="ui-icon-search" value="#{bundle.View}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()" disabled="#{empty personaController.selected}"/>
+                            <p:commandButton id="editButton" styleClass="editar"  icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PersonaEditForm" oncomplete="PF('PersonaEditDialog').show()" disabled="#{empty personaController.selected}"/>
+                            <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{personaController.destroy}" update=":growl,datalist" disabled="#{empty personaController.selected}">
+                                <p:confirm message="Eliminar Persona" header="Aviso" icon="ui-icon-alert"   > </p:confirm>                                
+                            </p:commandButton>                      
+                            <p:confirmDialog global="true" showEffect="clip" hideEffect="clip" style="background: #bbede3;font-size: 16px !important;font-weight: bold" id="iinfo">                             
+                                <p:commandButton style="width: 70px;margin-left: 17px;font-size: 16px !important;background: #29a0c7;outline: none;box-shadow: none" value="Si" type="button"  styleClass="ui-confirmdialog-yes"></p:commandButton>
+                                <p:commandButton style="width: 70px;font-size: 16px !important;background: #e26c6c;outline: none;box-shadow: none;" value="No" type="button" styleClass="ui-confirmdialog-no" immediate="true"></p:commandButton>
+                            </p:confirmDialog>
+
+                                <p:commandButton styleClass="ver" ajax="false" icon="ui-icon-document" value="Descargar Reporte"
+                                                 actionListener="#{exportar.reportePersonas()}"/>
+
+                        </f:facet>                   
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

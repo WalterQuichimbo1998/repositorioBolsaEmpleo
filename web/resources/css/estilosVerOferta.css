@@ -1,0 +1,82 @@
+
+.tablaOferta .ui-widget-content {
+    background: none;
+    border:none;
+}
+.verForm{
+    width: 94%;
+    margin: auto;
+    background: none;
+}
+.infoO{
+    width: 100%;
+}
+.txtO2{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    margin-top: 10px;
+    color: #454545;
+    font-size: 30px;
+    font-family: Verdana;
+    font-weight: bold;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background: none;
+    text-align: center;
+}
+
+.txtO0{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    color: #454545;
+    font-size: 20px;
+    font-family: Verdana;
+    text-align: center;
+    font-weight: normal;
+}
+
+.infoO2{
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.infoO3{
+    width: 90%;
+    margin: auto;
+}
+.textoO2{
+    width: 100%;
+    margin: 0;
+    color: #086A87; 
+    font-size: 30px; 
+    text-align: center;
+    font-family:Verdana;
+}
+.textoO{
+    width: 100%;
+    margin: 0;
+    color: #086A87; 
+    font-size: 26px; 
+    text-align: left;
+    font-family:Arial;
+}
+
+.txtO{
+    width: 96%;
+    height: auto;
+    margin:auto;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: #454545;
+    font-size: 20px;
+    font-family: Tahoma;
+    font-weight: normal;
+    text-align: left;
+
+}
+
+

@@ -1,0 +1,111 @@
+.login.ui-dialog{
+ border: none;
+    margin: 0;
+    padding: 0px !important;
+    outline: none;
+    border-radius: 0px;
+    background: none;
+     box-shadow: none !important;
+
+}
+.cj{
+    width: 320px;
+    margin: 0;
+    padding: 0;
+    background: #007bff;
+    box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);
+    border-radius: 3px;
+    
+}
+.tt{
+   
+    width: 98%;
+     margin: 0;
+    margin: auto;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-family: Arial;
+    background: none;
+    color: white;
+    text-shadow:1px 1px #454545;
+}
+.cc{
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width:100%;
+    margin: auto;
+    background: #f2f2f2;
+   
+}
+.cajaImg{
+    width: 120px;
+    margin: auto;
+}
+.textoL{
+    width: 80%;
+    margin: auto;
+    font-family: Arial;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.inputText.ui-inputfield{
+    width: 80%;
+    margin: auto;
+    font-size: 20px !important;
+    padding: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    box-shadow:none;
+    box-shadow:0px;
+    outline: none;
+    border:1px solid #007bff;
+    box-shadow: inset 0px 0px 0px 0px red;
+    background: #f7f9f9;
+
+}
+.btn.ui-button{
+
+    width: 180px;
+    height: 40px;
+    background: #007bff;
+    font-size: 18px !important;
+    font-weight: normal;
+    color: white;
+    border: none;   
+    margin-top: 20px;
+    outline: none;
+    margin: 5px;
+    text-shadow:none;
+    box-shadow: none;
+    outline: none;
+    transition:  all .5s ease;
+}
+.btn:hover{
+    background: #0267d3;
+    text-shadow:1px 1px #454545;
+    cursor: pointer
+}
+.botonSalir.ui-button{
+    width: 120px;
+    height: 40px;
+    background: #ff3333;
+    font-size: 18px !important;
+    font-weight: normal;
+    color: white;
+    border: none;   
+    margin-top: 20px;
+    outline: none;
+    margin: 5px;
+    text-shadow:none;
+    box-shadow: none;
+    outline: none;
+    transition:  all .5s ease;
+}
+.botonSalir:hover{
+    background: #fc1e1e;
+    text-shadow:1px 1px #454545;
+    cursor: pointer;
+}

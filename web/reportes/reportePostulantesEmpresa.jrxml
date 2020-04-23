@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2be56a8-fe97-40d6-9596-9cb85f8070b6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT id_postulante,oferta_laboral_id_oferta,persona_id_persona,
+estado_postulante,fecha_postulante,
+oferta_laboral.id_oferta,oferta_laboral.cargo_solicitado,empresa.id_empresa,empresa.nombre_comercial,
+persona.id_persona,(SELECT nombre FROM persona WHERE persona.id_persona=persona_id_persona),
+(SELECT apellido FROM persona WHERE persona.id_persona=persona_id_persona)
+FROM postulante
+LEFT JOIN oferta_laboral ON oferta_laboral.id_oferta=postulante.oferta_laboral_id_oferta
+LEFT JOIN empresa ON empresa.id_empresa=oferta_laboral.id_empresa
+LEFT JOIN persona ON persona.id_persona=empresa.id_persona
+WHERE persona.id_persona=$P{id}
+ORDER BY fecha_postulante DESC]]>
+	</queryString>
+	<field name="id_postulante" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="oferta_laboral_id_oferta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="persona_id_persona" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado_postulante" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_postulante" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_oferta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cargo_solicitado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_empresa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_comercial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_persona" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="(SELECT nombre FROM persona WHERE persona.id_persona=persona_id_persona)" class="java.lang.String"/>
+	<field name="(SELECT apellido FROM persona WHERE persona.id_persona=persona_id_persona)" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="185" y="4" width="430" height="79" backcolor="#FFFFFF" uuid="e40de839-69e1-4d10-a080-d5207839ed77"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE POSTULANTES]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="683" y="7" width="70" height="70" uuid="a5573b75-74aa-4fc5-94fb-fd52b4b5881c"/>
+				<imageExpression><![CDATA["empresa.png"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="34" y="4" width="95" height="80" uuid="f0e89173-3398-48c0-ba2c-58cf3ddfdf13"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="25" backcolor="#E9EAEA" uuid="965756ed-c2da-4540-8689-37d4bce69e0c"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="12" y="0" width="303" height="26" uuid="249f9134-68df-4ac4-a2d3-7d46a6ad4a62"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo Solicitado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="574" y="0" width="120" height="26" uuid="abd6c859-7596-489f-80ed-7eab361e8638"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Postulación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="694" y="0" width="107" height="26" uuid="94630cf4-37e9-49b0-be1c-339757268466"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="0" width="259" height="26" uuid="a4ed5ace-2a3d-464d-815e-2c44c5654078"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Persona]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="48" splitType="Stretch">
+			<textField>
+				<reportElement x="12" y="4" width="303" height="40" uuid="dceb26a7-a569-4946-a9a2-8d2c3601cdf2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cargo_solicitado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="574" y="4" width="120" height="40" uuid="2dced344-d7f4-4142-ae30-c3fc204ada27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_postulante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="315" y="4" width="259" height="40" uuid="3f280598-f7af-44d0-a7ff-81c59dde559c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{(SELECT nombre FROM persona WHERE persona.id_persona=persona_id_persona)}+" "+
+$F{(SELECT apellido FROM persona WHERE persona.id_persona=persona_id_persona)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="694" y="4" width="107" height="40" uuid="50fbda33-ea0d-4bc8-8638-19342ab0887e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{estado_postulante}==null ? "Nuevo" : 
+( $F{estado_postulante}==true ? "Aceptado" : "No Aceptado" ) )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="684" y="3" width="80" height="20" uuid="fe35919b-28ee-4ed9-b0cf-46f8aabc81c0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="763" y="3" width="40" height="20" uuid="d76186e2-8f62-469f-a5b6-836198c7138a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="26" y="3" width="183" height="20" uuid="6c8a738c-ced7-4e1a-b485-ca2b41c4c0bf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

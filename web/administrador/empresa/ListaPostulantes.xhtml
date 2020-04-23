@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../administrador.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Ofertas Laborales" class="btn2 bbt" action="/administrador/empresa/ofertas?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
+            </li>  
+            
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Ofertas Laborales"  action="/administrador/empresa/ofertas?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Lista Postulantes" style="color: #086A87;" action="/administrador/empresa/ListaPostulantes?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+            <div class="c_tablas" style="width: 700px;margin: auto">
+                <h3 class="titulo_p">Lista Postulantes</h3>
+                <h:form id="IdiomaListForm" style="text-align: center;">
+
+                    <p:panel>
+                        <p:dataTable id="datalist" class="tabla" value="#{postulanteController.listaBuscarAdmin}" var="item" 
+                                     selectionMode="single" selection="#{postulanteController.selected}"
+                                     paginator="true"
+                                     rowKey="#{item.idPostulante}"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,20,30,40,50"
+                                     paginatorPosition="bottom"
+                                     emptyMessage="No hay datos."
+                                     sortBy="#{item.fechaPostulante}"
+                                     sortOrder="descending">
+                            <p:column style="width:110px;" sortBy="#{item.personaIdPersona.idPersona}" headerText="Foto">
+                                <img style="width: 100px;height: 110px;border-radius: 4px;margin: 0;padding: 0;margin: auto;
+                                     object-fit:cover;object-position:center center;
+                                     background-size: cover;"     
+                                     src="#{request.contextPath}/resources/#{postulanteController.existeFoto(item.personaIdPersona.foto)==true ? item.personaIdPersona.foto:'foto/sin_foto_perfil.png'}" ></img>  
+                            </p:column>
+                            <p:column headerText="Postulante" sortBy="#{item.personaIdPersona.nombre}">
+                                <h:outputText value="#{item.personaIdPersona.nombre} #{item.personaIdPersona.apellido}" style="font-size: 18px;font-weight: bold"/>
+                                <br/>
+                                <h:outputText value="#{item.personaIdPersona.idCarrera.carrera}" style="font-size: 16px;"/>
+                                <br/>
+                                <h:outputText value="Fecha de Postulación: #{personaController.fecha(item.fechaPostulante)}" style="font-size: 16;"/>
+                                <br/>
+                                <br/>
+                                <h:outputText rendered="#{item.personaIdPersona.genero==1}" value="#{item.confirmacion==true ? 'Contratada':''}" style="font-size: 20px;font-weight: bold;color: #007bff"/>
+                                <h:outputText rendered="#{item.personaIdPersona.genero==0}" value="#{item.confirmacion==true ? 'Contratado':''}" style="font-size: 20px;font-weight: bold;color: #007bff"/>
+                                <h:outputText rendered="#{item.personaIdPersona.genero==null}" value="#{item.confirmacion==true ? 'Contratado':''}" style="font-size: 20px;font-weight: bold;color: #007bff"/>
+
+                                <br/>
+                            </p:column>
+
+
+                        </p:dataTable>
+                    </p:panel>
+                </h:form>
+            </div>
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

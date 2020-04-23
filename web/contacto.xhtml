@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">  
+    <ui:composition template="index.xhtml">
+        <ui:define name="link">
+           <li>
+                <p:commandButton value="Inicio" class="btn2" action="index?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Ofertas Laborales" class="btn2" actionListener="#{ofertaLaboralController.listaO()}" action="ofertas?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Contacto" class="btn2 bbt" action="contacto?faces-redirect=true" />
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Iniciar Sesión" class="btn2" oncomplete="PF('login_estudiante').show()" update=":datos"/>
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="Iniciar Sesión"  oncomplete="PF('login_estudiante').show()" update=":datos" >
+                    <img style="width: 50px;object-fit:cover;object-position:center center;vertical-align: -17px;"
+                         src="#{request.contextPath}/resources/img/internet.png" ></img>
+                </p:commandLink>
+            </li>
+        </ui:define>
+        <ui:define name="caja">
+         <br/>
+         <br/>               
+         <div class="contacto" style="display: table">           
+                <img src="resources/img/portada2.png" style="margin: 0;width:100%;height: auto;object-fit:cover;
+                         object-position:center center; "/>
+                <h2 class="h2">Instituto Superior Tecnológico Limón</h2>
+                <h:outputLabel value="Teléfono: " style="font-size: 18px; font-weight: bold;font-family:Arial" />
+                <h:outputLabel value="(07) 277-1303" style="font-size: 18px;font-family: arial;"/>
+                <br/>
+                <h:outputLabel value="Correo: " style="font-size: 18px; font-weight: bold;font-family: Arial;" />
+                <h:outputLabel value="tecnologicolimon@gmail.com" style="font-size: 18px;font-family: arial;"/>
+                <br/>
+                <h:outputLabel value="Dirección: " style="font-size: 18px; font-weight: bold;font-family: Arial;" />
+                <h:outputLabel value="Av. 12 de Diciembre Limón, Morona-Santiago, Ecuador" style="font-size: 18px;font-family: arial;"/>
+                <br/>
+                <h:outputLabel value="Página web: " style="font-size: 18px; font-weight: bold;font-family: Arial;" />
+                <a id="link2" href="https://tecnologicolimon.edu.ec/" target="_blank">tecnologicolimon.edu.ec/</a>
+                <br/>
+                <br/>
+                <img src="resources/img/logo_bolsa2.png" style="width: 130px;margin: auto"/>
+                <br/>                 
+                <span class="ir-arriba">-</span>              
+            </div>
+         <br/>
+         <br/>
+        </ui:define>
+    </ui:composition>  
+</html>

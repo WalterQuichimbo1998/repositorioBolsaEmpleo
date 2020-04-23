@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IdiomaViewDlg" widgetVar="IdiomaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewIdiomaTitle}" 
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="IdiomaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{idiomaController.selected != null}">
+                          <h:outputText value="#{bundle.ViewIdiomaLabel_idListaIdiomas}" style="font-weight: bold"/>
+                          <h:outputText value="#{idiomaController.selected.idListaIdiomas.nombreIdioma}" title="#{bundle.ViewIdiomaTitle_idListaIdiomas}"/>
+                        <h:outputText value="#{bundle.ViewIdiomaLabel_idNivelEscrito}" style="font-weight: bold"/>
+                        <h:outputText value="#{idiomaController.selected.idNivelEscrito.nivelEscrito}" title="#{bundle.ViewIdiomaTitle_idNivelEscrito}"/>
+                        <h:outputText value="#{bundle.ViewIdiomaLabel_idNivelHablado}" style="font-weight: bold"/>
+                        <h:outputText value="#{idiomaController.selected.idNivelHablado.nivelHablado}" title="#{bundle.ViewIdiomaTitle_idNivelHablado}"/>
+                    </p:panelGrid>
+                    <p:commandButton styleClass="btn_s" value="#{bundle.Close}" immediate="true" oncomplete="PF('IdiomaViewDialog').hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

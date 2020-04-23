@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="882718d1-cf69-496c-93a6-d83d96178058">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     hoja_vida_estudiante.`id_hoja_vida_estudiante` AS hoja_vida_estudiante_id_hoja_vida_estudiante,
+     hoja_vida_estudiante.`id_persona` AS hoja_vida_estudiante_id_persona,
+     persona.`id_persona` AS persona_id_persona,
+     persona.`nombre` AS persona_nombre,
+     persona.`apellido` AS persona_apellido,
+     persona.`cedula` AS persona_cedula
+FROM
+     `persona` persona INNER JOIN `hoja_vida_estudiante` hoja_vida_estudiante ON persona.`id_persona` = hoja_vida_estudiante.`id_persona`
+ORDER BY hoja_vida_estudiante.id_hoja_vida_estudiante DESC;]]>
+	</queryString>
+	<field name="hoja_vida_estudiante_id_hoja_vida_estudiante" class="java.lang.Integer"/>
+	<field name="hoja_vida_estudiante_id_persona" class="java.lang.Integer"/>
+	<field name="persona_id_persona" class="java.lang.Integer"/>
+	<field name="persona_nombre" class="java.lang.String"/>
+	<field name="persona_apellido" class="java.lang.String"/>
+	<field name="persona_cedula" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement x="154" y="25" width="466" height="70" uuid="891dbfd7-6cad-4f9e-82e5-6d8c8c04e329"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO SUPERIOR TECNOLÓGICO "LIMÓN"]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="20" y="1" width="113" height="102" uuid="e123bfc8-61bc-4b85-a177-1771e8b4c7af"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Top">
+				<reportElement x="620" y="25" width="178" height="70" uuid="424a275f-4641-4902-b545-1b549a9cbdc0"/>
+				<imageExpression><![CDATA["logo_senescyt.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="2" width="802" height="25" backcolor="#FFFFFF" uuid="54d90bfd-ddd5-4d97-affe-df296cafb017"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14"/>
+				</textElement>
+				<text><![CDATA[Reporte de Perfiles Habilitados de Estudiante]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="22" backcolor="#F5F5F5" uuid="ad8ac1f4-1038-44d6-8758-b7f7c3a54354"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="267" height="20" uuid="f27706e7-989a-43ed-8ac7-885512eae4ed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="0" width="267" height="20" uuid="4968d6db-ca0b-4991-8c86-182a5fac5c2b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="0" width="267" height="20" uuid="5d64b450-eddf-4001-b2f6-6b65ea7fbb9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cédula]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="267" height="20" uuid="22e41f97-f2f3-4371-a0e9-2c4cec70d402"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{persona_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="0" width="267" height="20" uuid="36379999-f010-4abb-92c8-23ef383cdf26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{persona_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="534" y="0" width="267" height="20" uuid="69147fd2-fc7e-4f3b-9751-9ea27751a56e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{persona_cedula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="762" y="1" width="40" height="20" uuid="57e262d8-1ec4-4640-afe0-02fe811ca049"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="31" y="0" width="182" height="20" uuid="7ccd984d-6c76-4849-ae3d-3c0837dbc30b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="682" y="1" width="80" height="20" uuid="00270e45-3287-4d57-ae23-055921eadc97"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

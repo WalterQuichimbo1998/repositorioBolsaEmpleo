@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./Empleador.xhtml">
+        <ui:define name="dir">
+             <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Logotipos de Empresas" action="/empleador/Logotipos?faces-redirect=true"/>
+
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Subir Logotipo" style="color: #086A87;" action="/empleador/subirLogotipo?faces-redirect=true"/>
+        </ui:define>
+
+        <ui:define name="caja">
+            <br/>
+            <div class="caja_form">
+                <h3 class="titulo_p" style="margin-top: 0">Subir Logotipo</h3>
+
+            <h:form enctype="multipart/form-data" class="formulario">
+
+                <div class="info3">
+                    <h:panelGrid columns="1" style="width: 100%; margin: auto;  ">
+                        <h:panelGroup style="display:block; text-align: center; "> 
+                            <h2 style="font-family: Tahoma">#{empresaController.selected.nombreComercial}</h2>
+                            <h3 class="textoFoto">Seleccione un Logotipo</h3>
+                            <div class="selec">
+                                <div id="upload-button">  
+                                    <p:fileUpload  value="#{empresaController.file}" mode="simple" required="true" 
+                                                   dragDropSupport="false"
+                                                   update=":growl" 
+                                                   fileLimit="1" 
+                                                   allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                                   ></p:fileUpload>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </div>
+
+                <div style="margin: auto; width: 80%; display: flex">    
+
+                    <p:commandButton class="btn_guardar" value="Subir Logotipo" ajax="false" actionListener="#{empresaController.subirLogo}" />
+
+                </div>
+                     <p style="font-family: Arial;text-align: center;color:#454545;margin:auto"><strong>Aviso: </strong>Seleccione un logotipo con extensión .png o .jpg - Tamaño máximo 2Mb.</p>
+            </h:form>
+             </div>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+
+</html>

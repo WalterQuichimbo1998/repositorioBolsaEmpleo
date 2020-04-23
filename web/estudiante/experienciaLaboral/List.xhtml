@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../Estudiante.xhtml">
+     
+            <ui:define name="dir">
+                <h:commandLink class="prin" value="Inicio" action="/estudiante/Estudiante?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Experiencia Laboral" style="color: #086A87;" action="/estudiante/experienciaLaboral/List?faces-redirect=true"/>
+         </ui:define>
+        <ui:define name="caja">
+            <div class="c_tablas">
+            <h3 class="titulo_p">Experiencia Laboral</h3>
+            <h:form id="ExperienciaLaboralListForm" style="text-align: center">
+                <p:panel>
+                    <p:dataTable id="datalist" class="tabla" value="#{experienciaLaboralController.items}" var="item"
+                                 selectionMode="single" selection="#{experienciaLaboralController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idExperiencia}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 paginatorPosition="bottom"
+                                 emptyMessage="No hay datos."
+                                 sortBy="#{item.idExperiencia}"
+                                 sortOrder="descending">
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                     
+                        <p:column sortBy="#{item.institucion}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperienciaLaboralTitle_institucion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.institucion}"/>
+                        </p:column>
+                         <p:column sortBy="#{item.idAreaTrabajo.areaTrabajo}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperienciaLaboralTitle_idAreaTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idAreaTrabajo.areaTrabajo}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.puesto}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperienciaLaboralTitle_puesto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.puesto}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.fechaInicio}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperienciaLaboralTitle_fechaInicio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaInicio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.fechaFin}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperienciaLaboralTitle_fechaFin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaFin}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.actividades}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperienciaLaboralTitle_actividades}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.actividades}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.trabajaActualmente}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListExperienciaLaboralTitle_trabajaActualmente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.trabajaActualmente==null ? '':item.trabajaActualmente==1 ? 'Si':'No'}"/>
+                        </p:column>
+                        
+                      
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{experienciaLaboralController.prepareCreate}" update=":ExperienciaLaboralCreateForm" oncomplete="PF('ExperienciaLaboralCreateDialog').show()"/>
+                            <p:commandButton id="viewButton" styleClass="ver"  icon="ui-icon-search" value="#{bundle.View}" update=":ExperienciaLaboralViewForm" oncomplete="PF('ExperienciaLaboralViewDialog').show()" disabled="#{empty experienciaLaboralController.selected}"/>
+                            <p:commandButton id="editButton" styleClass="editar"  icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ExperienciaLaboralEditForm" oncomplete="PF('ExperienciaLaboralEditDialog').show()" disabled="#{empty experienciaLaboralController.selected}"/>
+                            <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{experienciaLaboralController.destroy}" update=":growl,datalist" disabled="#{empty experienciaLaboralController.selected}">
+                              <p:confirm message="Eliminar Registro" header="Aviso" icon="ui-icon-alert"   > </p:confirm>                                
+                            </p:commandButton>                      
+                          <p:confirmDialog global="true" showEffect="clip"  hideEffect="clip" style="background: #f2f2f2;font-size: 18px !important;font-weight: bold;padding: 0t;margin: 0;">                                                           
+                                    <p:commandButton style="width: 70px;margin:0px !important;margin-left: 10px !important;font-size: 16px !important;background: #29a0c7;outline: none;box-shadow: none" value="Si" type="button"  styleClass="ui-confirmdialog-yes"></p:commandButton>
+                                    <p:commandButton style="width: 70px;margin:0px !important;margin-left: 5px !important;font-size: 16px !important;background: #e26c6c;outline: none;box-shadow: none;" value="No" type="button" styleClass="ui-confirmdialog-no" immediate="true"></p:commandButton>                              
+                                </p:confirmDialog>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            </div>
+            
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

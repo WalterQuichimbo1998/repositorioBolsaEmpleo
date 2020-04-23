@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="../Empleador.xhtml">
+
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Empresas" class="btn2 bbt" action="/empleador/empresa/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Postulantes" class="btn2" action="/empleador/ListaPostulante?faces-redirect=true"/>
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
+                    <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
+                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}" ></img>
+                </p:commandLink>
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Empresas" style="color: #086A87;" action="/empleador/empresa/List?faces-redirect=true"/>
+        </ui:define>
+
+        <ui:define name="caja">
+            <h3 class="titulo_p">Mis Empresas</h3>
+            <h:form id="EmpresaListForm" style="text-align: center">
+                <p:panel id="panelEmpresa">
+                    <p:dataTable id="datalist" class="tabla" value="#{empresaController.lista}" var="item"
+                                 selectionMode="single" 
+                                 paginator="true"
+                                 rowKey="#{item.idEmpresa}"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,15"
+                                 paginatorPosition="bottom"
+                                 emptyMessage="No hay datos."
+                                 sortBy="#{item.idEmpresa}"
+                                 sortOrder="descending">
+
+                        <p:ajax event="rowSelect"   update="createButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton editButton deleteButton"/>
+
+                        <p:column sortBy="#{item.nombreComercial}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEmpresaTitle_nombreComercial}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreComercial}"/>
+                        </p:column>
+
+
+                        <p:column style="width: 180px;" sortBy="#{item.direccion}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEmpresaTitle_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.direccion}"/>
+                        </p:column>
+
+                        <p:column style="width: 90px;" sortBy="#{item.telefonoOficina}">
+                            <f:facet name="header">
+                                <h:outputText value="Teléfono"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefonoOficina}"/>
+                        </p:column>
+                        <p:column style="width: 90px;" sortBy="#{item.fechaCreacion}">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha registro"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column style="width: 90px;" sortBy="#{item.idEmpresa}">
+                            <f:facet name="header">
+                                <h:outputText value="Acción"/>
+                            </f:facet>
+                            <p:commandLink id="editButton" style="text-decoration: none;outline: none;margin-right: 9px"
+                                           actionListener="#{empresaController.setSelected(item)}"                                      
+                                           action="/empleador/empresa/actualizarEmpresa?faces-redirect=true" >
+                                <img src="#{request.contextPath}/resources/img/editar.png" width="28px" class="icono"></img>  
+                            </p:commandLink>
+                            <p:tooltip for="editButton" value="Editar" trackMouse="true" style="box-shadow: none" />
+
+                            <p:commandLink id="deleteButton" style="text-decoration: none;outline: none"
+                                           actionListener="#{empresaController.setSelected(item)}"  
+                                           oncomplete="PF('delete_empresa').show()">
+                                <img src="#{request.contextPath}/resources/img/eliminar.png" width="28px" class="icono"></img>  
+                            </p:commandLink>
+                            <p:tooltip for="deleteButton" value="Eliminar" trackMouse="true" style="box-shadow: none" />
+                        </p:column>
+
+                        <p:column style="width: 80px;" sortBy="#{item.idEmpresa}">
+                            <f:facet name="header">
+                                <h:outputText value="Reporte"/>
+                            </f:facet>
+                            <h:commandLink id="track2" style="text-decoration: none;font-size: 16px" 
+                                           actionListener="#{exportar.reporteIndividual_Empresa(item.idEmpresa,item.logotipo)}">
+                                <img src="#{request.contextPath}/resources/img/pdf.png" width="30px"></img>  
+                            </h:commandLink>       
+                            <p:tooltip id="toolTipTrack2" for="track2" value="Descargar reporte" trackMouse="true" style="box-shadow: none" />
+
+                        </p:column>
+                        <p:column style="width: 70px;" sortBy="#{item.idEmpresa}">
+                            <f:facet name="header">
+                                <h:outputText value="Ofertas"/>
+                            </f:facet>
+
+                            <h:commandLink id="track" immediate="true" actionListener="#{ofertaLaboralController.setEmpresa(item)}" 
+                                           action="/empleador/ofertaLaboral/List?faces-redirect=true">
+                                <img src="#{request.contextPath}/resources/img/documento.png" width="40px"></img>   
+                            </h:commandLink>
+                            <p:tooltip id="toolTipTrack" for="track" value="Ver ofertas" trackMouse="true" style="box-shadow: none"  />
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <h:outputLabel value="Total Empresas: "  style="font-size: 16px; font-weight: normal "/>
+                            <h:outputLabel value="#{empresaController.lista.size()}"  style="font-size: 16px; "/>
+                            <br/>
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Crear Nueva Empresa" actionListener="#{empresaController.prepareCreate}" action="/empleador/empresa/crearEmpresa?faces-redirect=true"/>
+
+                        </f:facet>
+                    </p:dataTable>
+                    <br/>
+                    <c:if test="#{empresaController.lista.size()!=0}">
+                        <div class="c_fechas" style="margin-top: 40px" >
+                            <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                                font-size: 20px">Descargar Reporte por Fechas</h1>
+                            <br/>
+                            <br/>
+                            <p:outputLabel style="font-size: 16px !important" value="Seleccione las fechas de registro correspondientes."/>
+                            <br/>
+                            <br/>
+                            <div style="width: 180px;margin: auto;display: inline-block;margin-bottom: 20px">
+                                <h3 style="width: 100%;margin: auto;text-align: center;margin-bottom: 5px;">Fecha Inicio</h3>
+                                <p:calendar id="fechaInicio" locale="es" pattern="dd/MM/yyyy" navigator="true" mask="true" styleClass="fecha" 
+                                            value="#{empresaController.fecha_inicio}"/>
+                            </div>
+                            <div style="width: 180px;margin: auto;display: inline-block;margin-bottom: 20px">
+                                <h3 style="width: 100%;margin: auto;text-align: center;margin-bottom: 5px;">Fecha Final</h3>
+                                <p:calendar id="fechaFinal" locale="es" pattern="dd/MM/yyyy" navigator="true" mask="true" styleClass="fecha" 
+                                            value="#{empresaController.fecha_fin}"/>
+                            </div>
+                            <br/>
+                            <h:commandButton value="Ayer"  actionListener="#{empresaController.fecha2()}" class="f1">
+                                <f:ajax execute="@form" render="fechaInicio" /> 
+                                <f:ajax render="fechaFinal" /> 
+                                <f:ajax render="mensaje" /> 
+                                <f:ajax render="des" /> 
+                            </h:commandButton>
+                            <h:commandButton value="Buscar" class="botonDescargar" 
+                                             actionListener="#{empresaController.verificarReporte}" id="export" >
+                                <f:ajax execute="@form" render="mensaje" />                                                                       
+                                <f:ajax render="des" />                                                                       
+                            </h:commandButton>
+
+                            <h:commandButton value="Hoy"  actionListener="#{empresaController.fecha1()}" class="f1">
+                                <f:ajax execute="@form" render="fechaInicio" /> 
+                                <f:ajax render="fechaFinal" /> 
+                                <f:ajax render="mensaje" /> 
+                                <f:ajax render="des" /> 
+                            </h:commandButton>
+                            <br/>
+                            <br/>
+                            <h:outputLabel id="mensaje" style="#{empresaController.v==true ? 'color:green;font-size:14px;':'color:red;font-size:14px;'}"  
+                                           value="#{empresaController.mensaje}">
+                                <br/>
+                                <h:outputLabel value="Total : #{empresaController.listaE.size()} "
+                                               style="#{empresaController.v==true ? 'color:#000;font-size:14px;':'display:none;'} "/>
+                                <h:outputLabel value="#{empresaController.listaE.size()>1 ? 'registros':'registro'}"
+                                               style="#{empresaController.v==true ? 'color:#000;font-size:14px;':'display:none;'} "/>
+                                <br/>
+                            </h:outputLabel>
+                            <p:commandButton  styleClass="editar"  value="Descargar reporte" ajax="false" id="des"
+                                              style="#{empresaController.v==true ? 'margin-top:10px;':'display:none;'} "                                      
+                                              actionListener="#{empresaController.descargarReporte()}">    
+                            </p:commandButton>
+                        </div>
+                        <br/>
+                        <div class="c_fechas" >
+                            <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                                font-size: 20px">Descargar Reporte Total</h1>
+                            <br/>
+
+                            <p:commandButton styleClass="editar" ajax="false" icon="ui-icon-document" value="Descargar reporte"
+                                             actionListener="#{exportar.reporteEmpresas(personaController.selected.idPersona)}"/>
+
+                            <br/>
+                        </div>
+                        <br/>
+                        <br/>
+                    </c:if>
+                </p:panel>
+            </h:form>
+
+            <p:dialog id="delete_empresa" widgetVar="delete_empresa" modal="false" resizable="false" closeOnEscape="true"
+                      appendTo="@(body)"  showEffect="clip" hideEffect="clip" header="Aviso"
+                      style="background: #f2f2f2;box-shadow: none;box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.75) !important;" >
+                <h:form id="DeleteEmpresa">
+                    <h2 style="text-align: center; font-family: Arial">Eliminar empresa</h2>
+                    <p:commandButton styleClass="botonA" actionListener="#{empresaController.destroy}" 
+                                     update=":growl,:EmpresaListForm:datalist" value="Si"  oncomplete="PF('delete_empresa').hide()"/>
+                    <p:commandButton styleClass="botonC" value="No" oncomplete="PF('delete_empresa').hide()"/>
+                </h:form>
+            </p:dialog>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+</html>

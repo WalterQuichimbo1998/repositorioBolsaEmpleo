@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="./Estudiante_D.xhtml">
+
+
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/estudiante/Estudiante_D?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mi Perfil" style="color: #086A87;" action="/estudiante/verPerfilPersona_D?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+            <div class="caja_form">
+                <h3 class="titulo_p" style="font-size: 44px;margin-top: 0;">Datos Personales</h3>
+                <h:form class="formulario" style="margin-top: 20px;">
+                    
+                    <div class="info">
+                                  
+                        <center style="padding-top: 25px">
+                        <c:if test="#{personaController.existeFoto(personaController.selected.foto) == false}">
+                            <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 3px;">
+                                <img style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center; "  
+                                     src="#{request.contextPath}/resources/foto/sin_foto_perfil.png"></img>
+                            </div>
+                        </c:if>
+                        <c:if test="#{personaController.existeFoto(personaController.selected.foto) == true}">
+                            
+                            <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 3px; ">
+                                <img style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center; " 
+                                     src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
+                            </div>
+                        </c:if>
+      
+                        
+                            <p:commandButton  styleClass="btn_guardar2" ajax="false" value="Cambiar Foto" action="/estudiante/cambiarFoto?faces-redirect=true" 
+                                          style="width: 210px;margin-bottom: 40px;"/>
+                        </center>
+                        <h3 class="texto" >Nombres</h3> 
+                        <h:inputText class="txt" value="#{personaController.selected.nombre}" style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();" />
+                        <h3 class="texto" >Apellidos</h3>
+                        <h:inputText class="txt" value="#{personaController.selected.apellido}"  style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <h3 class="texto" >Número de Cédula <h:outputLabel style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" title="Este número de cédula será usado cuando usted quiera recuperar su clave de acceso"/></h3>
+                        <h:inputText onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.cedula}" />
+                         <h3  class="texto" >Fecha de Nacimiento</h3>                  
+                        <p:calendar styleClass="calendarClass" pattern="dd/MM/yyyy" locale="es" navigator="true" value="#{personaController.selected.fechaNacimiento}" mask="true" />
+                         <h3  class="texto" >Género</h3>
+                        <h:selectOneMenu class="txtC" value="#{personaController.selected.genero}"   >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItem itemLabel="MASCULINO" itemValue="0"/>
+                            <f:selectItem itemLabel="FEMENINO" itemValue="1"/>
+                        </h:selectOneMenu>
+                         <h3  class="texto" >Estado civil</h3>
+                        <h:selectOneMenu class="txtC" value="#{personaController.selected.idEstadoCivil}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
+                                           var="idEstadoCivilItem"
+                                           itemValue="#{idEstadoCivilItem}"/>
+                        </h:selectOneMenu>
+                          <h3 class="texto" >Edad</h3>
+                        <h:inputText onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.edad}"  />
+                     
+                    </div>
+                    
+                
+                    <div class="info"> 
+                        <br/>
+                        <h3  class="texto"  >Provincia</h3>
+                        <h:selectOneMenu class="txtC"   id="combo" value="#{personaController.selected.idProvincia}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.listaProvincias}"
+                                           var="idProvinciaItem"
+                                           itemValue="#{idProvinciaItem}"/>
+                            <f:ajax execute="combo" render="combo2"/>
+                            <f:ajax render="menuParroquia"/>
+
+                        </h:selectOneMenu>
+                         <h3  class="texto" >Canton</h3>
+                        <h:selectOneMenu class="txtC" id="combo2" value="#{personaController.selected.idCanton}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.listaCanton}" 
+                                           var="idCantonItem"
+                                           itemValue="#{idCantonItem}" />
+                            <f:ajax execute="combo2" render="menuParroquia" />
+                        </h:selectOneMenu>
+                         <h3  class="texto" >Parroquia</h3>
+                        <h:selectOneMenu class="txtC" value="#{personaController.selected.idParroquia}" id="menuParroquia">                  
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>                
+                            <f:selectItems value="#{personaController.listaParroquia}"
+                                           var="idParroquiaItem"
+                                           itemValue="#{idParroquiaItem}"/>
+
+                        </h:selectOneMenu>
+                         <h3 class="texto" >Dirección</h3>
+                        <h:inputText class="txt" value="#{personaController.selected.direccion}" />
+                        <h3 class="texto" >Celular</h3>
+                        <h:inputText class="txt" value="#{personaController.selected.celular}"  />
+                        <h3 class="texto" >Teléfono</h3>
+                        <h:inputText class="txt" value="#{personaController.selected.telefono}" />
+                        <h3 class="texto" >Correo electrónico <h:outputLabel style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" title="Este correo será usado cuando usted quiera recuperar su clave de acceso"/></h3>
+                        <h:inputText class="txt" value="#{personaController.selected.correo}" />
+                        <h3  class="texto" >Estado laboral</h3>
+                        <h:selectOneMenu class="txtC" value="#{personaController.selected.estadoLaboral}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItem itemLabel="Empleado" itemValue="0"/>
+                            <f:selectItem itemLabel="Desempleado" itemValue="1"/>
+                        </h:selectOneMenu>
+                        <h3  class="texto" >Tipo sangre</h3>
+                        <h:selectOneMenu class="txtC" value="#{personaController.selected.idTipoSangre}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoSangreController.itemsAvailableSelectOne}"
+                                           var="idTipoSangreItem"
+                                           itemValue="#{idTipoSangreItem}"/>
+                        </h:selectOneMenu>
+                        <h3  class="texto" >Etnia</h3>
+                        <h:selectOneMenu class="txtC" value="#{personaController.selected.idEtnia}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{etniaController.itemsAvailableSelectOne}"
+                                           var="idEtniaItem"
+                                           itemValue="#{idEtniaItem}"/>
+                        </h:selectOneMenu>
+                        <h3 class="texto" >Código Postal</h3>
+                        <h:inputText class="txt" value="#{personaController.selected.codigoPostal}"  />
+                    </div>
+
+                    <div style="margin: auto; width: 80%; display: block">     
+                        <center>
+                            <p:commandButton  styleClass="btn_guardar" ajax="false" value="Actualizar Datos" actionListener="#{personaController.datosActualizados}"/>
+                            <br/> 
+                            <p:commandButton  styleClass="btn_guardar2" ajax="false" value="Cambiar Clave" action="/estudiante/cambiarClave_D?faces-redirect=true" />
+
+                        </center>
+                    </div>
+
+                </h:form>
+                <br/>
+            <br/>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+
+</html>

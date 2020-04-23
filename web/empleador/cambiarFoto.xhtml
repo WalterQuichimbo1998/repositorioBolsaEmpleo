@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./Empleador.xhtml">
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true" />
+            <h:commandLink class="prin" value="Mi Perfil" action="/empleador/verPerfilPersona_2?faces-redirect=true" immediate="true" />
+
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Cambiar Foto" style="color: #086A87;" action="/empleador/cambiarFoto?faces-redirect=true"/>
+        </ui:define>
+
+        <ui:define name="caja">
+
+            <div class="caja_form">
+                <h3 class="titulo_p" style="margin-top: 0;">Cambiar Foto</h3>
+                <h:form enctype="multipart/form-data" class="formulario" style="margin-top: 20px;">
+
+                    <div class="info3">
+                        <h:panelGrid columns="1" style="width: 100%; margin: auto;  ">
+                            <h:panelGroup style="display:block; text-align: center; "> 
+                                <h3 class="textoFoto">Seleccione una foto</h3>
+                                <div class="selec">
+                                    <div id="upload-button">                                            
+                                        <p:fileUpload  value="#{personaController.file}" mode="simple" required="true" 
+                                                       dragDropSupport="false"
+                                                       update=":growl" 
+                                                       fileLimit="1" 
+                                                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" ></p:fileUpload>
+                                    </div>
+                                </div>
+
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </div>
+
+                    <div style="margin: auto; width: 80%;">   
+                        <center>
+                            <p:commandButton  styleClass="btn_guardar" value="Actualizar Foto " ajax="false" actionListener="#{personaController.subirFoto()}"/>
+                    </center>
+                     <p style="font-family: Arial;text-align: center;color:#454545;margin: auto"><strong>Aviso: </strong>Seleccione una foto con extensión .png o .jpg - Tamaño máximo 3Mb.</p>
+
+                    </div>
+                </h:form>
+                <br/>
+                <br/>
+
+            </div>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+
+</html>

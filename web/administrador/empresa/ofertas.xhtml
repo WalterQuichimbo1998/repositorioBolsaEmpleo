@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../administrador.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true" />
+            </li>                    
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Ofertas Laborales" class="btn2 bbt" action="/administrador/empresa/ofertas?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" styleClass="btn2 cs"   oncomplete="PF('form_logout').show()"/>
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Ofertas Laborales" style="color: #086A87;" action="/administrador/empresa/ofertas?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+          <h:form class="tablaCentro2">
+              <h3 class="titulo_p" style="background: none;text-shadow:none;color: #024959">Ofertas Laborales más Postuladas</h3>
+              <p:dataTable styleClass="postulacionesMas" value="#{ofertaLaboralController.items}" var="item" 
+                           rowKey="#{item.idOferta}"
+                           paginator="true"
+                             rows="5"                                    
+                             rowsPerPageTemplate="5,10,15,20,25"
+                             emptyMessage="No hay datos aún"
+                             sortBy="#{item.postulanteList.size()}"
+                             sortOrder="descending">
+                    <p:column class="celda">
+                        <div class="caja_oferta1" >
+                            <div class="caja_oferta2">
+                                <br/> 
+                                <div style="width: 100px;height: auto;float: right;">
+                                    <h3 style="font-family: Arial;font-size: 18px;text-align: center;color: #454545;
+                                        padding: 0;margin: 0;margin-top: 10px; margin-bottom: 10px">Total</h3>
+                                 <h1 style="font-family: Arial; font-size: 32px;color: #039BE5;
+                                     background: white;text-align: center;border-radius: 8px;margin: 0;margin: auto">#{item.postulanteList.size()}</h1>     
+                                     <center>
+                                         <p:commandButton rendered="#{item.postulanteList.size()!=0}" value="Ver" style="text-align: center;text-decoration: none;background: none;
+                                                          border:none;"
+                                                        actionListener="#{postulanteController.setOfertaVer(item)}" action="/administrador/empresa/ListaPostulantes?faces-redirect=true"/>
+                                     </center>
+                                </div>                      
+                                 <h3 class ="linkOferta">#{item.cargoSolicitado} </h3> 
+                                <h:outputText value="#{item.idEmpresa.nombreComercial}" class="textoDescripion"/>
+                                <br/>
+                                <h:outputText value="#{item.idEmpresa.idProvincia.provincia} - #{item.idEmpresa.idCanton.canton}" class="textoDescripion"/>
+                                <br/>
+                                <h:outputText value="Actividades a Desempeñar:" class="textoDescripcion2" />
+                                <br/>
+                                <h:outputText value="#{item.actividades}" class="textoDescripcion"/>
+                                <br/>                                                                                  
+                            </div>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

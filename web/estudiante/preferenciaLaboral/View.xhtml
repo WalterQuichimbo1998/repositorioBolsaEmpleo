@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PreferenciaLaboralViewDlg" widgetVar="PreferenciaLaboralViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPreferenciaLaboralTitle}" 
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="PreferenciaLaboralViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{preferenciaLaboralController.selected != null}">
+                         <h:outputText value="#{bundle.ViewPreferenciaLaboralLabel_sectorPublico}" style="font-weight: bold"/>
+                        <h:outputText value="#{preferenciaLaboralController.pasarNumero(preferenciaLaboralController.selected.sectorPublico)}" title="#{bundle.ViewPreferenciaLaboralTitle_sectorPublico}"/>
+                        <h:outputText value="#{bundle.ViewPreferenciaLaboralLabel_sectorPrvado}" style="font-weight: bold"/>
+                        <h:outputText value="#{preferenciaLaboralController.pasarNumero(preferenciaLaboralController.selected.sectorPrvado)}" title="#{bundle.ViewPreferenciaLaboralTitle_sectorPrvado}"/>
+                        <h:outputText value="#{bundle.ViewPreferenciaLaboralLabel_aspiracionSalarial}" style="font-weight: bold"/>
+                        <h:outputText value="#{preferenciaLaboralController.selected.aspiracionSalarial}" title="#{bundle.ViewPreferenciaLaboralTitle_aspiracionSalarial}"/>
+                        <h:outputText value="#{bundle.ViewPreferenciaLaboralLabel_trabajarResidencia}" style="font-weight: bold"/>
+                        <h:outputText value="#{preferenciaLaboralController.pasarNumero(preferenciaLaboralController.selected.trabajarResidencia)}" title="#{bundle.ViewPreferenciaLaboralTitle_trabajarResidencia}"/>
+                       </p:panelGrid>
+                    <p:commandButton styleClass="btn_s" value="#{bundle.Close}" immediate="true" oncomplete="PF('PreferenciaLaboralViewDialog').hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

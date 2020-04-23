@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">  
+
+    <ui:composition template="index.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="index?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Ofertas Laborales" class="btn2 bbt" actionListener="#{ofertaLaboralController.listaO()}" action="ofertas?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Contacto" class="btn2" action="contacto?faces-redirect=true" />
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Iniciar Sesión" class="btn2" oncomplete="PF('login_estudiante').show()" update=":datos"/>
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="Iniciar Sesión"  oncomplete="PF('login_estudiante').show()" update=":datos" >
+                    <img style="width: 50px;object-fit:cover;object-position:center center;vertical-align: -17px;"
+                         src="#{request.contextPath}/resources/img/internet.png" ></img>
+                </p:commandLink>
+            </li>
+        </ui:define>
+        <ui:define name="caja">
+            <br/>
+            <br/>
+            <h:form class="formOfertas">
+                <h1 class="tituloOfertas">Ofertas Laborales</h1>
+                <br/>
+                <p:dataTable  styleClass="listaOfertas" value="#{ofertaLaboralController.items}" var="item"        
+                              paginator="true"
+                              widgetVar="oferta"
+                              rows="5"                                 
+                              rowsPerPageTemplate="5,10,15,20,25"
+                              sortBy="#{item.fechaCreacion}"
+                              emptyMessage="No se encontraron resultados."
+                              sortOrder="descending"
+                              filteredValue="#{ofertaLaboralController.filtroOfertas}">
+                    <f:facet name="header">
+                        <p:inputText id="globalFilter"
+                                     placeholder="Buscar" 
+                                     onkeyup="javascript:this.value = this.value.toUpperCase();PF('oferta').filter()" 
+                                     style="font-size: 16px;margin: 10px; text-align: center;border-radius: 20px;padding: 7px 0px;width: 500px;
+                                     box-shadow: none;background: #e6edff"/> 
+                    </f:facet>
+                    <p:column class="celda" style="width: 0px;margin: 0;padding: 0;" filterBy="#{item.idEmpresa.nombreComercial}" filterMatchMode="contains"
+                              filterStyle="background:none;width:0px;box-shadow:none;height:0px;border:none;"></p:column>
+                    <p:column class="celda" filterBy="#{item.cargoSolicitado}" filterMatchMode="contains"
+                              filterStyle="background:none;width:0px;box-shadow:none;height:0px;border:none;">
+
+                        <div class="caja_oferta1">
+                            <div class="caja_oferta2">
+                                <br/>                              
+                                <p:commandButton value="Ver detalles" id="track" styleClass="ver" icon="ui-icon-search" rendered="#{item.estado==true}"
+                                                 style="float: right; margin-top: 20px;"
+                                                 actionListener="#{ofertaLaboralController.setSelected(item)}" 
+                                                 action="/verOferta?faces-redirect=true" class="ver"/>
+                                <p:tooltip id="toolTipTrack" for="track" value="Ver detalles" trackMouse="true"  style="box-shadow: none;font-size: 12px"/>
+                                <img  style="width: 50px;margin: 0;padding: 0;margin: auto;float: right;margin-right: 50px;margin-top: 20px;
+                                      #{item.estado eq false ? '' :'display:none'}"     
+                                      src="#{request.contextPath}/resources/img/cancelar.png" ></img>
+                                <h3 class ="linkOferta">#{item.cargoSolicitado} </h3> 
+                                <h:outputText value="#{item.idEmpresa.nombreComercial}" class="textoDescripcion" style="font-weight: bold;color:#024959"/>
+                                <br/>
+                                <h:outputText value="#{item.idEmpresa.idProvincia.provincia} - #{item.idEmpresa.idCanton.canton} - #{item.idEmpresa.idParroquia.parroquia}" class="textoDescripcion"/>
+                                <br/>
+                                <h:outputText value="Fecha Inicio: #{ofertaLaboralController.fecha(item.fechaInicio)}" class="textoDescripcion"/>
+                                <br/>
+                                <h:outputText value="#{item.estado==true ? 'DISPONIBLE':'NO DISPONIBLE'}" 
+                                              style="#{item.estado==true ? 'color: #63a3e9;font-size: 20px;font-weight: bold;':'color: #e25555;font-size: 20px;font-weight: bold;'} float: right;" />
+                                <h:outputText rendered="#{item.remuneracion!=''}" value="Remuneración: $ #{item.remuneracion}" class="textoDescripcion"/>
+                                <br/>                              
+
+                                <br/>
+                                <h:outputText value="Actividades a Desempeñar:" class="textoDescripcion2" />
+                                <br/>
+                                <h:outputText value="#{item.actividades}" class="textoDescripcion"/>
+                                <br/>
+                            </div>
+                        </div>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

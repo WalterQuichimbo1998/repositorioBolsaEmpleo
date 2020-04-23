@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CapacitacionEditDlg" widgetVar="CapacitacionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCapacitacionTitle}" 
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="CapacitacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{capacitacionController.selected != null}">
+                        <p:outputLabel value="Estudiante" for="idEs" style="font-weight: bold"/>
+                        <p:selectOneMenu id="idEs" value="#{capacitacionController.selected.idHojaVidaEstudiante}" style="width: 310px;" required="true" requiredMessage="Seleccione un Estudiante"
+                                         panelStyle="300px" effect="fade" filter="true" filterMatchMode="contains">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>   
+                            <f:selectItems value="#{hojaVidaEstudianteController.itemsAvailableSelectOne}"
+                                           var="idHojaVidaEstudianteItem"
+                                           itemValue="#{idHojaVidaEstudianteItem}"/>
+                        </p:selectOneMenu>
+                       <p:outputLabel value="#{bundle.EditCapacitacionLabel_institucion}" for="institucion" style="font-weight: bold"/>
+                        <p:inputText id="institucion" value="#{capacitacionController.selected.institucion}" title="#{bundle.EditCapacitacionTitle_institucion}" style="width: 300px;" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_nombreEvento}" for="nombreEvento" style="font-weight: bold"/>
+                        <p:inputText id="nombreEvento" value="#{capacitacionController.selected.nombreEvento}" title="#{bundle.EditCapacitacionTitle_nombreEvento}" style="width: 300px;"/>
+                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_idTipoEvento}" for="idTipoEvento" style="font-weight: bold" />
+                        <p:selectOneMenu id="idTipoEvento" value="#{capacitacionController.selected.idTipoEvento}" style="width: 180px;">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoEventoController.itemsAvailableSelectOne}"
+                                           var="idTipoEventoItem"
+                                           itemValue="#{idTipoEventoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_fechaInicio}" for="fechaInicio" style="font-weight: bold"/>
+                        <p:calendar id="fechaInicio" pattern="dd/MM/yyyy" locale="es" value="#{capacitacionController.selected.fechaInicio}" title="#{bundle.EditCapacitacionTitle_fechaInicio}" navigator="true" mask="true"/>
+                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_fechaFin}" for="fechaFin" style="font-weight: bold"/>
+                        <p:calendar id="fechaFin" pattern="dd/MM/yyyy" locale="es" value="#{capacitacionController.selected.fechaFin}" title="#{bundle.EditCapacitacionTitle_fechaFin}" navigator="true" mask="true"/>
+                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_dias}" for="dias" style="font-weight: bold"/>
+                        <p:inputText id="dias" value="#{capacitacionController.selected.dias}" title="#{bundle.EditCapacitacionTitle_dias}" />
+                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_idAreaEstudio}" for="idAreaEstudio" style="font-weight: bold"/>
+                        <p:selectOneMenu id="idAreaEstudio" value="#{capacitacionController.selected.idAreaEstudio}" style="width: 180px;">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{areaEstudioController.itemsAvailableSelectOne}"
+                                           var="idAreaEstudioItem"
+                                           itemValue="#{idAreaEstudioItem}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_idHorasCapacitaciones}" for="idHorasCapacitaciones" style="font-weight: bold"/>
+                        <p:selectOneMenu id="idHorasCapacitaciones" value="#{capacitacionController.selected.idHorasCapacitaciones}" style="width: 180px;">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{horasCapacitacionesController.itemsAvailableSelectOne}"
+                                           var="idHorasCapacitacionesItem"
+                                           itemValue="#{idHorasCapacitacionesItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_idTipoCertificado}" for="idTipoCertificado" style="font-weight: bold"/>
+                        <p:selectOneMenu id="idTipoCertificado" value="#{capacitacionController.selected.idTipoCertificado}" style="width: 180px;">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoCertificadoController.itemsAvailableSelectOne}"
+                                           var="idTipoCertificadoItem"
+                                           itemValue="#{idTipoCertificadoItem}"/>
+                        </p:selectOneMenu>
+                  
+                        <p:column/>
+                        <p:column>
+                           <p:commandButton styleClass="btn_g" actionListener="#{capacitacionController.update}" value="#{bundle.Save}" update="display,:CapacitacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CapacitacionEditDialog');"/>
+                    <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('CapacitacionEditDialog').hide();"/>
+                        </p:column>
+                    </p:panelGrid>
+                    
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

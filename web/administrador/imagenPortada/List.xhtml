@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../administrador.xhtml">
+
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true" />
+            </li>                    
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Imagenes de Portada" class="btn2 bbt" action="/administrador/imagenPortada/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" styleClass="btn2 cs"   oncomplete="PF('form_logout').show()"/>
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Imagenes de Portada" style="color: #086A87;" action="/administrador/imagenPortada/List?faces-redirect=true"/>
+        </ui:define>
+
+        <ui:define name="caja">
+            <h:form id="ImagenPortadaListForm" style="text-align: center;">
+                <h3 class="titulo_p">Imagenes de Portada</h3>
+                <p:panel style="margin-bottom: 0;padding-bottom: 0;margin-bottom: 10px">
+                    <br/>
+                    <p style="font-family: Arial;text-align: center;color:#454545;margin:auto;font-size: 17px;">
+                        <strong>Aviso: </strong>Las imagenes que registre se mostrarán en la portada según el <strong>ID</strong> de forma Ascendente.</p>
+                    <br/>
+                    <p:dataTable id="datalist" value="#{imagenPortadaController.items}" var="item"
+                                 selectionMode="single" selection="#{imagenPortadaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idImagen}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 paginatorPosition="bottom"
+                                 sortBy="#{item.idImagen}"
+                                 sortOrder="ascending"
+                                 >
+
+                        <p:column sortBy="#{item.idImagen}" style="width: 100px">
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idImagen}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.imagen}">
+                            <f:facet name="header">
+                                <h:outputText value="Imagen"/>
+                            </f:facet>
+                            <img style="width: 260px;margin: auto;" 
+                                 src="#{request.contextPath}/resources/portada/#{item.imagen}"></img>
+                        </p:column>
+                        <p:column sortBy="#{item.imagen}" style="width: 280px">
+                            <f:facet name="header">
+                                <h:outputText value="Acción"/>
+                            </f:facet>
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Editar" 
+                                             action="/administrador/imagenPortada/subirImagen?faces-redirect=true" 
+                                             actionListener="#{imagenPortadaController.setSelected(item)}"/>
+
+                            <p:commandButton id="viewButton"  styleClass="ver" icon="ui-icon-search" value="Ver" 
+                                             actionListener="#{imagenPortadaController.setSelected(item)}"
+                                             update=":ImagenPortadaViewForm" oncomplete="PF('ImagenPortadaViewDlg').show()"/>
+
+                            <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="Eliminar"
+                                             actionListener="#{imagenPortadaController.setSelected(item)}"
+                                             oncomplete="PF('DeleteDlg').show()"/>
+
+                        </p:column>
+                        <f:facet name="footer">
+                            <br/>
+                            <p style="font-family: Arial;text-align: center;color:#454545;margin:auto;font-size: 16px;font-weight: normal">Solo puede subir un límite de 5 imagenes</p>
+
+                        </f:facet>
+                    </p:dataTable>
+
+                    <br/>
+                </p:panel>
+
+            </h:form>
+            <br/>
+            <br/>
+            <p:panel style="padding: 0;margin-bottom:20px" rendered="#{imagenPortadaController.limite(imagenPortadaController.items.size())==true}">
+                <h:form enctype="multipart/form-data" class="formulario" style="text-align: center">
+                    <h1 style="color:#454545;background: #ccc;margin: 0;padding-top: 10px;padding-bottom: 10px">Subir Nueva Imagen de portada</h1>
+                    <div class="info3">
+
+                        <br/>
+                        <p style="font-family: Arial;text-align: center;color:#454545;margin:auto;font-size: 16px;">
+                            <strong>1. </strong>Use imagenes de un tamaño proporcionado para mejor presentación de la portada.</p>
+                        <br/>
+                        <h3 style="color: #ccc;font-size: 20px">Seleccione una Imagen</h3>
+                        <div class="selec">
+                            <div id="upload-button">  
+                                <p:fileUpload  value="#{imagenPortadaController.file}" mode="simple" required="true" 
+                                               dragDropSupport="false"
+                                               update=":growl" 
+                                               fileLimit="1" 
+                                               allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                               ></p:fileUpload>
+                            </div>
+                        </div>
+
+                    </div>   
+
+                    <div style="margin: auto; width: 80%; display: flex">    
+                        <p:commandButton class="btn_guardar" value="Subir Imagen" ajax="false" actionListener="#{imagenPortadaController.prepareCreate}" action="#{imagenPortadaController.subirImagen()}" />
+                    </div>
+                     <p:commandButton id="aviso" value="Aviso" style="background: none;border:none;outline: none;color:#086A87;font-size: 15px !important;box-shadow: none;width: 100px"/> 
+                     <p:tooltip for="aviso" value="Seleccione una Imagen con extensión .png o .jpg - Tamaño máximo 4Mb." trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
+                    <br/>
+                    <br/>
+                </h:form>
+
+            </p:panel>
+            <p:dialog id="DeleteDlg" widgetVar="DeleteDlg" modal="false" resizable="false" 
+                      appendTo="@(body)" showHeader="false" showEffect="clip" hideEffect="clip" 
+                      style="background: white; padding-bottom: 10px;box-shadow: none;
+                      box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);" >
+                <h:form id="DeleteDlgForm">
+
+                    <h1 style="text-align: center; font-family: Arial">¿Está seguro de eliminar?</h1>
+                    <center>
+                        <p:commandButton styleClass="botonA" actionListener="#{imagenPortadaController.eliminarImagen}" update=":ImagenPortadaListForm:datalist,:growl" value="Aceptar"  oncomplete="PF('DeleteDlg').hide()"/>
+                        <p:commandButton styleClass="botonC" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('DeleteDlg').hide()"/>
+
+                    </center>
+                </h:form>
+            </p:dialog>
+
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

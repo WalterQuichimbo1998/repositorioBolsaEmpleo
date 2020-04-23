@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HojaVidaEstudianteCreateDlg" widgetVar="HojaVidaEstudianteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Habilitación de Perfil"
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="HojaVidaEstudianteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{hojaVidaEstudianteController.selected != null}">
+                        <p:outputLabel value="ESTUDIANTE: " for="idPersona" style="font-weight: bold" />
+                        <p:selectOneMenu id="idPersona" value="#{hojaVidaEstudianteController.selected.idPersona}" required="true" requiredMessage="Seleccione una persona"
+                                         panelStyle="width:300px" effect="fade" style="width:300px" filter="true" filterMatchMode="contains">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.listaEstudiante}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}"/>
+                        </p:selectOneMenu>
+                        <p:column/>
+                        <p:column>
+                            <p:commandButton styleClass="btn_g" actionListener="#{hojaVidaEstudianteController.existePerfil}" value="Habilitar" update="display,:HojaVidaEstudianteListForm:datalist,:growl" oncomplete="handleSubmit(args,'HojaVidaEstudianteCreateDialog');"/>
+                            <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('HojaVidaEstudianteCreateDialog').hide();"/>
+
+                        </p:column>
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

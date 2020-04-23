@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog  styleClass="login" id="form_estudiante" widgetVar="login_estudiante" modal="true" resizable="false" appendTo="@(body)"
+                   closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" >
+                <div class="cj">
+                    <h2 class="tt">Inicio de Sesión</h2>
+                    <div class="cc">
+                        <div class="cajaImg">
+                            <img src="resources/img/estudiante.png" width="100%" />
+                        </div> 
+                        <h:form id="datos">
+                            <h3 class="textoL">Usuario </h3>
+                            <center>
+                                <p:inputText styleClass="inputText" value="#{accesoBean.selected.usuario}"/>                         
+                            </center>
+                            <h3 class="textoL">Clave </h3>
+                            <center>
+                                <p:password styleClass="inputText" value="#{accesoBean.selected.clave}" style="margin-bottom: 5px"/>
+                            </center>
+                           
+                            <h:commandLink value="¿Olvidaste la clave?" action="info?faces-redirect=true" 
+                                           style="font-family: Arial;font-size: 14px;margin-left: 30px;text-decoration: none;color: #454545"/>
+                            <br/>
+                            <br/>
+                            <center>
+                                <p:commandButton styleClass="btn" value="Iniciar Sesión" ajax="false" actionListener="#{accesoBean.login}" />
+                            </center>
+                            <center>
+                                <p:commandButton styleClass="botonSalir" value="Cancelar" oncomplete="PF('login_estudiante').hide()" />
+                            </center>
+                        </h:form>
+                    </div>
+                </div>
+
+
+        </p:dialog>
+    </ui:composition>
+ 
+</html>

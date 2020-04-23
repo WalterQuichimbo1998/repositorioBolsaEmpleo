@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../Estudiante.xhtml">
+
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/estudiante/Estudiante?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Logros Personales" style="color: #086A87;" action="/estudiante/logroPersonal/List?faces-redirect=true"/>
+        </ui:define>
+
+        <ui:define name="caja">
+            <div class="c_tablas">
+            <h3 class="titulo_p">Logros Personales</h3>
+            <h:form id="LogroPersonalListForm" style="text-align: center">
+                <p:panel>
+                    <p:dataTable id="datalist" class="tabla" value="#{logroPersonalController.items}" var="item"
+                                 selectionMode="single" selection="#{logroPersonalController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idLogroPersonal}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 paginatorPosition="bottom"
+                                 emptyMessage="No hay datos."
+                                  sortBy="#{item.idLogroPersonal}"
+                                 sortOrder="descending">
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column sortBy="#{item.idTipoLogro.tipoLogro}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLogroPersonalTitle_idTipoLogro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoLogro.tipoLogro}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.descripcion}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLogroPersonalTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+
+
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{logroPersonalController.prepareCreate}" update=":LogroPersonalCreateForm" oncomplete="PF('LogroPersonalCreateDialog').show()"/>
+                            <p:commandButton id="viewButton" styleClass="ver"  icon="ui-icon-search" value="#{bundle.View}" update=":LogroPersonalViewForm" oncomplete="PF('LogroPersonalViewDialog').show()" disabled="#{empty logroPersonalController.selected}"/>
+                            <p:commandButton id="editButton"  styleClass="editar" icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LogroPersonalEditForm" oncomplete="PF('LogroPersonalEditDialog').show()" disabled="#{empty logroPersonalController.selected}"/>
+                            <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{logroPersonalController.destroy}" update=":growl,datalist" disabled="#{empty logroPersonalController.selected}">
+                                <p:confirm message="Eliminar Registro" header="Aviso" icon="ui-icon-alert"   > </p:confirm>                                
+                            </p:commandButton>                      
+                            <p:confirmDialog global="true" showEffect="clip"  hideEffect="clip" style="background: #f2f2f2;font-size: 18px !important;font-weight: bold;padding: 0t;margin: 0;">                                                           
+                                    <p:commandButton style="width: 70px;margin:0px !important;margin-left: 10px !important;font-size: 16px !important;background: #29a0c7;outline: none;box-shadow: none" value="Si" type="button"  styleClass="ui-confirmdialog-yes"></p:commandButton>
+                                    <p:commandButton style="width: 70px;margin:0px !important;margin-left: 5px !important;font-size: 16px !important;background: #e26c6c;outline: none;box-shadow: none;" value="No" type="button" styleClass="ui-confirmdialog-no" immediate="true"></p:commandButton>                              
+                                </p:confirmDialog>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            </div>
+  
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

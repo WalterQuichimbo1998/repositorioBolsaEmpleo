@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ExperienciaLaboralViewDlg" widgetVar="ExperienciaLaboralViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewExperienciaLaboralTitle}" 
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="ExperienciaLaboralViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{experienciaLaboralController.selected != null}">
+                        <h:outputText value="#{bundle.ViewExperienciaLaboralLabel_institucion}" style="font-weight: bold"/>
+                        <h:outputText value="#{experienciaLaboralController.selected.institucion}" title="#{bundle.ViewExperienciaLaboralTitle_institucion}"/>
+                        <h:outputText value="#{bundle.ViewExperienciaLaboralLabel_puesto}" style="font-weight: bold"/>
+                        <h:outputText value="#{experienciaLaboralController.selected.puesto}" title="#{bundle.ViewExperienciaLaboralTitle_puesto}"/>
+                        <h:outputText value="#{bundle.ViewExperienciaLaboralLabel_fechaInicio}" style="font-weight: bold"/>
+                        <h:outputText value="#{experienciaLaboralController.selected.fechaInicio}" title="#{bundle.ViewExperienciaLaboralTitle_fechaInicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewExperienciaLaboralLabel_fechaFin}" style="font-weight: bold"/>
+                        <h:outputText value="#{experienciaLaboralController.selected.fechaFin}" title="#{bundle.ViewExperienciaLaboralTitle_fechaFin}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewExperienciaLaboralLabel_actividades}" style="font-weight: bold"/>
+                        <h:outputText value="#{experienciaLaboralController.selected.actividades}" title="#{bundle.ViewExperienciaLaboralTitle_actividades}"/>
+                        <h:outputText value="#{bundle.ViewExperienciaLaboralLabel_trabajaActualmente}" style="font-weight: bold"/>
+                        <h:outputText value="#{experienciaLaboralController.pasarNumero(experienciaLaboralController.selected.trabajaActualmente)}" title="#{bundle.ViewExperienciaLaboralTitle_trabajaActualmente}"/>
+                        <h:outputText value="#{bundle.ViewExperienciaLaboralLabel_idAreaTrabajo}" style="font-weight: bold"/>
+                        <h:outputText value="#{experienciaLaboralController.selected.idAreaTrabajo.areaTrabajo}" title="#{bundle.ViewExperienciaLaboralTitle_idAreaTrabajo}"/>
+                         </p:panelGrid>
+                    <p:commandButton styleClass="btn_s" value="#{bundle.Close}" immediate="true" oncomplete="PF('ExperienciaLaboralViewDialog').hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08fc2059-ebf5-438a-8546-14051b2a65bd">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="198"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logotipo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM oferta_laboral
+     LEFT JOIN empresa ON empresa.id_empresa = oferta_laboral.id_empresa
+     LEFT JOIN tipo_contrato ON  tipo_contrato.id_tipo_contrato = oferta_laboral.id_tipo_contrato
+     LEFT JOIN area_estudio ON area_estudio.id_area_estudio = 
+oferta_laboral.id_area_estudio
+     LEFT JOIN horas_capacitaciones ON   horas_capacitaciones.id_horas_capacitaciones = oferta_laboral.id_horas_capacitaciones
+     LEFT JOIN  nivel_academico ON  nivel_academico.id_nivel_academico = oferta_laboral.id_nivel_academico
+     LEFT JOIN  provincia ON provincia.id_provincia = empresa.id_provincia
+     LEFT JOIN  canton ON canton.id_canton =empresa.id_canton
+     LEFT JOIN  parroquia ON parroquia.id_parroquia = empresa.id_parroquia
+    WHERE id_oferta=$P{id}]]>
+	</queryString>
+	<field name="id_oferta" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cargo_solicitado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_inicio" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_fin" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jornada_trabajo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="remuneracion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="experiencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="conocimiento_cargo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="actividades" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tiempo_experiencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_empresa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_tipo_contrato" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_area_estudio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_horas_capacitaciones" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_nivel_academico" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_creacion" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_persona" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ruc_cedula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razon_social" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_comercial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_tipo_empresa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_tipo_persona" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pagina_web" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ciudad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono_oficina" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono_particular" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="celular" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="logotipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="servicios" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="experiencias" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_provincia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_canton" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_parroquia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipo_contrato" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="area_estudio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horas_capacitaciones" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nivel_academico" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="provincia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="canton" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="parroquia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="88" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="113" y="0" width="331" height="80" backcolor="#FFFFFF" uuid="a6d66874-d430-4cc9-839e-28a2608f2243"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OFERTA LABORAL]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="95" height="80" uuid="07162713-69cc-4248-8783-2e03a0f56615"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="446" y="2" width="107" height="79" uuid="17d451c4-ce9b-4d58-a41f-d07ddbe316dd"/>
+				<imageExpression><![CDATA[$P{logotipo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="37" y="0" width="489" height="23" backcolor="#EAEAEB" uuid="9c6e6a08-cd73-4918-b0e9-e12ef54b4b1b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos generales de la oferta laboral]]></text>
+			</staticText>
+			<line>
+				<reportElement x="38" y="25" width="488" height="1" uuid="fd871a07-f67b-4ae5-8478-52e3f7eee469"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="513" splitType="Stretch">
+			<staticText>
+				<reportElement x="37" y="11" width="160" height="20" uuid="2b434d21-acd3-45a8-afe6-94fca850324e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo solicitado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="11" width="327" height="20" uuid="b29672fe-4081-4069-8ab1-a0f86c204597"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cargo_solicitado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="173" width="160" height="20" uuid="6a0e983c-d716-4244-8550-b85a12e644ec"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Provincia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="173" width="170" height="20" uuid="208384f8-42d9-48ac-bed3-534077d68e47"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{provincia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="33" width="160" height="20" uuid="c58e2c4c-3658-4eb0-ac58-b586f78cb0bc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="33" width="327" height="20" uuid="1c814227-9006-45d9-9435-c10af03420d4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_comercial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="439" width="180" height="20" uuid="4ef1e1e2-9c21-4084-8a4f-14a7bf87de39"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conocimiento del cargo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="459" width="479" height="50" uuid="bb32f470-bc69-40d1-9e20-e046859e008e"/>
+				<textElement verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{conocimiento_cargo}==null ? "" : $F{conocimiento_cargo}+"" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="299" width="140" height="20" uuid="d3f3d9f3-fd70-45fb-8144-dac9216cfbff"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Experiencia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="319" width="479" height="50" uuid="57df8ad3-1416-40a9-b7ac-2032ba8da687"/>
+				<textElement verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{experiencia}==null ? "" : $F{experiencia}+"" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="193" width="160" height="20" uuid="64cad5fb-e4f4-44fa-93eb-dabd03749547"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantón:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="193" width="170" height="20" uuid="d775949f-f8a4-43f7-9f5f-4988d4501662"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{canton}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="213" width="160" height="20" uuid="048692a0-969a-4848-8b16-a941557c9926"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parroquia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="213" width="170" height="20" uuid="bcdf4918-332e-4cd8-89fa-ed696fe052bf"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{parroquia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="273" width="160" height="20" uuid="5f086339-c151-47a5-b6f8-58aa351eff89"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Horas de capacitación:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="273" width="170" height="20" uuid="0be91e75-7475-4fae-a6a4-a3d9673fc94f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{horas_capacitaciones}==null ? "" : $F{horas_capacitaciones}+" Horas" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="73" width="160" height="20" uuid="074735ca-1c10-4916-ab26-11e5bb89937a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de inicio:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="199" y="73" width="147" height="20" uuid="cc1e4723-37db-4667-a44d-99229817a94a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{fecha_inicio}==null ? "" : $F{fecha_inicio}+"" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="93" width="160" height="20" uuid="a0c27c3b-f4d6-4b1d-9494-61a860b48753"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de finalización:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="113" width="160" height="20" uuid="636f78d1-8237-42ef-8ec8-f6de26136971"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jornada de trabajo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="113" width="170" height="20" uuid="ac5e3461-7e95-4982-b5ea-40734c2c2e53"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{jornada_trabajo}==null ? "" : $F{jornada_trabajo}+" Horas" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="53" width="160" height="20" uuid="0208fc0e-3a0a-401f-b42b-e6d04b14512f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area de estudio:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="53" width="170" height="20" uuid="b4acea0d-1675-483a-a16e-bfca83600194"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{area_estudio}==null ? "" : $F{area_estudio}+"" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="253" width="160" height="20" uuid="4e889ba3-e530-49f2-9ffd-737758dfb878"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiempo de experiencia:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="253" width="170" height="20" uuid="847afae7-91eb-4283-800a-8de6553874c3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{tiempo_experiencia}==null ? "" : $F{tiempo_experiencia}+"" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="369" width="140" height="20" uuid="e9f6e84c-8421-46ae-960b-c844962bb951"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="37" y="389" width="479" height="50" uuid="a4ef1dd6-1237-44b5-91f4-a7096bc2d028"/>
+				<textElement verticalAlignment="Top">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{descripcion}==null ? "" : $F{descripcion}+"" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="153" width="160" height="20" uuid="b20085e8-b5b7-4ffb-840a-527301daddd1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de contrato:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="153" width="147" height="20" uuid="bd685071-848e-462a-b14e-f5aca14b5606"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{tipo_contrato}==null ? "" : $F{tipo_contrato}+"" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="233" width="160" height="20" uuid="18a6e0b8-ec07-420f-811a-088339aa1960"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="233" width="170" height="20" uuid="a04935e0-52be-442c-96e2-fb9dc956470b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="199" y="93" width="147" height="20" uuid="a5bf6dcb-ec86-4832-b3d1-e9dab6041507"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{fecha_fin}==null ? "" : $F{fecha_fin}+"" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="133" width="160" height="20" uuid="9d7fdc6e-27d7-4ced-a744-6e1f02c4fe10"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Remuneración:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="199" y="133" width="147" height="20" uuid="ffb4bf55-c403-4e55-ac69-2495c01f177a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $F{remuneracion}==null ? "" : "$ "+$F{remuneracion} )]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="18" y="1" width="150" height="20" uuid="33c6a1a2-de28-448e-98cf-74acec2e68e8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="0" width="62" height="20" uuid="8bfd7388-7b07-4810-a910-caa752bedd61"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="518" y="0" width="37" height="20" uuid="a3cdc89b-33f0-4609-a095-34fb421a681b"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LogroPersonalEditDlg" widgetVar="LogroPersonalEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLogroPersonalTitle}" 
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="LogroPersonalEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{logroPersonalController.selected != null}">
+                      
+                        <p:outputLabel value="#{bundle.EditLogroPersonalLabel_idTipoLogro}" for="idTipoLogro" style="font-weight: bold"/>
+                        <p:selectOneMenu id="idTipoLogro" value="#{logroPersonalController.selected.idTipoLogro}" style="width: 160px">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoLogroController.itemsAvailableSelectOne}"
+                                           var="idTipoLogroItem"
+                                           itemValue="#{idTipoLogroItem}"/>
+                        </p:selectOneMenu>
+                         <p:outputLabel value="#{bundle.EditLogroPersonalLabel_descripcion}" for="descripcion" style="font-weight: bold"/>
+                        <p:inputTextarea id="descripcion"  rows="3" cols="33" value="#{logroPersonalController.selected.descripcion}" title="#{bundle.EditLogroPersonalTitle_descripcion}" />
+                        <p:column/>
+                        <p:column>
+                            <p:commandButton styleClass="btn_g" actionListener="#{logroPersonalController.update}" value="#{bundle.Save}" update="display,:LogroPersonalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LogroPersonalEditDialog');"/>
+                    <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('LogroPersonalEditDialog').hide();"/>
+               
+                        </p:column>
+                    </p:panelGrid>
+                     </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

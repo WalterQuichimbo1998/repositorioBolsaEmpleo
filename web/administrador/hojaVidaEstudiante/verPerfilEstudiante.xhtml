@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="../administrador.xhtml">
+
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Habilitación Perfil" class="btn2 bbt" action="/administrador/hojaVidaEstudiante/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
+            </li>  
+
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Habilitación de Perfil Estudiantil" action="/administrador/hojaVidaEstudiante/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true" />
+            <h:commandLink class="prin" value="Ver Perfil" style="color: #086A87;" action="/administrador/hojaVidaEstudiante/verPerfilEstudiante?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+
+            <div style="width: 90%;margin: auto;background: #f2f2f2">
+                <h3 class="titulo_p">Perfil Estudiante</h3>
+                <h:form id="formularioPerfil">
+
+                    <p:dataList  value="#{hojaVidaEstudianteController.hojaVida}" var="item" type="none" itemType="none"
+                                 styleClass="listas"  >
+
+                        <br/>
+
+                        <p:fieldset legend="Datos Personales" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                            <div style="width: 90%;margin: auto">
+
+                                <h1>#{item.idPersona.nombre} #{item.idPersona.apellido}</h1> 
+                                <div style="width: 100%;display:flex">
+
+                                    <div style="width: 170px; height: 190px; ">
+                                        <img style="width: 170px; height: 190px;border-radius: 3px; object-fit:cover;object-position:center center; " 
+                                             src="#{request.contextPath}/resources/#{hojaVidaEstudianteController.existeFoto(item.idPersona.foto)==true ? item.idPersona.foto:'foto/sin_foto_perfil.png'}" ></img>  
+                                    </div>
+
+
+                                    <div style="width: 60%; margin-left: 20px; padding-top: 10px;">
+
+                                        <h:outputText value="Edad: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.edad}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Estado civil: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.idEstadoCivil.estadoCivil}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Celular: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.celular}" style="font-size: 17px;"/>
+                                        <br/>
+
+                                        <h:outputText value="Teléfono: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.telefono}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Correo: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.correo}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Provincia: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.idProvincia.provincia}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Cantón: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.idCanton.canton}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Parroquia: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.idParroquia.parroquia}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <h:outputText value="Dirección: " style="font-size: 17px; font-weight: bold"/>
+                                        <h:outputText value="#{item.idPersona.direccion}" style="font-size: 17px;"/>
+                                        <br/>
+                                        <br/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </p:fieldset>
+                        <br/>
+                        <p:fieldset legend="Instrucción Formal" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                            <p:dataList styleClass="listaPersona"  value="#{item.instruccionFormalList}" var="item2"
+                                        emptyMessage="No hay datos." type="none" itemType="none">
+
+                                <br/>
+                                <h:outputText value="Institución: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.institucion}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Código Senescyt: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.codigoSenescyt}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Nivel Académico: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.idNivelAcademico.nivelAcademico}" style="font-size: 17px;"/>
+                                <br/>
+
+                            </p:dataList>
+                        </p:fieldset>
+                        <br/>
+                        <p:fieldset legend="Oficios" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                            <p:dataList styleClass="listaPersona"  value="#{item.oficioList}" var="item2"
+                                        emptyMessage="No hay datos." type="none" itemType="none">
+                                <br/>
+                                <h:outputText value="Oficio: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.oficio}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Descripción: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.descripcion}" style="font-size: 17px;"/>
+                                <br/> 
+                            </p:dataList>
+                        </p:fieldset>
+                        <br/>
+                        <p:fieldset legend="Idiomas" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                            <p:dataList styleClass="listaPersona"  value="#{item.idiomaList}" var="item2"
+                                        emptyMessage="No hay datos." type="none" itemType="none" >
+
+                                <br/>
+                                <h:outputText value="Idioma Hablado: " style="font-size: 17px; font-weight: bold"/>                              
+                                <h:outputText value="#{item2.idListaIdiomas.nombreIdioma}" style="font-size: 17px;"/>                              
+                                <br/>
+                                <h:outputText value="Nivel Escrito: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.idNivelEscrito.nivelEscrito}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Nivel Hablado: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.idNivelHablado.nivelHablado}" style="font-size: 17px;"/>
+                                <br/>
+                            </p:dataList>
+                        </p:fieldset>
+                        <br/>
+                        <p:fieldset legend="Capacitaciones" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                            <p:dataList styleClass="listaPersona"  value="#{item.capacitacionList}" var="item2"
+                                        emptyMessage="No hay datos." type="none" itemType="none" >
+
+                                <br/>
+                                <h:outputText value="Institucón: " style="font-size: 17px; font-weight: bold"/>                              
+                                <h:outputText value="#{item2.institucion}" style="font-size: 17px;"/>                              
+                                <br/>
+
+                                <h:outputText value="Nombre del evento: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.nombreEvento}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Evento: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.idTipoEvento.evento}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Area de estudio: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.idAreaEstudio.areaEstudio}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Horas de capacitación: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText rendered="#{item2.idHorasCapacitaciones!=null}" value="#{item2.idHorasCapacitaciones.horasCapacitaciones} Horas" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Fecha de inicio: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.fechaInicio}" style="font-size: 17px;">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                                <br/>
+                                <h:outputText value="Fecha de finalización: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.fechaFin}" style="font-size: 17px;">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                                <br/>
+                            </p:dataList>
+                        </p:fieldset>
+                        <br/>
+
+                        <p:fieldset legend="Experiencia Laboral" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                            <p:dataList styleClass="listaPersona"  value="#{item.experienciaLaboralList}" var="item2"
+                                        emptyMessage="No hay datos."  type="none" itemType="none" >
+                                <br/>
+                                <h:outputText value="Institución: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.institucion}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Area de Trabajo: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.idAreaTrabajo.areaTrabajo}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Puesto: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.puesto}" style="font-size: 17px;"/>
+                                <br/>                               
+                                <h:outputText value="Fecha de inicio:  " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.fechaInicio}" style="font-size: 17px;">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                                <br/>
+                                <h:outputText value="Fecha de finalización: " style="font-size: 17px;font-weight: bold"/>
+                                <h:outputText value="#{item2.fechaFin}" style="font-size: 17px;">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                                <br/>
+                                <h:outputText value="Actividades: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.actividades}" style="font-size: 17px;"/>
+                                <br/>
+                            </p:dataList>
+                        </p:fieldset>
+                        <br/>
+                        <p:fieldset legend="Referencia Personal" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                            <p:dataList styleClass="listaPersona"  value="#{item.referenciaPersonalList}" var="item2"
+                                        emptyMessage="No hay datos."  type="none" itemType="none" >
+                                <br/>
+                                <h:outputText value="Nombre: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.nombre}" style="font-size: 17px;"/>
+                                <h:outputText value=" " style="font-size: 17px;"/>
+                                <h:outputText value="#{item2.apellido}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Correo: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.correoElectronico}" style="font-size: 17px;"/>
+                                <br/>
+                                <h:outputText value="Teléfono: " style="font-size: 17px; font-weight: bold"/>
+                                <h:outputText value="#{item2.telefono}" style="font-size: 17px;"/>
+                                <br/>
+                            </p:dataList>
+
+                        </p:fieldset>
+                        <br/>
+                        <p:separator/>
+                        <br/>
+                        <p:fieldset legend="Postulaciones de trabajo" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                            <p:dataTable id="datalist" styleClass="tabla2" value="#{postulanteController.lista_2}" var="item"
+                                         selectionMode="single"
+                                         widgetVar="postulante"
+                                         paginator="true"
+                                         rowKey="#{item.idPostulante}"
+                                         rows="4"
+                                         rowsPerPageTemplate="4,8,12,16"
+                                         paginatorPosition="bottom"
+                                         sortBy="#{item.fechaPostulante}"
+                                         sortOrder="descending"
+                                         emptyMessage="No se encontraron datos.">
+
+                                <p:column style="border:none;border:1px solid white">
+                                    <br/>
+                                    <h:outputText value="#{item.ofertaLaboralIdOferta.cargoSolicitado}" style="font-size: 20px;font-weight: bold;"/>
+                                    <br/>
+
+                                    <h:outputText value="#{item.ofertaLaboralIdOferta.idEmpresa.nombreComercial}" style="font-size: 16px;"/>
+                                    <br/>
+                                    <h:outputText value="Fecha de Postulación: #{personaController.fecha(item.fechaPostulante)}" style="font-size: 16px;"/>
+                                    <br/>
+                                    <h:outputLabel rendered="#{item.confirmacion==true}" style="color:green;font-size: 18px;" value="Puesto de trabajo aceptado."/>
+                                </p:column>
+                            </p:dataTable>
+
+                        </p:fieldset>
+                        <br/>
+                    </p:dataList>
+                    <br/>
+                </h:form>
+            </div>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+
+</html>

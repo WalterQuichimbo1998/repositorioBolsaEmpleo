@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../administrador.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true" />
+            </li>                    
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Empresas" class="btn2 bbt" action="/administrador/empresa/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" styleClass="btn2 cs"   oncomplete="PF('form_logout').show()"/>
+            </li>
+        </ui:define>
+      
+        <ui:define name="dir">
+           <h:commandLink class="prin" value="Inicio"  action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Listado de  Empresas" style="color: #086A87;" action="/administrador/empresa/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Ver Empresa" style="color: #086A87;" action="/administrador/empresa/verEmpresa?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+              <div class="caja_form">
+             <h3 class="titulo_pE">Datos de la Empresa</h3>
+             <br/>
+             <br/>
+                 <h:form id="formularioE">
+                    
+                   <div class="infoE2">
+                        <h3 class="textoE" >Nombre Comercial</h3> 
+                        <h:inputText class="txtE0" value="#{empresaController.selected.nombreComercial}" 
+                                     onkeyup="javascript:this.value = this.value.toUpperCase();" 
+                                     readonly="true"/>
+                    </div>
+                    <div class="infoE">
+                        <h3 class="textoE" >Cédula/Ruc</h3>
+                        <h:inputText class="txtE" value="#{empresaController.selected.rucCedula}" readonly="true"/>
+
+                    </div>
+                    <div class="infoE">
+                        <h3 class="textoE" >Razón social</h3>
+                        <h:inputText class="txtE" value="#{empresaController.selected.razonSocial}" readonly="true"/>
+                    </div>
+                  
+                    <div class="infoE">  
+                        <h3  class="textoE" >Tipo empresa</h3>
+                        <h:selectOneMenu class="txtCE" value="#{empresaController.selected.idTipoEmpresa}" readonly="true" disabled="true">
+                            <f:selectItem itemLabel="-Seleccione-" itemDisabled="true"/>
+                            <f:selectItems value="#{tipoEmpresaController.itemsAvailableSelectOne}"
+                                           var="idTipoEmpresaItem"
+                                           itemValue="#{idTipoEmpresaItem}"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="infoE">  
+                        <h3  class="textoE" >Tipo persona</h3>
+                        <h:selectOneMenu class="txtCE" value="#{empresaController.selected.idTipoPersona}" readonly="true" disabled="true">
+                            <f:selectItem itemLabel="-Seleccione-" itemDisabled="true"/>
+                            <f:selectItems value="#{tipoPersonaController.itemsAvailableSelectOne}"
+                                           var="idTipoPersonaItem"
+                                           itemValue="#{idTipoPersonaItem}"/>
+                        </h:selectOneMenu>
+                    </div>
+                      
+                   
+                    <div class="infoE">
+                    <h3 class="textoE" >Provincia</h3>
+                    <h:selectOneMenu class="txtCE" id="combo" value="#{empresaController.selected.idProvincia}" readonly="true" disabled="true">
+                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{empresaController.listaProvincias}"
+                                       var="idProvinciaItem"
+                                       itemValue="#{idProvinciaItem}" />          
+                        <f:ajax execute="combo" render="combo2"/>
+                        <f:ajax render="menuParroquia"/>
+                    </h:selectOneMenu>
+                </div>
+
+                <div class="infoE">
+                    <h3 class="textoE" >Cantón</h3>
+                    <h:selectOneMenu class="txtCE" id="combo2" value="#{empresaController.selected.idCanton}" readonly="true" disabled="true">
+                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <f:selectItems value="#{empresaController.listaCanton}"
+                                       var="idCantonItem"
+                                       itemValue="#{idCantonItem}" />
+                        <f:ajax execute="combo2" render="menuParroquia" />
+                    </h:selectOneMenu>
+                </div>
+                <div class="infoE">
+                    <h3 class="textoE" >Parroquia</h3>
+                    <h:selectOneMenu class="txtCE" value="#{empresaController.selected.idParroquia}" id="menuParroquia" readonly="true" disabled="true">
+                       <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                       <f:selectItems value="#{empresaController.listaParroquia}"
+                                       var="idParroquiaItem"
+                                       itemValue="#{idParroquiaItem}"/>
+                    </h:selectOneMenu>
+                </div>
+                    <div class="infoE">
+                        <h3 class="textoE" >Dirección</h3>
+                        <h:inputText class="txtE" value="#{empresaController.selected.direccion}" readonly="true"/>
+                    </div>
+                    <div class="infoE">
+                        <h3 class="textoE" >Teléfono oficina</h3>
+                        <h:inputText class="txtE" value="#{empresaController.selected.telefonoOficina}" readonly="true"/>
+                    </div>
+              
+                    <div class="infoE">
+                        <h3 class="textoE" >Celular</h3>
+                        <h:inputText class="txtE"  value="#{empresaController.selected.celular}" readonly="true"/>
+                    </div>
+                     <div class="infoE">
+                        <h3  class="textoE" >Página web</h3>
+                        <h:inputText class="txtE" value="#{empresaController.selected.paginaWeb}" readonly="true"/>
+                    </div>
+                      <div class="infoE">
+
+                </div>
+                     
+             
+                    <div class="infoE"> 
+                        <h3  class="textoE" >Servicios</h3>
+                       <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.servicios}" readonly="true"/>
+                    </div>
+                    <div class="infoE"> 
+                        <h3  class="textoE" >Experiencias</h3>
+                        <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.experiencias}" readonly="true"/>
+                    </div>
+                    <div class="infoE"> 
+                        <h3  class="textoE" >Actividades</h3>
+                        <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.actividades}" readonly="true"/>
+                    </div>
+                    
+                   
+
+                </h:form>
+             <br/>
+             <br/>
+              </div>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+
+</html>

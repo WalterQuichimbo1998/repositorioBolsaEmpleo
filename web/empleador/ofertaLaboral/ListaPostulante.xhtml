@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="../Empleador.xhtml">
+
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Empresas" class="btn2" action="/empleador/empresa/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Ofertas" class="btn2" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Mis Postulantes" class="btn2 bbt" action="/empleador/ofertaLaboral/ListaPostulante?faces-redirect=true"/>
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
+                    <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
+                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}" ></img>
+                </p:commandLink>
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Empresas" action="/empleador/empresa/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Ofertas" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Postulantes" style="color: #086A87;" action="/empleador/ofertaLaboral/ListaPostulante?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+            <h3 class="titulo_p" style="background: none;color: #454545;text-shadow:none;margin-top: 0px">Mis Postulantes</h3>
+            <h:form id="PostulanteListForm" class="ppp">
+                <p:panel style="background: white;">
+                    <h:outputLabel value="Cargo Solicitado: " style="font-weight: bold;font-size: 16px"/>
+                    <h:outputLabel value="#{postulanteController.ofertaLista.cargoSolicitado}" style="font-size: 16px; "/>
+                    <p:dataTable id="datalist" class="tabla2" value="#{postulanteController.listaP}" var="item" style="margin-top: 5px"
+                                 selectionMode="single"
+                                 paginator="true"
+                                 widgetVar="postulante"
+                                 rowKey="#{item.idPostulante}" 
+                                 rows="3"
+                                 rowsPerPageTemplate="3,6,9,12"
+                                 paginatorPosition="bottom"
+                                 emptyMessage="No hay datos."
+                                 sortBy="#{item.estado_postulante}"
+                                 sortOrder="descending"
+                                 filteredValue="#{postulanteController.listaBuscar}"
+                                 rowStyleClass="#{item.confirmacion eq true ? 'fila' : null}">
+                        <f:facet name="header">
+                            <p:inputText id="globalFilter"
+                                         placeholder="Buscar" 
+                                         onkeyup="PF('postulante').filter()"
+                                         style="font-size: 18px !important;margin: 10px; text-align: center;border-radius: 20px;
+                                         padding: 7px 0px;width: 500px; "  /> 
+                        </f:facet> 
+                        <p:column style="width:110px;" sortBy="#{item.personaIdPersona.idPersona}" headerText="Foto">
+                            <img style="width: 100px;height: 110px;border-radius: 4px;margin: 0;padding: 0;margin: auto;
+                                 object-fit:cover;object-position:center center;
+                                 background-size: cover;"     
+                                 src="#{request.contextPath}/resources/#{postulanteController.existeFoto(item.personaIdPersona.foto)==true ? item.personaIdPersona.foto:'foto/sin_foto_perfil.png'}" ></img>  
+                        </p:column>
+                        <p:column sortBy="#{item.personaIdPersona.nombre}" filterBy="#{item.personaIdPersona.nombre}"  filterMatchMode="contains"
+                                  headerText="Persona"> 
+
+                            <h:outputText value="#{item.personaIdPersona.nombre} #{item.personaIdPersona.apellido}" style="font-size: 19px;font-weight: 700" class="t_nombre"/>
+                            <br/>
+                            <h:outputText value="Fecha de Postulación: #{personaController.fecha(item.fechaPostulante)}" style="font-size: 17px;"/>
+                            <br/>
+                            <br/>
+                            <h:outputLabel rendered="#{item.estado_postulante==true}" value="#{item.confirmacion==true ? 'El puesto de trabajo ha sido confirmado.':'Por confirmar por parte del postulante.'}"
+                                           style="margin-top:5px; #{item.confirmacion==true ? 'color:green;font-size:18px;':'color:#039BE5;font-size:16px;'}" />
+                        </p:column>
+                        <p:column style="width:110px" sortBy="#{item.estado_postulante}" 
+                                  headerText="Estado">
+                            <img  style="width: 50px;margin: 0;padding: 0;margin: auto;
+                                  #{item.estado_postulante eq true ? '' :'display:none'}"     
+                                  src="#{request.contextPath}/resources/img/visto.png" ></img>  
+                            <img  style="width: 40px;margin: 0;padding: 0;margin: auto;
+                                  #{item.estado_postulante eq false ? '' :'display:none'}"     
+                                  src="#{request.contextPath}/resources/img/cancelar.png" ></img>
+                            <br/>
+                            <h:outputText value="#{item.estado_postulante==null ? 'NUEVO' : postulanteController.pasarTexto(item.estado_postulante )}"  
+                                          style=" #{item.estado_postulante eq true ? 'font-size: 18px;color:#454545;font-weight:bold;':'font-size: 16px;color:#454545;font-weight:bold;'}
+                                          #{item.estado_postulante == null ? 'font-size: 18px;color:#007bff;font-weight:bold;':''}"/>
+                        </p:column>
+                        <p:column style="width:110px" sortBy="#{item.confirmacion}"
+                                  headerText="Confirmación">
+                            <img  style="width: 60px;margin: 0;padding: 0;margin: auto;
+                                  #{item.confirmacion eq true ? '' :'display:none'}"     
+                                  src="#{request.contextPath}/resources/img/ok.png" ></img>  
+                            <img  style="width: 50px;margin: 0;padding: 0;margin: auto;
+                                  #{postulanteController.aceptacion(item.estado_postulante, item.confirmacion) eq true ? '' :'display:none'}"     
+                                  src="#{request.contextPath}/resources/img/proceso.png" ></img>  
+                            <br/>     
+                            <h:outputText value="#{item.confirmacion eq true ? 'Puesto Aceptado' :''}"  
+                                          style=" #{item.confirmacion eq true ? 'font-size: 16px;color:#454545;font-weight:bold;font-family:Arial;':''}"/>
+
+                            <h:outputText value="#{postulanteController.aceptacion(item.estado_postulante, item.confirmacion) eq true ? 'En proceso' :''}"  
+                                          style=" #{postulanteController.aceptacion(item.estado_postulante, item.confirmacion) eq true ? 'font-size: 16px;color:#454545;font-weight:bold;font-family:Arial;':''}"/>
+                            <br/>
+                            <h:outputText value="#{item.confirmacion eq true ? postulanteController.fecha(item.fechaConfirmacion) :''}"/>
+                        </p:column>
+                        <p:column style="width:110px" sortBy="#{item.idPostulante}" filterBy="#{item.personaIdPersona.apellido}"  filterMatchMode="contains"
+                                  headerText="Perfil">
+                            <p:commandButton id="viewButton" styleClass="verPerfilPos"  icon="ui-icon-search" value="Ver Perfil"
+                                             actionListener="#{postulanteController.setSelected(item)}"
+                                             action="/empleador/ofertaLaboral/verPerfilPostulante?faces-redirect=true"
+                                             style="margin: auto;margin-bottom: 10px"/>
+
+                            <p:commandButton rendered="#{item.confirmacion==false}" styleClass="verificar"  icon="ui-icon-gear" value="Estado"
+                                             actionListener="#{postulanteController.setSelected(item)}"
+                                             oncomplete="PF('form_estado').show()" update=":veri" style="margin: auto"/>
+
+                            <p:commandButton rendered="#{item.confirmacion==true}" styleClass="ver"  icon="ui-icon-gear" value="Abandonar"  style="margin: auto"
+                                             actionListener="#{postulanteController.setSelected(item)}"
+                                             action="#{ofertaLaboralController.setSelected(item.ofertaLaboralIdOferta)}"
+                                             oncomplete="PF('form_estado2').show()" update=":veri"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <h:outputLabel value="Total Postulantes: "  style="font-size: 16px; font-weight: normal"/>
+                            <h:outputLabel value="#{postulanteController.listaP.size()}"  style="font-size: 16px;"/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+                        </f:facet>
+                    </p:dataTable>
+                    <c:if test="#{postulanteController.listaP.size()!=0}">                   
+                        <div class="c_fechas2">
+                            <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                                font-size: 20px;background: #29a0c7;padding-top: 10px;padding-bottom: 10px">Descargar Reporte por Fechas</h1>
+                            <br/>
+                            <br/>
+                            <p:outputLabel style="font-size: 16px !important" value="Seleccione las fechas de postulación correspondientes."/>
+                            <br/>
+                            <br/>
+                            <div style="width: 180px;margin: auto;display: inline-block;margin-bottom: 20px">
+                                <h3 style="width: 100%;margin: auto;text-align: center;margin-bottom: 5px;">Fecha Inicio</h3>
+                                <p:calendar id="fechaInicio" locale="es" pattern="dd/MM/yyyy" navigator="true" mask="true" styleClass="fecha" 
+                                            value="#{postulanteController.fecha_inicio}"/>
+                            </div>
+                            <div style="width: 180px;margin: auto;display: inline-block;margin-bottom: 20px">
+                                <h3 style="width: 100%;margin: auto;text-align: center;margin-bottom: 5px;">Fecha Final</h3>
+                                <p:calendar id="fechaFinal" locale="es" pattern="dd/MM/yyyy" navigator="true" mask="true" styleClass="fecha" 
+                                            value="#{postulanteController.fecha_fin}"/>
+                            </div>
+                            <br/>
+                            <h:commandButton value="Ayer"  actionListener="#{postulanteController.fecha2()}" class="f1">
+                                <f:ajax execute="@form" render="fechaInicio" /> 
+                                <f:ajax render="fechaFinal" /> 
+                                <f:ajax render="mensaje" /> 
+                                <f:ajax render="des" /> 
+                            </h:commandButton>
+                            <h:commandButton value="Buscar" class="botonDescargar" 
+                                             actionListener="#{postulanteController.verificarReportePostulantes}" id="export" >
+                                <f:ajax execute="@form" render="mensaje" />                                                                       
+                                <f:ajax render="des" />                                                                       
+                            </h:commandButton>
+                            <h:commandButton value="Hoy"  actionListener="#{postulanteController.fecha1()}" class="f1">
+                                <f:ajax execute="@form" render="fechaInicio" /> 
+                                <f:ajax render="fechaFinal" /> 
+                                <f:ajax render="mensaje" /> 
+                                <f:ajax render="des" /> 
+                            </h:commandButton>
+                            <br/>
+                            <br/>
+                            <h:outputLabel id="mensaje" style="#{postulanteController.v==true ? 'color:green;font-size:14px;':'color:red;font-size:14px;'}"  
+                                           value="#{postulanteController.mensaje}">
+                                <br/>
+                                <h:outputLabel value="Total : #{postulanteController.listaE.size()} "
+                                               style="#{postulanteController.v==true ? 'color:#000;font-size:14px;':'display:none;'} "/>
+                                <h:outputLabel value="#{postulanteController.listaE.size()>1 ? 'registros':'registro'}"
+                                               style="#{postulanteController.v==true ? 'color:#000;font-size:14px;':'display:none;'} "/>
+                                <br/>
+
+                            </h:outputLabel>
+                            <p:commandButton  styleClass="editar"  value="Descargar reporte" ajax="false" id="des"
+                                              style="#{postulanteController.v==true ? 'margin-top:10px;':'display:none;'} "                                      
+                                              actionListener="#{postulanteController.descargarReportePostulantes()}">    
+                            </p:commandButton>
+                        </div>
+                        <br/>
+                        <div class="c_fechas2">
+                            <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                                font-size: 20px;background: #29a0c7;padding-top: 10px;padding-bottom: 10px">Descargar Reporte Total</h1>
+                            <br/>
+                            <br/>
+                            <p:commandButton styleClass="editar" ajax="false" icon="ui-icon-document" value="Descargar reporte"
+                                             actionListener="#{exportar.reportePostulantes(postulanteController.ofertaLista.idOferta)}"/>
+                            <br/>
+                        </div>
+                        <br/>
+                        <br/>
+                    </c:if>
+                </p:panel>
+            </h:form>
+
+            <p:dialog id="form_estado" widgetVar="form_estado" modal="false" resizable="false" appendTo="@(body)" header="ACEPTACIÓN" 
+                      closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" 
+                      style="box-shadow: none; box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75) !important;background: white">
+                <h:form id="veri" style="width: 200px;margin: auto;text-align: center;">
+                    <h1 class="aceptado" id="t1" style="#{postulanteController.selected.estado_postulante eq true ? 'color:green;font-family: Arial;':'color:red;font-family: Arial;'} 
+                        #{postulanteController.selected.estado_postulante == null ? 'font-size: 24px;font-family: Arial;color:#007bff;':''}">
+                        #{postulanteController.selected.estado_postulante==null ? 'NUEVO' : postulanteController.pasarTexto(postulanteController.selected.estado_postulante )}</h1>
+
+                    <h2 class="postular" id="t2">#{postulanteController.selected.estado_postulante eq true ? 'Cancelar Postulante':'Aceptar Postulante'}</h2>
+
+                    <p:selectBooleanButton class="estado" value="#{postulanteController.selected.estado_postulante}"  onLabel="Cancelar" offLabel="Aceptar"
+                                           >
+                        <p:ajax listener="#{postulanteController.update}" update=":PostulanteListForm,:growl" oncomplete="PF('form_estado').hide()"/>
+
+                    </p:selectBooleanButton> 
+                    <br/>
+                    <p:commandButton value="Cerrar" styleClass="eliminar" style="margin-top: 10px;width: 90px;"
+                                     immediate="true" oncomplete="PF('form_estado').hide()"/>
+                    <br/>
+                </h:form>
+
+            </p:dialog>
+            <p:dialog id="form_estado2" widgetVar="form_estado2" modal="false" resizable="false" appendTo="@(body)" 
+                      closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false"
+                      style="box-shadow: none; box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75) !important;background: white">
+                <h:form id="veri2" style="width: 240px;margin: auto;text-align: center;">
+                    <h:outputLabel style="color:#007bff;font-size: 18px;" value="Confirmar Abandono"/>
+                    <br/>
+                    <br/>
+                    <p:commandButton styleClass="ver" value="Aceptar" style="width:120px;height: 40px;font-weight: bold;font-size: 14px !important" 
+                                     action="#{postulanteController.update4}" update=":PostulanteListForm,:growl" oncomplete="PF('form_estado2').hide()">
+                        <f:actionListener binding="#{ofertaLaboralController.update4()}" />
+                    </p:commandButton>
+                    <br/>
+                    <p:commandButton value="Cerrar" styleClass="eliminar" style="margin-top: 10px;width: 90px;"
+                                     immediate="true" oncomplete="PF('form_estado2').hide()"/>
+                    <br/>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+</html>

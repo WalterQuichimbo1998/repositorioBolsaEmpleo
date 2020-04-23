@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="../Estudiante.xhtml">
+
+
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/estudiante/Estudiante?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Ofertas Disponibles" action="/estudiante/ofertaLaboral/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Ver Oferta" style="color: #086A87;" action="/estudiante/ofertaLaboral/verOferta?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+            <div class="c_oferta">
+            <h3 class="titulo_p">Oferta Laboral</h3>
+
+            <h:form>
+                <p:dataList id="datalist" value="#{ofertaLaboralController.listaOferta}" var="item" 
+                            class="tablaOferta" paginatorPosition="bottom" type="none" itemType="none">
+
+                    <div class="verForm">
+                        <br/>
+                        <p:fieldset legend="Cargo Solicitado" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+                            <h3 class="txtO2">#{item.cargoSolicitado}</h3>                                 
+                            <br/>
+                            <h3 class="txtO0">#{item.idEmpresa.nombreComercial}</h3>
+                            <br/>
+                            <c:if test="#{ofertaLaboralController.existeFoto(ofertaLaboralController.selected.idEmpresa.logotipo)==true}">
+                                <div style="width: 270px; height: auto; margin: auto; background: white; border-radius: 10px; padding: 10px">
+                                    <img style="border-radius: 10px;"  width="100%" src="#{request.contextPath}/resources/#{ofertaLaboralController.selected.idEmpresa.logotipo}"></img>
+                                </div>
+                            </c:if>
+                        </p:fieldset>
+                        <br/>
+
+
+                        <p:fieldset legend="Estado Oferta" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+
+                            <h3 class="txtO0" style="#{item.estado==true ? 'color: #007bff;font-weight: bold;':'color: #e25555;font-weight: bold;'}">#{item.estado==true ? 'DISPONIBLE':'NO DISPONIBLE'}</h3> 
+                            <br/>
+                        </p:fieldset>
+                        <br/>
+
+
+                        <p:fieldset legend="Detalles" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+                            <div class="infoO2" > 
+                                <h3  class="textoO" >Descripción</h3>
+                                <h3 class="txtO" >#{item.descripcion}</h3>
+                            </div>
+                            <div class="infoO2"> 
+                                <h3  class="textoO" >Actividades a desempeñar</h3>
+                                <h3 class="txtO" >#{item.actividades}</h3>
+                            </div>
+
+
+                            <div class="infoO2" >  
+                                <h3  class="textoO" >Tipo contrato</h3>
+                                <h3 class="txtO" >#{item.idTipoContrato.tipoContrato}</h3>
+
+                            </div>
+
+
+                            <div class="infoO2" >
+                                <h3 class="textoO" >Jornada de trabajo</h3>
+                                <c:if test="#{ofertaLaboralController.selected.jornadaTrabajo.length()!=0}">
+                                <h3 class="txtO" >#{item.jornadaTrabajo} Horas</h3>
+                            </c:if>
+                            <c:if test="#{ofertaLaboralController.selected.jornadaTrabajo.length()==0}">
+                                <h3 class="txtO" ></h3>
+                            </c:if>
+                            </div>
+                            <div class="infoO2" >
+                                <h3 class="textoO" >Remuneración</h3>
+                              <c:if test="#{ofertaLaboralController.selected.remuneracion.length()!=0}">
+                                <h3 class="txtO" >$ #{item.remuneracion}</h3>
+                            </c:if>
+                            <c:if test="#{ofertaLaboralController.selected.remuneracion.length()==0}">
+                                <h3 class="txtO" ></h3>
+                            </c:if>
+                            </div>
+                            <div class="infoO2" >
+                                <h3 class="textoO" >Fecha inicio</h3>
+                                <h3 class="txtO" >#{ofertaLaboralController.fecha(item.fechaInicio)}</h3>
+
+                            </div>
+                            <div class="infoO2" >
+                                <h3 class="textoO" >Fecha fin</h3>
+                                <h3 class="txtO" >#{ofertaLaboralController.fecha(item.fechaFin)}</h3>
+                            </div>
+
+                            <div class="infoO2" >
+                                <h3 class="textoO" >Provincia</h3>
+                                <h3 class="txtO" >#{item.idEmpresa.idProvincia.provincia}</h3>
+
+                            </div>
+                            <div class="infoO2">
+                                <h3 class="textoO" >Cantón</h3>
+                                <h3 class="txtO" >#{item.idEmpresa.idCanton.canton}</h3>
+                            </div>
+                            <div class="infoO2" >   
+                                <h3 class="textoO" >Parroquia</h3>
+                                <h3 class="txtO" >#{item.idEmpresa.idParroquia.parroquia}</h3>
+                            </div>
+
+                            <div class="infoO2">
+                                <h3 class="textoO" >Dirección</h3>
+                                <h3 class="txtO" >#{item.idEmpresa.direccion}</h3>
+                            </div>
+
+                        </p:fieldset>
+                        <br/>
+                        <p:fieldset legend="Requerimientos" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+                            <div class="infoO2"  > 
+                                <h3  class="textoO" >Conocimientos del cargo</h3>
+                                <h3 class="txtO" >#{item.conocimientoCargo}</h3>
+                            </div>
+                            <div class="infoO2">  
+                                <h3  class="textoO" >Nivel Académico</h3>
+                                <h3 class="txtO" >#{item.idNivelAcademico.nivelAcademico}</h3>
+                            </div>
+                            <div class="infoO2" >
+                                <h3 class="textoO" >Horas capacitacines</h3>
+                                 <c:if test="#{ofertaLaboralController.selected.idHorasCapacitaciones!=null}">
+                                <h3 class="txtO" >#{item.idHorasCapacitaciones.horasCapacitaciones} Horas</h3>
+                            </c:if>
+                            <c:if test="#{ofertaLaboralController.selected.idHorasCapacitaciones==null}">
+                                <h3 class="txtO" ></h3>
+                            </c:if>
+                            </div>
+                            <div class="infoO2" >
+                                <h3 class="textoO" >Años de Experiencia</h3>
+                                <h3 class="txtO" >#{item.tiempo_experiencia}</h3>
+                            </div>
+                            <div class="infoO2" > 
+                                <h3  class="textoO" >Experiencias</h3>
+                                <h3 class="txtO" >#{item.experiencia}</h3>
+                            </div>
+
+                            <div class="infoO2" >
+                                <h3 class="textoO" >Area de Estudio</h3>
+                                <h3 class="txtO" >#{item.idAreaEstudio.areaEstudio}</h3>
+                            </div>
+                        </p:fieldset>
+                        <br/>
+                        <p:fieldset legend="Postular" style="width: 90%; margin: auto; background: white;border:1px solid #ccc">
+                          
+                                <center>
+                                    <p:commandButton rendered="#{item.estado==true}"
+                                                value="POSTULAR OFERTA" actionListener="#{postulanteController.prepareCreate}" 
+                                                 action="#{postulanteController.setOfertaPostular(item)}" styleClass="post"
+                                                 oncomplete="PF('PostulanteCreateDialog').show()"/>
+                                    <h:outputLabel rendered="#{item.estado==false}"
+                                        style="font-size: 18px;font-family: Arial;color: #e25555" value="No está disponible por el momento."/>
+                                </center>
+                            
+                             
+                           
+                           
+                            <br/>
+                        </p:fieldset>
+                        <br/>
+                    </div>
+
+                </p:dataList>
+            </h:form>
+            </div>
+            <br/>
+            <p:dialog id="PostulanteCreateDlg" widgetVar="PostulanteCreateDialog" modal="false" resizable="false" 
+                      appendTo="@(body)" showHeader="false" showEffect="clip" hideEffect="clip" 
+                      style="background: white; padding-bottom: 10px;box-shadow: none;
+                      box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);" >
+                <h:form id="PostulanteCreateForm">
+
+                    <h1 style="text-align: center; font-family: Arial">ACEPTACIÓN</h1>
+                    <p:commandButton styleClass="botonA" actionListener="#{postulanteController.existePos}" update=":growl" value="Aceptar"  oncomplete="PF('PostulanteCreateDialog').hide()"/>
+                    <p:commandButton styleClass="botonC" value="#{bundle.Cancel}" oncomplete="PF('PostulanteCreateDialog').hide()"/>
+
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+
+</html>

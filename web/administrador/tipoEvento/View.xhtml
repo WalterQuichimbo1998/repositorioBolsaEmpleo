@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoEventoViewDlg" widgetVar="TipoEventoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTipoEventoTitle}"
+                  closeOnEscape="true" showEffect="clip" hideEffect="clip">
+            <h:form id="TipoEventoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoEventoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTipoEventoLabel_evento}" style="font-weight: bold"/>
+                        <h:outputText value="#{tipoEventoController.selected.evento}" title="#{bundle.ViewTipoEventoTitle_evento}"/>
+                    </p:panelGrid>
+                    <p:commandButton styleClass="btn_s" value="#{bundle.Close}" immediate="true" oncomplete="PF('TipoEventoViewDialog').hide();"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

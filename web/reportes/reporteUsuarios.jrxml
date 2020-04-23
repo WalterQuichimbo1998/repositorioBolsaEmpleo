@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd656045-e8ac-4c44-89f5-363ca4a9d9a4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     usuario.`id_usuario` AS usuario_id_usuario,
+     usuario.`usuario` AS usuario_usuario,
+     usuario.`clave` AS usuario_clave,
+     usuario.`id_persona` AS usuario_id_persona,
+     usuario.`id_rol` AS usuario_id_rol,
+     persona.`id_persona` AS persona_id_persona,
+     persona.`nombre` AS persona_nombre,
+     persona.`apellido` AS persona_apellido,
+     rol.`id_rol` AS rol_id_rol,
+     rol.`rol` AS rol_rol
+FROM
+     `persona` persona INNER JOIN `usuario` usuario ON persona.`id_persona` = usuario.`id_persona`
+     INNER JOIN `rol` rol ON usuario.`id_rol` = rol.`id_rol`
+WHERE rol='ESTUDIANTE' OR rol='EMPRESA'
+ORDER BY usuario.id_usuario DESC]]>
+	</queryString>
+	<field name="usuario_id_usuario" class="java.lang.Integer"/>
+	<field name="usuario_usuario" class="java.lang.String"/>
+	<field name="usuario_clave" class="java.lang.String"/>
+	<field name="usuario_id_persona" class="java.lang.Integer"/>
+	<field name="usuario_id_rol" class="java.lang.Integer"/>
+	<field name="persona_id_persona" class="java.lang.Integer"/>
+	<field name="persona_nombre" class="java.lang.String"/>
+	<field name="persona_apellido" class="java.lang.String"/>
+	<field name="rol_id_rol" class="java.lang.Integer"/>
+	<field name="rol_rol" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="24" y="0" width="113" height="102" uuid="5537c4de-be9e-4e15-a482-854f58cd978a"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="156" y="23" width="466" height="70" uuid="e98fa94d-8f4b-4c8e-96a8-81ace91009a6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUTO SUPERIOR TECNOLÓGICO "LIMÓN"]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Top">
+				<reportElement x="624" y="23" width="178" height="70" uuid="2631c7bc-2be9-4e30-9f72-94f30390166f"/>
+				<imageExpression><![CDATA["logo_senescyt.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="1" y="1" width="802" height="25" backcolor="#EDEEEE" uuid="a6e6ce82-698c-4ea3-b802-7eb443ddf241"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14"/>
+				</textElement>
+				<text><![CDATA[Reporte de Usuarios]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="0" width="802" height="24" backcolor="#F5F5F5" uuid="ac68b48c-8a97-4f80-b8fa-157dfd250ec7"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="52" y="1" width="310" height="22" uuid="8d9711c9-430f-4dda-a346-38cd6391049a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres y Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="1" width="130" height="22" uuid="954c227a-24ea-4565-9cc7-b4468df67a4a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="1" width="130" height="22" uuid="34304b37-6521-43e1-8151-f119e99016e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clave]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="1" width="134" height="22" uuid="a6ce14f2-7325-4d21-8956-fcef6cc85846"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rol]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="52" y="0" width="310" height="20" uuid="4ab0a74d-701e-40c2-869a-2e3c3937d643"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{persona_nombre}+" "+$F{persona_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="0" width="130" height="20" uuid="2a54ae93-47ca-4e17-bd44-14c32b8dc482"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="0" width="130" height="20" uuid="ec56108a-ee3f-46e7-bcc4-ee29f9e83cc3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_clave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="640" y="0" width="134" height="20" uuid="e4199d51-c2b8-49bc-87c9-fef13d776b2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rol_rol}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="682" y="1" width="80" height="20" uuid="4f4bb75b-40fb-47e6-a6b2-e96df1dda60c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="31" y="0" width="182" height="20" uuid="fbf9a978-defa-4f52-9127-92481f15f7bd"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="762" y="1" width="40" height="20" uuid="b206215f-7bc5-4873-a233-08c735ff40c9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
