@@ -100,13 +100,13 @@ ORDER BY fecha_postulante DESC]]>
 				</textElement>
 				<text><![CDATA[INSTITUTO SUPERIOR TECNOLÓGICO "LIMÓN"]]></text>
 			</staticText>
-			<image hAlign="Center" vAlign="Top">
-				<reportElement x="620" y="25" width="178" height="70" uuid="32de70f2-4711-4eb6-81e5-73eadf81a7ce"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\logo_senescyt.png"]]></imageExpression>
-			</image>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="20" y="2" width="113" height="102" uuid="ae41252b-1d48-488d-bc52-9dbc3d906733"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\logo.png"]]></imageExpression>
+				<reportElement x="19" y="7" width="113" height="102" uuid="461f2db8-7994-4e62-a3bc-ce3d45b3c13c"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Top">
+				<reportElement x="619" y="25" width="178" height="70" uuid="22184617-4fe0-4305-9e41-73b9c9d752d6"/>
+				<imageExpression><![CDATA["logo_senescyt.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

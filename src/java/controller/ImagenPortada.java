@@ -37,7 +37,7 @@ public class ImagenPortada implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_imagen")
     private Integer idImagen;
-    @Size(max = 45)
+    @Size(max = 60)
     @Column(name = "imagen")
     private String imagen;
 

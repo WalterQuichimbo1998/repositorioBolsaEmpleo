@@ -158,14 +158,6 @@ WHERE oferta_laboral_id_oferta=$P{id}]]>
 	</background>
 	<title>
 		<band height="84" splitType="Stretch">
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="730" y="6" width="70" height="70" uuid="3b2125c8-bcb3-438f-8e7c-91b37b206fcd"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\empresa.png"]]></imageExpression>
-			</image>
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="0" width="95" height="84" uuid="d169b9a1-6ed9-4206-8387-ed042835305f"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\logo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement mode="Transparent" x="188" y="0" width="452" height="79" backcolor="#FFFFFF" uuid="fe4837ee-998a-41c2-b3ee-386dc1fadb68"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -173,6 +165,14 @@ WHERE oferta_laboral_id_oferta=$P{id}]]>
 				</textElement>
 				<text><![CDATA[REPORTE DE POSTULANTES]]></text>
 			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="3" width="95" height="80" uuid="273f9f3f-0eb2-4f92-9bfc-1a1dde86e01f"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="732" y="5" width="70" height="70" uuid="d1a08d74-13f5-4b0f-b7c5-e8a22ef1127b"/>
+				<imageExpression><![CDATA["empresa.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

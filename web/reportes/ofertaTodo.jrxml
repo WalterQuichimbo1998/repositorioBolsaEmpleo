@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="504bddca-7818-4729-b2b5-dc60c4cbdfe1">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="id" class="java.lang.Integer">
@@ -164,12 +164,12 @@ ORDER BY oferta_laboral.fecha_creacion DESC;]]>
 				<text><![CDATA[REPORTE DE OFERTAS LABORALES]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="717" y="9" width="70" height="70" uuid="6eac0284-727c-4827-b91b-0005be8f4fb3"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\empresa.png"]]></imageExpression>
+				<reportElement x="24" y="10" width="95" height="80" uuid="fb9945d6-4e78-4a03-a060-dacf9e339fa0"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
 			</image>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="14" y="4" width="95" height="80" uuid="5872bd53-46ab-44ff-9fd5-b31fae6ded29"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\logo.png"]]></imageExpression>
+				<reportElement x="704" y="10" width="70" height="70" uuid="ff6af7fb-e5ab-4fe1-8d4b-6cbb889ffbfe"/>
+				<imageExpression><![CDATA["empresa.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

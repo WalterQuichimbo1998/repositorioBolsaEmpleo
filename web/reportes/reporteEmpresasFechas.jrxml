@@ -88,14 +88,6 @@ ORDER BY fecha_creacion DESC]]>
 	</background>
 	<title>
 		<band height="88" splitType="Stretch">
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="37" y="4" width="95" height="80" uuid="5b28356a-a830-4cd3-8cba-4027e480c641"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\logo.png"]]></imageExpression>
-			</image>
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="686" y="7" width="70" height="70" uuid="d523e6f0-bbd4-456f-9dcc-3dae38675dc2"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\empresa.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement mode="Transparent" x="223" y="0" width="355" height="79" backcolor="#FFFFFF" uuid="804bff13-eb0b-40f0-bb7c-ff89cccfc862"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -103,6 +95,14 @@ ORDER BY fecha_creacion DESC]]>
 				</textElement>
 				<text><![CDATA[REPORTE DE EMPRESAS]]></text>
 			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="685" y="7" width="70" height="70" uuid="92093292-7f8e-4fc5-86e7-f451672bf0f3"/>
+				<imageExpression><![CDATA["empresa.png"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="36" y="4" width="95" height="80" uuid="e6795e11-2bf1-47b7-8dd0-f082a490db73"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

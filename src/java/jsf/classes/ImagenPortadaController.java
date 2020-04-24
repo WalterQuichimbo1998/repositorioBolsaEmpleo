@@ -4,6 +4,7 @@ import control.UtilPath;
 import controller.ImagenPortada;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
@@ -77,7 +78,6 @@ public class ImagenPortadaController implements Serializable {
         persist(PersistAction.CREATE, "Imagen súbida con éxito.");
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
-            items = getFacade().findAll();
         }
     }
 
@@ -191,7 +191,7 @@ public class ImagenPortadaController implements Serializable {
                 if (file.getSize() <= 4096000) {
                     try {
                         nombre = file.getFileName();
-                        selected.setImagen(nombre);
+                        this.selected.setImagen(nombre);
                         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
                         String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
                         String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + nombre;
@@ -209,7 +209,7 @@ public class ImagenPortadaController implements Serializable {
                             create();
                             file = null;
                         }
-                    } catch (Exception e) {
+                    } catch (IOException e) {
                     }
                 } else {
                     this.setFile(null);
@@ -231,14 +231,8 @@ public class ImagenPortadaController implements Serializable {
 
                 if (file.getSize() <= 4096000) {
                     try {
-//                        ExternalContext ec0 = FacesContext.getCurrentInstance().getExternalContext();
-//                        String realPathDelete = UtilPath.getPathDefinida(ec0.getRealPath("/"));
-//                        String pathDefinitionDelete = realPathDelete + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + selected.getImagen();
-//                        File archivo = new File(pathDefinitionDelete);
-//                        archivo.delete();
-
                         nombre = selected.getImagen();
-                        selected.setImagen(nombre);
+                        this.selected.setImagen(nombre);
                         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
                         String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
                         String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + nombre;
@@ -256,7 +250,7 @@ public class ImagenPortadaController implements Serializable {
                             update();
                             file = null;
                         }
-                    } catch (Exception e) {
+                    } catch (IOException e) {
                     }
                 } else {
                     this.setFile(null);

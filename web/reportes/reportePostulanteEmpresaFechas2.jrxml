@@ -70,12 +70,12 @@ ORDER BY fecha_postulante DESC;]]>
 				<text><![CDATA[REPORTE DE POSTULANTES]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="686" y="6" width="70" height="70" uuid="39280384-f048-45d6-9ee5-ecf02359ea80"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\empresa.png"]]></imageExpression>
+				<reportElement x="35" y="4" width="95" height="80" uuid="533b94e0-0fa0-40b3-9ca4-efb95621e713"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
 			</image>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="37" y="3" width="95" height="80" uuid="126fbacf-454d-494e-8fbc-0bfb8a3ddba2"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\logo.png"]]></imageExpression>
+				<reportElement x="684" y="7" width="70" height="70" uuid="d4d200a4-7990-4dad-a312-0fa6749532dd"/>
+				<imageExpression><![CDATA["empresa.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

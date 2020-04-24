@@ -62,14 +62,6 @@ ORDER BY fecha_postulante DESC;]]>
 	</background>
 	<title>
 		<band height="87" splitType="Stretch">
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="32" y="4" width="95" height="80" uuid="7a5b850c-bc85-44fe-bec5-a61d7b3dfef8"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\logo.png"]]></imageExpression>
-			</image>
-			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="681" y="7" width="70" height="70" uuid="9c9a7520-7a9b-4f03-b59e-ddd17e59ea21"/>
-				<imageExpression><![CDATA["C:\\Users\\TOSHIBA\\Documents\\Proyecto TESIS\\EmpleoISTL\\web\\reportes\\empresa.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement mode="Transparent" x="183" y="4" width="430" height="79" backcolor="#FFFFFF" uuid="49698a1b-9a13-42e5-a98b-89e1ad49f47d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -77,6 +69,14 @@ ORDER BY fecha_postulante DESC;]]>
 				</textElement>
 				<text><![CDATA[REPORTE DE POSTULANTES]]></text>
 			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="687" y="7" width="70" height="70" uuid="7fc9ac51-1888-4e46-b795-baaf65d7c011"/>
+				<imageExpression><![CDATA["empresa.png"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="30" y="4" width="95" height="80" uuid="848f7882-0e30-4c68-ae93-31aef34ece05"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

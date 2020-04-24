@@ -134,7 +134,7 @@
 
                 <h:form enctype="multipart/form-data" style="text-align: center;background: #f2f2f2;padding-top: 15px;padding-bottom: 15px" >
                     <h2 style="color: #086A87;text-align: center;font-family: Arial">Subir archivo Excel a la Base de Datos</h2>    
-                     <p:outputLabel style="color:#454545;font-size: 16px !important;" value="1. Todas las columnas del archivo de Excel deben estar llenas para subir a base de datos."/>
+                     <p:outputLabel style="color:#454545;font-size: 16px !important;" value="1. Todas las columnas del archivo de Excel deben estar llenas para subir a la base de datos."/>
                    
                     <h3 style="color: #ccc;text-align: center;font-family: Arial">Seleccione el archivo</h3>       
                     <div class="selec">
@@ -152,7 +152,7 @@
                                      actionListener="#{capacitacionController.subirExcel()}"
                                      update=":CapacitacionListForm,:datalist" />
                     <br/>
-                    <p:commandButton id="aviso" value="Aviso" style="background: none;border:none;outline: none;color:#086A87;font-size: 15px !important;box-shadow: none;width: 100px"/> 
+                    <p:commandButton id="aviso" ajax="false" value="Aviso" style="background: none;border:none;outline: none;color:#086A87;font-size: 15px !important;box-shadow: none;width: 100px"/> 
                      <p:tooltip for="aviso" value="Si algún registro no se sube a la base de datos revise la columnas del archivo Excel." trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
                 </h:form>
             </div>
