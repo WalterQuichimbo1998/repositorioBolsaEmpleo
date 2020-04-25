@@ -23,11 +23,11 @@ and open the template in the editor.
                         <h:form id="datos">
                             <h3 class="textoL">Usuario </h3>
                             <center>
-                                <p:inputText styleClass="inputText" value="#{accesoBean.selected.usuario}"/>                         
+                                <p:inputText styleClass="inputText" value="#{accesoBean.user}"/>                         
                             </center>
                             <h3 class="textoL">Clave </h3>
                             <center>
-                                <p:password styleClass="inputText" value="#{accesoBean.selected.clave}" style="margin-bottom: 5px"/>
+                                <p:password styleClass="inputText" value="#{accesoBean.pass}" style="margin-bottom: 5px"/>
                             </center>
                            
                             <h:commandLink value="¿Olvidaste la clave?" action="info?faces-redirect=true" 
@@ -35,7 +35,7 @@ and open the template in the editor.
                             <br/>
                             <br/>
                             <center>
-                                <p:commandButton styleClass="btn" value="Iniciar Sesión" ajax="false" actionListener="#{accesoBean.login}" />
+                                <p:commandButton styleClass="btn" value="Iniciar Sesión" ajax="false" actionListener="#{accesoBean.login()}" />
                             </center>
                             <center>
                                 <p:commandButton styleClass="botonSalir" value="Cancelar" oncomplete="PF('login_estudiante').hide()" />

@@ -67,15 +67,15 @@
                             <f:facet name="header">
                                 <h:outputText value="Acción"/>
                             </f:facet>
-                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Editar" 
+                            <p:commandButton  styleClass="crear" icon="ui-icon-plus"   value="Editar" 
                                              action="/administrador/imagenPortada/subirImagen?faces-redirect=true" 
                                              actionListener="#{imagenPortadaController.setSelected(item)}"/>
 
-                            <p:commandButton id="viewButton"  styleClass="ver" icon="ui-icon-search" value="Ver" 
+                            <p:commandButton styleClass="ver" icon="ui-icon-search" value="Ver" 
                                              actionListener="#{imagenPortadaController.setSelected(item)}"
-                                             update=":ImagenPortadaViewForm" oncomplete="PF('ImagenPortadaViewDlg').show()"/>
+                                             update=":ImagenPortadaViewForm" oncomplete="PF('ImagenPortadaViewDialog').show()"/>
 
-                            <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="Eliminar"
+                            <p:commandButton styleClass="eliminar" icon="ui-icon-trash"  value="Eliminar"
                                              actionListener="#{imagenPortadaController.setSelected(item)}"
                                              oncomplete="PF('DeleteDlg').show()"/>
 

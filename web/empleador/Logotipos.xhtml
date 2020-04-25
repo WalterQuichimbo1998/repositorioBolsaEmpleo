@@ -31,16 +31,12 @@
                                  sortBy="#{item.idEmpresa}"
                                  sortOrder="descending">
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton"/>
-
-
                         <p:column sortBy="#{item.nombreComercial}">
                             <f:facet name="header">
                                 <h:outputText value="Empresa"/>
                             </f:facet>
                             <br/>
-                            <h:outputText value="#{item.nombreComercial}"/>
+                            <h:outputText value="#{item.nombreComercial}" style="font-size: 16px !important"/>
                             <br/>
                             <br/>
                         </p:column>
@@ -51,19 +47,22 @@
                             </f:facet>
 
                         <img style="width: 120px;margin: auto;" 
-                             src="#{request.contextPath}/resources/#{empresaController.existeFoto(item.logotipo)==true ? item.logotipo:'logotipo/sin_logotipo.jpg'}"></img>
+                             src="#{request.contextPath}/resources/#{empresaController.existeFoto(item.logotipo)==true ? item.logotipo:'requerido/sin_logotipo.jpg'}"></img>
                         </p:column>
-                        <p:column style="width:220px" sortBy="#{item.idEmpresa}">
+                        <p:column style="width:280px" sortBy="#{item.idEmpresa}">
                             <f:facet name="header">
                                 <h:outputText value="Acción"/>
                             </f:facet>
                             <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Agregar" 
                                              action="/empleador/subirLogotipo?faces-redirect=true" 
                                              actionListener="#{empresaController.setSelected(item)}"/>
-
-                            <p:commandButton id="viewButton"  styleClass="ver" icon="ui-icon-search" value="#{bundle.View}" 
+                     <p:tooltip for="createButton" value="Agregar o Actualizar" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
+                            <p:commandButton rendered="#{empresaController.existeImagen(item.logotipo)==true}" styleClass="ver" icon="ui-icon-search" value="#{bundle.View}" 
                                              actionListener="#{empresaController.setSelected(item)}"
                                              update=":EmpresaViewForm" oncomplete="PF('EmpresaViewDialog').show()"/>
+                            <p:commandButton rendered="#{empresaController.existeImagen(item.logotipo)==true}" styleClass="eliminar" icon="ui-icon-trash" value="Eliminar" 
+                                             actionListener="#{empresaController.setSelected(item)}"
+                                             oncomplete="PF('DeleteDlg').show()"/>
                         </p:column>
 
                         <f:facet name="footer">
@@ -75,7 +74,20 @@
                     </p:dataTable>
                 </p:panel>
             </h:form>
+            <p:dialog id="DeleteDlg" widgetVar="DeleteDlg" modal="false" resizable="false" 
+                      appendTo="@(body)" showHeader="false" showEffect="clip" hideEffect="clip" 
+                      style="background: white; padding-bottom: 10px;box-shadow: none;
+                      box-shadow: 0px 0px 14px 2px rgba(0,0,0,0.75);" >
+                <h:form id="DeleteDlgForm">
 
+                    <h1 style="text-align: center; font-family: Arial;font-size: 22px">¿Está seguro de eliminar?</h1>
+                    <center>
+                        <p:commandButton styleClass="crear" value="Aceptar" actionListener="#{empresaController.eliminarImagen()}" update=":EmpresaListForm:datalist,:growl" oncomplete="PF('DeleteDlg').hide()"/>
+                        <p:commandButton styleClass="eliminar" value="Cancelar" immediate="true" oncomplete="PF('DeleteDlg').hide()"/>
+
+                    </center>
+                </h:form>
+            </p:dialog>
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

@@ -204,6 +204,10 @@ public class EmpresaController implements Serializable {
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaUpdated"));
     }
+    public void update2() {
+        this.selected.setLogotipo("");
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaUpdated"));
+    }
 
     public void actualizarLogo() {
         persist(PersistAction.UPDATE, "Logotipo subido con éxito.");
@@ -566,5 +570,23 @@ public class EmpresaController implements Serializable {
         this.setFecha_fin(new Date(d.getYear(), d.getMonth(), d.getDate() - 1));
         mensaje = "";
         v = false;
+    }
+     public void eliminarImagen() {
+        ExternalContext ecDelete = FacesContext.getCurrentInstance().getExternalContext();
+        String realPathDelete = UtilPath.getPathDefinida(ecDelete.getRealPath("/"));
+        String pathDefinitionDelete = realPathDelete + File.separator + "web" + File.separator + "resources" + File.separator + selected.getLogotipo();
+        File archivo = new File(pathDefinitionDelete);
+        archivo.delete();
+        update2();
+    }
+     public Boolean existeImagen(String i) {
+        boolean r = true;
+        if ("".equals(i)) {
+            r = false;
+        }
+        if (i.isEmpty()) {
+            r = false;
+        }
+        return r;
     }
 }

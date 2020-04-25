@@ -6,17 +6,13 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-
-        <p:dialog id="ImagenPortadaViewDlg" widgetVar="ImagenPortadaViewDlg" modal="true" resizable="false" appendTo="@(body)" header="Ver"
+        <p:dialog id="ImagenPortadaViewDlg" widgetVar="ImagenPortadaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver"
                   showEffect="fade" hideEffect="fade">
             <h:form id="ImagenPortadaViewForm">
                     <div style="width: 400px; height: auto;padding: 10px; ">
                           <img style="border-radius: 10px;" width="100%" src="#{request.contextPath}/resources/portada/#{imagenPortadaController.selected.imagen}"></img>                                         
                     </div>
-
-               
             </h:form>
         </p:dialog>
-
     </ui:composition>
 </html>

@@ -530,7 +530,7 @@ public class PersonaController implements Serializable {
         } else {
             cc = false;
             mensaje = "Correo electrónico o Cédula no registrado";
-            tiempoLimpiar();
+            limpiar();
         }
         }
     }
@@ -540,26 +540,20 @@ public class PersonaController implements Serializable {
         if (user != null) {
             mensaje = "Revise su correo electrónico";
             enviarCorreo(user.getClave());
-            tiempoLimpiar();
+            limpiar();
         } else {
             cc = false;
             mensaje = "Usuario no encontrado";
-            tiempoLimpiar();
+            limpiar();
         }
     }
 
-    public void tiempoLimpiar() {
-        new Thread(() -> {
-            try {
-                Thread.sleep(1500);
+    public void limpiar() {
                 mensaje = "";
                 cc = false;
                 per = null;
                 correo = null;
                 cedula = null;
-            } catch (InterruptedException ex) {
-            }
-        }).start();
     }
 
     public String descencriptar(String pass) {
