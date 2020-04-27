@@ -14,7 +14,7 @@
                 <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
             </li>
             <li>
-                <p:commandButton value="Mis Empresas" class="btn2" action="/empleador/empresa/List?faces-redirect=true"/>
+                <p:commandButton value="Mis Empresas" class="btn2" actionListener="#{empresaController.limpiarFechas()}" action="/empleador/empresa/List?faces-redirect=true"/>
             </li>
             <li>
                 <p:commandButton value="Mis Ofertas" class="btn2 bbt" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
@@ -143,6 +143,7 @@
                             <h:commandLink id="track" actionListener="#{postulanteController.setOfertaLista(item)}" 
                                            action="/empleador/ofertaLaboral/ListaPostulante?faces-redirect=true">
                                 <img src="#{request.contextPath}/resources/img/estudiante.png" width="40px"></img>   
+                                 <f:actionListener binding="#{postulanteController.limpiarFechas()}" />
                             </h:commandLink>
                             <p:tooltip id="toolTipTrack" for="track" value="Ver Postulantes" trackMouse="true" style="box-shadow: none"  />
 

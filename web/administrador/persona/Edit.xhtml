@@ -69,7 +69,7 @@
                         </p:selectOneMenu>
                         <p:column/>
                         <p:column>
-                            <p:commandButton styleClass="btn_g" actionListener="#{personaController.update}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaEditDialog');"/>
+                            <p:commandButton styleClass="btn_g" actionListener="#{personaController.existeCorreo2()}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaEditDialog');"/>
                             <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('PersonaEditDialog').hide();"/>
 
                         </p:column>

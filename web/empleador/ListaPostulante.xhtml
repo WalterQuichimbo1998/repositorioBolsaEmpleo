@@ -51,8 +51,7 @@
                                  sortBy="#{item.fechaPostulante}"
                                  sortOrder="descending"
                                  paginatorPosition="bottom"
-                                 filteredValue="#{postulanteController.listaPostulantes}"                                
-                                 rowStyleClass="#{item.confirmacion eq true ? 'fila' : null}">
+                                 filteredValue="#{postulanteController.listaPostulantes}">
                         <f:facet name="header">
                             <p:inputText id="globalFilter"
                                          placeholder="Buscar" 
@@ -141,7 +140,7 @@
                     <c:if test="#{postulanteController.listaPostulantes.size()!=0}">                   
                         <div class="c_fechas2">
                             <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
-                                font-size: 20px;background: #29a0c7;padding-top: 10px;padding-bottom: 10px">Descargar Reporte por Fechas</h1>
+                                font-size: 22px;background: none;padding-top: 20px;padding-bottom: 10px">Descargar Reporte por Fechas</h1>
                             <br/>
                             <br/>
                             <p:outputLabel style="font-size: 16px !important" value="Seleccione las fechas de postulación correspondientes."/>
@@ -195,7 +194,7 @@
                         <br/>
                         <div class="c_fechas2">
                             <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
-                                font-size: 20px;background: #29a0c7;padding-top: 10px;padding-bottom: 10px">Descargar Reporte Total</h1>
+                                font-size: 22px;background: none;padding-top: 20px;padding-bottom: 10px">Descargar Reporte Total</h1>
                             <br/>
                             <br/>
                             <p:commandButton styleClass="editar" ajax="false" icon="ui-icon-document" value="Descargar reporte"

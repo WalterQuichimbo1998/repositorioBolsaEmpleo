@@ -724,9 +724,13 @@ nav ul li{
 .ui-datatable .ui-column-filter{
     background:none;
     width:0px;
-    box-shadow:none;
     height:0px;
+    padding: 0;
+    margin: 0;
+    box-shadow:none;
     border:none;
+    outline: none;
+    display: none;
 }
 .ui-datatable thead tr {
     height: 30px;   
@@ -1293,7 +1297,7 @@ nav ul li{
 .c_fechas2{
     width: 100%;
     margin: auto;
-    background: #f2f2f2;
+    background: whitesmoke;
     padding-bottom: 20px;
     display: inline-block;
     margin-bottom: 20px;
@@ -1453,8 +1457,14 @@ nav ul li{
     .caja_form{
         width: 100%;
     }
-    .formulario{
+     .formulario{
         width: 92%;
+        padding: 0;
+    }
+    .info{
+        width: 86%;
+        margin: auto;
+        padding: 0;
     }
 
     #formularioPerfil{
@@ -1481,8 +1491,7 @@ nav ul li{
         display: block;
     }
     .info{
-        width: 98%;
-        margin: auto;
+        width: 94%;
     }
     .botones2{
         width: 180px;

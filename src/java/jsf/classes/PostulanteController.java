@@ -710,4 +710,10 @@ public class PostulanteController implements Serializable {
          mensaje="";
          v = false;
      }
+     public void limpiarFechas(){
+         fecha_inicio=null;
+         fecha_fin=null;
+         v=false;
+         mensaje="";
+     }
 }

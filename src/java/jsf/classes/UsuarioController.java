@@ -1,6 +1,8 @@
 package jsf.classes;
 
 import control.AccesoBean;
+import controller.HojaVidaEstudiante;
+import controller.Persona;
 import controller.Usuario;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
@@ -50,6 +52,8 @@ public class UsuarioController implements Serializable {
     private boolean ver;
     private String mensaje2 = "";
     private boolean ver2;
+    private String user;
+    private boolean perfil;
 
     public UsuarioController() {
     }
@@ -134,6 +138,24 @@ public class UsuarioController implements Serializable {
         this.claveAntigua = claveAntigua;
     }
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public boolean isPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(boolean perfil) {
+        this.perfil = perfil;
+    }
+    
+    
+
     public Usuario prepareCreate() {
         selected = new Usuario();
         initializeEmbeddableKey();
@@ -151,6 +173,7 @@ public class UsuarioController implements Serializable {
     public void update() {
         this.selected.setClaveCifrada(encriptar(selected.getClave()));
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+        items = null;
     }
 
     public void update2() {
@@ -159,7 +182,9 @@ public class UsuarioController implements Serializable {
     }
 
     public void update3() {
+        this.selected.setUsuario(user);
         persist(PersistAction.UPDATE, "Usuario actualizado con éxito.");
+         
     }
 
     public void destroy() {
@@ -257,6 +282,25 @@ public class UsuarioController implements Serializable {
         }
 
     }
+     public String existePerfilPersona(Persona id) {
+        HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
+        String m = "";
+        if (h != null) {
+            m = "Si";
+        } else {
+          m="No";
+        }
+        return m;
+    }
+     public boolean existePerfilPersonaVer(Usuario id) {
+         perfil=false;
+        if ("ESTUDIANTE".equals(id.getIdRol().getRol())) {
+            perfil=true;
+        } else {
+            perfil=false;
+        }
+        return perfil;
+    }
 
     public void validate(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException {
         if (((String) arg2).length() < 5) {
@@ -265,20 +309,35 @@ public class UsuarioController implements Serializable {
     }
 
     public void existeUsuario() {
-        Usuario u = getFacade().existeUsuarioRegistrado(selected.getUsuario());
+        Usuario u = getFacade().existeUsuarioRegistradoAdmin(selected.getUsuario());
         if (u != null) {
+            items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe.Ingrese otro.", ""));
         } else {
-            create();
+            Usuario u2 = getFacade().existePersonaRegistradoAdmin(selected.getIdPersona(),selected.getIdRol());
+           if(u2!=null){
+               items = null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
+           }else{
+                create();
+           }
         }
     }
 
     public void existeUsuario2() {
-        Usuario u = getFacade().existeUsuarioRegistrado(selected.getUsuario());
+        Usuario u = getFacade().existeUsuarioRegistrado(selected.getIdUsuario(), selected.getUsuario());
         if (u != null) {
+            items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe.Ingrese otro.", ""));
         } else {
-            update();
+            Usuario u2 = getFacade().existePersonaRegistradoAdmin(selected.getIdPersona(),selected.getIdRol());
+           if(u2!=null){
+               items = null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
+           }else{
+                update();
+           }
+            
         }
     }
 
@@ -289,7 +348,6 @@ public class UsuarioController implements Serializable {
             ver = false;
             mensaje = "Complete el campo clave. Al menos 6 caracteres";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete el campo clave.", ""));
-            limpiar1();
         } else {
             if (selected.getClave().length() <= 5) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Clave nueva muy corta. Ingrese al menos 6 caracteres", ""));
@@ -298,66 +356,38 @@ public class UsuarioController implements Serializable {
                     ver = false;
                     mensaje = "Clave actual incorrecta.";
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Clave actual incorrecta", ""));
-                    limpiar1();
                 } else {
                     ver = true;
                     mensaje = "Clave actualizada con éxito.";
                     update2();
-                    limpiar1();
                 }
             }
         }
     }
-
-    public void limpiar1() {
-        new Thread(() -> {
-            try {
-                Thread.sleep(500);
-                mensaje = "";
-                ver = false;
-                claveAntigua = null;
-            } catch (InterruptedException ex) {
-            }
-        }).start();
-    }
-
     public void verficarUsuario() {
         mensaje2 = "";
         ver2 = false;
-        if (selected.getUsuario() == null || "".equals(selected.getUsuario().trim())) {
+        if (user== null || "".equals(user.trim())) {
             ver2 = false;
             mensaje2 = "Complete el campo usuario. Al menos 6 caracteres";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete el campo usuario.", ""));
-            limpiar2();
         } else {
-            if (selected.getUsuario().length() <= 5) {
+            if (user.length() <= 5) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Usuario muy corto. Ingrese al menos 6 caracteres", ""));
             } else {
-                Usuario u = getFacade().existeUsuarioRegistrado(selected.getUsuario());
+                Usuario u = getFacade().existeUsuarioRegistrado(AccesoBean.obtenerIdPersona().getIdUsuario(), user);
                 if (u != null) {
+                    user="";
                     ver2 = false;
                     mensaje2 = "El usuario ya existe. Ingrese otro.";
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe. Ingrese otro.", ""));
-                    limpiar2();
                 } else {
                     ver2 = true;
                     mensaje2 = "Usuario actualizado con éxito";
                     update3();
-                    limpiar2();
                 }
             }
         }
-    }
-
-    public void limpiar2() {
-        new Thread(() -> {
-            try {
-                Thread.sleep(500);
-                mensaje2 = "";
-                ver2 = false;
-            } catch (InterruptedException ex) {
-            }
-        }).start();
     }
 
     public String encriptar(String pass) {

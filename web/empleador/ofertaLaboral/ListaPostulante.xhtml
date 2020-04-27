@@ -14,10 +14,10 @@
                 <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
             </li>
             <li>
-                <p:commandButton value="Mis Empresas" class="btn2" action="/empleador/empresa/List?faces-redirect=true"/>
+                <p:commandButton value="Mis Empresas" class="btn2" actionListener="#{empresaController.limpiarFechas()}" action="/empleador/empresa/List?faces-redirect=true"/>
             </li>
             <li>
-                <p:commandButton value="Mis Ofertas" class="btn2" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
+                <p:commandButton value="Mis Ofertas" class="btn2" actionListener="#{ofertaLaboralController.limpiarFechas()}" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
             </li>
             <li>
                 <p:commandButton value="Mis Postulantes" class="btn2 bbt" action="/empleador/ofertaLaboral/ListaPostulante?faces-redirect=true"/>
@@ -58,8 +58,7 @@
                                  emptyMessage="No hay datos."
                                  sortBy="#{item.estado_postulante}"
                                  sortOrder="descending"
-                                 filteredValue="#{postulanteController.listaBuscar}"
-                                 rowStyleClass="#{item.confirmacion eq true ? 'fila' : null}">
+                                 filteredValue="#{postulanteController.listaBuscar}">
                         <f:facet name="header">
                             <p:inputText id="globalFilter"
                                          placeholder="Buscar" 
@@ -143,7 +142,7 @@
                     <c:if test="#{postulanteController.listaP.size()!=0}">                   
                         <div class="c_fechas2">
                             <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
-                                font-size: 20px;background: #29a0c7;padding-top: 10px;padding-bottom: 10px">Descargar Reporte por Fechas</h1>
+                                font-size: 22px;background: none;padding-top: 20px;padding-bottom: 10px">Descargar Reporte por Fechas</h1>
                             <br/>
                             <br/>
                             <p:outputLabel style="font-size: 16px !important" value="Seleccione las fechas de postulación correspondientes."/>
@@ -197,7 +196,7 @@
                         <br/>
                         <div class="c_fechas2">
                             <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
-                                font-size: 20px;background: #29a0c7;padding-top: 10px;padding-bottom: 10px">Descargar Reporte Total</h1>
+                                font-size: 22px;background: none;padding-top: 20px;padding-bottom: 10px">Descargar Reporte Total</h1>
                             <br/>
                             <br/>
                             <p:commandButton styleClass="editar" ajax="false" icon="ui-icon-document" value="Descargar reporte"

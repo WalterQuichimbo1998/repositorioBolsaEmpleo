@@ -143,44 +143,7 @@
                     <strong>Estudiante </strong>#{accesoBean.usuarioLogueado()}</h3>
             </footer> 
         </div>
-        <p:dialog styleClass="logout" id="form_perfil" widgetVar="form_perfil" modal="true" resizable="false" appendTo="@(body)" header="Cerrar Sesión" 
-                  closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" >
-
-            <h:form style="margin: 0;padding: 0;padding-left: 40px;padding-right: 40px;display: block;margin-right: -3px" >
-                 <center>
-                <c:if test="#{personaController.existeFoto(personaController.selected.foto) == false}">
-                    <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
-                        <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                             src="#{request.contextPath}/resources/foto/sin_foto_perfil.png"></img>
-                    </div>
-                </c:if>
-                <c:if test="#{personaController.existeFoto(personaController.selected.foto) ==true}">
-                    <br/>
-                    <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; box-shadow: 0px 0px 2px 1px #454545;">
-                        <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                             src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
-                    </div>
-                </c:if>
-
-                <br/>
-                <br/>
-              </center>
-              
-                    <p:commandButton value="Mi Perfil" icon="ui-icon-contact" action="/estudiante/verPerfilPersona_D?faces-redirect=true" styleClass="b_1"/>
-                    <br/>
-                    <p:commandButton value="Cambiar Clave" icon="ui-icon-key" action="/estudiante/cambiarClave_D?faces-redirect=true" styleClass="b_1"/>
-                    <br/>
-                    <p:commandButton value="Cambiar Foto" icon="ui-icon-image" action="/estudiante/cambiarFoto_D?faces-redirect=true" styleClass="b_1"/> 
-                    <br/>
-                    <p:commandButton value="Cerrar Sesión"  styleClass="ss" icon="ui-icon-power" action="#{accesoBean.logoutAdmin()}"/>
-                    <br/>
-                    <br/>
-                    <p:commandButton  value="Cerrar" styleClass="b_2"   oncomplete="PF('form_perfil').hide()"/>
-            </h:form>	
-
-        </p:dialog>
-        
- 
+    
          <script type="text/javascript">
             Waves.init();
             Waves.attach('.btn3', ['waves-button']);

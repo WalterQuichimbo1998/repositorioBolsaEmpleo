@@ -86,7 +86,7 @@ public class PersonaController implements Serializable {
     private boolean cc_3;
     private Persona per = null;
     private final String key = "empleo";
-
+    private String correoPersona;
     public PersonaController() {
     }
 
@@ -96,13 +96,13 @@ public class PersonaController implements Serializable {
         }
         if ("EMPRESA".equals(AccesoBean.obtenerIdPersona().getIdRol().getRol())) {
             this.selected = AccesoBean.obtenerIdPersona().getIdPersona();
+            
         }
         return selected;
     }
 
     public void setSelected(Persona selected) {
         this.selected = selected;
-
     }
 
     public Integer getId2() {
@@ -260,6 +260,15 @@ public class PersonaController implements Serializable {
         this.cc_3 = cc_3;
     }
 
+    public String getCorreoPersona() {
+        return correoPersona;
+    }
+
+    public void setCorreoPersona(String correoPersona) {
+        this.correoPersona = correoPersona;
+    }
+    
+
     public Persona prepareCreate() {
         selected = new Persona();
         initializeEmbeddableKey();
@@ -274,6 +283,7 @@ public class PersonaController implements Serializable {
         }
     }
 
+    
     public void update() {
         persist(PersistAction.UPDATE, "Persona actualizada correctamente.");
     }
@@ -390,7 +400,9 @@ public class PersonaController implements Serializable {
         }
 
     }
-
+    public void correoPersona(){
+        correoPersona=AccesoBean.obtenerIdPersona().getIdPersona().getCorreo();
+    }
     public String fecha(Date d) {
         String resultado = "";
         if (d != null) {
@@ -413,16 +425,16 @@ public class PersonaController implements Serializable {
         return resultado;
     }
 
-    public String existePerfilPersona(Persona id) {
-        HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
-        String m = "";
-        if (h != null) {
-            m = "Si";
-        } else {
-            m = "No";
-        }
-        return m;
-    }
+//    public String existePerfilPersona(Persona id) {
+//        HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
+//        String m = "";
+//        if (h != null) {
+//            m = "Si";
+//        } else {
+//            m = "No";
+//        }
+//        return m;
+//    }
 
     public Integer existePerfilPersona2(Persona id) {
         HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
@@ -435,23 +447,47 @@ public class PersonaController implements Serializable {
         return n;
     }
 //Administrador
-
-    public void existePersona() {
-        Persona p = getFacade().existePersonaRegistrada(selected.getCedula(), selected.getCorreo());
+    public void existeCorreo() {
+        Persona p = getFacade().existeCorreoRegistrado(selected.getCorreo());
         if (p != null) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La cédula o correo ya se encuentra registrada", ""));
+            items=null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
         } else {
             create();
         }
     }
+    public void existeCorreo2() {
+        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(),selected.getCorreo());
+        if (p != null) {
+            items=null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
+        } else {
+            update();
+        }
+    }
+    //Persona
+    public void existeCorreoPersona() {
+        if (correoPersona== null || "".equals(correoPersona.trim())) {
+            this.selected.setCorreo("");
+            datosActualizados();
+        } else {
+        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(),correoPersona); 
+        if (p != null) {
+            correoPersona=selected.getCorreo();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
+        } else {
+            this.selected.setCorreo(correoPersona);
+            datosActualizados();
+        }
+        }
+    }
 
+    
     boolean f = false;
-
     public void subirFoto() {
         String extension = "";
         if (file == null || file.getSize() == 0) {
              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Foto", ""));
-
         } else {
             String ex = file.getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
@@ -530,7 +566,6 @@ public class PersonaController implements Serializable {
         } else {
             cc = false;
             mensaje = "Correo electrónico o Cédula no registrado";
-            limpiar();
         }
         }
     }
@@ -540,20 +575,10 @@ public class PersonaController implements Serializable {
         if (user != null) {
             mensaje = "Revise su correo electrónico";
             enviarCorreo(user.getClave());
-            limpiar();
         } else {
             cc = false;
             mensaje = "Usuario no encontrado";
-            limpiar();
         }
-    }
-
-    public void limpiar() {
-                mensaje = "";
-                cc = false;
-                per = null;
-                correo = null;
-                cedula = null;
     }
 
     public String descencriptar(String pass) {
@@ -568,7 +593,6 @@ public class PersonaController implements Serializable {
             decipher.init(Cipher.DECRYPT_MODE, secretKey);
             byte[] plainText = decipher.doFinal(m);
             descencri = new String(plainText, "UTF-8");
-
         } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
             System.out.println("Error: " + e);
         }
@@ -576,12 +600,10 @@ public class PersonaController implements Serializable {
     }
 
     public void enviarCorreo(String clave) {
-
         final String remitente = "empleoistl2020@gmail.com";
         final String r_clave = "@empleo_istl_2020";
         String receptor = getCorreo();
         Properties prop = new Properties();
-
         try {
             prop.put("mail.smtp.host", "smtp.gmail.com");
             prop.put("mail.from", "empleoistl2020@gmail.com");
@@ -589,10 +611,8 @@ public class PersonaController implements Serializable {
             prop.put("mail.smtp.port", "587");
             prop.put("mail.smtp.auth", "true");
             prop.setProperty("mail.debug", "true");
-
             Session session = Session.getInstance(prop, null);
             MimeMessage msg = new MimeMessage(session);
-
             msg.setRecipients(Message.RecipientType.TO, receptor);
             msg.setSubject("Clave de acceso recuperada del sistema de Bolsa de Empleo");
             msg.setSentDate(new Date());

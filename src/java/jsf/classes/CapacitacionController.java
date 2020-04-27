@@ -251,7 +251,6 @@ public class CapacitacionController implements Serializable {
         } else {
             String archivo = file.getContentType();
             if ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".equals(archivo)) {
-
                 Conexion con = new Conexion();
                 PreparedStatement ps;
                 try {
@@ -265,7 +264,6 @@ public class CapacitacionController implements Serializable {
                                fila.getCell(4).getNumericCellValue()==0 || fila.getCell(5).getNumericCellValue()==0 || fila.getCell(6).getNumericCellValue()==0 || fila.getCell(7).getNumericCellValue()==0 ) {
                             System.out.println("No se subieron algunos datos porque tenia columnas vacias, Fila "+i);
                         }else{
-
                         ps = con.conexion().prepareStatement("INSERT INTO capacitacion (id_hoja_vida_estudiante,institucion,nombre_evento,dias,id_tipo_evento,id_area_estudio,id_horas_capacitaciones,id_tipo_certificado) VALUES(?,?,?,?,?,?,?,?)");
                         ps.setInt(1, (int) fila.getCell(0).getNumericCellValue());
                         ps.setString(2, fila.getCell(1).getStringCellValue());
@@ -282,13 +280,11 @@ public class CapacitacionController implements Serializable {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro subido correctamente.", ""));
                     lista = getFacade().findAll();
                     file=null;
-                    
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(CapacitacionController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException | SQLException ex) {
                     Logger.getLogger(CapacitacionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Archivo no válido.", ""));
             }

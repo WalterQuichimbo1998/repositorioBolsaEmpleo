@@ -751,11 +751,15 @@ nav ul li{
 
 }
 .tabla2.ui-datatable .ui-column-filter{
-    background:none;
+     background:none;
     width:0px;
-    box-shadow:none;
     height:0px;
+    padding: 0;
+    margin: 0;
+    box-shadow:none;
     border:none;
+    outline: none;
+    display: none;
 }
 .tabla2.ui-datatable thead tr {
     background: #f2f2f2;
@@ -786,6 +790,7 @@ nav ul li{
     background-image: none !important;
 
 }
+
 .btn_g.ui-button{
     background: #57a3f4;
     font-size: 13px !important;
@@ -1100,7 +1105,7 @@ nav ul li{
     transition: all .3s ease;
 }
 .verO:hover{
-
+    cursor: pointer;
     box-shadow: 0px 0px 1px 1px #454545;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
 }
@@ -1124,6 +1129,7 @@ nav ul li{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 .crear2.ui-button{
     background: #57a3f4; 
@@ -1143,6 +1149,7 @@ nav ul li{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 
 .ver2.ui-button{
@@ -1162,6 +1169,7 @@ nav ul li{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545; 
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 .ver.ui-button{
     background: silver; 
@@ -1181,6 +1189,7 @@ nav ul li{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545; 
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 .editar.ui-button{
     background: #64cdad; 
@@ -1220,6 +1229,7 @@ nav ul li{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545; 
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 .post.ui-button{
     background: #63baa0; 
@@ -1239,6 +1249,7 @@ nav ul li{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 #cajaCurriculo{
     width: 90%; 
@@ -1286,11 +1297,11 @@ nav ul li{
 .c_fechas2{
     width: 100%;
     margin: auto;
-    background: #eee;
+    background: whitesmoke;
     padding-bottom: 20px;
     display: inline-block;
     margin-bottom: 20px;
-    border:1px solid #ccc;
+    
 }
 .fecha .ui-inputfield{
     width:90%;
@@ -1333,6 +1344,7 @@ nav ul li{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545; 
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 .ui-chkbox .ui-chkbox-box
 {
@@ -1363,12 +1375,13 @@ nav ul li{
     text-shadow:none;
     outline: none;
     transition: all .3s ease;
-
+    
 }
 .estado:hover{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 .f1{
     background: #a8cef6; 
@@ -1390,6 +1403,7 @@ nav ul li{
     color: #000;
     box-shadow: 0px 0px 1px 1px #454545; 
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
 }
 @media only screen and (min-width: 1440px){ 
     .contenedor{
@@ -1423,9 +1437,6 @@ nav ul li{
     .c_tablas{
         width: 100%;
     }
-    .formulario{
-        width: 92%;
-    }
     .caja_form{
         width: 100%;
     }
@@ -1435,6 +1446,15 @@ nav ul li{
     #cajaCurriculo{
         width: 100%; 
 
+    }
+    .formulario{
+        width: 92%;
+        padding: 0;
+    }
+    .info{
+        width: 86%;
+        margin: auto;
+        padding: 0;
     }
 
 }
@@ -1448,8 +1468,7 @@ nav ul li{
         width: 100%; 
     }
     .info{
-        width: 98%;
-        margin: auto;
+        width: 94%;
     }
     .botones2{
         width: 180px;

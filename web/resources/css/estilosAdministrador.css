@@ -438,9 +438,13 @@ nav ul li{
 .ui-datatable .ui-column-filter{
     background:none;
     width:0px;
-    box-shadow:none;
     height:0px;
+    padding: 0;
+    margin: 0;
+    box-shadow:none;
     border:none;
+    outline: none;
+    display: none;
 }
 .ui-datatable thead tr {
     height: 30px;   

@@ -39,8 +39,10 @@
                         <h:inputText class="txt" value="#{personaController.selected.nombre}" style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();" />
                         <h3 class="texto" >Apellidos</h3>
                         <h:inputText class="txt" value="#{personaController.selected.apellido}"  style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
-                        <h3 class="texto" >Número de Cédula <h:outputLabel style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" title="Este número de cédula será usado cuando usted quiera recuperar su clave de acceso"/></h3>
-                        <h:inputText onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.cedula}" />
+                        <h3 class="texto" >Número de Cédula
+                           <h:outputLabel id="aviso0" style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" />
+                            <p:tooltip for="aviso0" value="Este número de cédula será de uso cuando usted necesite recuperar su clave de acceso" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
+                            <h:inputText onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.cedula}" /></h3>
                         <h3  class="texto" >Fecha de Nacimiento</h3>                  
                         <p:calendar styleClass="calendarClass" pattern="dd/MM/yyyy" locale="es" navigator="true" value="#{personaController.selected.fechaNacimiento}" mask="true" />
                         <h3  class="texto" >Género</h3>
@@ -91,9 +93,11 @@
                         <h:inputText class="txt" value="#{personaController.selected.celular}"  />
                         <h3 class="texto" >Teléfono</h3>
                         <h:inputText class="txt" value="#{personaController.selected.telefono}" />
-                        <h3 class="texto" >Correo electrónico <h:outputLabel style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" title="Este correo será usado cuando usted quiera recuperar su clave de acceso"/></h3>
-                        
-                        <h:inputText class="txt" value="#{personaController.selected.correo}" />
+                        <h3 class="texto" >Correo electrónico 
+                            <h:outputLabel id="aviso" style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" />
+                            <p:tooltip for="aviso" value="Este correo será de uso cuando usted necesite recuperar su clave de acceso" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
+                        </h3>
+                        <h:inputText class="txt" value="#{personaController.correoPersona}" />
                         <h3  class="texto" >Estado laboral</h3>
                         <h:selectOneMenu class="txtC" value="#{personaController.selected.estadoLaboral}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -119,7 +123,7 @@
                     </div>
                     <div style="margin: auto; width: 80%; display: block">     
                         <center>
-                            <p:commandButton  styleClass="btn_guardar" ajax="false" value="Actualizar Datos" actionListener="#{personaController.datosActualizados()}"/>
+                            <p:commandButton  styleClass="btn_guardar" ajax="false" value="Actualizar Datos" actionListener="#{personaController.existeCorreoPersona()}"/> 
                             <br/> 
                             <p:commandButton  styleClass="btn_guardar2" ajax="false" value="Cambiar Clave" action="/estudiante/cambiarClave?faces-redirect=true" />                      
                         </center>

@@ -49,7 +49,6 @@
                                  rowsPerPageTemplate="6,9,12,15"
                                  paginatorPosition="bottom"
                                  filteredValue="#{postulanteController.listaBuscar}" 
-                                 rowStyleClass="#{item.confirmacion eq true ? 'fila' : null}"
                                  sortBy="#{item.fechaPostulante}"
                                  sortOrder="descending"
                                  emptyMessage="No se encontraron datos">
@@ -112,9 +111,8 @@
                                              action="/estudiante/postulante/verOferta_2?faces-redirect=true" />
 
 
-                            <p:commandButton  id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" 
-                                              actionListener="#{postulanteController.setSelected(item)}" style="#{item.confirmacion==true ? 'display:none;width:100px;':'display:inline-block;width:100px;'}"
-                                              action="#{postulanteController.destroy}" 
+                            <p:commandButton rendered="#{item.confirmacion!=true}"  id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" 
+                                              actionListener="#{postulanteController.setSelected(item)}" action="#{postulanteController.destroy}" style="width:100px;"
                                               update=":growl,datalist" >
                                 <p:confirm message="Eliminar Postulación" header="Aviso" icon="ui-icon-alert"   > </p:confirm>                                
                             </p:commandButton>   

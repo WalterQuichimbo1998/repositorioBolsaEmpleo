@@ -10,6 +10,7 @@ import controller.Idioma;
 import controller.OfertaLaboral;
 import controller.Persona;
 import controller.Postulante;
+import controller.Rol;
 import controller.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,7 +19,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author TOSHIBA
+ * @author WALTER QUICHIMBO
  */
 public abstract class AbstractFacade<T> {
 
@@ -134,12 +135,12 @@ public abstract class AbstractFacade<T> {
         }
         return postulante;
     }
-       public Usuario existeUsuarioRegistrado(String user) {
+       public Usuario existeUsuarioRegistradoAdmin(String user) {
         EntityManager em = getEntityManager();
         Usuario usuario = null;
         try {
             try {
-                TypedQuery<Usuario> query = em.createNamedQuery("Usuario.buscarUsuario", Usuario.class);
+                TypedQuery<Usuario> query = em.createNamedQuery("Usuario.buscarUsuarioAdmin", Usuario.class);
                 query.setParameter("usuario", user);
                 try {
                     usuario = query.getSingleResult();
@@ -155,13 +156,78 @@ public abstract class AbstractFacade<T> {
         }
         return usuario;
     }
-       public Persona existePersonaRegistrada(String cedula,String correo) {
+       public Usuario existePersonaRegistradoAdmin(Persona p,Rol r) { 
+        EntityManager em = getEntityManager();
+        Usuario usuario = null;
+        try {
+            try {
+                TypedQuery<Usuario> query = em.createNamedQuery("Usuario.buscarPersonaAdmin", Usuario.class);
+                query.setParameter("persona", p);
+                query.setParameter("rol", r);
+                try {
+                    usuario = query.getSingleResult();
+                } catch (NoResultException e) {
+                    usuario=null;
+                }
+            } catch (NullPointerException e) {
+                usuario = null;
+            }
+        } catch (NoResultException e ) {
+            usuario = null;
+            System.out.println("Error: " + e);
+        }
+        return usuario;
+    }
+       public Usuario existeUsuarioRegistrado(Integer id,String user) {
+        EntityManager em = getEntityManager();
+        Usuario usuario = null;
+        try {
+            try {
+                TypedQuery<Usuario> query = em.createNamedQuery("Usuario.buscarUsuario", Usuario.class);
+                query.setParameter("id_usuario", id);
+                query.setParameter("usuario", user);
+                try {
+                    usuario = query.getSingleResult();
+                } catch (NoResultException e) {
+                    usuario=null;
+                }
+            } catch (NullPointerException e) {
+                usuario = null;
+            }
+        } catch (NoResultException e ) {
+            usuario = null;
+            System.out.println("Error: " + e);
+        }
+        return usuario;
+    }
+       public Persona existeCorreoRegistrado(String correo) {
         EntityManager em = getEntityManager();
         Persona persona = null;
         try {
             try {
-                TypedQuery<Persona> query = em.createNamedQuery("Persona.buscarPersona", Persona.class);
-                query.setParameter("cedula", cedula);
+                TypedQuery<Persona> query = em.createNamedQuery("Persona.buscarCorreo", Persona.class);
+                query.setParameter("correo", correo);
+                try {
+                    persona = query.getSingleResult();
+                } catch (NoResultException e) {
+                    persona=null;
+                }
+            } catch (NullPointerException e) {
+                persona = null;
+            }
+        } catch (NoResultException e ) {
+            persona = null;
+            System.out.println("Error: " + e);
+        }
+        return persona;
+    }
+       public Persona existeCorreoRegistrado2(Integer id,String correo) {
+        EntityManager em = getEntityManager();
+        Persona persona = null;
+        try {
+            try {
+                TypedQuery<Persona> query = em.createNamedQuery("Persona.buscarCorreo2", Persona.class);
+                query.setParameter("id_persona", id);
                 query.setParameter("correo", correo);
                 try {
                     persona = query.getSingleResult();

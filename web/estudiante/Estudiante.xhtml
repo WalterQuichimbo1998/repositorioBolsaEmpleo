@@ -76,7 +76,7 @@
                         <h:panelGrid columns="1" style="margin: auto; ">
                             <h:panelGroup style="display: inline-block; text-align: center; "> 
                                 <div class="botones2" style="padding-top: 31px;">
-                                    <h:commandLink class="botones"  action="/estudiante/verPerfilPersona?faces-redirect=true" >
+                                    <h:commandLink class="botones" actionListener="#{personaController.correoPersona()}"  action="/estudiante/verPerfilPersona?faces-redirect=true" >
                                         <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img> 
                                     </h:commandLink>
                                     <div class="txt_boton">Mi Perfil</div>
@@ -171,7 +171,7 @@
                     <br/>
                     <br/>
                 </center>
-                <p:commandButton value="Mi Perfil" icon="ui-icon-contact" action="/estudiante/verPerfilPersona?faces-redirect=true" styleClass="b_1"/>
+                <p:commandButton value="Mi Perfil" icon="ui-icon-contact" actionListener="#{personaController.correoPersona()}" action="/estudiante/verPerfilPersona?faces-redirect=true" styleClass="b_1"/>
                 <br/>
                 <p:commandButton value="Cambiar Clave" icon="ui-icon-key" action="/estudiante/cambiarClave?faces-redirect=true" styleClass="b_1"/>
                 <br/>

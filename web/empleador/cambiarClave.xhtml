@@ -46,16 +46,16 @@
             </div>
             <br/>
             <br/>
-            <div class="caja_form"> 
+           <div class="caja_form"> 
                 <h3 class="titulo_p" style="margin-top: 0;">Cambiar Usuario</h3>
                 <h:form class="formulario" style="margin-top: 20px;display:block;"> 
 
                     <div class="info2">
-                        <h3 class="textoClave">Usuario</h3>
-                        <h:outputLabel style="font-size: 17px;color:#454545" value="#{accesoBean.usuarioLogueado2()}"/>
+                        <h:outputLabel class="textoClave">Usuario actual:</h:outputLabel>
+                        <h:outputLabel class="textoClave" style="margin-left: 10px;color:#454545" value="#{usuarioController.selected.usuario}"/>
                         <br/>
                         <br/>
-                        <p:inputText id="c4" styleClass="inputText"  value="#{usuarioController.selected.usuario}" required="true" requiredMessage="Usuario: Campo requerido, al menos 6 caracteres"/>    
+                         <p:inputText id="c4" styleClass="inputText"  value="#{usuarioController.user}" placeholder="Nuevo usuario" required="true" requiredMessage="Usuario: Campo requerido, al menos 6 caracteres"/>    
                         <p:message for="c4"/>
                     </div>
                     <center>

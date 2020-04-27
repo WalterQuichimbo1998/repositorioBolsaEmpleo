@@ -38,12 +38,10 @@
             <div style="width: 90%;margin: auto;background: #f2f2f2">
                 <h3 class="titulo_p">Perfil Estudiante</h3>
                 <h:form id="formularioPerfil">
-
                     <p:dataList  value="#{hojaVidaEstudianteController.hojaVida}" var="item" type="none" itemType="none"
                                  styleClass="listas"  >
 
                         <br/>
-
                         <p:fieldset legend="Datos Personales" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <div style="width: 90%;margin: auto">
 
@@ -54,8 +52,6 @@
                                         <img style="width: 170px; height: 190px;border-radius: 3px; object-fit:cover;object-position:center center; " 
                                              src="#{request.contextPath}/resources/#{hojaVidaEstudianteController.existeFoto(item.idPersona.foto)==true ? item.idPersona.foto:'requerido/sin_foto_perfil.png'}" ></img>  
                                     </div>
-
-
                                     <div style="width: 60%; margin-left: 20px; padding-top: 10px;">
 
                                         <h:outputText value="Edad: " style="font-size: 17px; font-weight: bold"/>
@@ -121,13 +117,13 @@
                                 <h:outputText value="Descripción: " style="font-size: 17px; font-weight: bold"/>
                                 <h:outputText value="#{item2.descripcion}" style="font-size: 17px;"/>
                                 <br/> 
+                                <p:separator rendered="#{item.oficioList.size()>=2}"/>
                             </p:dataList>
                         </p:fieldset>
                         <br/>
                         <p:fieldset legend="Idiomas" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <p:dataList styleClass="listaPersona"  value="#{item.idiomaList}" var="item2"
                                         emptyMessage="No hay datos." type="none" itemType="none" >
-
                                 <br/>
                                 <h:outputText value="Idioma Hablado: " style="font-size: 17px; font-weight: bold"/>                              
                                 <h:outputText value="#{item2.idListaIdiomas.nombreIdioma}" style="font-size: 17px;"/>                              
@@ -138,18 +134,17 @@
                                 <h:outputText value="Nivel Hablado: " style="font-size: 17px;font-weight: bold"/>
                                 <h:outputText value="#{item2.idNivelHablado.nivelHablado}" style="font-size: 17px;"/>
                                 <br/>
+                                <p:separator rendered="#{item.idiomaList.size()>=2}"/>
                             </p:dataList>
                         </p:fieldset>
                         <br/>
                         <p:fieldset legend="Capacitaciones" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <p:dataList styleClass="listaPersona"  value="#{item.capacitacionList}" var="item2"
                                         emptyMessage="No hay datos." type="none" itemType="none" >
-
                                 <br/>
                                 <h:outputText value="Institucón: " style="font-size: 17px; font-weight: bold"/>                              
                                 <h:outputText value="#{item2.institucion}" style="font-size: 17px;"/>                              
                                 <br/>
-
                                 <h:outputText value="Nombre del evento: " style="font-size: 17px;font-weight: bold"/>
                                 <h:outputText value="#{item2.nombreEvento}" style="font-size: 17px;"/>
                                 <br/>
@@ -172,6 +167,7 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </h:outputText>
                                 <br/>
+                                <p:separator rendered="#{item.capacitacionList.size()>=2}"/>
                             </p:dataList>
                         </p:fieldset>
                         <br/>
@@ -202,6 +198,7 @@
                                 <h:outputText value="Actividades: " style="font-size: 17px; font-weight: bold"/>
                                 <h:outputText value="#{item2.actividades}" style="font-size: 17px;"/>
                                 <br/>
+                                <p:separator rendered="#{item.experienciaLaboralList.size()>=2}"/>
                             </p:dataList>
                         </p:fieldset>
                         <br/>
@@ -220,13 +217,14 @@
                                 <h:outputText value="Teléfono: " style="font-size: 17px; font-weight: bold"/>
                                 <h:outputText value="#{item2.telefono}" style="font-size: 17px;"/>
                                 <br/>
+                                <p:separator rendered="#{item.referenciaPersonalList.size()>=2}"/>
                             </p:dataList>
 
                         </p:fieldset>
                         <br/>
                         <p:separator/>
                         <br/>
-                        <p:fieldset legend="Postulaciones de trabajo" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
+                        <p:fieldset rendered="#{postulanteController.lista_2.size()!=0}" legend="Postulaciones de trabajo" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <p:dataTable id="datalist" styleClass="tabla2" value="#{postulanteController.lista_2}" var="item"
                                          selectionMode="single"
                                          widgetVar="postulante"

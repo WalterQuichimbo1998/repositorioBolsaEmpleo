@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      lang="es">
+      lang="es"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Bolsa de Empleo ISTL</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -41,10 +42,10 @@
                                         <p:commandButton value="Inicio" class="btn2 bbt" action="/empleador/Empleador?faces-redirect=true"/>
                                     </li>
                                     <li>
-                                        <p:commandButton value="Mis Empresas" class="btn2" action="/empleador/empresa/List?faces-redirect=true"/>
+                                        <p:commandButton value="Mis Empresas" class="btn2" actionListener="#{empresaController.limpiarFechas()}" action="/empleador/empresa/List?faces-redirect=true"/>
                                     </li>
                                     <li>
-                                        <p:commandButton value="Mis Postulantes" class="btn2" action="/empleador/ListaPostulante?faces-redirect=true"/>
+                                        <p:commandButton value="Mis Postulantes" class="btn2" actionListener="#{postulanteController.limpiarFechas()}" action="/empleador/ListaPostulante?faces-redirect=true"/>
                                     </li>
                                     <li id="ingresar0">
                                         <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
@@ -76,19 +77,23 @@
                         <h:panelGrid columns="2" style="margin: auto; ">
                             <h:panelGroup style="display: inline-block; text-align: center; "> 
                                 <div class="botones2" style="padding-top: 31px;">
-                                    <h:commandLink class="botones"  action="/empleador/verPerfilPersona_2?faces-redirect=true" >
+                                    <h:commandLink class="botones" actionListener="#{personaController.correoPersona()}"  action="/empleador/verPerfilPersona_2?faces-redirect=true" >
                                         <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img> 
                                     </h:commandLink>
                                     <div class="txt_boton">Mi Perfil</div>
                                 </div>                             
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/empresa.png" action="/empleador/empresa/List?faces-redirect=true" 
-                                                     style="width: 105px;height: 105px"/> 
+                                        style="width: 105px;height: 105px">
+                                          <f:actionListener binding="#{empresaController.limpiarFechas()}" />               
+                                    </h:commandButton> 
                                     <div class="txt_boton">Mis Empresas</div>
                                 </div>
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/estudiante.png"  action="/empleador/ListaPostulante?faces-redirect=true"
-                                                     style="width: 105px;height: 105px"/> 
+                                        style="width: 105px;height: 105px">
+                                       <f:actionListener binding="#{postulanteController.limpiarFechas()}" />                   
+                                    </h:commandButton> 
                                     <div class="txt_boton">Mis Postulantes</div>
                                 </div>
 
@@ -130,7 +135,7 @@
                     <br/>
                     <br/>
                 </center>
-                <p:commandButton value="Mi Perfil" icon="ui-icon-contact" action="/empleador/verPerfilPersona_2?faces-redirect=true" styleClass="b_1"/>
+                <p:commandButton value="Mi Perfil" icon="ui-icon-contact" actionListener="#{personaController.correoPersona()}" action="/empleador/verPerfilPersona_2?faces-redirect=true" styleClass="b_1"/>
                 <br/>
                 <p:commandButton value="Cambiar Clave" icon="ui-icon-key" action="/empleador/cambiarClave?faces-redirect=true" styleClass="b_1"/>
                 <br/>

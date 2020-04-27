@@ -12,10 +12,10 @@
                 <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
             </li>
             <li>
-                <p:commandButton value="Mis Empresas" class="btn2" action="/empleador/empresa/List?faces-redirect=true"/>
+                <p:commandButton value="Mis Empresas" class="btn2" actionListener="#{empresaController.limpiarFechas()}" action="/empleador/empresa/List?faces-redirect=true"/>
             </li>
             <li>
-                <p:commandButton value="Mis Ofertas" class="btn2" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
+                <p:commandButton value="Mis Ofertas" class="btn2" actionListener="#{ofertaLaboralController.limpiarFechas()}" action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
             </li>
             <li>
                 <p:commandButton value="Mis Postulantes" class="btn2 bbt" action="/empleador/ofertaLaboral/ListaPostulante?faces-redirect=true"/>

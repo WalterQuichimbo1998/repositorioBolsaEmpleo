@@ -66,7 +66,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Código"/>
                             </f:facet>
-                            <h:outputText value="#{item.idHojaVidaEstudiante}"/>
+                            <h:outputText value="#{item.idHojaVidaEstudiante}" style="font-size: 16px !important"/>
                         </p:column>
                         <p:column sortBy="#{item.idPersona.nombre}" filterBy="#{item.idPersona.nombre}" filterMatchMode="contains" >
                             <f:facet name="header">
@@ -114,11 +114,9 @@
                                 <p:commandButton style="width: 70px;margin-left: 17px;font-size: 16px !important;background: #29a0c7;outline: none;box-shadow: none" value="Si" type="button"  styleClass="ui-confirmdialog-yes"></p:commandButton>
                                 <p:commandButton style="width: 70px;font-size: 16px !important;background: #e26c6c;outline: none;box-shadow: none;" value="No" type="button" styleClass="ui-confirmdialog-no" immediate="true"></p:commandButton>
                             </p:confirmDialog>
-                            <c:if test="#{hojaVidaEstudianteController.items.size()!=0}">
-                                <p:commandLink ajax="false" actionListener="#{exportar.reportePerfil()}">
+                            <p:commandLink rendered="#{hojaVidaEstudianteController.items.size()!=0}" ajax="false" actionListener="#{exportar.reportePerfil()}">
                                     <p:commandButton styleClass="ver" icon="ui-icon-document" value="Descargar Reporte"/>
                                 </p:commandLink>
-                            </c:if>
 
                         </f:facet>
                     </p:dataTable>
