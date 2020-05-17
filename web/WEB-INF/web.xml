@@ -36,7 +36,7 @@
         <filter-class>control.AuthAdminFilter</filter-class>
     </filter>
     
-    <filter-mapping>
+ <filter-mapping>
         <filter-name>AuthAdminFilter</filter-name>
         <url-pattern>/administrador/*</url-pattern>
     </filter-mapping>
@@ -48,6 +48,7 @@
         <filter-name>AuthAdminFilter</filter-name>
         <url-pattern>/estudiante/*</url-pattern>
     </filter-mapping>
+
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>

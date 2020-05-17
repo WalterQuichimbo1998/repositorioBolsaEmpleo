@@ -6,6 +6,29 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">  
 
     <ui:composition template="index.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="index?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Ofertas Laborales" class="btn2" actionListener="#{ofertaLaboralController.listaO()}" action="ofertas?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Contacto" class="btn2" action="contacto?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Recuperar clave" class="btn2 bbt" action="info?faces-redirect=true" />
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Iniciar Sesión" class="btn2" oncomplete="PF('login_estudiante').show()" update=":datos"/>
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="Iniciar Sesión"  oncomplete="PF('login_estudiante').show()" update=":datos" >
+                    <img style="width: 50px;object-fit:cover;object-position:center center;vertical-align: -17px;"
+                         src="#{request.contextPath}/resources/img/internet.png" ></img>
+                </p:commandLink>
+            </li>
+        </ui:define>
         <ui:define name="caja">
             <br/>
             <br/>
@@ -32,7 +55,7 @@
                     </center>
                     <br/>
                     <center>
-                        <h:outputLabel style="#{personaController.cc==true? 'color:#007bff;font-family:Arial;':'color:red;font-family:Arial;'}" value="#{personaController.mensaje}"/>
+                        <h:outputLabel style="#{personaController.cc==true? 'color:#007bff;font-family:Arial;font-size:16px;':'color:red;font-family:Arial;font-size:16px;'}" value="#{personaController.mensaje}"/>
                         <br/>
                         <br/>
                         <h:outputLabel style="font-size: 22px; font-weight: bold;font-family:Arial;color:#999" value="Para más información" title="Info"/>

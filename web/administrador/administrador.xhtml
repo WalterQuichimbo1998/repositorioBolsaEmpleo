@@ -20,8 +20,7 @@
         <h:outputScript library="js" name="waves.js"/>
 
     </h:head>
-    <h:body>
-
+    <h:body rendered="#{accesoBean.usuarioNavegacion() eq 'ADMINISTRADOR'}">
         <p:growl id="growl" life="3000" />
         <div class="contenedor">
             <div class="cont">
@@ -140,12 +139,12 @@
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/documento.png" action="/administrador/areaEstudio/List?faces-redirect=true" 
                                                      style="width: 105px;height: 105px"/> 
-                                    <div class="txt_boton">Areas de Estudio</div>
+                                    <div class="txt_boton">Áreas de Estudio</div>
                                 </div>
                                 <div class="botones2">
                                     <h:commandButton class="botones"  image="../resources/img/documento.png" action="/administrador/areaTrabajo/List?faces-redirect=true"  
                                                      style="width: 105px;height: 105px"/> 
-                                    <div class="txt_boton">Areas de Trabajo</div>
+                                    <div class="txt_boton">Áreas de Trabajo</div>
                                 </div>
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/documento.png" action="/administrador/tipoCertificado/List?faces-redirect=true"  
@@ -197,7 +196,7 @@
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/portada.png" action="/administrador/imagenPortada/List?faces-redirect=true"
                                                      style="width: 105px;height: 105px"/> 
-                                    <div class="txt_boton">Imagenes para la <br/>portada de la página</div>
+                                    <div class="txt_boton">Imágenes para la <br/>portada de la página</div>
                                 </div>                                    
                             </h:panelGroup>
                         </h:panelGrid>

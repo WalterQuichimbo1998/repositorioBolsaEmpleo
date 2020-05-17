@@ -53,7 +53,7 @@ public class Usuario implements Serializable {
     @Column(name = "clave")
     private String clave;
    
-    @Size(max = 45)
+    @Size(max = 80)
     @Column(name = "clave_cifrada")
     private String claveCifrada;
    

@@ -2,6 +2,9 @@ package jsf.classes;
 
 import control.UtilPath;
 import controller.ImagenPortada;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,6 +28,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import org.primefaces.model.UploadedFile;
 
 @Named("imagenPortadaController")
@@ -37,6 +42,8 @@ public class ImagenPortadaController implements Serializable {
     private ImagenPortada selected;
     private UploadedFile file;
     private String nombre = "";
+    private int width;
+    private int height;
 
     public ImagenPortadaController() {
     }
@@ -181,39 +188,46 @@ public class ImagenPortadaController implements Serializable {
 
     }
 
-    public void subirImagen() {
+    public void subirImagen() throws IOException {
         if (file == null || file.getSize() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Imagen", ""));
         } else {
             String ex = file.getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
-
-                if (file.getSize() <= 4096000) {
-                    try {
-                        nombre = file.getFileName();
-                        this.selected.setImagen(nombre);
-                        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                        String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
-                        String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + nombre;
-                        FileOutputStream out = new FileOutputStream(pathDefinition);
-                        InputStream in = file.getInputstream();
-                        if ((in != null)) {
-                            int read = 0;
-                            byte[] bytes = new byte[1024];
-                            while ((read = in.read(bytes)) != -1) {
-                                out.write(bytes, 0, read);
+                if (file.getSize() <= 2048000) {
+                    InputStream in2 = file.getInputstream();
+                    BufferedImage image = ImageIO.read(in2);
+                    width = image.getWidth();
+                    height = image.getHeight();
+                    if (width == 1300 && height == 500) {
+                        try {
+                            nombre = file.getFileName();
+                            this.selected.setImagen(nombre);
+                            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                            String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
+                            String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + nombre;
+                            FileOutputStream out = new FileOutputStream(pathDefinition);
+                            InputStream in = file.getInputstream();
+                            if ((in != null)) {
+                                int read = 0;
+                                byte[] bytes = new byte[1024];
+                                while ((read = in.read(bytes)) != -1) {
+                                    out.write(bytes, 0, read);
+                                }
+                                in.close();
+                                out.flush();
+                                out.close();
+                                create();
+                                file = null;
                             }
-                            in.close();
-                            out.flush();
-                            out.close();
-                            create();
-                            file = null;
+                        } catch (IOException e) {
                         }
-                    } catch (IOException e) {
+                    } else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Los píxeles de la imagen no son los requeridos. - Tamaño permitido 1300 x 500", ""));
                     }
                 } else {
                     this.setFile(null);
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Imagen muy pesada elija otro. Tamaño máximo: 4Mb", ""));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Imagen muy pesada elija otro. Tamaño máximo: 2Mb", ""));
                 }
             } else {
                 this.setFile(null);
@@ -222,14 +236,18 @@ public class ImagenPortadaController implements Serializable {
         }
     }
 
-    public void subirImagen2() {
+    public void subirImagen2() throws IOException {
         if (file == null || file.getSize() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Imagen", ""));
         } else {
             String ex = file.getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
-
-                if (file.getSize() <= 4096000) {
+               if (file.getSize() <= 2048000) {
+                    InputStream in2 = file.getInputstream();
+                    BufferedImage image = ImageIO.read(in2);
+                    width = image.getWidth();
+                    height = image.getHeight();
+                    if (width == 1300 && height == 500) {
                     try {
                         nombre = selected.getImagen();
                         this.selected.setImagen(nombre);
@@ -249,8 +267,13 @@ public class ImagenPortadaController implements Serializable {
                             out.close();
                             update();
                             file = null;
+                            items=null;
+                             items = getFacade().findAll();
                         }
                     } catch (IOException e) {
+                    }
+                      } else {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Los píxeles de la imagen no son los requeridos. - Tamaño permitido 1600 x 500", ""));
                     }
                 } else {
                     this.setFile(null);
@@ -274,7 +297,7 @@ public class ImagenPortadaController implements Serializable {
 
     public boolean limite(Integer n) {
         boolean l = true;
-        if (n < 5) {
+        if (n <= 7) {
             l = true;
         } else {
             l = false;

@@ -27,8 +27,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import javax.faces.component.UIComponent;
-import javax.faces.validator.ValidatorException;
 
 /**
  *
@@ -36,7 +34,7 @@ import javax.faces.validator.ValidatorException;
  */
 @Named(value = "accesoBean")
 @SessionScoped
-public class AccesoBean implements Serializable {
+public class AccesoBean implements Serializable {  
 
     public final static String USER_KEY = "auth_user";
     @EJB
@@ -46,7 +44,7 @@ public class AccesoBean implements Serializable {
     private String user;
     private String pass;
     private final String key = "empleo";
-
+    private boolean activo=false;
     public AccesoBean() {
     }
 
@@ -74,11 +72,19 @@ public class AccesoBean implements Serializable {
         this.pass = pass;
     }
 
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
     public void login() {
-        if (user == null || "".equals(user) || pass == null || "".equals(pass)) {
+        if (user.trim() == null || "".equals(user.trim()) || pass.trim() == null || "".equals(pass.trim())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete los campos correspondientes", ""));
         } else {
-            Usuario us = getEjbFacade().validarUsuario2(user, encriptar(pass));
+            Usuario us = getEjbFacade().validarUsuario2(user.trim(), encriptar(pass.trim()));
             if (us != null) {
                 if ("ADMINISTRADOR".equals(us.getIdRol().getRol())) {
                     try {
@@ -104,7 +110,7 @@ public class AccesoBean implements Serializable {
                         }
                     } else {
                         try {
-                            asignarRecursoWeb("/estudiante/Estudiante_D.xhtml", us);
+                            asignarRecursoWeb("/estudiante2/Estudiante_D.xhtml", us);
                         } catch (IOException ex) {
                             Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -127,6 +133,7 @@ public class AccesoBean implements Serializable {
     }
 
     public void asignarRecursoWeb(String path, Usuario us) throws IOException {
+        activo=true;
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext extContext = context.getExternalContext();
         String url = extContext.encodeActionURL(context.getApplication().getViewHandler().getActionURL(context, path));
@@ -135,6 +142,7 @@ public class AccesoBean implements Serializable {
     }
 
     public void logoutAdmin() throws IOException {
+        activo=false;
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext extContext = context.getExternalContext();
         extContext.getSessionMap().remove(USER_KEY);
@@ -148,10 +156,27 @@ public class AccesoBean implements Serializable {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return us.getIdPersona().getNombre() + " " + us.getIdPersona().getApellido();
     }
-
+    public String usuarioNavegacion() {
+        Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        return us.getIdRol().getRol();
+    }
+  public  HojaVidaEstudiante hojaVida() {
+        HojaVidaEstudiante hv = null;
+             Usuario uus = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+                if("ESTUDIANTE".equals(uus.getIdRol().getRol())){
+                   hv = (HojaVidaEstudiante) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("hojaVida");
+                }else{
+                    hv=null;
+                }
+        return hv;
+    }
     public String usuarioLogueado2() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return us.getUsuario();
+    }
+    public String userFoto() {
+        Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        return us.getIdPersona().getFoto();
     }
 
     public static String usuarioLogueadoClave() {
@@ -190,4 +215,15 @@ public class AccesoBean implements Serializable {
         }
         return encri;
     }
+    public Boolean existeFoto(String f) {
+        boolean r = true;
+        if ("".equals(f)) {
+            r = false;
+        }
+        if (f.isEmpty()) {
+            r = false;
+        }
+        return r;
+    }
+
 }

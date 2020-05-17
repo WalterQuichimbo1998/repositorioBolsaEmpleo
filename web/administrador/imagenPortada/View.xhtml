@@ -3,16 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition>
         <p:dialog id="ImagenPortadaViewDlg" widgetVar="ImagenPortadaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="Ver"
                   showEffect="fade" hideEffect="fade">
-            <h:form id="ImagenPortadaViewForm">
-                    <div style="width: 400px; height: auto;padding: 10px; ">
+            <c:if test="#{imagenPortadaController.selected.imagen!=''}">
+            <h:form id="ImagenPortadaViewForm" rendered="#{imagenPortadaController.selected.imagen!=''}">
+                    <div style="width: 500px; height: auto;padding: 10px; ">
                           <img style="border-radius: 10px;" width="100%" src="#{request.contextPath}/resources/portada/#{imagenPortadaController.selected.imagen}"></img>                                         
                     </div>
             </h:form>
+                </c:if>
         </p:dialog>
     </ui:composition>
 </html>

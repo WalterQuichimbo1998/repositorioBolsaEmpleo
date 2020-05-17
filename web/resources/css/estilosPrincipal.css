@@ -142,7 +142,7 @@ nav ul li{
     nav {
         width: 99.9%;
         height: auto;
-        z-index: 100;
+        z-index: 1000;
         position: absolute;
         top: 80px;
         right:100%;
@@ -194,17 +194,23 @@ nav ul li{
     #ingresar1{
         display: none;
     }
+    
 
 }
 
 #slider_main{
-    width: 80%;
+    width: 90%;
     height: auto;
     margin: auto;
-    display: block;
+    /*display: block;*/
     border-radius: 6px;
+    cursor: pointer;
+    margin-top: 40px;
 }
- .next.ui-button{
+
+
+
+/* .next.ui-button{
     background: #eee; 
     font-size: 16px !important; 
     border-radius: 3px;
@@ -222,7 +228,7 @@ nav ul li{
     color: white;
     background: #42A5F5;
     
-}
+}*/
  .prev.ui-button{
     background: #eee; 
     font-size: 16px !important; 
@@ -234,12 +240,15 @@ nav ul li{
     margin-right: 5px;  
     margin-top: 4px; 
     margin-bottom: 5px;
-    width: 60px;
-    transition: all .3s ease; 
+    width: 80px;  
+    transition: all .5s ease; 
+    display: inline-block;
 }
-.prev:hover{
+.prev:hover{ 
     color: white;
-    background: #42A5F5;
+    background: #007bff;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.46);
+    transition: all .3s ease;
     
 }
 .direccion{
@@ -280,6 +289,7 @@ nav ul li{
 .caja_central{
     width: 1260px;
     margin: auto;
+    
 }
 .imageSwitch{
     width:100%; 
@@ -633,6 +643,46 @@ nav ul li{
     box-shadow: 0px 0px 1px 1px #454545;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
 }
+.editar.ui-button{
+    background: #007bff; 
+    height: 30px; 
+    font-size: 14px !important; 
+    border-radius: 3px;
+    border:none;
+    box-shadow: none;
+    text-shadow:none;
+    outline: none;
+    margin-right: 5px; 
+    margin-top: 4px; 
+    margin-bottom: 5px;
+    transition: all .3s ease;
+    color: #000;
+}
+.editar:hover{
+    color: #000;
+    box-shadow: 0px 0px 1px 1px #454545; 
+    -webkit-box-shadow: 0px 0px 1px 1px #454545;
+}
+.eliminar.ui-button{
+    background: #e26c6c; 
+    height: 30px; 
+    font-size: 14px !important; 
+    border-radius: 3px;
+    border:none;
+    box-shadow: none;
+    text-shadow:none;
+    outline: none;
+    margin-right: 5px;  
+    margin-top: 4px; 
+    margin-bottom: 5px;
+    transition: all .3s ease;
+}
+.eliminar:hover{
+    color: #000;
+    box-shadow: 0px 0px 1px 1px #454545; 
+    -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
+}
 @media only screen and (min-width: 1440px){ 
     .contenedor{
         width: 1366px;
@@ -661,13 +711,13 @@ nav ul li{
     }
 
  #slider_main{
-        width: 90%;
-        height: auto;
+        width: 96%;
+        margin-top: 30px;
     }
 } 
 @media only screen and (max-width: 1024px){ 
     #slider_main{
-        width: 96%;
+        margin-top: 20px;
     }
     .texto{
     width: 96%;
@@ -699,10 +749,11 @@ nav ul li{
     .verOferta{
         width: 100%;
     }
+    
 }
 @media only screen and (max-width: 768px){ 
     #slider_main{
-        width: 98%;
+        margin-top: 10px;
     }
     .texto{
     width: 94%;

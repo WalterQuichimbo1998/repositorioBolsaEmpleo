@@ -104,7 +104,7 @@
                             <h:outputLabel value="Total Perfiles registrados: " style="font-size: 17px; font-weight: normal"/>
                             <h:outputLabel value="#{hojaVidaEstudianteController.items.size()}" style="font-size: 17px;"/>
                             <br/>
-                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{hojaVidaEstudianteController.prepareCreate}" update=":HojaVidaEstudianteCreateForm" oncomplete="PF('HojaVidaEstudianteCreateDialog').show()"/>
+                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Habilitar nuevo" actionListener="#{hojaVidaEstudianteController.prepareCreate}" update=":HojaVidaEstudianteCreateForm" oncomplete="PF('HojaVidaEstudianteCreateDialog').show()"/>
                             <p:commandButton id="viewButton" styleClass="ver"  icon="ui-icon-search" value="#{bundle.View}" update=":HojaVidaEstudianteViewForm" oncomplete="PF('HojaVidaEstudianteViewDialog').show()" disabled="#{empty hojaVidaEstudianteController.selected}"/>
                             <p:commandButton id="editButton" styleClass="editar"  icon="ui-icon-pencil" value="#{bundle.Edit}" update=":HojaVidaEstudianteEditForm" oncomplete="PF('HojaVidaEstudianteEditDialog').show()" disabled="#{empty hojaVidaEstudianteController.selected}"/>
                             <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{hojaVidaEstudianteController.destroy}" update=":growl,datalist" disabled="#{empty hojaVidaEstudianteController.selected}">

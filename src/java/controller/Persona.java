@@ -97,7 +97,7 @@ public class Persona implements Serializable {
     private Integer edad;
     @Column(name = "estado_laboral")
     private Integer estadoLaboral;
-      @Size(max = 45)
+      @Size(max = 60)
     @Column(name = "foto")
     private String foto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")

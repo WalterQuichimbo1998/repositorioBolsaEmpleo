@@ -22,7 +22,7 @@
         <h:outputScript library="js" name="menu_1.js"/>
         <h:outputScript library="js" name="waves.js"/>
     </h:head>
-    <h:body>
+    <h:body rendered="#{accesoBean.usuarioNavegacion() eq 'EMPRESA'}">
         <p:growl id="growl" life="3000" />
         <div class="contenedor">
             <div class="cont">
@@ -122,7 +122,7 @@
                     <c:if test="#{personaController.existeFoto(personaController.selected.foto) == false}">
                         <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
                             <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                                 src="#{request.contextPath}/resources/foto/sin_foto_perfil.png"></img>
+                                 src="#{request.contextPath}/resources/requerido/sin_foto_perfil.png"></img>
                         </div>
                     </c:if>
                     <c:if test="#{personaController.existeFoto(personaController.selected.foto) == true}">

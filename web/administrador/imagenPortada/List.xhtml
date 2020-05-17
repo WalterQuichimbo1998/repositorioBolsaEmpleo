@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:composition template="../administrador.xhtml">
 
@@ -19,7 +20,7 @@
                 <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true" />
             </li>
             <li>
-                <p:commandButton value="Imagenes de Portada" class="btn2 bbt" action="/administrador/imagenPortada/List?faces-redirect=true"/>
+                <p:commandButton value="Imágenes de Portada" class="btn2 bbt" action="/administrador/imagenPortada/List?faces-redirect=true"/>
             </li>
             <li>
                 <p:commandButton value="Cerrar Sesión" styleClass="btn2 cs"   oncomplete="PF('form_logout').show()"/>
@@ -28,7 +29,7 @@
         <ui:define name="dir">
             <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
             <h:commandLink class="prin" value="/" disabled="true"/>
-            <h:commandLink class="prin" value="Imagenes de Portada" style="color: #086A87;" action="/administrador/imagenPortada/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="Imágenes de Portada" style="color: #086A87;" action="/administrador/imagenPortada/List?faces-redirect=true"/>
         </ui:define>
 
         <ui:define name="caja">
@@ -37,8 +38,15 @@
                 <p:panel style="margin-bottom: 0;padding-bottom: 0;margin-bottom: 10px">
                     <br/>
                     <p style="font-family: Arial;text-align: center;color:#454545;margin:auto;font-size: 17px;">
-                        <strong>Aviso: </strong>Las imagenes que registre se mostrarán en la portada según el <strong>ID</strong> de forma Ascendente.</p>
+                        <strong>Aviso: </strong>Las imágenes que registre se mostrarán en la portada según el <strong>ID</strong> de forma Ascendente.</p>
                     <br/>
+                    <c:if test="#{imagenPortadaController.items.size()!=0}">
+                        <p style="font-family: Arial;text-align: center;color:#e48888;margin:auto;font-size: 17px;">
+                        Si actualiza una imagen y no aparece, recargue la página.</p>
+                        <br/>
+                    </c:if>
+              
+                    
                     <p:dataTable id="datalist" value="#{imagenPortadaController.items}" var="item"
                                  selectionMode="single" selection="#{imagenPortadaController.selected}"
                                  paginator="true"
@@ -47,8 +55,7 @@
                                  rowsPerPageTemplate="5"
                                  paginatorPosition="bottom"
                                  sortBy="#{item.idImagen}"
-                                 sortOrder="ascending"
-                                 >
+                                 sortOrder="ascending">
 
                         <p:column sortBy="#{item.idImagen}" style="width: 100px">
                             <f:facet name="header">
@@ -67,13 +74,10 @@
                             <f:facet name="header">
                                 <h:outputText value="Acción"/>
                             </f:facet>
-                            <p:commandButton  styleClass="crear" icon="ui-icon-plus"   value="Editar" 
+                            <p:commandButton  styleClass="crear" icon="ui-icon-plus"   value="Actualizar" 
                                              action="/administrador/imagenPortada/subirImagen?faces-redirect=true" 
                                              actionListener="#{imagenPortadaController.setSelected(item)}"/>
 
-                            <p:commandButton styleClass="ver" icon="ui-icon-search" value="Ver" 
-                                             actionListener="#{imagenPortadaController.setSelected(item)}"
-                                             update=":ImagenPortadaViewForm" oncomplete="PF('ImagenPortadaViewDialog').show()"/>
 
                             <p:commandButton styleClass="eliminar" icon="ui-icon-trash"  value="Eliminar"
                                              actionListener="#{imagenPortadaController.setSelected(item)}"
@@ -83,11 +87,13 @@
                         <f:facet name="footer">
                             <br/>
                             <br/>
-                            <p:commandButton styleClass="crear" value="Subir Nueva Imagen" ajax="false" actionListener="#{imagenPortadaController.prepareCreate}"
+                            <p:commandButton rendered="#{imagenPortadaController.limite(imagenPortadaController.items.size())==true}"
+                                              styleClass="crear" value="Subir Nueva Imagen" ajax="false" actionListener="#{imagenPortadaController.prepareCreate}"
                                              action="/administrador/imagenPortada/subirImagenNueva?faces-redirect=true"/>
                             <br/>
-                            <p style="font-family: Arial;text-align: center;color:#454545;margin:auto;font-size: 16px;font-weight: normal">Solo puede subir un límite de 5 imagenes</p>
-
+                            <br/>
+                            <p style="font-family: Arial;text-align: center;color:#454545;margin:auto;font-size: 16px;font-weight: normal">Solo puede subir un límite de <strong>7</strong> imagenes.</p>
+                            
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
@@ -111,7 +117,7 @@
                 </h:form>
             </p:dialog>
 
-            <ui:include src="View.xhtml"/>
+     
         </ui:define>
     </ui:composition>
 

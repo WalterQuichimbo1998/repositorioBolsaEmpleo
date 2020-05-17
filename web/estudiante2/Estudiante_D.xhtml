@@ -18,7 +18,7 @@
         <h:outputScript library="js" name="menu_1.js"/>
         <h:outputScript library="js" name="waves.js"/>
     </h:head>
-    <h:body>
+    <h:body rendered="#{accesoBean.usuarioNavegacion() eq 'ESTUDIANTE'}">
         <p:growl id="growl" life="3000" />  
         <div class="contenedor">
           <div class="cont">
@@ -35,7 +35,7 @@
                             <ul>
                                 <ui:insert name="link">
                                     <li>
-                                        <p:commandButton value="Inicio" class="btn2 bbt" action="/estudiante/Estudiante_D?faces-redirect=true"/>
+                                        <p:commandButton value="Inicio" class="btn2 bbt" action="/estudiante2/Estudiante_D?faces-redirect=true"/>
                                     </li>
                                     <li>
                                         <p:commandButton value="Cerrar Sesión" class="btn2 cs" ajax="false" actionListener="#{accesoBean.logoutAdmin()}" />
@@ -65,7 +65,7 @@
                                 <h:panelGroup style="display: inline-block; text-align: center; "> 
                                
                                         <div class="botones2" style="padding-top: 31px;">
-                                            <h:commandLink class="botones"  action="/estudiante/verPerfilPersona_D?faces-redirect=true" >
+                                            <h:commandLink class="botones"  action="/estudiante2/verPerfilPersona_D?faces-redirect=true" >
                                                  <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img> 
                                                 </h:commandLink>
                                             <div class="txt_boton">Mi Perfil</div>

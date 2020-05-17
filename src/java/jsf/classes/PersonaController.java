@@ -425,17 +425,6 @@ public class PersonaController implements Serializable {
         return resultado;
     }
 
-//    public String existePerfilPersona(Persona id) {
-//        HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
-//        String m = "";
-//        if (h != null) {
-//            m = "Si";
-//        } else {
-//            m = "No";
-//        }
-//        return m;
-//    }
-
     public Integer existePerfilPersona2(Persona id) {
         HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
         Integer n = null;
@@ -448,7 +437,7 @@ public class PersonaController implements Serializable {
     }
 //Administrador
     public void existeCorreo() {
-        Persona p = getFacade().existeCorreoRegistrado(selected.getCorreo());
+        Persona p = getFacade().existeCorreoRegistrado(selected.getCorreo().trim());
         if (p != null) {
             items=null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
@@ -457,7 +446,7 @@ public class PersonaController implements Serializable {
         }
     }
     public void existeCorreo2() {
-        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(),selected.getCorreo());
+        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(),selected.getCorreo().trim());
         if (p != null) {
             items=null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
@@ -467,16 +456,16 @@ public class PersonaController implements Serializable {
     }
     //Persona
     public void existeCorreoPersona() {
-        if (correoPersona== null || "".equals(correoPersona.trim())) {
+        if (correoPersona.trim()== null || "".equals(correoPersona.trim())) {
             this.selected.setCorreo("");
             datosActualizados();
         } else {
-        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(),correoPersona); 
+        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(),correoPersona.trim()); 
         if (p != null) {
             correoPersona=selected.getCorreo();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
         } else {
-            this.selected.setCorreo(correoPersona);
+            this.selected.setCorreo(correoPersona.trim());
             datosActualizados();
         }
         }
@@ -554,7 +543,7 @@ public class PersonaController implements Serializable {
     }
 
     public void recuperarClave() {
-        if(correo==null || "".equals(correo) || cedula==null || "".equals(cedula)){
+        if(correo.trim()==null || "".equals(correo.trim()) || cedula.trim()==null || "".equals(cedula.trim())){
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete los campos", ""));
         }else{
         per = getFacade().buscarCorreo(getCedula(), getCorreo());
@@ -566,6 +555,7 @@ public class PersonaController implements Serializable {
         } else {
             cc = false;
             mensaje = "Correo electrónico o Cédula no registrado";
+            tiempoLimpiar();
         }
         }
     }
@@ -575,10 +565,25 @@ public class PersonaController implements Serializable {
         if (user != null) {
             mensaje = "Revise su correo electrónico";
             enviarCorreo(user.getClave());
+            tiempoLimpiar();
         } else {
             cc = false;
             mensaje = "Usuario no encontrado";
+            tiempoLimpiar();
         }
+    }
+    public void tiempoLimpiar() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(1500);
+                mensaje = "";
+                cc = false;
+                per = null;
+                correo = null;
+                cedula = null;
+            } catch (InterruptedException ex) {
+            }
+        }).start();
     }
 
     public String descencriptar(String pass) {

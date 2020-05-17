@@ -34,7 +34,7 @@
                         </p:selectOneMenu>
                         <p:column/>
                         <p:column>
-                            <p:commandButton styleClass="btn_g" actionListener="#{usuarioController.existeUsuario2}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioEditDialog');"/>
+                            <p:commandButton styleClass="btn_g" actionListener="#{usuarioController.existeUsuario2()}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioEditDialog');"/>
                             <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('UsuarioEditDialog').hide();"/>
 
                         </p:column>

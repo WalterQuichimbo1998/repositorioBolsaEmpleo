@@ -89,7 +89,7 @@ public class Empresa implements Serializable {
     @Size(max = 45)
     @Column(name = "celular")
     private String celular;
-   @Size(max = 45)
+   @Size(max = 80)
     @Column(name = "logotipo")
     private String logotipo;
     @Size(max = 500)

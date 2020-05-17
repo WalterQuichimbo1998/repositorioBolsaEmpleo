@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       lang="es">
+   
     <h:head>
         <title>Bolsa de Empleo ISTL</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -22,7 +23,7 @@
         <h:outputScript library="js" name="waves.js"/>
 
     </h:head>
-    <h:body>
+    <h:body rendered="#{accesoBean.usuarioNavegacion() eq 'ESTUDIANTE'}">
 
         <p:growl id="growl" life="3000" />  
         <div class="contenedor">

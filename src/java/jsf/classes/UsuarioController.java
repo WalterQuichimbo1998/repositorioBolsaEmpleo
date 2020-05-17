@@ -53,7 +53,8 @@ public class UsuarioController implements Serializable {
     private String mensaje2 = "";
     private boolean ver2;
     private String user;
-    private boolean perfil;
+//    private boolean perfil;
+//    private boolean perfil_ver;
 
     public UsuarioController() {
     }
@@ -146,15 +147,6 @@ public class UsuarioController implements Serializable {
         this.user = user;
     }
 
-    public boolean isPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(boolean perfil) {
-        this.perfil = perfil;
-    }
-    
-    
 
     public Usuario prepareCreate() {
         selected = new Usuario();
@@ -282,24 +274,25 @@ public class UsuarioController implements Serializable {
         }
 
     }
-     public String existePerfilPersona(Persona id) {
+     public boolean existePerfilPersona(Persona id) {
+         boolean perfil=false;
         HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
         String m = "";
         if (h != null) {
-            m = "Si";
+              perfil=true;
         } else {
-          m="No";
-        }
-        return m;
-    }
-     public boolean existePerfilPersonaVer(Usuario id) {
-         perfil=false;
-        if ("ESTUDIANTE".equals(id.getIdRol().getRol())) {
-            perfil=true;
-        } else {
-            perfil=false;
+          perfil=false;
         }
         return perfil;
+    }
+     public boolean existePerfilPersonaVer(Usuario id) {
+         boolean perfil_ver=false;
+        if ("ESTUDIANTE".equals(id.getIdRol().getRol())) {
+            perfil_ver=true;
+        } else {
+            perfil_ver=false;
+        }
+        return perfil_ver;
     }
 
     public void validate(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException {
@@ -309,7 +302,7 @@ public class UsuarioController implements Serializable {
     }
 
     public void existeUsuario() {
-        Usuario u = getFacade().existeUsuarioRegistradoAdmin(selected.getUsuario());
+        Usuario u = getFacade().existeUsuarioRegistradoAdmin(selected.getUsuario().trim());
         if (u != null) {
             items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe.Ingrese otro.", ""));
@@ -325,26 +318,21 @@ public class UsuarioController implements Serializable {
     }
 
     public void existeUsuario2() {
-        Usuario u = getFacade().existeUsuarioRegistrado(selected.getIdUsuario(), selected.getUsuario());
+        Usuario u = getFacade().existeUsuarioRegistrado(selected.getIdUsuario(), selected.getUsuario().trim());
         if (u != null) {
             items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe.Ingrese otro.", ""));
         } else {
-            Usuario u2 = getFacade().existePersonaRegistradoAdmin(selected.getIdPersona(),selected.getIdRol());
-           if(u2!=null){
-               items = null;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
-           }else{
                 update();
            }
             
         }
-    }
+    
 
     public void verificarClave() {
         mensaje = "";
         ver = false;
-        if (selected.getClave() == null || "".equals(selected.getClave().trim())) {
+        if (selected.getClave().trim() == null || "".equals(selected.getClave().trim())) {
             ver = false;
             mensaje = "Complete el campo clave. Al menos 6 caracteres";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete el campo clave.", ""));
@@ -367,7 +355,7 @@ public class UsuarioController implements Serializable {
     public void verficarUsuario() {
         mensaje2 = "";
         ver2 = false;
-        if (user== null || "".equals(user.trim())) {
+        if (user.trim()== null || "".equals(user.trim())) {
             ver2 = false;
             mensaje2 = "Complete el campo usuario. Al menos 6 caracteres";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete el campo usuario.", ""));
@@ -375,7 +363,7 @@ public class UsuarioController implements Serializable {
             if (user.length() <= 5) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Usuario muy corto. Ingrese al menos 6 caracteres", ""));
             } else {
-                Usuario u = getFacade().existeUsuarioRegistrado(AccesoBean.obtenerIdPersona().getIdUsuario(), user);
+                Usuario u = getFacade().existeUsuarioRegistrado(AccesoBean.obtenerIdPersona().getIdUsuario(), user.trim());
                 if (u != null) {
                     user="";
                     ver2 = false;

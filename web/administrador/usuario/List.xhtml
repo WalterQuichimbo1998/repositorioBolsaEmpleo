@@ -94,13 +94,21 @@
                             </f:facet>
                             <h:outputText value="#{item.idRol.rol}"/>
                         </p:column>
-                        <p:column style="width: 80px" sortBy="#{item.idUsuario}" >
+                        <p:column style="width: 80px" sortBy="#{item.idUsuario}">
                             <f:facet name="header">
                                 <h:outputText value="Perfil Habilitado"/>
                             </f:facet>
-                            <h:outputText rendered="#{usuarioController.existePerfilPersonaVer(item)}"
-                                          value="#{usuarioController.existePerfilPersona(item.idPersona)}" 
-                                          style="#{usuarioController.existePerfilPersona(item.idPersona) == 'Si'? 'color:#29a0c7;font-size:18px;':'color:red;' }"/>
+                            <p:commandLink rendered="#{usuarioController.existePerfilPersona(item.idPersona)==true}"
+                                           style="#{item.idRol.rol eq 'ESTUDIANTE'?'':'display:none;'}">
+                               <img style="width: 30px;margin: 0;padding: 0;margin: auto;"     
+                                  src="#{request.contextPath}/resources/img/ok.png" ></img> 
+                                  </p:commandLink>
+                                <p:commandLink rendered="#{usuarioController.existePerfilPersona(item.idPersona)==false}"
+                                               style="#{item.idRol.rol eq 'ESTUDIANTE'?'':'display:none;'}">
+                               <img  style="width: 26px;margin: 0;padding: 0;margin: auto;"     
+                                  src="#{request.contextPath}/resources/img/disable.png" ></img> 
+                                  </p:commandLink>
+                           
 
                         </p:column>
                         <f:facet name="footer">
