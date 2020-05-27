@@ -6,8 +6,8 @@
 package sessions.beans;
 
 import control.AccesoBean;
-import controller.Empresa;
-import controller.Idioma;
+import modelo.Empresa;
+import modelo.Idioma;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

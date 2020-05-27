@@ -1,6 +1,6 @@
 package control;
 
-import controller.HojaVidaEstudiante;
+import modelo.HojaVidaEstudiante;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -10,7 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import controller.Usuario;
+import modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sessions.beans.HojaVidaEstudianteFacade;
@@ -44,7 +44,7 @@ public class AccesoBean implements Serializable {
     private String user;
     private String pass;
     private final String key = "empleo";
-    private boolean activo=false;
+   
     public AccesoBean() {
     }
 
@@ -72,13 +72,6 @@ public class AccesoBean implements Serializable {
         this.pass = pass;
     }
 
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
 
     public void login() {
         if (user.trim() == null || "".equals(user.trim()) || pass.trim() == null || "".equals(pass.trim())) {
@@ -86,7 +79,7 @@ public class AccesoBean implements Serializable {
         } else {
             Usuario us = getEjbFacade().validarUsuario2(user.trim(), encriptar(pass.trim()));
             if (us != null) {
-                if ("ADMINISTRADOR".equals(us.getIdRol().getRol())) {
+                if ("ADMINISTRADOR".equals(us.getRol())) {
                     try {
                         asignarRecursoWeb("/administrador/administrador.xhtml", us);
                     } catch (IOException ex) {
@@ -94,7 +87,7 @@ public class AccesoBean implements Serializable {
                     }
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
                 }
-                if ("ESTUDIANTE".equals(us.getIdRol().getRol())) {
+                if ("ESTUDIANTE".equals(us.getRol())) {
                     HojaVidaEstudiante hv = null;
                     try {
                         hv = hojaFacade.buscarIdPersona(us.getIdPersona());
@@ -118,7 +111,7 @@ public class AccesoBean implements Serializable {
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("hojaVida", hv);
                 }
-                if ("EMPRESA".equals(us.getIdRol().getRol())) {
+                if ("EMPLEADOR".equals(us.getRol())) {
                     try {
                         asignarRecursoWeb("/empleador/Empleador.xhtml", us);
                     } catch (IOException ex) {
@@ -133,7 +126,6 @@ public class AccesoBean implements Serializable {
     }
 
     public void asignarRecursoWeb(String path, Usuario us) throws IOException {
-        activo=true;
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext extContext = context.getExternalContext();
         String url = extContext.encodeActionURL(context.getApplication().getViewHandler().getActionURL(context, path));
@@ -142,28 +134,32 @@ public class AccesoBean implements Serializable {
     }
 
     public void logoutAdmin() throws IOException {
-        activo=false;
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext extContext = context.getExternalContext();
         extContext.getSessionMap().remove(USER_KEY);
+         HttpSession session = SessionUtils.getSession();
+        session.invalidate();
         String url = extContext.encodeActionURL(context.getApplication().getViewHandler().getActionURL(context, "/index.xhtml"));
         extContext.redirect(url);
-        HttpSession session = SessionUtils.getSession();
-        session.invalidate();
+       
     }
 
+    public Usuario userAdmin() {
+        Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        return us;
+    }
     public String usuarioLogueado() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return us.getIdPersona().getNombre() + " " + us.getIdPersona().getApellido();
     }
     public String usuarioNavegacion() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-        return us.getIdRol().getRol();
+        return us.getRol();
     }
   public  HojaVidaEstudiante hojaVida() {
         HojaVidaEstudiante hv = null;
              Usuario uus = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-                if("ESTUDIANTE".equals(uus.getIdRol().getRol())){
+                if("ESTUDIANTE".equals(uus.getRol())){
                    hv = (HojaVidaEstudiante) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("hojaVida");
                 }else{
                     hv=null;

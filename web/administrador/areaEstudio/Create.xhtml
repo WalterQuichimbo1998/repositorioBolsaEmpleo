@@ -13,8 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{areaEstudioController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateAreaEstudioLabel_areaEstudio}" for="areaEstudio" style="font-weight: bold"/>
-                        <p:inputText id="areaEstudio" value="#{areaEstudioController.selected.areaEstudio}" title="#{bundle.CreateAreaEstudioTitle_areaEstudio}" style="width: 200px"
-                                     onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="areaEstudio" value="#{areaEstudioController.selected.areaEstudio}" title="#{bundle.CreateAreaEstudioTitle_areaEstudio}" style="width: 300px"
+                                     onkeyup="javascript:this.value = this.value.toUpperCase();" required="true" requiredMessage="Ingrese una área de estudio" maxlength="45"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{areaEstudioController.create}" value="#{bundle.Save}" update="display,:AreaEstudioListForm:datalist,:growl" oncomplete="handleSubmit(args,'AreaEstudioCreateDialog');"/>

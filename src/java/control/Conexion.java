@@ -12,9 +12,7 @@ import javax.sql.DataSource;
  * @author Walter Quichimbo
  */
 public class Conexion {
-
     private Connection con = null;
-
     public Connection conexion() {
         try {
             String jdniName = "java:app/bolsa_empleo_istl";
@@ -25,5 +23,4 @@ public class Conexion {
         }
         return con;
     }
-
 }

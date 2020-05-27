@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoContratoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditTipoContratoLabel_tipoContrato}" for="tipoContrato" style="font-weight: bold"/>
-                        <p:inputText id="tipoContrato" value="#{tipoContratoController.selected.tipoContrato}" title="#{bundle.EditTipoContratoTitle_tipoContrato}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="tipoContrato" value="#{tipoContratoController.selected.tipoContrato}" title="#{bundle.EditTipoContratoTitle_tipoContrato}" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     style="width: 200px" required="true" requiredMessage="Escriba el tipo de contrato" maxlength="45"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{tipoContratoController.update}" value="#{bundle.Save}" update="display,:TipoContratoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoContratoEditDialog');"/>

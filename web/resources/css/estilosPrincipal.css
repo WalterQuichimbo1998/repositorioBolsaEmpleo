@@ -309,6 +309,7 @@ nav ul li{
     font-family: Tahoma; 
     font-size: 17px;
     font-weight: normal;
+    color:#454545;
 
 }
 .imagenes{
@@ -613,15 +614,7 @@ nav ul li{
     width: 86%;
     margin: auto;
 }
-/*#info_correo{
-    color: #454545;
-    font-family: Arial;
-    margin: 3px;
-}
-#info_correo:hover{
-    cursor: pointer;
-    color: #007bff;
-}*/
+
 .enviar.ui-button{
     background: #57a3f4; 
     height: 30px; 
@@ -682,6 +675,12 @@ nav ul li{
     box-shadow: 0px 0px 1px 1px #454545; 
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
     cursor: pointer;
+}
+.link{
+    width: 38px;
+}
+.link:hover{
+    width: 36px;
 }
 @media only screen and (min-width: 1440px){ 
     .contenedor{

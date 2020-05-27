@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.NivelEscrito;
+import modelo.NivelEscrito;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

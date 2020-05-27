@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.TipoEmpresa;
+import modelo.TipoEmpresa;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

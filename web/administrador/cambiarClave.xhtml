@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./administrador.xhtml">
+
+
+        <ui:define name="caja">
+            <div class="caja_form">
+                <h3 class="titulo_p" style="margin-top: 0;">Cambiar Clave</h3>
+                <h:form class="formulario" style="margin-top: 20px;display:block;">                  
+                    <div class="info2">
+                        <h3  class="textoClave" for="c0" >Clave actual</h3>
+                        <p:password id="c0" maxlength="30" styleClass="inputText" value="#{usuarioController.claveAntigua}" required="true" requiredMessage="Clave actual Campo requerido"/>
+                        <p:message for="c0"/>  
+                        <p:tooltip for="c0" value="Máximo 30 carácteres" trackMouse="true" style="box-shadow: none;font-size: 14px !important" />
+                        <h3  class="textoClave" for="c1" >Nueva Clave</h3>
+                        <p:password id="c1" maxlength="30" styleClass="inputText" value="#{usuarioController.selected.clave}"
+                                    validatorMessage="Las claves no coinciden" match="c2" 
+                                    required="true" requiredMessage="Clave nueva: Campo requerido, al menos 6 caracteres"  />
+                        <p:message for="c1"/>
+                        <p:tooltip for="c1" value="Máximo 30 carácteres" trackMouse="true" style="box-shadow: none;font-size: 14px !important" />
+                        <h3  class="textoClave" for="c2" >Confirme Clave</h3>
+                        <p:password id="c2" maxlength="30" styleClass="inputText" />
+                        <p:message for="c2"/>
+                        <p:tooltip for="c2" value="Máximo 30 carácteres" trackMouse="true" style="box-shadow: none;font-size: 14px !important" />
+                    </div>
+                    <center>
+                        <p:commandButton  styleClass="btn_guardar" ajax="false" value="Actualizar Clave" actionListener="#{usuarioController.verificarClave}"/>
+                        <br/>
+                        <br/>
+                        <h:outputLabel style="#{usuarioController.ver==true? 'color: #009688;':'color: #e36060;'}" value="#{usuarioController.mensaje}"/>
+                    </center>
+
+                </h:form>
+            </div>
+            <br/>
+            <br/>
+            <div class="caja_form"> 
+                <h3 class="titulo_p" style="margin-top: 0;">Cambiar Usuario</h3>
+                <h:form class="formulario" style="margin-top: 20px;display:block;"> 
+
+                    <div class="info2">
+                        <h:outputLabel class="textoClave">Usuario actual:</h:outputLabel>
+                        <h:outputLabel class="textoClave" style="margin-left: 10px;color:#454545" value="#{usuarioController.selected.usuario}"/>
+                        <br/>
+                        <br/>
+                         <p:inputText id="c4" maxlength="30" styleClass="inputText"  value="#{usuarioController.user}" placeholder="Nuevo usuario" required="true" requiredMessage="Usuario: Campo requerido, al menos 6 caracteres"/>    
+                        <p:message for="c4"/>
+                        <p:tooltip for="c4" value="Máximo 30 carácteres" trackMouse="true" style="box-shadow: none;font-size: 14px !important" />
+                    </div>
+                    <center>
+                        <p:commandButton  styleClass="btn_guardar" ajax="false" value="Actualizar Usuario" actionListener="#{usuarioController.verficarUsuario()}"/>
+                        <br/>
+                        <br/>
+                        <h:outputLabel style="#{usuarioController.ver2==true? 'color: #009688;':'color: #e36060;'}" value="#{usuarioController.mensaje2}"/>
+                    </center>
+                </h:form>
+            </div>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+
+</html>

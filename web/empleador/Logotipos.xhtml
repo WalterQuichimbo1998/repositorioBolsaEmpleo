@@ -47,20 +47,20 @@
                             </f:facet>
 
                         <img style="width: 120px;margin: auto;" 
-                             src="#{request.contextPath}/resources/#{empresaController.existeFoto(item.logotipo)==true ? item.logotipo:'requerido/sin_logotipo.jpg'}"></img>
+                             src="#{request.contextPath}/resources/#{item.logotipo}"></img>
                         </p:column>
                         <p:column style="width:280px" sortBy="#{item.idEmpresa}">
                             <f:facet name="header">
                                 <h:outputText value="Acción"/>
                             </f:facet>
-                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Agregar" 
+                            <p:commandButton rendered="#{item.logotipo == 'requerido/sin_logotipo.jpg'}" id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Agregar" 
                                              action="/empleador/subirLogotipo?faces-redirect=true" 
                                              actionListener="#{empresaController.setSelected(item)}"/>
-                     <p:tooltip for="createButton" value="Agregar o Actualizar" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
-                            <p:commandButton rendered="#{empresaController.existeImagen(item.logotipo)==true}" styleClass="ver" icon="ui-icon-search" value="#{bundle.View}" 
+                     <p:tooltip for="createButton" value="Agregar" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
+                            <p:commandButton rendered="#{item.logotipo != 'requerido/sin_logotipo.jpg'}" styleClass="ver" icon="ui-icon-search" value="#{bundle.View}" 
                                              actionListener="#{empresaController.setSelected(item)}"
                                              update=":EmpresaViewForm" oncomplete="PF('EmpresaViewDialog').show()"/>
-                            <p:commandButton rendered="#{empresaController.existeImagen(item.logotipo)==true}" styleClass="eliminar" icon="ui-icon-trash" value="Eliminar" 
+                            <p:commandButton rendered="#{item.logotipo != 'requerido/sin_logotipo.jpg'}" styleClass="eliminar" icon="ui-icon-trash" value="Eliminar" 
                                              actionListener="#{empresaController.setSelected(item)}"
                                              oncomplete="PF('DeleteDlg').show()"/>
                         </p:column>

@@ -5,13 +5,11 @@
  */
 package sessions.beans;
 
-import controller.HojaVidaEstudiante;
-import controller.Idioma;
-import controller.OfertaLaboral;
-import controller.Persona;
-import controller.Postulante;
-import controller.Rol;
-import controller.Usuario;
+import modelo.HojaVidaEstudiante;
+import modelo.OfertaLaboral;
+import modelo.Persona;
+import modelo.Postulante;
+import modelo.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -156,7 +154,7 @@ public abstract class AbstractFacade<T> {
         }
         return usuario;
     }
-       public Usuario existePersonaRegistradoAdmin(Persona p,Rol r) { 
+       public Usuario existePersonaRegistradoAdmin(Persona p,String r) { 
         EntityManager em = getEntityManager();
         Usuario usuario = null;
         try {
@@ -164,6 +162,29 @@ public abstract class AbstractFacade<T> {
                 TypedQuery<Usuario> query = em.createNamedQuery("Usuario.buscarPersonaAdmin", Usuario.class);
                 query.setParameter("persona", p);
                 query.setParameter("rol", r);
+                try {
+                    usuario = query.getSingleResult();
+                } catch (NoResultException e) {
+                    usuario=null;
+                }
+            } catch (NullPointerException e) {
+                usuario = null;
+            }
+        } catch (NoResultException e ) {
+            usuario = null;
+            System.out.println("Error: " + e);
+        }
+        return usuario;
+    }
+        public Usuario existePersonaRegistradoAdmin2(Persona p,String r,Integer id) { 
+        EntityManager em = getEntityManager();
+        Usuario usuario = null;
+        try {
+            try {
+                TypedQuery<Usuario> query = em.createNamedQuery("Usuario.buscarPersonaAdmin2", Usuario.class);
+                query.setParameter("persona", p);
+                query.setParameter("rol", r);
+                query.setParameter("id_usuario", id);
                 try {
                     usuario = query.getSingleResult();
                 } catch (NoResultException e) {
@@ -200,6 +221,8 @@ public abstract class AbstractFacade<T> {
         }
         return usuario;
     }
+      
+     
        public Persona existeCorreoRegistrado(String correo) {
         EntityManager em = getEntityManager();
         Persona persona = null;

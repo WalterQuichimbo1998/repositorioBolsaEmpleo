@@ -2,12 +2,12 @@ package jsf.classes;
 
 import control.AccesoBean;
 import control.UtilPath;
-import controller.Canton;
-import controller.HojaVidaEstudiante;
-import controller.Parroquia;
-import controller.Persona;
-import controller.Provincia;
-import controller.Usuario;
+import modelo.Canton;
+import modelo.HojaVidaEstudiante;
+import modelo.Parroquia;
+import modelo.Persona;
+import modelo.Provincia;
+import modelo.Usuario;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -91,10 +91,10 @@ public class PersonaController implements Serializable {
     }
 
     public Persona getSelected() {
-        if ("ESTUDIANTE".equals(AccesoBean.obtenerIdPersona().getIdRol().getRol())) {
+        if ("ESTUDIANTE".equals(AccesoBean.obtenerIdPersona().getRol())) {
             this.selected = AccesoBean.obtenerIdPersona().getIdPersona();
         }
-        if ("EMPRESA".equals(AccesoBean.obtenerIdPersona().getIdRol().getRol())) {
+        if ("EMPLEADOR".equals(AccesoBean.obtenerIdPersona().getRol())) {
             this.selected = AccesoBean.obtenerIdPersona().getIdPersona();
             
         }
@@ -276,7 +276,7 @@ public class PersonaController implements Serializable {
     }
 
     public void create() {
-
+        this.selected.setFoto("requerido/sin_foto_perfil.png");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PersonaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -294,6 +294,7 @@ public class PersonaController implements Serializable {
 
     public void actualizarFoto() {
         persist(PersistAction.UPDATE, "Foto subida con éxito.");
+        items=null;
     }
 
     public void destroy() {
@@ -516,6 +517,8 @@ public class PersonaController implements Serializable {
                             out.flush();
                             out.close();
                             actualizarFoto();
+                            
+                            
                         }
 
                     } catch (IOException e) {
@@ -563,12 +566,12 @@ public class PersonaController implements Serializable {
     public void buscarUser() {
         Usuario user = getFacade().buscarUser(per);
         if (user != null) {
-            mensaje = "Revise su correo electrónico";
+            mensaje = "Su clave de acceso a sido enviado a su correo electrónico";
             enviarCorreo(user.getClave());
             tiempoLimpiar();
         } else {
             cc = false;
-            mensaje = "Usuario no encontrado";
+            mensaje = "Usuario no encontrado o registrado";
             tiempoLimpiar();
         }
     }
@@ -606,7 +609,7 @@ public class PersonaController implements Serializable {
 
     public void enviarCorreo(String clave) {
         final String remitente = "empleoistl2020@gmail.com";
-        final String r_clave = "@empleo_istl_2020";
+        final String r_clave = "upqnawmrjfowxjyd";
         String receptor = getCorreo();
         Properties prop = new Properties();
         try {
@@ -619,9 +622,9 @@ public class PersonaController implements Serializable {
             Session session = Session.getInstance(prop, null);
             MimeMessage msg = new MimeMessage(session);
             msg.setRecipients(Message.RecipientType.TO, receptor);
-            msg.setSubject("Clave de acceso recuperada del sistema de Bolsa de Empleo");
+            msg.setSubject("Sistema de Seguimiento a egresados y graduados ISTL");
             msg.setSentDate(new Date());
-            msg.setContent("<p>Su clave de acceso es: <h2>" + clave + "</h2></p>", "text/html");
+            msg.setContent("<p>Su clave de acceso es: <h3>" + clave + "</h3></p>", "text/html");
             Transport trans = session.getTransport("smtp");
             trans.connect(remitente, r_clave);
             trans.sendMessage(msg, msg.getAllRecipients());

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="../administrador.xhtml">
+
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Postulaciones estudiante" class="btn2 bbt" action="/administrador/seguimiento/postulaciones?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
+            </li>  
+
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Seguimiento Estudiantil" action="/administrador/seguimiento/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true" />
+            <h:commandLink class="prin" value="Postulaciones estudiante" style="color: #086A87;" action="/administrador/seguimiento/postulaciones?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+
+            <div style="width: 90%;margin: auto;background: #f2f2f2">
+                <h3 class="titulo_p">Postulaciones del estudiante</h3>
+                <center>
+                    <h:outputLabel rendered="#{postulanteController.per==null}" value="No se a seleccionado un estudiante"
+                               style="font-size: 22px;margin: auto;color: #454545;"/>
+                </center>
+                <h:form id="formularioPerfil" rendered="#{postulanteController.per!=null}" style="text-align: center">
+                    <center>
+                        <br/>
+                        <h:outputLabel value="#{postulanteController.per.nombre} #{postulanteController.per.apellido}"
+                                       style="font-size: 22px;font-family: Arial;margin: auto;color: #454545;"/>
+                        <br/>
+                        <br/>
+                    </center>
+                <p:dataTable id="datalist" styleClass="tabla2" value="#{postulanteController.lista_2}" var="item"
+                                         selectionMode="single"
+                                         widgetVar="postulante"
+                                         paginator="true"
+                                         rowKey="#{item.idPostulante}"
+                                         rows="4"
+                                         rowsPerPageTemplate="4,8,12,16"
+                                         paginatorPosition="bottom"
+                                         sortBy="#{item.fechaPostulante}"
+                                         sortOrder="descending"
+                                         emptyMessage="No se encontraron datos.">
+
+                                <p:column style="border:none;border:1px solid white">
+                                    <br/>
+                                    <h:outputText value="#{item.ofertaLaboralIdOferta.cargoSolicitado}" style="font-size: 22px;font-weight: bold;"/>
+                                    <br/>
+                                    <h:outputText value="#{item.ofertaLaboralIdOferta.idEmpresa.nombreComercial}" style="font-size: 17px;"/>
+                                    <br/>
+                                    <h:outputText value="Fecha de Postulación: #{personaController.fecha(item.fechaPostulante)}" style="font-size: 16px;"/>
+                                    <br/>
+                                    <h:outputLabel rendered="#{item.confirmacion==true}" style="color:#007bff;font-size: 17px;" value="Puesto de trabajo aceptado."/>
+                                </p:column>
+                            </p:dataTable>
+
+                </h:form>
+            </div>
+            <br/>
+            <br/>
+        </ui:define>
+    </ui:composition>
+
+</html>

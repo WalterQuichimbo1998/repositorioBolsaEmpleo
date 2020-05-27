@@ -1,7 +1,7 @@
 package jsf.classes;
 
 import control.AccesoBean;
-import controller.ReferenciaPersonal;
+import modelo.ReferenciaPersonal;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.ReferenciaPersonalFacade;

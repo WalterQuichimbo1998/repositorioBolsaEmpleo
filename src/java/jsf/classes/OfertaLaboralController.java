@@ -1,8 +1,8 @@
 package jsf.classes;
 
 import control.Exportar;
-import controller.Empresa;
-import controller.OfertaLaboral;
+import modelo.Empresa;
+import modelo.OfertaLaboral;
 import java.io.IOException;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
@@ -145,6 +145,9 @@ public class OfertaLaboralController implements Serializable {
         this.selected.setIdEmpresa(empresa);
         this.selected.setFechaCreacion(new Date());
         this.selected.setEstado(true);
+        if(selected.getIdTipoContrato().getTipoContrato().equals("INDEFINIDO")){
+             this.selected.setFechaFin(null);
+        }
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("OfertaLaboralCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -155,7 +158,11 @@ public class OfertaLaboralController implements Serializable {
     }
 
     public void update() {
+         if(selected.getIdTipoContrato().getTipoContrato().equals("INDEFINIDO")){
+             this.selected.setFechaFin(null);
+        }
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("OfertaLaboralUpdated"));
+        items=null;
     }
 
     public void update2() {
@@ -194,7 +201,9 @@ public class OfertaLaboralController implements Serializable {
 
     public List<OfertaLaboral> getLista() {
         if (lista == null) {
-            lista = getFacade().listaOferta(empresa.getIdEmpresa());
+            if(empresa!=null){
+                lista = getFacade().listaOferta(empresa.getIdEmpresa());
+            }
         }
         return lista;
     }
@@ -332,7 +341,7 @@ public class OfertaLaboralController implements Serializable {
             SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
             resultado = formato.format(d);
         } else {
-            resultado = "";
+            resultado = "No definido";
         }
         return resultado;
     }

@@ -20,30 +20,20 @@ $(document).ready(function () {
         }
     });
 
-
+$('textarea.txtOA').keyup(function() {
+    var $textarea = $(this);
+    var max = 250;
+    if ($textarea.val().length > max) {
+        $textarea.val($textarea.val().substr(0, max));
+    }
+});
+$('textarea.txtEA').keyup(function() {
+    var $textarea = $(this);
+    var max = 250;
+    if ($textarea.val().length > max) {
+        $textarea.val($textarea.val().substr(0, max));
+    }
 });
 
-
-
-
-
-
-
-
-//$(document).ready(function () {
-//    $(".caja_oferta2").hover(
-//            function () {
-//                $(".linkOferta").css({"color": "black"});
-//                $(".textoDescripcion2").css({"color": "black"});
-//                $(".textoDescripcion").css({"color": "black"});
-////                $(".ver").css({"background-color": "green"});
-//            }, function () {
-//        $(".linkOferta").css({"color": ""});
-//        $(".textoDescripcion2").css({"color": ""});
-//        $(".textoDescripcion").css({"color": ""});
-////        $(".ver").css({"background-color": ""});
-//    }
-//    );
-//});
-
+});
 

@@ -109,7 +109,7 @@
    border-bottom: 2px solid #98c2bb;
     font-size: 21px;
     color: #024959;
-    transform: translateY(-3px);
+    /*transform: translateY(-3px);*/
 }
 .txtO:focus{
     border-bottom: 2px solid #57a3f4;
@@ -125,7 +125,7 @@
 .txtOA{
     width: 97%;
     color: #454545;
-    font-size: 20px;
+    font-size: 18px !important;
     font-family: Arial;
     font-weight: normal;
     border: none;
@@ -136,6 +136,7 @@
     background: none;
     border:2px solid #f0f3f4;
     padding-top: 10px;
+    resize: none;
 
 }
 .txtOA:hover{

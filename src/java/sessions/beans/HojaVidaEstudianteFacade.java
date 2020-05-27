@@ -5,8 +5,8 @@
  */
 package sessions.beans;
 
-import controller.HojaVidaEstudiante;
-import controller.OfertaLaboral;
+import modelo.HojaVidaEstudiante;
+import modelo.OfertaLaboral;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

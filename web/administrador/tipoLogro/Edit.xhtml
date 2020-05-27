@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoLogroController.selected != null}">
                         <p:outputLabel value="#{bundle.EditTipoLogroLabel_tipoLogro}" for="tipoLogro" style="font-weight: bold"/>
-                        <p:inputText id="tipoLogro" value="#{tipoLogroController.selected.tipoLogro}" title="#{bundle.EditTipoLogroTitle_tipoLogro}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="tipoLogro" value="#{tipoLogroController.selected.tipoLogro}" title="#{bundle.EditTipoLogroTitle_tipoLogro}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     required="true" requiredMessage="Escriba el tipo de logro" maxlength="45"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{tipoLogroController.update}" value="#{bundle.Save}" update="display,:TipoLogroListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoLogroEditDialog');"/>

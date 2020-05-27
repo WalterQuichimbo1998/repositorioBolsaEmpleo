@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.AreaEstudio;
+import modelo.AreaEstudio;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

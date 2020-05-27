@@ -33,9 +33,12 @@
         </ui:define>
         <ui:define name="caja">
 
-            
-            <h:form id="CantonListForm" class="tablaCentro">
-                <h3 class="titulo_p">#{cantonController.selectedP.provincia}</h3>
+             <center>
+                    <h:outputLabel rendered="#{cantonController.selectedP==null}" value="No se a seleccionado una provincia"
+                               style="font-size: 22px;margin: auto;color: #454545;"/>
+                </center>
+            <h:form id="CantonListForm" class="tablaCentro" rendered="#{cantonController.selectedP!=null}">
+                <h3 class="titulo_p" style="font-size: 28px;">#{cantonController.selectedP.provincia}</h3>
                 <p:panel>
                     <p:dataTable id="datalist" value="#{cantonController.lista}" var="item"
                                  selectionMode="single" selection="#{cantonController.selected}"
@@ -64,7 +67,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Lista de Parroquias"/>
                             </f:facet>
-                            <p:commandButton icon="ui-icon-search" styleClass="ver" value="Ver" style="margin: 5px" actionListener="#{parroquiaController.setSelectedC(item)}" action="/administrador/parroquia/List?faces-redirect=true"/>
+                            <p:commandButton icon="ui-icon-search" styleClass="ver" value="Parroquias" style="margin: 5px" actionListener="#{parroquiaController.setSelectedC(item)}" action="/administrador/parroquia/List?faces-redirect=true"/>
                         </p:column>
                         <f:facet name="footer">
                             <h:outputLabel value="Total Cantones: "  style="font-size: 16px; font-weight: normal "/>

@@ -13,9 +13,9 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{oficioController.selected != null}">
                         <p:outputLabel value="#{bundle.EditOficioLabel_oficio}" for="oficio" style="font-weight: bold" />
-                        <p:inputText id="oficio" value="#{oficioController.selected.oficio}" title="#{bundle.EditOficioTitle_oficio}" onkeyup="javascript:this.value = this.value.toUpperCase();" style="width:250px"/>
+                        <p:inputText id="oficio" value="#{oficioController.selected.oficio}" title="#{bundle.EditOficioTitle_oficio}" onkeyup="javascript:this.value = this.value.toUpperCase();" style="width:250px" required="true" requiredMessage="Escriba el nombre del oficio" maxlength="45"/>
                         <p:outputLabel value="#{bundle.EditOficioLabel_descripcion}" for="descripcion" style="font-weight: bold"/>
-                        <p:inputTextarea id="descripcion"  rows="3" cols="33" value="#{oficioController.selected.descripcion}" title="#{bundle.EditOficioTitle_descripcion}" />
+                        <p:inputTextarea id="descripcion"   maxlength="200" rows="3" cols="35" autoResize="false" value="#{oficioController.selected.descripcion}" title="#{bundle.EditOficioTitle_descripcion}" required="true" requiredMessage="Escriba una descripción"/>
                         <p:column/>
                        <p:column>
                            <p:commandButton styleClass="btn_g" actionListener="#{oficioController.update}" value="#{bundle.Save}" update="display,:OficioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OficioEditDialog');"/>

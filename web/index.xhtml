@@ -4,8 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      lang="es"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      lang="es">
     <h:head>
         <title>Bolsa de Empleo ISTL</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -36,7 +35,7 @@
                         <ul>
                             <ui:insert name="link">
                                 <li>
-                                    <p:commandButton value="Inicio" class="btn2 bbt" action="index?faces-redirect=true"/>
+                                    <p:commandButton value="Inicio" class="btn2 bbt"  action="index?faces-redirect=true"/>
                                 </li>
                                 <li>
                                     <p:commandButton value="Ofertas Laborales" class="btn2" actionListener="#{ofertaLaboralController.listaO()}" action="ofertas?faces-redirect=true" />
@@ -46,7 +45,7 @@
                                 </li>
 
                                 <li id="ingresar0">
-                                    <p:commandButton rendered="#{accesoBean.activo==false}" value="Iniciar Sesión" class="btn2" oncomplete="PF('login_estudiante').show()" update=":datos"/>
+                                    <p:commandButton  value="Iniciar Sesión" class="btn2" oncomplete="PF('login_estudiante').show()" update=":datos"/>
                                 </li>  
                                 <li style="margin-left: 20px;margin-right: 20px;line-height: 80px;" id="ingresar1">                                   
                                     <p:commandLink id="inter" title="Iniciar Sesión"  oncomplete="PF('login_estudiante').show()" update=":datos" >
@@ -85,21 +84,21 @@
 
                         </h:form>     
                     </div>
-
-
-
                     <br/>
                     <br/>
-
                     <h1 style="margin: 0;font-family: Arial;font-size: 34px;font-weight: bold;
                         margin-bottom: 10px;text-align: center;color: #039be5;"> 
-                        Sistema Bolsa de Empleo</h1>
+                        Sistema de Seguimiento a Egresados y Graduados</h1>
                     <br/>
                     <h4 class="texto">
-                        El Instituto Superior Tecnológico Limón ofrece el sistema de Bolsa de Empleo 
-                        para alumnos graduados y egresados con la finalidad de agilizar su inserción con el sector empresarial 
-                        en base a su perfil, ofreciendo las mejores oportunidades laborales para aquellos que se 
-                        encuentren en la búsqueda de algún empleo en particular.
+                        El <strong>Instituto Superior Tecnológico Limón</strong> ofrece el sistema de Seguimiento a todos los estudiantes 
+                        egresados y graduados de la institución, pero sobre todo a las personas que necesiten de un profesional 
+                        de calidad y que desean saber la información sobre los profesionales.
+                    </h4>
+                    <br/>
+                    <h4 class="texto">
+                        El <strong>propósito fundamental</strong> de esta herramienta informática es tener una base de datos con información 
+                        de los estudiantes egresados y graduados, y asi tener una información más eficiente.
                     </h4>
                     <br/>
                     <br/>
@@ -118,22 +117,21 @@
                                     <img src="resources/img/estudiante_foto.jpg" class="img_portada"/>
                                     <h1 class="texto_2">ESTUDIANTE</h1>
                                     <p class="texto_3">
-                                        Actualiza tu información de perfil y postulate a las diferentes ofertas de trabajo de tu mayor interés.
+                                        Actualiza la información de tu Hoja de Vida. Postulate a las diferentes ofertas de trabajo de tu mayor interés.
                                     </p>
                                 </div>
                                 <div class="c_img">
                                     <img src="resources/img/empresa_foto.jpg" class="img_portada"/>
-                                    <h1 class="texto_2">EMPRESA</h1>
+                                    <h1 class="texto_2">EMPLEADOR</h1>
                                     <p class="texto_3">
-                                        Empleador registra tus empresas o negocios para poder ofertar tus diferentes ofertas de trabajo.
+                                        Registra tus empresas o negocios y lleva un registro ordenado de ellas.
                                     </p>
                                 </div>
                                 <div class="c_img">
                                     <img src="resources/img/job_search.jpg" class="img_portada"/>
                                     <h1 class="texto_2">OFERTA</h1>
                                     <p class="texto_3">
-                                        Las ofertas de trabajo son publicadas por las distintas empresas o negocios, y además podrás encontrar
-                                        ofertas de cualquier índole.
+                                        Empleador publicá tus ofertas de trabajo de tus distintas empresas o negocios.
                                     </p>
                                 </div>
                             </h:panelGroup>

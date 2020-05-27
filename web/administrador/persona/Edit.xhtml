@@ -4,8 +4,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
 
@@ -15,27 +14,29 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPersonaLabel_nombre}" for="nombre" style="font-weight: bold;"/>
-                        <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.EditPersonaTitle_nombre}" style="width: 200px;" onkeyup="javascript:this.value = this.value.toUpperCase();"
-                                     required="true" requiredMessage="Ingrese un nombre"/>
+                        <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.EditPersonaTitle_nombre}" style="width: 260px;" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     required="true" requiredMessage="Ingrese un nombre" maxlength="25" autocomplete="off"/>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_apellido}" for="apellido" style="font-weight: bold;"/>
-                        <p:inputText id="apellido" value="#{personaController.selected.apellido}" title="#{bundle.EditPersonaTitle_apellido}" style="width: 200px;" onkeyup="javascript:this.value = this.value.toUpperCase();"
-                                     required="true" requiredMessage="Ingrese una apellido"/>
+                        <p:inputText id="apellido" value="#{personaController.selected.apellido}" title="#{bundle.EditPersonaTitle_apellido}" style="width: 260px;" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     required="true" requiredMessage="Ingrese una apellido" maxlength="30" autocomplete="off"/>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_cedula}" for="cedula" style="font-weight: bold;"/>
-                        <p:inputText id="cedula" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" value="#{personaController.selected.cedula}" title="#{bundle.EditPersonaTitle_cedula}" style="width: 200px;"
-                                     required="true" requiredMessage="Ingrese una cédula"/>
+                        <p:inputText id="cedula" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" value="#{personaController.selected.cedula}" title="#{bundle.EditPersonaTitle_cedula}" style="width: 260px;"
+                                     required="true" requiredMessage="Ingrese una cédula" maxlength="10" autocomplete="off"/>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_celular}" for="celular" style="font-weight: bold;"/>
-                        <p:inputText id="celular" value="#{personaController.selected.celular}" title="#{bundle.EditPersonaTitle_celular}" style="width: 200px;"/>
+                        <p:inputText id="celular" value="#{personaController.selected.celular}" title="#{bundle.EditPersonaTitle_celular}" style="width: 260px;" maxlength="10"
+                                     onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" autocomplete="off"/>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_telefono}" for="telefono" style="font-weight: bold;"/>
-                        <p:inputText id="telefono" value="#{personaController.selected.telefono}" title="#{bundle.EditPersonaTitle_telefono}" style="width: 200px;"/>
+                        <p:inputText id="telefono" value="#{personaController.selected.telefono}" title="#{bundle.EditPersonaTitle_telefono}" style="width: 260px;" maxlength="10"
+                                     onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" autocomplete="off"/>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_correo}" for="correo" style="font-weight: bold;"/>
-                        <p:inputText id="correo" value="#{personaController.selected.correo}" title="#{bundle.EditPersonaTitle_correo}" style="width: 200px;"
-                                      required="true" requiredMessage="Ingrese un correo electrónico"/>
+                        <p:inputText id="correo" value="#{personaController.selected.correo}" title="#{bundle.EditPersonaTitle_correo}" style="width: 260px;"
+                                      required="true" requiredMessage="Ingrese un correo electrónico" maxlength="45" autocomplete="off"/>
                          <p:outputLabel value="#{bundle.EditPersonaLabel_direccion}" for="direccion" style="font-weight: bold;" />
-                        <p:inputText id="direccion" value="#{personaController.selected.direccion}" title="#{bundle.EditPersonaTitle_direccion}" style="width: 200px;"/>
+                        <p:inputText id="direccion" value="#{personaController.selected.direccion}" title="#{bundle.EditPersonaTitle_direccion}" style="width: 260px;" maxlength="45"/>
                         
                         
                             <p:outputLabel value="Carrera: " for="idCarrera" style="font-weight: bold;"/>
-                        <p:selectOneMenu id="idCarrera" value="#{personaController.selected.idCarrera}" style="width: 210px;">                   
+                        <p:selectOneMenu id="idCarrera" value="#{personaController.selected.idCarrera}" style="width: 270px;">                   
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"
                                            var="idCarreraItem"
@@ -43,7 +44,8 @@
                        
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_idProvincia}" for="idProvincia" style="font-weight: bold;"/>
-                        <p:selectOneMenu id="idProvincia" value="#{personaController.selected.idProvincia}" style="width: 210px;">
+                        <p:selectOneMenu id="idProvincia" value="#{personaController.selected.idProvincia}" style="width: 270px;"
+                                         effect="fade" filter="true" filterMatchMode="contains" height="100">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.listaProvincias}"
                                            var="idProvinciaItem"
@@ -52,7 +54,8 @@
                         <f:ajax render="idParroquia"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_idCanton}" for="idCanton" style="font-weight: bold;"/>
-                        <p:selectOneMenu id="idCanton" value="#{personaController.selected.idCanton}" style="width: 210px;">
+                        <p:selectOneMenu id="idCanton" value="#{personaController.selected.idCanton}" style="width: 270px;"
+                                         effect="fade"  filter="true" filterMatchMode="contains" height="100">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.listaCanton}"
                                            var="idCantonItem"
@@ -61,7 +64,8 @@
                         </p:selectOneMenu>
 
                         <p:outputLabel value="#{bundle.EditPersonaLabel_idParroquia}" for="idParroquia" style="font-weight: bold;"/>
-                        <p:selectOneMenu id="idParroquia" value="#{personaController.selected.idParroquia}" style="width: 210px;">
+                        <p:selectOneMenu id="idParroquia" value="#{personaController.selected.idParroquia}" style="width: 270px;"
+                                         effect="fade" filter="true" filterMatchMode="contains" height="100">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.listaParroquia}"
                                            var="idParroquiaItem"

@@ -6,8 +6,8 @@
 package sessions.beans;
 
 import control.AccesoBean;
-import controller.Empresa;
-import controller.OfertaLaboral;
+import modelo.Empresa;
+import modelo.OfertaLaboral;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

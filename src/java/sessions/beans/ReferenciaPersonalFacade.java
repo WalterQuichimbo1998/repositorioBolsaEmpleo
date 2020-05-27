@@ -6,8 +6,8 @@
 package sessions.beans;
 
 import control.AccesoBean;
-import controller.Idioma;
-import controller.ReferenciaPersonal;
+import modelo.Idioma;
+import modelo.ReferenciaPersonal;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -23,14 +23,14 @@ and open the template in the editor.
                         <h:form id="datos">
                             <h3 class="textoL">Usuario </h3>
                             <center>
-                                <p:inputText styleClass="inputText" value="#{accesoBean.user}"/>                         
+                                <p:inputText maxlength="30" styleClass="inputText" value="#{accesoBean.user}" autocomplete="off" required="true" requiredMessage="Ingrese su usuario"/>                         
                             </center>
                             <h3 class="textoL">Clave </h3>
                             <center>
-                                <p:password styleClass="inputText" value="#{accesoBean.pass}" style="margin-bottom: 5px"/>
+                                <p:password maxlength="30" styleClass="inputText" value="#{accesoBean.pass}" style="margin-bottom: 5px" autocomplete="off" required="true" requiredMessage="Ingrese su clave"/>
                             </center>
                            
-                            <h:commandLink value="¿Olvidaste la clave?" action="info?faces-redirect=true" 
+                            <h:commandLink value="¿Olvidaste la clave?" immediate="true" action="info?faces-redirect=true" 
                                            style="font-family: Arial;font-size: 14px;margin-left: 30px;text-decoration: none;color: #454545"/>
                             <br/>
                             <br/>
@@ -38,7 +38,7 @@ and open the template in the editor.
                                 <p:commandButton styleClass="btn" value="Iniciar Sesión" ajax="false" actionListener="#{accesoBean.login()}" />
                             </center>
                             <center>
-                                <p:commandButton styleClass="botonSalir" value="Cancelar" oncomplete="PF('login_estudiante').hide()" />
+                                <p:commandButton styleClass="botonSalir" value="Cancelar" immediate="true" oncomplete="PF('login_estudiante').hide()" />
                             </center>
                         </h:form>
                     </div>

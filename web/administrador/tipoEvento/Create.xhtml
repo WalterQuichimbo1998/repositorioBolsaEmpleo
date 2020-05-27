@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoEventoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateTipoEventoLabel_evento}" for="evento" style="font-weight: bold"/>
-                        <p:inputText id="evento" value="#{tipoEventoController.selected.evento}" title="#{bundle.CreateTipoEventoTitle_evento}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="evento" value="#{tipoEventoController.selected.evento}" title="#{bundle.CreateTipoEventoTitle_evento}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                      required="true" requiredMessage="Escriba el tipo de evento" maxlength="45"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{tipoEventoController.create}" value="#{bundle.Save}" update="display,:TipoEventoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoEventoCreateDialog');"/>

@@ -14,19 +14,20 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{preferenciaLaboralController.selected != null}">
                        <p:outputLabel value="#{bundle.CreatePreferenciaLaboralLabel_sectorPublico}" for="sectorPublico" style="font-weight: bold" />
-                       <p:selectOneRadio id="sectorPublico"  value="#{preferenciaLaboralController.selected.sectorPublico}" >                           
+                       <p:selectOneRadio id="sectorPublico"  value="#{preferenciaLaboralController.selected.sectorPublico}" required="true" requiredMessage="Seleccione el sector público">                           
                            <f:selectItem itemLabel="Si" itemValue="1" />
                           <f:selectItem itemLabel="No" itemValue="0" />                            
                        </p:selectOneRadio>
                        
                         <p:outputLabel value="#{bundle.CreatePreferenciaLaboralLabel_sectorPrvado}" for="sectorPrivado" style="font-weight: bold"/>
-                        <p:selectOneRadio id="sectorPrivado"  value="#{preferenciaLaboralController.selected.sectorPrvado}" >                           
+                        <p:selectOneRadio id="sectorPrivado"  value="#{preferenciaLaboralController.selected.sectorPrvado}" required="true" requiredMessage="Seleccione el sector privado">                           
                            <f:selectItem itemLabel="Si" itemValue="1" />
                           <f:selectItem itemLabel="No" itemValue="0" />                            
                        </p:selectOneRadio>   
                         
                         <p:outputLabel value="#{bundle.CreatePreferenciaLaboralLabel_aspiracionSalarial}" for="aspiracionSalarial" style="font-weight: bold"/>
-                        <p:inputText id="aspiracionSalarial" style="width: 70px" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" value="#{preferenciaLaboralController.selected.aspiracionSalarial}" title="#{bundle.CreatePreferenciaLaboralTitle_aspiracionSalarial}" />
+                        <p:inputText id="aspiracionSalarial" style="width: 70px" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" value="#{preferenciaLaboralController.selected.aspiracionSalarial}" title="#{bundle.CreatePreferenciaLaboralTitle_aspiracionSalarial}" 
+                                     maxlength="6"/>
                         
                         <p:outputLabel value="#{bundle.CreatePreferenciaLaboralLabel_trabajarResidencia}" for="trabajarResidencia" style="font-weight: bold" />
                         <p:selectOneRadio id="trabajarResidencia"  value="#{preferenciaLaboralController.selected.trabajarResidencia}" >                           

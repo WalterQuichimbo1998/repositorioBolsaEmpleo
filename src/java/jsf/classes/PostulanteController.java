@@ -2,9 +2,10 @@ package jsf.classes;
 
 import control.AccesoBean;
 import control.Exportar;
-import controller.HojaVidaEstudiante;
-import controller.OfertaLaboral;
-import controller.Postulante;
+import modelo.HojaVidaEstudiante;
+import modelo.OfertaLaboral;
+import modelo.Persona;
+import modelo.Postulante;
 import java.io.IOException;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
@@ -57,7 +58,7 @@ public class PostulanteController implements Serializable {
     private List<Postulante> listaE = null;
     private String mensaje;
     private Boolean v = false;
-    Integer id_per;
+    private Persona per;
 
     public PostulanteController() {
     }
@@ -79,30 +80,22 @@ public class PostulanteController implements Serializable {
     private PostulanteFacade getFacade() {
         return ejbFacade;
     }
-
-    public List<Postulante> getLista() {
-        if (lista == null) {
-            lista = getFacade().lista();
-        }
-        return lista;
+    
+   
+    public Persona getPer() {
+        return per;
     }
 
-    public void setLista(List<Postulante> lista) {
-        this.lista = lista;
-    }
-
-    public Integer getId_per() {
-        return id_per;
-    }
-
-    public void setId_per(Integer id_per) {
-        this.id_per = id_per;
-        lista_2 = null;
+    public void setPer(Persona per) {
+        this.per = per;
+        lista_2=null;
     }
     
     public List<Postulante> getLista_2() {
         if (lista_2 == null) {
-            lista_2 = getFacade().lista_2(getId_per());
+            if(per!=null){
+                lista_2 = getFacade().lista_2(getPer().getIdPersona());
+            }
         }
         return lista_2;
     }
@@ -140,14 +133,15 @@ public class PostulanteController implements Serializable {
 
     public List<Postulante> getListaP() {
         if (listaP == null) {
-            listaP = getFacade().listaPostulantes(ofertaLista.getIdOferta());
+            if(ofertaLista!=null){
+                listaP = getFacade().listaPostulantes(ofertaLista.getIdOferta());
+            }
         }
 
         return listaP;
     }
 
     public List<Postulante> getListaPostulantes() {
-
         if (listaPostulantes == null) {
             listaPostulantes = getFacade().listaPostulantes2();
         }
@@ -280,14 +274,14 @@ public class PostulanteController implements Serializable {
             this.selected.setConfirmacion(false);
             persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PostulanteAceptado"));
             lista = null;
-            lista = getFacade().lista();
+            lista = getFacade().lista(AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona());
             listaPostulantes = null;
             listaPostulantes = getFacade().listaPostulantes2();
         } else {
             this.selected.setConfirmacion(false);
             persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PostulanteDenegado"));
             lista = null;
-            lista = getFacade().lista();
+            lista = getFacade().lista(AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona());
             listaPostulantes = null;
             listaPostulantes = getFacade().listaPostulantes2();
         }
@@ -317,7 +311,7 @@ public class PostulanteController implements Serializable {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
             lista = null;
-            lista = getFacade().lista();
+            lista = getFacade().lista(AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona());
         }
     }
 
@@ -327,7 +321,13 @@ public class PostulanteController implements Serializable {
         }
         return items;
     }
-
+ public List<Postulante> getLista() {
+        if (lista == null) {
+            lista = getFacade().lista(AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona());
+        }
+        return lista;
+    }
+  
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
@@ -458,9 +458,12 @@ public class PostulanteController implements Serializable {
         Postulante p = getFacade().existePostulante(ofertaPostular, AccesoBean.obtenerIdPersona().getIdPersona());
         if (p != null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Ya estas postulado a esta oferta", "Ya estas postulado a esta oferta"));
-
+        lista=null;
         } else {
             create();
+            lista=null;
+            items=null;
+            listaPostulantes=null;
         }
     }
 

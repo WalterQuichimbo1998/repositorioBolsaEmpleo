@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.TipoLogro;
+import modelo.TipoLogro;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.TipoLogroFacade;

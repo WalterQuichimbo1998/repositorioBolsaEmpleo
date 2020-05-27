@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{horasCapacitacionesController.selected != null}">
                         <p:outputLabel value="#{bundle.EditHorasCapacitacionesLabel_horasCapacitaciones}" for="horasCapacitaciones" style="font-weight: bold"/>
-                        <p:inputText id="horasCapacitaciones" value="#{horasCapacitacionesController.selected.horasCapacitaciones}" title="#{bundle.EditHorasCapacitacionesTitle_horasCapacitaciones}" />
+                        <p:inputText id="horasCapacitaciones" value="#{horasCapacitacionesController.selected.horasCapacitaciones}" title="#{bundle.EditHorasCapacitacionesTitle_horasCapacitaciones}" 
+                                     required="true" requiredMessage="Campo requerido" maxlength="30"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{horasCapacitacionesController.update}" value="#{bundle.Save}" update="display,:HorasCapacitacionesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HorasCapacitacionesEditDialog');"/>

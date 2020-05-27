@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.TipoEmpresa;
+import modelo.TipoEmpresa;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.TipoEmpresaFacade;

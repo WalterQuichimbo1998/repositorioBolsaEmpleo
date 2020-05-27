@@ -25,7 +25,7 @@
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                     <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
-                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img>
+                        src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                 </p:commandLink>
             </li>
         </ui:define>
@@ -39,11 +39,15 @@
 
         <ui:define name="caja">
             <h3 class="titulo_p">Mis Ofertas Laborales</h3>
-            <h:form id="OfertaLaboralListForm" style="text-align: center">
+            <center>
+                    <h:outputLabel rendered="#{ofertaLaboralController.empresa==null}" value="Seleccione una empresa"
+                                   style="font-size: 20px;font-family: Arial"/>
+                </center>
+            <h:form id="OfertaLaboralListForm" style="text-align: center" rendered="#{ofertaLaboralController.empresa!=null}">
                 <p:panel>
                     <h:outputLabel value="Empresa: " style="font-weight: bold;font-size: 16px"/>
                     <h:outputLabel value="#{ofertaLaboralController.empresa.nombreComercial}" style="font-size: 16px; "/>
-                    <p:dataTable id="datalist" class="tabla" value="#{ofertaLaboralController.lista}" var="item" style="margin-top: 5px"
+                    <p:dataTable rendered="#{ofertaLaboralController.empresa!=null}" id="datalist" class="tabla" value="#{ofertaLaboralController.lista}" var="item" style="margin-top: 5px"
                                  selectionMode="single"
                                  paginator="true"
                                  rowKey="#{item.idOferta}"                             
@@ -72,8 +76,10 @@
 
                             <h:outputText value=" - "/>
                             <h:outputText value="Hasta " style="font-weight: bold"/>
-                            <h:outputText value="#{item.fechaFin}">
+                            <h:outputText rendered="#{item.fechaFin !=null}" value="#{item.fechaFin}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                            <h:outputText rendered="#{item.fechaFin ==null}" value="No definido">
                             </h:outputText>
                             <br/>
                             <br/>
@@ -178,21 +184,14 @@
                             </div>
                             <br/>
                             <h:commandButton value="Ayer"  actionListener="#{ofertaLaboralController.fecha2()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
                             </h:commandButton>
                             <h:commandButton value="Buscar" class="botonDescargar" 
                                              actionListener="#{ofertaLaboralController.verificarReporte}" id="export" >
-                                <f:ajax execute="@form" render="mensaje" />                                                                       
-                                <f:ajax render="des" />                                                                       
+                                <f:ajax execute="@form" render="mensaje des" />                                                                       
                             </h:commandButton>
                             <h:commandButton value="Hoy"  actionListener="#{ofertaLaboralController.fecha1()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
                             </h:commandButton>
                             <br/>
                             <br/>
@@ -246,7 +245,7 @@
                 <h:form id="veri" style="width: 200px;margin: auto;text-align: center;">
                     <h3 style="#{ofertaLaboralController.selected.estado == true ? 'color:#007bff;font-family: Arial;font-size:20px;':'color:red;font-family: Arial;font-size:20px;'}">
                         #{ofertaLaboralController.selected.estado == true ? 'DISPONIBLE':'NO DISPONIBLE'} </h3>
-                    <p:selectBooleanButton class="estado" value="#{ofertaLaboralController.selected.estado}"  onLabel="Deshabilitar" offLabel="Habilitar">
+                    <p:selectBooleanButton class="estado" value="#{ofertaLaboralController.selected.estado}"  onLabel="NO Disponible" offLabel="Disponible">
                         <p:ajax update=":OfertaLaboralListForm,:growl" listener="#{ofertaLaboralController.update2}" oncomplete="PF('form_estado').hide()"/>
 
                     </p:selectBooleanButton>  

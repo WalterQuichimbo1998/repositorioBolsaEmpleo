@@ -24,11 +24,10 @@
                             <br/>
                             <h3 class="txtO0">#{item.idEmpresa.nombreComercial}</h3>
                             <br/>
-                            <c:if test="#{ofertaLaboralController.existeFoto(ofertaLaboralController.selected.idEmpresa.logotipo)==true}">
-                                <div style="width: 270px; height: auto; margin: auto; background: white; border-radius: 10px; padding: 10px">
-                                    <img style="border-radius: 10px;"  width="100%" src="#{request.contextPath}/resources/#{ofertaLaboralController.selected.idEmpresa.logotipo}"></img>
-                                </div>
-                            </c:if>
+                            <div style="width: 270px; height: auto; margin: auto; background: white; border-radius: 10px; padding: 10px; 
+                                 #{item.idEmpresa.logotipo eq 'requerido/sin_logotipo.jpg' ? 'display:none;':''}">
+                                <img style="border-radius: 10px;"  width="100%" src="#{request.contextPath}/resources/#{item.idEmpresa.logotipo}"></img>
+                            </div>
                             <br/>
                         </p:fieldset>
                         <br/>
@@ -79,7 +78,7 @@
                             </div>
                             <div class="infoO2" >
                                 <h3 class="textoO" >Fecha fin</h3>
-                                <h3 class="txtO" >#{ofertaLaboralController.fecha(item.fechaFin)}</h3>
+                                <h3 class="txtO">#{ofertaLaboralController.fecha(item.fechaFin)}</h3>
                             </div>
                             <div class="infoO2" >
                                 <h3 class="textoO" >Provincia</h3>
@@ -109,7 +108,7 @@
                                 <h3 class="txtO" >#{item.idNivelAcademico.nivelAcademico}</h3>
                             </div>
                             <div class="infoO2" >
-                                <h3 class="textoO" >Horas capacitacines</h3>
+                                <h3 class="textoO" >Horas de capacitacón</h3>
                                 <c:if test="#{ofertaLaboralController.selected.idHorasCapacitaciones!=null}">
                                     <h3 class="txtO" >#{item.idHorasCapacitaciones.horasCapacitaciones} Horas</h3>
                                 </c:if>
@@ -123,7 +122,7 @@
                             </div>
 
                             <div class="infoO2" >
-                                <h3 class="textoO" >Area de Estudio</h3>
+                                <h3 class="textoO" >Área de Estudio</h3>
                                 <h3 class="txtO" >#{item.idAreaEstudio.areaEstudio}</h3>
                             </div>
                         </p:fieldset>

@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.TipoEvento;
+import modelo.TipoEvento;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.TipoEventoFacade;

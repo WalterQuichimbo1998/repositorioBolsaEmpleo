@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../administrador.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Seguimiento" class="btn2 bbt" action="/administrador/seguimiento/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
+            </li>  
+            
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Seguimiento Estudiantil" style="color: #086A87;" action="/administrador/seguimiento/List?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+
+            <h3 class="titulo_p">Seguimiento Estudiantil</h3>
+            <h:form id="HojaVidaEstudianteListForm" style="text-align: center">
+                <p:panel>
+
+                    <p:dataTable styleClass="tablaPersonalizada" id="datalist" value="#{hojaVidaEstudianteController.items}" var="item" style="margin-top: 5px"
+                                 selectionMode="single" selection="#{hojaVidaEstudianteController.selected}"
+                                 paginator="true"
+                                 widgetVar="perfil"
+                                 rowKey="#{item.idHojaVidaEstudiante}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 paginatorPosition="bottom"
+                                 sortBy="#{item.idHojaVidaEstudiante}"
+                                 sortOrder="descending"
+                                 emptyMessage="No se encontraron datos..."
+                                 filteredValue="#{hojaVidaEstudianteController.listaPerfil}">
+                        <f:facet name="header">
+                            <p:inputText id="globalFilter"
+                                         placeholder="Buscar" 
+                                         onkeyup="PF('perfil').filter()" 
+                                         style="font-size: 18px !important;margin: 10px; text-align: center;border-radius: 20px;padding: 7px 0px;width: 500px;"
+                                         /> 
+                        </f:facet>
+                         <p:column style="width:60px;" sortBy="#{item.idHojaVidaEstudiante}" headerText="Foto">
+                                <img style="width: 44px;height: 44px;border-radius: 20px;margin: 0;padding: 0;margin: auto;
+                                     object-fit:cover;object-position:center center;
+                                     background-size: cover;"     
+                                     src="#{request.contextPath}/resources/#{item.idPersona.foto}" ></img>  
+                            </p:column>
+                        <p:column sortBy="#{item.idHojaVidaEstudiante}" filterBy="#{item.idHojaVidaEstudiante}" filterMatchMode="contains"  
+                                  style="width: 80px">
+                            <f:facet name="header">
+                                <h:outputText value="Código"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idHojaVidaEstudiante}" style="font-size: 16px !important"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idPersona.nombre}" filterBy="#{item.idPersona.nombre}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="Estudiante"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPersona.nombre} #{item.idPersona.apellido}"/>
+                        </p:column>
+                       
+                         <p:column sortBy="#{item.idPersona.idCarrera.carrera}" filterBy="#{item.idPersona.idCarrera.carrera}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="Carrera"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPersona.idCarrera.carrera}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idPersona.apellido}" style="width: 120px;">
+                            <f:facet name="header">
+                                <h:outputText value="Perfil"/>
+                            </f:facet>
+                            <p:commandButton value="Ver Perfil" styleClass="crear" style="font-weight: normal" icon="ui-icon-search" actionListener="#{hojaVidaEstudianteController.setPersona(item.idPersona)}"
+                                             action="/administrador/seguimiento/verPerfilEstudiante?faces-redirect=true">
+                            </p:commandButton>
+                        </p:column>
+                        <p:column sortBy="#{item.idPersona.idPersona}" style="width: 120px;">
+                            <f:facet name="header">
+                                <h:outputText value="Postulaciones Laborales"/>
+                            </f:facet>
+                            <p:commandButton value="Ver" styleClass="ver" style="background: #f0fdb5" icon="ui-icon-search" actionListener="#{postulanteController.setPer(item.idPersona)}"
+                                             action="/administrador/seguimiento/postulaciones?faces-redirect=true">
+                            </p:commandButton>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <h:outputLabel value="Total estudiantes registrados: " style="font-size: 17px; font-weight: normal"/>
+                            <h:outputLabel value="#{hojaVidaEstudianteController.items.size()}" style="font-size: 17px;"/>
+                            <br/>
+                            
+                        </f:facet>
+                    </p:dataTable>
+
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

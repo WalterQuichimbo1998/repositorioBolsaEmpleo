@@ -6,7 +6,7 @@
 package sessions.beans;
 
 import control.AccesoBean;
-import controller.Postulante;
+import modelo.Postulante;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,8 +33,8 @@ public class PostulanteFacade extends AbstractFacade<Postulante> {
     public PostulanteFacade() {
         super(Postulante.class);
     }
-     public List<Postulante> lista(){
-        Query q=em.createNativeQuery("SELECT * FROM postulante WHERE persona_id_persona ="+AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona()+";", Postulante.class);
+     public List<Postulante> lista(Integer id){
+        Query q=em.createNativeQuery("SELECT * FROM postulante WHERE persona_id_persona ="+id+";", Postulante.class);
         List<Postulante> lista=q.getResultList();
         return lista;
     }

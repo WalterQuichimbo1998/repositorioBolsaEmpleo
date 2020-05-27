@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{cantonController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateCantonLabel_canton}" for="canton" style="font-weight: bold"/>
-                        <p:inputText id="canton" style="width: 240px" value="#{cantonController.selected.canton}" title="#{bundle.CreateCantonTitle_canton}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="canton" style="width: 240px" value="#{cantonController.selected.canton}" title="#{bundle.CreateCantonTitle_canton}" onkeyup="javascript:this.value = this.value.toUpperCase();" 
+                                     required="true" requiredMessage="Ingrese un cantón" maxlength="30"/>
                         <p:column/>  
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{cantonController.create}" value="#{bundle.Save}" update="display,:CantonListForm:datalist,:growl" oncomplete="handleSubmit(args,'CantonCreateDialog');"/>

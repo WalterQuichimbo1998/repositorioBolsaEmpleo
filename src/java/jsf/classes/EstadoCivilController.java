@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.EstadoCivil;
+import modelo.EstadoCivil;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.EstadoCivilFacade;

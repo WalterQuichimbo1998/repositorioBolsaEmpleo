@@ -19,8 +19,11 @@
             <br/>
             <div class="caja_form">
                 <h3 class="titulo_p" style="margin-top: 0">Subir Logotipo</h3>
-
-            <h:form enctype="multipart/form-data" class="formulario">
+                <center>
+                    <h:outputLabel rendered="#{empresaController.selected==null}" value="Seleccione una empresa"
+                                   style="font-size: 20px;font-family: Arial"/>
+                </center>
+                <h:form enctype="multipart/form-data" class="formulario" rendered="#{empresaController.selected!=null}">
 
                 <div class="info3">
                     <h:panelGrid columns="1" style="width: 100%; margin: auto;  ">

@@ -1,9 +1,9 @@
 package jsf.classes;
 
 import control.AccesoBean;
-import controller.HojaVidaEstudiante;
-import controller.Persona;
-import controller.Usuario;
+import modelo.HojaVidaEstudiante;
+import modelo.Persona;
+import modelo.Usuario;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.UsuarioFacade;
@@ -53,17 +53,15 @@ public class UsuarioController implements Serializable {
     private String mensaje2 = "";
     private boolean ver2;
     private String user;
-//    private boolean perfil;
-//    private boolean perfil_ver;
 
     public UsuarioController() {
     }
 
     public Usuario getSelected() {
-        if ("ESTUDIANTE".equals(AccesoBean.obtenerIdPersona().getIdRol().getRol())) {
+        if ("ESTUDIANTE".equals(AccesoBean.obtenerIdPersona().getRol())) {
             this.selected = AccesoBean.obtenerIdPersona();
         }
-        if ("EMPRESA".equals(AccesoBean.obtenerIdPersona().getIdRol().getRol())) {
+        if ("EMPLEADOR".equals(AccesoBean.obtenerIdPersona().getRol())) {
             this.selected = AccesoBean.obtenerIdPersona();
         }
         return selected;
@@ -189,7 +187,7 @@ public class UsuarioController implements Serializable {
 
     public List<Usuario> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = getFacade().listaUsuario(AccesoBean.obtenerIdPersona().getIdUsuario());
         }
         return items;
     }
@@ -287,7 +285,7 @@ public class UsuarioController implements Serializable {
     }
      public boolean existePerfilPersonaVer(Usuario id) {
          boolean perfil_ver=false;
-        if ("ESTUDIANTE".equals(id.getIdRol().getRol())) {
+        if ("ESTUDIANTE".equals(id.getRol())) {
             perfil_ver=true;
         } else {
             perfil_ver=false;
@@ -307,7 +305,7 @@ public class UsuarioController implements Serializable {
             items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe.Ingrese otro.", ""));
         } else {
-            Usuario u2 = getFacade().existePersonaRegistradoAdmin(selected.getIdPersona(),selected.getIdRol());
+            Usuario u2 = getFacade().existePersonaRegistradoAdmin(selected.getIdPersona(),selected.getRol()); 
            if(u2!=null){
                items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
@@ -323,9 +321,14 @@ public class UsuarioController implements Serializable {
             items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe.Ingrese otro.", ""));
         } else {
+             Usuario u2 = getFacade().existePersonaRegistradoAdmin2(selected.getIdPersona(),selected.getRol(),selected.getIdUsuario()); 
+           if(u2!=null){
+               items = null;
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
+           }else{
                 update();
            }
-            
+        }
         }
     
 

@@ -15,14 +15,15 @@
                     <p:panelGrid columns="2" rendered="#{logroPersonalController.selected != null}">
                       
                         <p:outputLabel value="#{bundle.EditLogroPersonalLabel_idTipoLogro}" for="idTipoLogro" style="font-weight: bold"/>
-                        <p:selectOneMenu id="idTipoLogro" value="#{logroPersonalController.selected.idTipoLogro}" style="width: 160px">
+                        <p:selectOneMenu id="idTipoLogro" value="#{logroPersonalController.selected.idTipoLogro}" style="width: 160px" required="true" requiredMessage="Seleccione el tipo de logro"
+                                         effect="fade" filter="true" filterMatchMode="contains" height="140">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{tipoLogroController.itemsAvailableSelectOne}"
                                            var="idTipoLogroItem"
                                            itemValue="#{idTipoLogroItem}"/>
                         </p:selectOneMenu>
                          <p:outputLabel value="#{bundle.EditLogroPersonalLabel_descripcion}" for="descripcion" style="font-weight: bold"/>
-                        <p:inputTextarea id="descripcion"  rows="3" cols="33" value="#{logroPersonalController.selected.descripcion}" title="#{bundle.EditLogroPersonalTitle_descripcion}" />
+                        <p:inputTextarea id="descripcion"  maxlength="200" rows="3" cols="33" autoResize="false" value="#{logroPersonalController.selected.descripcion}" title="#{bundle.EditLogroPersonalTitle_descripcion}" required="true" requiredMessage="Escriba una descripción"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{logroPersonalController.update}" value="#{bundle.Save}" update="display,:LogroPersonalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LogroPersonalEditDialog');"/>

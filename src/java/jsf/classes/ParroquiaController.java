@@ -1,8 +1,8 @@
 package jsf.classes;
 
 import control.AccesoBean;
-import controller.Canton;
-import controller.Parroquia;
+import modelo.Canton;
+import modelo.Parroquia;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.ParroquiaFacade;
@@ -67,7 +67,9 @@ public class ParroquiaController implements Serializable {
    
     public List<Parroquia> getLista() {
         if (lista == null) {
-            lista = getFacade().listaParroquia(selectedC.getIdCanton());
+            if(selectedC!=null){
+               lista = getFacade().listaParroquia(selectedC.getIdCanton());
+            }
         }
         return lista;
     }

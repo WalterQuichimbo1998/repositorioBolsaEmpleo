@@ -36,7 +36,7 @@
             <h3 class="titulo_p">Habilitación de Perfil Estudiantil</h3>
             <h:form id="HojaVidaEstudianteListForm" style="text-align: center">
                 <p:panel>
-
+                    <p style="font-family:Arial;font-size: 15px;margin: auto; ">Las personas con el rol de <strong>ESTUDIANTE</strong> estarán disponibles para habilitar su perfil.</p>
                     <p:dataTable styleClass="tablaPersonalizada" id="datalist" value="#{hojaVidaEstudianteController.items}" var="item" style="margin-top: 5px"
                                  selectionMode="single" selection="#{hojaVidaEstudianteController.selected}"
                                  paginator="true"
@@ -48,8 +48,7 @@
                                  sortBy="#{item.idHojaVidaEstudiante}"
                                  sortOrder="descending"
                                  emptyMessage="No se encontraron datos..."
-                                 filteredValue="#{hojaVidaEstudianteController.listaPerfil}"
-                                 >
+                                 filteredValue="#{hojaVidaEstudianteController.listaPerfil}">
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
@@ -57,8 +56,7 @@
                             <p:inputText id="globalFilter"
                                          placeholder="Buscar" 
                                          onkeyup="PF('perfil').filter()" 
-                                         style="font-size: 18px !important;margin: 10px; text-align: center;border-radius: 20px;padding: 7px 0px;width: 500px;"
-                                         /> 
+                                         style="font-size: 18px !important;margin: 10px; text-align: center;border-radius: 20px;padding: 7px 0px;width: 500px;" /> 
                         </f:facet>
 
                         <p:column sortBy="#{item.idHojaVidaEstudiante}" filterBy="#{item.idHojaVidaEstudiante}" filterMatchMode="contains"  
@@ -73,31 +71,24 @@
                                 <h:outputText value="Nombres"/>
                             </f:facet>
                             <h:outputText value="#{item.idPersona.nombre}"/>
-
                         </p:column>
                         <p:column sortBy="#{item.idPersona.apellido}" filterBy="#{item.idPersona.apellido}" filterMatchMode="contains" >
                             <f:facet name="header">
                                 <h:outputText value="Apellidos"/>
                             </f:facet>
                             <h:outputText value="#{item.idPersona.apellido}"/>
-
                         </p:column>
                         <p:column sortBy="#{item.idPersona.cedula}" filterBy="#{item.idPersona.cedula}" filterMatchMode="contains" >
                             <f:facet name="header">
                                 <h:outputText value="Cédula"/>
                             </f:facet>
                             <h:outputText value="#{item.idPersona.cedula}"/>
-
                         </p:column>
-                        <p:column sortBy="#{item.idPersona.idPersona}" style="width: 120px;">
+                        <p:column sortBy="#{item.idPersona.idCarrera.carrera}" filterBy="#{item.idPersona.idCarrera.carrera}" filterMatchMode="contains" >
                             <f:facet name="header">
-                                <h:outputText value="Perfil"/>
+                                <h:outputText value="Carrera"/>
                             </f:facet>
-                            <p:commandButton value="Ver Perfil" styleClass="ver" icon="ui-icon-search" actionListener="#{hojaVidaEstudianteController.setPersona(item.idPersona)}"
-                                             action="/administrador/hojaVidaEstudiante/verPerfilEstudiante?faces-redirect=true">
-                                <f:actionListener binding="#{postulanteController.setId_per(item.idPersona.idPersona)}"  />
-                            </p:commandButton>
-
+                            <h:outputText value="#{item.idPersona.idCarrera.carrera}"/>
                         </p:column>
 
                         <f:facet name="footer">

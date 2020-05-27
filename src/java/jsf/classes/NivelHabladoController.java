@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.NivelHablado;
+import modelo.NivelHablado;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.NivelHabladoFacade;

@@ -26,7 +26,7 @@
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                     <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
-                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img>
+                         src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                 </p:commandLink>
             </li>
            
@@ -65,11 +65,8 @@
 
                                     <div style="width: 170px; height: 190px; ">
                                         <img style="width: 170px; height: 190px;border-radius: 3px; object-fit:cover;object-position:center center; " 
-                                             src="#{request.contextPath}/resources/#{postulanteController.existeFoto(item.idPersona.foto)==true ? item.idPersona.foto:'requerido/sin_foto_perfil.png'}" ></img>  
+                                             src="#{request.contextPath}/resources/#{item.idPersona.foto}" ></img>  
                                     </div>
-
-
-
                                     <div style="width: 60%; margin-left: 20px; padding-top: 10px;">
 
                                         <h:outputText value="Edad: " style="font-size: 17px; font-weight: bold"/>

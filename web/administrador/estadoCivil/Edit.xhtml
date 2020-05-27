@@ -14,7 +14,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{estadoCivilController.selected != null}">
                         <p:outputLabel value="#{bundle.EditEstadoCivilLabel_estadoCivil}" for="estadoCivil" style="font-weight: bold"/>
-                        <p:inputText id="estadoCivil" value="#{estadoCivilController.selected.estadoCivil}" title="#{bundle.EditEstadoCivilTitle_estadoCivil}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="estadoCivil" value="#{estadoCivilController.selected.estadoCivil}" title="#{bundle.EditEstadoCivilTitle_estadoCivil}" onkeyup="javascript:this.value = this.value.toUpperCase();" 
+                                     required="true" requiredMessage="Ingrese un estado civil" maxlength="25"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{estadoCivilController.update}" value="#{bundle.Save}" update="display,:EstadoCivilListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EstadoCivilEditDialog');"/>

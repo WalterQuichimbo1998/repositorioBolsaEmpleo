@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{carreraController.selected != null}">
                         <p:outputLabel value="Carrera:" for="carrera" style="font-weight: bold"/>
-                        <p:inputText id="carrera" value="#{carreraController.selected.carrera}" title="Carrera" style="width: 300px" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="carrera" value="#{carreraController.selected.carrera}" title="Carrera" style="width: 340px" onkeyup="javascript:this.value = this.value.toUpperCase();" 
+                                     required="true" requiredMessage="Ingrese la carrera" maxlength="45"/>
                     <p:column/>
                     <p:column>
                           <p:commandButton  styleClass="btn_g" actionListener="#{carreraController.create}" value="#{bundle.Save}" update="display,:CarreraListForm:datalist,:growl" oncomplete="handleSubmit(args,'CarreraCreateDialog');"/>

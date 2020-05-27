@@ -6,7 +6,7 @@
 package sessions.beans;
 
 import control.AccesoBean;
-import controller.ExperienciaLaboral;
+import modelo.ExperienciaLaboral;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

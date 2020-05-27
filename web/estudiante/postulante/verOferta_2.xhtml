@@ -17,7 +17,7 @@
             <h:commandLink class="prin" value="Ver Oferta" style="color: #086A87;" action="/estudiante/postulante/verOferta_2?faces-redirect=true"/>
         </ui:define>
         <ui:define name="caja">
-             <div class="c_oferta">
+            <div class="c_oferta">
                 <h3 class="titulo_p">Oferta Laboral</h3>
 
                 <h:form>
@@ -31,11 +31,10 @@
                                 <br/>
                                 <h3 class="txtO0">#{item.idEmpresa.nombreComercial}</h3>
                                 <br/>
-                                <c:if test="#{ofertaLaboralController.existeFoto(ofertaLaboralController.selected.idEmpresa.logotipo)==true}">
-                                    <div style="width: 270px; height: auto; margin: auto; background: white; border-radius: 10px; padding: 10px">
-                                        <img style="border-radius: 10px;"  width="100%" src="#{request.contextPath}/resources/#{ofertaLaboralController.selected.idEmpresa.logotipo}"></img>
-                                    </div>
-                                </c:if>
+                                <div style="width: 270px; height: auto; margin: auto; background: white; border-radius: 10px; padding: 10px;
+                                     #{item.idEmpresa.logotipo eq 'requerido/sin_logotipo.jpg' ? 'display:none;':''}">
+                                    <img style="border-radius: 10px;"  width="100%" src="#{request.contextPath}/resources/#{item.idEmpresa.logotipo}"></img>
+                                </div>
                             </p:fieldset>
                             <br/>
 

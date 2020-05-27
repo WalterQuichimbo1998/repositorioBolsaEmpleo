@@ -25,7 +25,7 @@
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                     <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
-                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img>
+                         src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                 </p:commandLink>
             </li>
         </ui:define>
@@ -156,22 +156,16 @@
                             </div>
                             <br/>
                             <h:commandButton value="Ayer"  actionListener="#{empresaController.fecha2()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
+                           
                             </h:commandButton>
                             <h:commandButton value="Buscar" class="botonDescargar" 
                                              actionListener="#{empresaController.verificarReporte}" id="export" >
-                                <f:ajax execute="@form" render="mensaje" />                                                                       
-                                <f:ajax render="des" />                                                                       
+                                <f:ajax execute="@form" render="mensaje des" />                                                                       
                             </h:commandButton>
 
                             <h:commandButton value="Hoy"  actionListener="#{empresaController.fecha1()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" />  
                             </h:commandButton>
                             <br/>
                             <br/>
@@ -216,7 +210,6 @@
                     <p:commandButton styleClass="botonC" value="No" oncomplete="PF('delete_empresa').hide()"/>
                 </h:form>
             </p:dialog>
-            <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
 </html>

@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.HorasCapacitaciones;
+import modelo.HorasCapacitaciones;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

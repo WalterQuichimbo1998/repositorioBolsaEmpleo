@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.NivelHablado;
+import modelo.NivelHablado;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author TOSHIBA
  */
-
+@Stateless
 public class NivelHabladoFacade extends AbstractFacade<NivelHablado> {
 
     @PersistenceContext(unitName = "EmpleoISTLPU")

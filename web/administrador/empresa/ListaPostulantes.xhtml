@@ -51,7 +51,7 @@
                                 <img style="width: 100px;height: 110px;border-radius: 4px;margin: 0;padding: 0;margin: auto;
                                      object-fit:cover;object-position:center center;
                                      background-size: cover;"     
-                                     src="#{request.contextPath}/resources/#{postulanteController.existeFoto(item.personaIdPersona.foto)==true ? item.personaIdPersona.foto:'requerido/sin_foto_perfil.png'}" ></img>  
+                                     src="#{request.contextPath}/resources/#{item.personaIdPersona.foto}" ></img>  
                             </p:column>
                             <p:column headerText="Postulante" sortBy="#{item.personaIdPersona.nombre}">
                                 <h:outputText value="#{item.personaIdPersona.nombre} #{item.personaIdPersona.apellido}" style="font-size: 18px;font-weight: bold"/>

@@ -1,8 +1,8 @@
 package jsf.classes;
 
 import control.AccesoBean; 
-import controller.Canton;
-import controller.Provincia;
+import modelo.Canton;
+import modelo.Provincia;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.CantonFacade;
@@ -57,7 +57,9 @@ public class CantonController implements Serializable {
 
     public List<Canton> getLista() {
        if (lista == null) {
-            lista = getFacade().listaCanton(selectedP.getIdProvincia());
+           if(selectedP!=null){
+                 lista = getFacade().listaCanton(selectedP.getIdProvincia());
+           }
         }
         return lista;
     }

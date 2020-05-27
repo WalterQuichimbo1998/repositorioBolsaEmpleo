@@ -28,7 +28,7 @@
         <ui:define name="dir">
            <h:commandLink class="prin" value="Inicio"  action="/administrador/administrador?faces-redirect=true"/>
             <h:commandLink class="prin" value="/" disabled="true"/>
-            <h:commandLink class="prin" value="Listado de  Empresas" style="color: #086A87;" action="/administrador/empresa/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="Listado de  Empresas"  action="/administrador/empresa/List?faces-redirect=true"/>
             <h:commandLink class="prin" value="/" disabled="true"/>
             <h:commandLink class="prin" value="Ver Empresa" style="color: #086A87;" action="/administrador/empresa/verEmpresa?faces-redirect=true"/>
         </ui:define>
@@ -42,7 +42,6 @@
                    <div class="infoE2">
                         <h3 class="textoE" >Nombre Comercial</h3> 
                         <h:inputText class="txtE0" value="#{empresaController.selected.nombreComercial}" 
-                                     onkeyup="javascript:this.value = this.value.toUpperCase();" 
                                      readonly="true"/>
                     </div>
                     <div class="infoE">
@@ -81,9 +80,7 @@
                         <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                         <f:selectItems value="#{empresaController.listaProvincias}"
                                        var="idProvinciaItem"
-                                       itemValue="#{idProvinciaItem}" />          
-                        <f:ajax execute="combo" render="combo2"/>
-                        <f:ajax render="menuParroquia"/>
+                                       itemValue="#{idProvinciaItem}" />  
                     </h:selectOneMenu>
                 </div>
 
@@ -94,7 +91,6 @@
                         <f:selectItems value="#{empresaController.listaCanton}"
                                        var="idCantonItem"
                                        itemValue="#{idCantonItem}" />
-                        <f:ajax execute="combo2" render="menuParroquia" />
                     </h:selectOneMenu>
                 </div>
                 <div class="infoE">

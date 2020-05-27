@@ -1,7 +1,7 @@
 package jsf.classes;
 
 import control.AccesoBean;
-import controller.InstruccionFormal;
+import modelo.InstruccionFormal;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.InstruccionFormalFacade;

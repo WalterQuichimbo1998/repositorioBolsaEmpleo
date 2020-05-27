@@ -5,8 +5,8 @@
  */
 package sessions.beans;
 
-import controller.Canton;
-import controller.Parroquia;
+import modelo.Canton;
+import modelo.Parroquia;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

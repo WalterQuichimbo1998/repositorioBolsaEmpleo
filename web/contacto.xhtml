@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">  
     <ui:composition template="index.xhtml">
         <ui:define name="link">
-           <li>
+            <li>
                 <p:commandButton value="Inicio" class="btn2" action="index?faces-redirect=true"/>
             </li>
             <li>
@@ -26,11 +26,11 @@
             </li>
         </ui:define>
         <ui:define name="caja">
-         <br/>
-         <br/>               
-         <div class="contacto" style="display: table">           
+            <br/>
+            <br/>               
+            <div class="contacto" style="display: table">           
                 <img src="resources/img/portada2.png" style="margin: 0;width:100%;height: auto;object-fit:cover;
-                         object-position:center center; "/>
+                     object-position:center center; "/>
                 <h2 class="h2">Instituto Superior Tecnológico Limón</h2>
                 <h:outputLabel value="Teléfono: " style="font-size: 18px; font-weight: bold;font-family:Arial" />
                 <h:outputLabel value="(07) 277-1303" style="font-size: 18px;font-family: arial;"/>
@@ -45,12 +45,25 @@
                 <a id="link2" href="https://tecnologicolimon.edu.ec/" target="_blank">tecnologicolimon.edu.ec/</a>
                 <br/>
                 <br/>
-                <img src="resources/img/logo_bolsa2.png" style="width: 130px;margin: auto"/>
-                <br/>                 
+                <div>
+                    <a href="https://www.facebook.com/tecnologicolimon1/" target="_blank" style="display: inline-block;">
+                        <img src="resources/img/facebook.png" alt="Facebook" class="link"/>
+                    </a>
+                    <a href="https://twitter.com/tecnologicolim1" target="_blank" style="display: inline-block;">
+                        <img src="resources/img/twitter.png" alt="Twitter" class="link"/>
+                    </a>
+                    <a href="https://www.linkedin.com/in/instituto-superior-tecnolgico-limn-27ba32195/" target="_blank" style="display: inline-block;">
+                        <img src="resources/img/linkedin.png" alt="Likedin" class="link"/>
+                    </a>
+                </div>
+                <br/>       
+                <br/>      
+                 <img src="resources/img/logo_bolsa2.png" style="width: 130px;margin: auto"/>
+               
                 <span class="ir-arriba">-</span>              
             </div>
-         <br/>
-         <br/>
+            <br/>
+            <br/>
         </ui:define>
     </ui:composition>  
 </html>

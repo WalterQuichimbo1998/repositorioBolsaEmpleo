@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{etniaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditEtniaLabel_etnia}" for="etnia" style="font-weight: bold"/>
-                        <p:inputText id="etnia" value="#{etniaController.selected.etnia}" title="#{bundle.EditEtniaTitle_etnia}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="etnia" value="#{etniaController.selected.etnia}" title="#{bundle.EditEtniaTitle_etnia}" onkeyup="javascript:this.value = this.value.toUpperCase();" 
+                                     required="true" requiredMessage="Ingrese una etnia" maxlength="30"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{etniaController.update}" value="#{bundle.Save}" update="display,:EtniaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EtniaEditDialog');"/>

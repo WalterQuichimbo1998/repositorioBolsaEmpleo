@@ -58,11 +58,11 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPreferenciaLaboralTitle_trabajarResidencia}"/>
                             </f:facet>
-                            <h:outputText value="#{preferenciaLaboralController.pasarNumero(item.trabajarResidencia)}"/>
+                            <h:outputText rendered="#{item.trabajarResidencia!=null}" value="#{preferenciaLaboralController.pasarNumero(item.trabajarResidencia)}"/>
                         </p:column>
                        
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" styleClass="crear" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{preferenciaLaboralController.prepareCreate}" update=":PreferenciaLaboralCreateForm" oncomplete="PF('PreferenciaLaboralCreateDialog').show()"/>
+                            <p:commandButton rendered="#{preferenciaLaboralController.items.size()==0}" id="createButton" styleClass="crear" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{preferenciaLaboralController.prepareCreate}" update=":PreferenciaLaboralCreateForm" oncomplete="PF('PreferenciaLaboralCreateDialog').show()"/>
                             <p:commandButton id="viewButton" styleClass="ver"  icon="ui-icon-search" value="#{bundle.View}" update=":PreferenciaLaboralViewForm" oncomplete="PF('PreferenciaLaboralViewDialog').show()" disabled="#{empty preferenciaLaboralController.selected}"/>
                             <p:commandButton id="editButton" styleClass="editar"  icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PreferenciaLaboralEditForm" oncomplete="PF('PreferenciaLaboralEditDialog').show()" disabled="#{empty preferenciaLaboralController.selected}"/>
                             <p:commandButton id="deleteButton" styleClass="eliminar" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{preferenciaLaboralController.destroy}" update=":growl,datalist" disabled="#{empty preferenciaLaboralController.selected}">

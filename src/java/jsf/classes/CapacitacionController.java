@@ -4,7 +4,7 @@ import com.lowagie.text.Cell;
 import com.lowagie.text.Row;
 import control.AccesoBean;
 import control.Conexion;
-import controller.Capacitacion;
+import modelo.Capacitacion;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

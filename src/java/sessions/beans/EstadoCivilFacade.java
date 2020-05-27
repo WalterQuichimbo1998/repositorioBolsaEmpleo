@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.EstadoCivil;
+import modelo.EstadoCivil;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

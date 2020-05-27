@@ -14,7 +14,7 @@
                     <p:panelGrid columns="2" rendered="#{nivelAcademicoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateNivelAcademicoLabel_nivelAcademico}" for="nivelAcademico" style="font-weight: bold"/>
                         <p:inputText id="nivelAcademico" value="#{nivelAcademicoController.selected.nivelAcademico}" title="#{bundle.CreateNivelAcademicoTitle_nivelAcademico}" style="width: 200px" 
-                                     onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                                     onkeyup="javascript:this.value = this.value.toUpperCase();" required="true" requiredMessage="Escriba el nivel académico" maxlength="40"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{nivelAcademicoController.create}" value="#{bundle.Save}" update="display,:NivelAcademicoListForm:datalist,:growl" oncomplete="handleSubmit(args,'NivelAcademicoCreateDialog');"/>

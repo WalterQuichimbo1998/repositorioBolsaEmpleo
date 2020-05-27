@@ -35,9 +35,13 @@
         </ui:define>
         <ui:define name="caja">
 
+            <center>
+                    <h:outputLabel rendered="#{parroquiaController.selectedC==null}" value="No se a seleccionado un cantón"
+                               style="font-size: 22px;margin: auto;color: #454545;"/>
+                </center>
             
-            <h:form id="ParroquiaListForm" class="tablaCentro">
-                <h3 class="titulo_p">#{parroquiaController.selectedC.canton}</h3>
+            <h:form id="ParroquiaListForm" class="tablaCentro" rendered="#{parroquiaController.selectedC!=null}">
+                <h3 class="titulo_p" style="font-size: 28px;">#{parroquiaController.selectedC.canton}</h3>
                 <p:panel>
                     <p:dataTable id="datalist" value="#{parroquiaController.lista}" var="item"
                                  selectionMode="single" selection="#{parroquiaController.selected}"
@@ -46,8 +50,7 @@
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  paginatorPosition="bottom"
-                                 emptyMessage="No hay datos."
-                                 >
+                                 emptyMessage="No hay datos.">
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>

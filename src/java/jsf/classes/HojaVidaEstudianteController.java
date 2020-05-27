@@ -1,7 +1,7 @@
 package jsf.classes;
 
-import controller.HojaVidaEstudiante;
-import controller.Persona;
+import modelo.HojaVidaEstudiante;
+import modelo.Persona;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.HojaVidaEstudianteFacade;
@@ -74,7 +74,9 @@ public class HojaVidaEstudianteController implements Serializable {
     
 
     public List<HojaVidaEstudiante> getHojaVida() {
-        hojaVida=getFacade().listaHojaEstudiante(persona.getIdPersona());
+        if(persona!=null){
+            hojaVida=getFacade().listaHojaEstudiante(persona.getIdPersona());
+        }
         return hojaVida;
     }
 

@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.TipoCertificado;
+import modelo.TipoCertificado;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

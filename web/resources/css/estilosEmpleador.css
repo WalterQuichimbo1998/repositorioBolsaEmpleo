@@ -967,6 +967,11 @@ nav ul li{
     background: #64cdad;
     text-shadow:none;
 }
+.tabla_c .ui-widget-content{
+    border:1px solid white;
+    text-align: center;
+}
+
 #head3{
     width: 100%;
     height: auto;

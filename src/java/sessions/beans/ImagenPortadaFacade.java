@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.ImagenPortada;
+import modelo.ImagenPortada;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

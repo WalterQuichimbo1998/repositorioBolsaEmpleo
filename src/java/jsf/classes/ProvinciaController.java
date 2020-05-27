@@ -1,8 +1,8 @@
 package jsf.classes;
 
 import control.AccesoBean;
-import controller.Canton;
-import controller.Provincia;
+import modelo.Canton;
+import modelo.Provincia;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.ProvinciaFacade;

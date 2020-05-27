@@ -66,7 +66,7 @@
                                
                                         <div class="botones2" style="padding-top: 31px;">
                                             <h:commandLink class="botones"  action="/estudiante2/verPerfilPersona_D?faces-redirect=true" >
-                                                 <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img> 
+                                                 <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                                                 </h:commandLink>
                                             <div class="txt_boton">Mi Perfil</div>
                                         </div>  

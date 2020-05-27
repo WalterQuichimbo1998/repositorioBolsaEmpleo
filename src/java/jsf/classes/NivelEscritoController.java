@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.NivelEscrito;
+import modelo.NivelEscrito;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.NivelEscritoFacade;

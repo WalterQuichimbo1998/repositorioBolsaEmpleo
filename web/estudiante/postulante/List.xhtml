@@ -102,6 +102,8 @@
                             <br/>     
                             <h:outputText value="#{item.confirmacion eq true ? 'Puesto Confirmado' :''}"  
                                           style=" #{item.confirmacion eq true ? 'font-size: 16px;color:#454545;font-weight:bold;font-family:Arial;':''}"/>
+                            <br/>
+                            <h:outputText value="#{item.confirmacion eq true ? postulanteController.fecha(item.fechaConfirmacion) :''}"/>
                         </p:column>
                         <p:column headerText="Acción" style="width:110px" sortBy="#{item.idPostulante}">
 
@@ -154,21 +156,14 @@
                             </div>
                             <br/>
                             <h:commandButton value="Ayer"  actionListener="#{postulanteController.fecha2()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
                             </h:commandButton>
                             <h:commandButton value="Buscar" class="botonDescargar" 
                                              actionListener="#{postulanteController.verificarReporte}" id="export" >
-                                <f:ajax execute="@form" render="mensaje" />                                                                       
-                                <f:ajax render="des" />                                                                       
+                                <f:ajax execute="@form" render="mensaje des" />                                                                       
                             </h:commandButton>
                             <h:commandButton value="Hoy"  actionListener="#{postulanteController.fecha1()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
                             </h:commandButton>
                             <br/>
                             <br/>

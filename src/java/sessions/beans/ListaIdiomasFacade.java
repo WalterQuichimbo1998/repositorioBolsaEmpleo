@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.ListaIdiomas;
+import modelo.ListaIdiomas;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

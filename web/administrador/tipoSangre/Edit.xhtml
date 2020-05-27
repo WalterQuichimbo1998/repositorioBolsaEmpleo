@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoSangreController.selected != null}">
                         <p:outputLabel value="#{bundle.EditTipoSangreLabel_tipoSangre}" for="tipoSangre" style="font-weight: bold"/>
-                        <p:inputText id="tipoSangre" value="#{tipoSangreController.selected.tipoSangre}" title="#{bundle.EditTipoSangreTitle_tipoSangre}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="tipoSangre" value="#{tipoSangreController.selected.tipoSangre}" title="#{bundle.EditTipoSangreTitle_tipoSangre}" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     required="true" requiredMessage="Escriba el tipo de sangre" maxlength="20"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{tipoSangreController.update}" value="#{bundle.Save}" update="display,:TipoSangreListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipoSangreEditDialog');"/>

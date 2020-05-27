@@ -141,7 +141,7 @@
 .txtEA{
     width: 97%;
     color: #454545;
-    font-size: 20px;
+    font-size: 18px !important;
     font-family: Arial;
     font-weight: normal;
     border: none;
@@ -152,6 +152,7 @@
     background: none;
     border:2px solid #f0f3f4;
     padding-top: 10px;
+    resize: none;
 
 }
 .txtEA:hover{

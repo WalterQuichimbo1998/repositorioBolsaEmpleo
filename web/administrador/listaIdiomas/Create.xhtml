@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{listaIdiomasController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateListaIdiomasLabel_nombreIdioma}" for="nombreIdioma" style="font-weight: bold"/>
-                        <p:inputText id="nombreIdioma" value="#{listaIdiomasController.selected.nombreIdioma}" title="#{bundle.CreateListaIdiomasTitle_nombreIdioma}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="nombreIdioma" value="#{listaIdiomasController.selected.nombreIdioma}" title="#{bundle.CreateListaIdiomasTitle_nombreIdioma}" onkeyup="javascript:this.value = this.value.toUpperCase();" 
+                                     required="true" requiredMessage="Escriba el nombre del idioma" maxlength="20"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{listaIdiomasController.create}" value="#{bundle.Save}" update="display,:ListaIdiomasListForm:datalist,:growl" oncomplete="handleSubmit(args,'ListaIdiomasCreateDialog');"/>

@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoCertificadoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateTipoCertificadoLabel_tipoCertificado}" for="tipoCertificado" style="font-weight: bold"/>
-                        <p:inputText id="tipoCertificado" value="#{tipoCertificadoController.selected.tipoCertificado}" title="#{bundle.CreateTipoCertificadoTitle_tipoCertificado}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="tipoCertificado" value="#{tipoCertificadoController.selected.tipoCertificado}" title="#{bundle.CreateTipoCertificadoTitle_tipoCertificado}" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     style="width: 200px" required="true" requiredMessage="Escriba el tipo de certificado" maxlength="45"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{tipoCertificadoController.create}" value="#{bundle.Save}" update="display,:TipoCertificadoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoCertificadoCreateDialog');"/>

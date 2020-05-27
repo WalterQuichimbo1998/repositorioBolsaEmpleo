@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.TipoSangre;
+import modelo.TipoSangre;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.TipoSangreFacade;

@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.AreaEstudio;
+import modelo.AreaEstudio;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.AreaEstudioFacade;

@@ -1,7 +1,7 @@
 package jsf.classes;
 
 import control.UtilPath;
-import controller.ImagenPortada;
+import modelo.ImagenPortada;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -90,6 +90,7 @@ public class ImagenPortadaController implements Serializable {
 
     public void update() {
         persist(PersistAction.UPDATE, "Imagen actualizada con éxito");
+        items=null;
     }
 
     public void destroy() {
@@ -219,6 +220,7 @@ public class ImagenPortadaController implements Serializable {
                                 out.close();
                                 create();
                                 file = null;
+
                             }
                         } catch (IOException e) {
                         }
@@ -267,8 +269,7 @@ public class ImagenPortadaController implements Serializable {
                             out.close();
                             update();
                             file = null;
-                            items=null;
-                             items = getFacade().findAll();
+                            
                         }
                     } catch (IOException e) {
                     }

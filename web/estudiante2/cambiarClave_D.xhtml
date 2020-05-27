@@ -19,17 +19,19 @@
                 <h:form class="formulario" style="margin-top: 20px;display:block;">                  
                     <div class="info2">
                         <h3  class="textoClave" for="c0" >Clave actual</h3>
-                        <p:password id="c0" styleClass="inputText" value="#{usuarioController.claveAntigua}" required="true" requiredMessage="Clave actual Campo requerido"/>
+                        <p:password id="c0" styleClass="inputText" maxlength="30" value="#{usuarioController.claveAntigua}" required="true" requiredMessage="Clave actual Campo requerido"/>
                         <p:message for="c0"/>  
+                        <p:tooltip for="c0" value="Máximo 30 carácteres" trackMouse="true" style="box-shadow: none;font-size: 14px !important" />
                         <h3  class="textoClave" for="c1" >Nueva Clave</h3>
-                        <p:password id="c1" styleClass="inputText" value="#{usuarioController.selected.clave}"
+                        <p:password id="c1" styleClass="inputText" maxlength="30" value="#{usuarioController.selected.clave}"
                                     validatorMessage="Las claves no coinciden" match="c2" 
-                                    required="true" requiredMessage="Clave nueva: Campo requerido, al menos 6 caracteres"
-                                     />
+                                    required="true" requiredMessage="Clave nueva: Campo requerido, al menos 6 caracteres"/>
                         <p:message for="c1"/>
+                        <p:tooltip for="c1" value="Máximo 30 carácteres" trackMouse="true" style="box-shadow: none;font-size: 14px !important" />
                         <h3  class="textoClave" for="c2" >Confirme Clave</h3>
-                        <p:password id="c2"  styleClass="inputText" />
+                        <p:password id="c2" maxlength="30" styleClass="inputText" />
                         <p:message for="c2"/>
+                        <p:tooltip for="c2" value="Máximo 30 carácteres" trackMouse="true" style="box-shadow: none;font-size: 14px !important" />
                     </div>
                     <center>
                         <p:commandButton  styleClass="btn_guardar" ajax="false" value="Actualizar Clave" actionListener="#{usuarioController.verificarClave}"/>
@@ -51,8 +53,9 @@
                         <h:outputLabel class="textoClave" style="margin-left: 10px;color:#454545" value="#{usuarioController.selected.usuario}"/>
                         <br/>
                         <br/>
-                         <p:inputText id="c4" styleClass="inputText"  value="#{usuarioController.user}" placeholder="Nuevo usuario" required="true" requiredMessage="Usuario: Campo requerido, al menos 6 caracteres"/>    
+                        <p:inputText id="c4" styleClass="inputText" maxlength="30"  value="#{usuarioController.user}" placeholder="Nuevo usuario" required="true" requiredMessage="Usuario: Campo requerido, al menos 6 caracteres"/>    
                         <p:message for="c4"/>
+                        <p:tooltip for="c4" value="Máximo 30 carácteres" trackMouse="true" style="box-shadow: none;font-size: 14px !important" />
                     </div>
                     <center>
                         <p:commandButton  styleClass="btn_guardar" ajax="false" value="Actualizar Usuario" actionListener="#{usuarioController.verficarUsuario()}"/>

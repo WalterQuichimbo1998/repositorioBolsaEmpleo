@@ -24,7 +24,7 @@
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                     <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
-                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img>
+                         src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                 </p:commandLink>
             </li>
         </ui:define>
@@ -40,27 +40,31 @@
                 <h3 class="titulo_pE">Actualizar Empresa</h3>
                 <br/>
                 <br/>
-                <h:form id="formularioE">
-
+                <center>
+                    <h:outputLabel rendered="#{empresaController.selected==null}" value="Seleccione una empresa"
+                                   style="font-size: 20px;font-family: Arial"/>
+                </center>
+                <h:form id="formularioE" rendered="#{empresaController.selected!=null}">
                     <div class="infoE2">
-                        <p:outputLabel class="textoE2" value="Nombre Comercial" for="nom"/>
-                        <h:inputText id="nom" class="txtE0" value="#{empresaController.selected.nombreComercial}" 
+                        <h3 class="textoE2">Nombre Comercial<strong style="color: red;"> *</strong></h3>
+                        <h:inputText id="nom" class="txtE0" maxlength="60" title="Máximo 60 carácteres" value="#{empresaController.selected.nombreComercial}" 
                                      onkeyup="javascript:this.value = this.value.toUpperCase();" 
-                                     required="true" requiredMessage="Ingrese al menos un NOMBRE COMERCIAL" />
+                                     required="true" requiredMessage="Ingrese el NOMBRE COMERCIAL" />
+                        <p:message for="nom"/>
                     </div>
                     <div class="infoE">
                         <h3 class="textoE" >Cédula/Ruc</h3>
-                        <h:inputText class="txtE" value="#{empresaController.selected.rucCedula}" />
+                        <h:inputText maxlength="20" class="txtE" value="#{empresaController.selected.rucCedula}" />
 
                     </div>
                     <div class="infoE">
                         <h3 class="textoE" >Razón social</h3>
-                        <h:inputText class="txtE" value="#{empresaController.selected.razonSocial}" />
+                        <h:inputText maxlength="45" class="txtE" value="#{empresaController.selected.razonSocial}" />
                     </div>
 
                     <div class="infoE">  
-                        <h3  class="textoE" >Tipo empresa</h3>
-                        <h:selectOneMenu class="txtCE" value="#{empresaController.selected.idTipoEmpresa}" >
+                        <h3  class="textoE" >Tipo empresa<strong style="color: red;"> *</strong></h3>
+                        <h:selectOneMenu class="txtCE" value="#{empresaController.selected.idTipoEmpresa}" required="true" requiredMessage="Seleccione Tipo de empresa">
                             <f:selectItem itemLabel="-Seleccione-" itemDisabled="true"/>
                             <f:selectItems value="#{tipoEmpresaController.itemsAvailableSelectOne}"
                                            var="idTipoEmpresaItem"
@@ -79,8 +83,8 @@
 
 
                     <div class="infoE">
-                        <h3 class="textoE" >Provincia</h3>
-                        <h:selectOneMenu class="txtCE" id="combo" value="#{empresaController.selected.idProvincia}">
+                      <h3 class="textoE">Provincia<strong style="color: red;"> *</strong></h3>
+                        <h:selectOneMenu class="txtCE" id="combo" value="#{empresaController.selected.idProvincia}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{empresaController.listaProvincias}"
                                            var="idProvinciaItem"
@@ -91,7 +95,7 @@
                     </div>
 
                     <div class="infoE">
-                        <h3 class="textoE" >Cantón</h3>
+                        <h3 class="textoE">Cantón<strong style="color: red;"> *</strong></h3>
                         <h:selectOneMenu class="txtCE" id="combo2" value="#{empresaController.selected.idCanton}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{empresaController.listaCanton}"
@@ -110,39 +114,39 @@
                         </h:selectOneMenu>
                     </div>
                     <div class="infoE">
-                        <p:outputLabel class="textoE" value="Dirección" for="dir"/>
-                        <br style="margin-bottom: 4px"/>
-                        <h:inputText id="dir" class="txtE" value="#{empresaController.selected.direccion}" required="true" requiredMessage="Ingrese al menos una direccion"/>
+                        <h3 class="textoE">Dirección<strong style="color: red;"> *</strong></h3>
+                        <h:inputText maxlength="45" id="dir" class="txtE" value="#{empresaController.selected.direccion}" required="true" requiredMessage="Ingrese al menos una direccion"/>
+                        <p:message for="dir"/>
                     </div>
                     <div class="infoE">
                         <h3 class="textoE" >Teléfono oficina</h3>
-                        <h:inputText class="txtE" value="#{empresaController.selected.telefonoOficina}" />
+                        <h:inputText maxlength="10" class="txtE" value="#{empresaController.selected.telefonoOficina}" />
                     </div>
 
                     <div class="infoE">
                         <h3 class="textoE" >Celular</h3>
-                        <h:inputText class="txtE"  value="#{empresaController.selected.celular}" />
+                        <h:inputText maxlength="10" class="txtE"  value="#{empresaController.selected.celular}" />
                     </div>
                     <div class="infoE">
                         <h3  class="textoE" >Página web</h3>
-                        <h:inputText class="txtE" value="#{empresaController.selected.paginaWeb}"/>
+                        <h:inputText maxlength="45" class="txtE" value="#{empresaController.selected.paginaWeb}"/>
                     </div>
                     <div class="infoE">
-
-                    </div>
-
-
-                    <div class="infoE"> 
-                        <h3  class="textoE" >Servicios</h3>
-                        <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.servicios}" />
                     </div>
                     <div class="infoE"> 
-                        <h3  class="textoE" >Experiencias</h3>
-                        <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.experiencias}" />
+                        <h3  class="textoE">Servicios</h3>
+                        <p:inputTextarea class="txtEA" rows="5" cols="33" value="#{empresaController.selected.servicios}" title="Máximo 250 letras o carácteres"
+                                         placeholder="Ingrese una pequeña descripción" autoResize="off" />
                     </div>
                     <div class="infoE"> 
-                        <h3  class="textoE" >Actividades</h3>
-                        <h:inputTextarea class="txtEA" rows="6" cols="33" value="#{empresaController.selected.actividades}" />
+                        <h3  class="textoE">Experiencias</h3>
+                        <p:inputTextarea class="txtEA" rows="5" cols="33" value="#{empresaController.selected.experiencias}" title="Máximo 250 letras o carácteres"
+                                         placeholder="Ingrese una pequeña descripción" autoResize="off" />
+                    </div>
+                    <div class="infoE"> 
+                        <h3  class="textoE">Actividades</h3>
+                        <p:inputTextarea class="txtEA" rows="5" cols="33" value="#{empresaController.selected.actividades}" title="Máximo 250 letras o carácteres"
+                                         placeholder="Ingrese una pequeña descripción" autoResize="off" />
                     </div>
 
                     <div style="margin: auto; width: 100%; display: flex">                

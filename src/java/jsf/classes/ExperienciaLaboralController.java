@@ -1,7 +1,7 @@
 package jsf.classes;
 
 import control.AccesoBean;
-import controller.ExperienciaLaboral;
+import modelo.ExperienciaLaboral;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.ExperienciaLaboralFacade;

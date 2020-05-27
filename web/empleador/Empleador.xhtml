@@ -22,7 +22,7 @@
         <h:outputScript library="js" name="menu_1.js"/>
         <h:outputScript library="js" name="waves.js"/>
     </h:head>
-    <h:body rendered="#{accesoBean.usuarioNavegacion() eq 'EMPRESA'}">
+    <h:body rendered="#{accesoBean.usuarioNavegacion() eq 'EMPLEADOR'}">
         <p:growl id="growl" life="3000" />
         <div class="contenedor">
             <div class="cont">
@@ -53,7 +53,7 @@
                                     <li id="ingresar1">                                   
                                         <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                                             <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle;"
-                                                 src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img>
+                                                 src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                                         </p:commandLink>
                                     </li>
                                 </ui:insert>
@@ -78,7 +78,7 @@
                             <h:panelGroup style="display: inline-block; text-align: center; "> 
                                 <div class="botones2" style="padding-top: 31px;">
                                     <h:commandLink class="botones" actionListener="#{personaController.correoPersona()}"  action="/empleador/verPerfilPersona_2?faces-redirect=true" >
-                                        <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img> 
+                                        <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                                     </h:commandLink>
                                     <div class="txt_boton">Mi Perfil</div>
                                 </div>                             
@@ -119,19 +119,10 @@
                   closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" >
             <h:form style="margin: 0;padding: 0;padding-left: 40px;padding-right: 40px;display: block;" >            
                 <center>
-                    <c:if test="#{personaController.existeFoto(personaController.selected.foto) == false}">
                         <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
-                            <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                                 src="#{request.contextPath}/resources/requerido/sin_foto_perfil.png"></img>
-                        </div>
-                    </c:if>
-                    <c:if test="#{personaController.existeFoto(personaController.selected.foto) == true}">
-                        <br/>
-                        <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; box-shadow: 0px 0px 2px 1px #454545;">
                             <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
                                  src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                         </div>
-                    </c:if>
                     <br/>
                     <br/>
                 </center>

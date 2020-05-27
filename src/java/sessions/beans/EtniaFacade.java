@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.Etnia;
+import modelo.Etnia;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

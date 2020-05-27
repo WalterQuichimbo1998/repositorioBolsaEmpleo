@@ -14,7 +14,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{hojaVidaEstudianteController.selected != null}">
                         <p:outputLabel value="ESTUDIANTE: " for="idPersona" style="font-weight: bold" />
-                        <p:selectOneMenu id="idPersona" value="#{hojaVidaEstudianteController.selected.idPersona}" required="true" requiredMessage="Seleccione una persona">
+                        <p:selectOneMenu id="idPersona" value="#{hojaVidaEstudianteController.selected.idPersona}" required="true" requiredMessage="Seleccione una persona"
+                                         effect="fade" style="width:300px" filter="true" filterMatchMode="contains" height="180">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{personaController.listaEstudiante}"
                                            var="idPersonaItem"

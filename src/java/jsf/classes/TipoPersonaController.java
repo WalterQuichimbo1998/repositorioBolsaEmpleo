@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.TipoPersona;
+import modelo.TipoPersona;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.TipoPersonaFacade;

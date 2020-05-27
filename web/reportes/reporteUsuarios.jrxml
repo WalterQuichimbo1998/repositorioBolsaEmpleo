@@ -9,28 +9,23 @@
      usuario.`usuario` AS usuario_usuario,
      usuario.`clave` AS usuario_clave,
      usuario.`id_persona` AS usuario_id_persona,
-     usuario.`id_rol` AS usuario_id_rol,
+     usuario.`rol` AS usuario_rol,
      persona.`id_persona` AS persona_id_persona,
      persona.`nombre` AS persona_nombre,
-     persona.`apellido` AS persona_apellido,
-     rol.`id_rol` AS rol_id_rol,
-     rol.`rol` AS rol_rol
+     persona.`apellido` AS persona_apellido
 FROM
      `persona` persona INNER JOIN `usuario` usuario ON persona.`id_persona` = usuario.`id_persona`
-     INNER JOIN `rol` rol ON usuario.`id_rol` = rol.`id_rol`
-WHERE rol='ESTUDIANTE' OR rol='EMPRESA'
+WHERE usuario.rol='ESTUDIANTE' OR usuario.rol='EMPLEADOR'
 ORDER BY usuario.id_usuario DESC]]>
 	</queryString>
 	<field name="usuario_id_usuario" class="java.lang.Integer"/>
 	<field name="usuario_usuario" class="java.lang.String"/>
 	<field name="usuario_clave" class="java.lang.String"/>
 	<field name="usuario_id_persona" class="java.lang.Integer"/>
-	<field name="usuario_id_rol" class="java.lang.Integer"/>
+	<field name="usuario_rol" class="java.lang.String"/>
 	<field name="persona_id_persona" class="java.lang.Integer"/>
 	<field name="persona_nombre" class="java.lang.String"/>
 	<field name="persona_apellido" class="java.lang.String"/>
-	<field name="rol_id_rol" class="java.lang.Integer"/>
-	<field name="rol_rol" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -94,7 +89,7 @@ ORDER BY usuario.id_usuario DESC]]>
 				<text><![CDATA[Clave]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="640" y="1" width="134" height="22" uuid="a6ce14f2-7325-4d21-8956-fcef6cc85846"/>
+				<reportElement x="645" y="2" width="142" height="22" uuid="06204a27-ecbd-43ba-8dcb-c4bedd53dd8a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -126,11 +121,11 @@ ORDER BY usuario.id_usuario DESC]]>
 				<textFieldExpression><![CDATA[$F{usuario_clave}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="640" y="0" width="134" height="20" uuid="e4199d51-c2b8-49bc-87c9-fef13d776b2e"/>
+				<reportElement x="645" y="0" width="142" height="20" uuid="e560cef6-0de0-415a-a031-ad7d7dbf91c0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{rol_rol}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{usuario_rol}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

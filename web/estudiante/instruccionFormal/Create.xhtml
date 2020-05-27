@@ -14,14 +14,14 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{instruccionFormalController.selected != null}">
                        <p:outputLabel value="#{bundle.CreateInstruccionFormalLabel_institucion}" for="institucion" style="font-weight: bold"/>
-                        <p:inputText id="institucion" value="#{instruccionFormalController.selected.institucion}" title="#{bundle.CreateInstruccionFormalTitle_institucion}" 
-                                     style="width: 300px" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
-                        <p:outputLabel value="#{bundle.CreateInstruccionFormalLabel_codigoSenescyt}" for="codigoSenescyt" style="font-weight: bold"/>
-                        <p:inputText id="codigoSenescyt" value="#{instruccionFormalController.selected.codigoSenescyt}" title="#{bundle.CreateInstruccionFormalTitle_codigoSenescyt}" 
-                                      style="width: 190px"/>
+                       <p:inputText id="institucion" value="#{instruccionFormalController.selected.institucion}" title="#{bundle.CreateInstruccionFormalTitle_institucion}" maxlength="45" 
+                                     style="width: 300px" onkeyup="javascript:this.value = this.value.toUpperCase();" required="true" requiredMessage="Escriba el nombre de la institución"/>
+                        <p:outputLabel value="#{bundle.CreateInstruccionFormalLabel_codigoSenescyt}" for="codigoSenescyt" style="font-weight: bold" />
+                        <p:inputText id="codigoSenescyt" value="#{instruccionFormalController.selected.codigoSenescyt}" title="#{bundle.CreateInstruccionFormalTitle_codigoSenescyt}" maxlength="45"
+                                      style="width: 190px" required="true" requiredMessage="Ingrese el código senescyt"/>
                        
                         <p:outputLabel value="#{bundle.CreateInstruccionFormalLabel_idNivelAcademico}" for="idNivelAcademico" style="font-weight: bold"/>
-                        <p:selectOneMenu id="idNivelAcademico" value="#{instruccionFormalController.selected.idNivelAcademico}"  style="width: 200px" >
+                        <p:selectOneMenu id="idNivelAcademico" value="#{instruccionFormalController.selected.idNivelAcademico}"  style="width: 200px" required="true" requiredMessage="Seleccione el nivel académico">
                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>   
                             <f:selectItems value="#{nivelAcademicoController.itemsAvailableSelectOne}"
                                            var="idNivelAcademicoItem"

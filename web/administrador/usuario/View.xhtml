@@ -19,7 +19,7 @@
                         <h:outputText value="#{bundle.ViewUsuarioLabel_idPersona}" style="font-weight: bold;"/>
                         <h:outputText value="#{usuarioController.selected.idPersona.nombre} #{usuarioController.selected.idPersona.apellido}" title="#{bundle.ViewUsuarioTitle_idPersona}"/>
                         <h:outputText value="Rol:" style="font-weight: bold;"/>
-                        <h:outputText value="#{usuarioController.selected.idRol.rol}" title="#{bundle.ViewUsuarioTitle_idRol}"/>
+                        <h:outputText value="#{usuarioController.selected.rol}" title="#{bundle.ViewUsuarioTitle_idRol}"/>
                     </p:panelGrid>
                     <p:commandButton styleClass="btn_s" value="#{bundle.Close}" immediate="true" oncomplete="PF('UsuarioViewDialog').hide();"/>
                 </h:panelGroup>

@@ -1,6 +1,6 @@
 package jsf.classes;
 
-import controller.TipoCertificado;
+import modelo.TipoCertificado;
 import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.TipoCertificadoFacade;

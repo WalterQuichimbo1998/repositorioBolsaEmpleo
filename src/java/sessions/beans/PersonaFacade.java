@@ -5,7 +5,7 @@
  */
 package sessions.beans;
 
-import controller.Persona;
+import modelo.Persona;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -41,8 +41,7 @@ public class PersonaFacade extends AbstractFacade<Persona> {
     public List<Persona> listaEstudiantes() {
         Query q = em.createNativeQuery("SELECT * FROM persona\n"
                 + " LEFT JOIN usuario ON usuario.id_persona=persona.id_persona \n"
-                + "LEFT JOIN rol ON rol.id_rol=usuario.id_rol \n"
-                + "WHERE rol.rol='ESTUDIANTE';", Persona.class);
+                + "WHERE usuario.rol='ESTUDIANTE';", Persona.class);
         List<Persona> lista = q.getResultList();
         return lista;
     }

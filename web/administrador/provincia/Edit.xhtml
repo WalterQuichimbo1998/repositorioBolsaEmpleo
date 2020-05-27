@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{provinciaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditProvinciaLabel_provincia}" for="provincia" style="font-weight: bold"/>
-                        <p:inputText id="provincia" value="#{provinciaController.selected.provincia}" title="#{bundle.EditProvinciaTitle_provincia}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="provincia" value="#{provinciaController.selected.provincia}" title="#{bundle.EditProvinciaTitle_provincia}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     required="true" requiredMessage="Escriba la provincia" maxlength="40"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{provinciaController.update}" value="#{bundle.Save}" update="display,:ProvinciaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProvinciaEditDialog');"/>

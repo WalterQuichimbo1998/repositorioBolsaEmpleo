@@ -140,23 +140,16 @@
                             </div>
                             <br/>
                             <h:commandButton value="Ayer"  actionListener="#{empresaController.fecha2()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
                             </h:commandButton>
 
                             <h:commandButton value="Buscar" class="botonDescargar" 
                                              actionListener="#{empresaController.verificarReporteAdminFechas}" id="export" >
-                                <f:ajax execute="@form" render="mensaje" />                                                                       
-                                <f:ajax render="des" />                                                                       
+                                <f:ajax execute="@form" render="mensaje des" />                                                                       
                             </h:commandButton>
 
                             <h:commandButton value="Hoy"  actionListener="#{empresaController.fecha1()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
                             </h:commandButton>
                             <br/>
                             <br/>

@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{parroquiaController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateParroquiaLabel_parroquia}" for="parroquia" style="font-weight: bold"/>
-                        <p:inputText id="parroquia" style="width: 240px" value="#{parroquiaController.selected.parroquia}" title="#{bundle.CreateParroquiaTitle_parroquia}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="parroquia" style="width: 240px" value="#{parroquiaController.selected.parroquia}" title="#{bundle.CreateParroquiaTitle_parroquia}" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                    required="true" requiredMessage="Escriba la parroquia" maxlength="40"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{parroquiaController.create}" value="#{bundle.Save}" update="display,:ParroquiaListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParroquiaCreateDialog');"/>

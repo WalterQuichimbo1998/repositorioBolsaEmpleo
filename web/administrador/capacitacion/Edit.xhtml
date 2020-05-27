@@ -22,11 +22,13 @@
                                            itemValue="#{idHojaVidaEstudianteItem}"/>
                         </p:selectOneMenu>
                        <p:outputLabel value="#{bundle.EditCapacitacionLabel_institucion}" for="institucion" style="font-weight: bold"/>
-                        <p:inputText id="institucion" value="#{capacitacionController.selected.institucion}" title="#{bundle.EditCapacitacionTitle_institucion}" style="width: 300px;" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="institucion" value="#{capacitacionController.selected.institucion}" title="#{bundle.EditCapacitacionTitle_institucion}" style="width: 300px;" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     required="true" requiredMessage="Ingrese el nombre de la institución" maxlength="45"/>
                         <p:outputLabel value="#{bundle.EditCapacitacionLabel_nombreEvento}" for="nombreEvento" style="font-weight: bold"/>
-                        <p:inputText id="nombreEvento" value="#{capacitacionController.selected.nombreEvento}" title="#{bundle.EditCapacitacionTitle_nombreEvento}" style="width: 300px;"/>
+                        <p:inputText id="nombreEvento" value="#{capacitacionController.selected.nombreEvento}" title="#{bundle.EditCapacitacionTitle_nombreEvento}" style="width: 300px;" required="true" requiredMessage="Ingrese el nombre del evento"
+                                     onkeyup="javascript:this.value = this.value.toUpperCase();" maxlength="45"/>
                         <p:outputLabel value="#{bundle.EditCapacitacionLabel_idTipoEvento}" for="idTipoEvento" style="font-weight: bold" />
-                        <p:selectOneMenu id="idTipoEvento" value="#{capacitacionController.selected.idTipoEvento}" style="width: 180px;">
+                        <p:selectOneMenu id="idTipoEvento" value="#{capacitacionController.selected.idTipoEvento}" style="width: 180px;" required="true" requiredMessage="Seleccione el tipo de evento">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{tipoEventoController.itemsAvailableSelectOne}"
                                            var="idTipoEventoItem"
@@ -37,7 +39,7 @@
                         <p:outputLabel value="#{bundle.EditCapacitacionLabel_fechaFin}" for="fechaFin" style="font-weight: bold"/>
                         <p:calendar id="fechaFin" pattern="dd/MM/yyyy" locale="es" value="#{capacitacionController.selected.fechaFin}" title="#{bundle.EditCapacitacionTitle_fechaFin}" navigator="true" mask="true"/>
                         <p:outputLabel value="#{bundle.EditCapacitacionLabel_dias}" for="dias" style="font-weight: bold"/>
-                        <p:inputText id="dias" value="#{capacitacionController.selected.dias}" title="#{bundle.EditCapacitacionTitle_dias}" />
+                        <p:inputText id="dias" value="#{capacitacionController.selected.dias}" title="#{bundle.EditCapacitacionTitle_dias}" maxlength="3" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
                         <p:outputLabel value="#{bundle.EditCapacitacionLabel_idAreaEstudio}" for="idAreaEstudio" style="font-weight: bold"/>
                         <p:selectOneMenu id="idAreaEstudio" value="#{capacitacionController.selected.idAreaEstudio}" style="width: 180px;">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

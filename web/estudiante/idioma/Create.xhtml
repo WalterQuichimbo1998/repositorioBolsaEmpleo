@@ -15,21 +15,21 @@
                     <p:panelGrid columns="2" rendered="#{idiomaController.selected != null}">
                        
                         <p:outputLabel value="#{bundle.CreateIdiomaLabel_idListaIdiomas}" for="idListaIdiomas" style="font-weight: bold" />
-                        <p:selectOneMenu id="idListaIdiomas" value="#{idiomaController.selected.idListaIdiomas}" style="width: 150px" >
+                        <p:selectOneMenu id="idListaIdiomas" value="#{idiomaController.selected.idListaIdiomas}" style="width: 150px" required="true" requiredMessage="Seleccione el idioma">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>   
                             <f:selectItems value="#{listaIdiomasController.itemsAvailableSelectOne}"
                                            var="idListaIdiomasItem"
                                            itemValue="#{idListaIdiomasItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateIdiomaLabel_idNivelEscrito}" for="idNivelEscrito" style="font-weight: bold"/>
-                        <p:selectOneMenu id="idNivelEscrito" value="#{idiomaController.selected.idNivelEscrito}" style="width: 150px" >
+                        <p:selectOneMenu id="idNivelEscrito" value="#{idiomaController.selected.idNivelEscrito}" style="width: 150px" required="true" requiredMessage="Seleccione el nivel escrito">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>   
                             <f:selectItems value="#{nivelEscritoController.itemsAvailableSelectOne}"
                                            var="idNivelEscritoItem"
                                            itemValue="#{idNivelEscritoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateIdiomaLabel_idNivelHablado}" for="idNivelHablado" style="font-weight: bold"/>
-                        <p:selectOneMenu id="idNivelHablado" value="#{idiomaController.selected.idNivelHablado}" style="width: 150px" >
+                        <p:selectOneMenu id="idNivelHablado" value="#{idiomaController.selected.idNivelHablado}" style="width: 150px" required="true" requiredMessage="Seleccione el nivel hablado">
                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>   
                             <f:selectItems value="#{nivelHabladoController.itemsAvailableSelectOne}"
                                            var="idNivelHabladoItem"

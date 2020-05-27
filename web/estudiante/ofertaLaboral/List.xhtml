@@ -54,8 +54,7 @@
                                      placeholder="Buscar" 
                                      onkeyup="javascript:this.value = this.value.toUpperCase();PF('oferta').filter()" 
                                      style="font-size: 18px !important;margin: 10px; text-align: center;border-radius: 20px;padding: 7px 0px;width: 500px;
-                                     box-shadow:none;background: #f1f6f8"
-                                     /> 
+                                     box-shadow:none;background: #f1f6f8"/> 
                     </f:facet>
                     <p:column class="celda" style="width: 0px;margin: 0;padding: 0;" filterBy="#{item.idEmpresa.nombreComercial}" filterMatchMode="contains"
                               filterStyle="background:none;width:0px;box-shadow:none;height:0px;border:none;"></p:column>
@@ -79,11 +78,17 @@
                                 <br/>
                                 <h:outputText value="#{item.idEmpresa.idProvincia.provincia} - #{item.idEmpresa.idCanton.canton}" class="textoDescripcion"/>
                                 <br/>
-                                <h:outputText value="Fecha Inicio: #{ofertaLaboralController.fecha(item.fechaInicio)}" class="textoDescripcion"/>
+                                <h:outputText value="Fecha Inicio: " class="textoDescripcion" style="color: #024959;"/>
+                                <h:outputText value="#{ofertaLaboralController.fecha(item.fechaInicio)}" class="textoDescripcion"/>
+                                <br/>
+                                <h:outputText value="Fecha Finalización: " class="textoDescripcion" style="color: #024959;"/>
+                                <h:outputText rendered="#{item.fechaFin!=null}"  value="#{ofertaLaboralController.fecha(item.fechaInicio)}" class="textoDescripcion"/>
+                                <h:outputText rendered="#{item.fechaFin==null}" value="No definido" class="textoDescripcion"/>
                                 <br/>
                                 <h:outputText value="#{item.estado==true ? 'DISPONIBLE':'NO DISPONIBLE'}" 
                                               style="#{item.estado==true ? 'color: #63a3e9;font-size: 20px;font-weight: bold;':'color: #e25555;font-size: 20px;font-weight: bold;'} float: right;" />
-                                <h:outputText rendered="#{item.remuneracion!=''}" value="Remuneración: $ #{item.remuneracion}" class="textoDescripcion"/>
+                                <h:outputText rendered="#{item.remuneracion!=''}" value="Remuneración: " class="textoDescripcion" style="color: #024959;"/>
+                                <h:outputText rendered="#{item.remuneracion!=''}" value="$ #{item.remuneracion}" class="textoDescripcion"/>
                                 <br/>                              
 
                                 <br/>

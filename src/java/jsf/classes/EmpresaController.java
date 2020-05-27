@@ -3,10 +3,10 @@ package jsf.classes;
 import control.AccesoBean;
 import control.Exportar;
 import control.UtilPath;
-import controller.Canton;
-import controller.Empresa;
-import controller.Parroquia;
-import controller.Provincia;
+import modelo.Canton;
+import modelo.Empresa;
+import modelo.Parroquia;
+import modelo.Provincia;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -109,8 +109,12 @@ public class EmpresaController implements Serializable {
     }
 
     public List<Canton> getListaCanton() {
-        if (selected.getIdProvincia() != null) {
-            return listaCanton = ejbFacadeC.listaCanton(selected.getIdProvincia().getIdProvincia());
+        if (selected.getIdProvincia()!= null) {
+             if (getListaProvincias().contains(selected.getIdProvincia()) == true) {
+                  return listaCanton = ejbFacadeC.listaCanton(selected.getIdProvincia().getIdProvincia());
+             }else{
+                  return null;
+             }
         } else {
             return null;
         }
@@ -191,21 +195,37 @@ public class EmpresaController implements Serializable {
     }
 
     public void create() {
-        this.selected.setIdPersona(AccesoBean.obtenerIdPersona().getIdPersona());
+        
+        if(selected.getIdProvincia()==null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Provincia", ""));
+        }else if(selected.getIdCanton()==null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione un Cantón", ""));
+        }else{
+             this.selected.setIdPersona(AccesoBean.obtenerIdPersona().getIdPersona());
         this.selected.setFechaCreacion(new Date());
+         this.selected.setLogotipo("requerido/sin_logotipo.jpg");
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
             lista = null;    // Invalidate list of items to trigger re-query.
             lista = getFacade().listaEmpresa();
         }
+        }
+       
     }
 
     public void update() {
+         if(selected.getIdProvincia()==null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Provincia", ""));
+        }else if(selected.getIdCanton()==null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione un Cantón", ""));
+        }else{
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaUpdated"));
+        items=null;
+    }
     }
     public void update2() {
-        this.selected.setLogotipo("");
+        this.selected.setLogotipo("requerido/sin_logotipo.jpg");
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaUpdated"));
     }
 
@@ -379,6 +399,7 @@ public class EmpresaController implements Serializable {
                             out.flush();
                             out.close();
                             actualizarLogo();
+                            lista=null;
                         }
                     } catch (Exception e) {
                     }

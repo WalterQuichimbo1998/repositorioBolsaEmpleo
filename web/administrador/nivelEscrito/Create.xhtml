@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nivelEscritoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateNivelEscritoLabel_nivelEscrito}" for="nivelEscrito" style="font-weight: bold"/>
-                        <p:inputText id="nivelEscrito" value="#{nivelEscritoController.selected.nivelEscrito}" title="#{bundle.CreateNivelEscritoTitle_nivelEscrito}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="nivelEscrito" value="#{nivelEscritoController.selected.nivelEscrito}" title="#{bundle.CreateNivelEscritoTitle_nivelEscrito}" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     style="width: 160px" required="true" requiredMessage="Escriba el nivel escrito" maxlength="30"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{nivelEscritoController.create}" value="#{bundle.Save}" update="display,:NivelEscritoListForm:datalist,:growl" oncomplete="handleSubmit(args,'NivelEscritoCreateDialog');"/>

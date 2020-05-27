@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{tipoEmpresaController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateTipoEmpresaLabel_tipoEmpresa}" for="tipoEmpresa" />
-                        <p:inputText id="tipoEmpresa" value="#{tipoEmpresaController.selected.tipoEmpresa}" title="#{bundle.CreateTipoEmpresaTitle_tipoEmpresa}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="tipoEmpresa" value="#{tipoEmpresaController.selected.tipoEmpresa}" title="#{bundle.CreateTipoEmpresaTitle_tipoEmpresa}" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     style="width: 200px" required="true" requiredMessage="Escriba el tipo de empresa" maxlength="45"/>
                     </p:panelGrid>
                     <p:commandButton styleClass="btn_g" actionListener="#{tipoEmpresaController.create}" value="#{bundle.Save}" update="display,:TipoEmpresaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoEmpresaCreateDialog');"/>
                     <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('TipoEmpresaCreateDialog').hide();"/>

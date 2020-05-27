@@ -5,12 +5,12 @@
  */
 package sessions.beans;
 
-import controller.Usuario;
+import modelo.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
+import java.util.List;
 /**
  *
  * @author TOSHIBA
@@ -37,6 +37,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         } catch (Exception e) {
         }
         return usuario;
+    }
+    public List<Usuario> listaUsuario(Integer n) {
+        Query q = em.createNativeQuery("SELECT * FROM usuario WHERE id_usuario !=" + n + ";", Usuario.class);
+        List<Usuario> lista = q.getResultList();
+        return lista;
     }
   
 }

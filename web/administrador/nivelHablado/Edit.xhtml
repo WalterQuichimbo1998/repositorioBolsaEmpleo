@@ -13,7 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{nivelHabladoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditNivelHabladoLabel_nivelHablado}" for="nivelHablado" style="font-weight: bold"/>
-                        <p:inputText id="nivelHablado" value="#{nivelHabladoController.selected.nivelHablado}" title="#{bundle.EditNivelHabladoTitle_nivelHablado}" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="nivelHablado" value="#{nivelHabladoController.selected.nivelHablado}" title="#{bundle.EditNivelHabladoTitle_nivelHablado}" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                     style="width: 160px" required="true" requiredMessage="Escriba el nivel hablado" maxlength="30"/>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{nivelHabladoController.update}" value="#{bundle.Save}" update="display,:NivelHabladoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'NivelHabladoEditDialog');"/>

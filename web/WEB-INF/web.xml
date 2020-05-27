@@ -13,14 +13,14 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <filter>
-        <filter-name>PrimeFaces FileUpload Filter</filter-name>
-        <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
-        <init-param>
-            <param-name>uploadDirectory</param-name>
-            <param-value>resources/docs</param-value>
-        </init-param>
-    </filter>
+   <filter>
+    <filter-name>PrimeFaces FileUpload Filter</filter-name>
+    <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>PrimeFaces FileUpload Filter</filter-name>
+    <servlet-name>Faces Servlet</servlet-name>
+</filter-mapping>
 
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -36,7 +36,7 @@
         <filter-class>control.AuthAdminFilter</filter-class>
     </filter>
     
- <filter-mapping>
+    <filter-mapping>
         <filter-name>AuthAdminFilter</filter-name>
         <url-pattern>/administrador/*</url-pattern>
     </filter-mapping>
@@ -48,8 +48,18 @@
         <filter-name>AuthAdminFilter</filter-name>
         <url-pattern>/estudiante/*</url-pattern>
     </filter-mapping>
-
+    <filter-mapping>
+        <filter-name>AuthAdminFilter</filter-name>
+        <url-pattern>/estudiante2/*</url-pattern>
+    </filter-mapping>
+ 
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.xhtml</location>
+    </error-page>
+
 </web-app>

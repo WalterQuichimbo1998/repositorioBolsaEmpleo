@@ -13,13 +13,13 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{referenciaPersonalController.selected != null}">
                        <p:outputLabel value="#{bundle.CreateReferenciaPersonalLabel_nombre}" for="nombre" style="font-weight: bold"/>
-                       <p:inputText id="nombre" value="#{referenciaPersonalController.selected.nombre}" title="#{bundle.CreateReferenciaPersonalTitle_nombre}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();" required="true" requiredMessage="Ingrese un nombre"/>
+                       <p:inputText id="nombre" value="#{referenciaPersonalController.selected.nombre}" title="#{bundle.CreateReferenciaPersonalTitle_nombre}" style="width: 240px" onkeyup="javascript:this.value = this.value.toUpperCase();" required="true" requiredMessage="Ingrese un nombre" maxlength="25"/>
                         <p:outputLabel value="#{bundle.CreateReferenciaPersonalLabel_apellido}" for="apellido" style="font-weight: bold"/>
-                        <p:inputText id="apellido" value="#{referenciaPersonalController.selected.apellido}" title="#{bundle.CreateReferenciaPersonalTitle_apellido}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();" required="true" requiredMessage="Ingrese un apellido"/>
-                        <p:outputLabel value="#{bundle.CreateReferenciaPersonalLabel_correoElectrocino}" for="correoElectrocino" style="font-weight: bold"/>
-                        <p:inputText id="correoElectrocino" value="#{referenciaPersonalController.selected.correoElectronico}" title="#{bundle.CreateReferenciaPersonalTitle_correoElectrocino}" style="width: 200px"/>
+                        <p:inputText id="apellido" value="#{referenciaPersonalController.selected.apellido}" title="#{bundle.CreateReferenciaPersonalTitle_apellido}" style="width: 240px" onkeyup="javascript:this.value = this.value.toUpperCase();" required="true" requiredMessage="Ingrese un apellido" maxlength="30"/>
+                        <p:outputLabel value="#{bundle.CreateReferenciaPersonalLabel_correoElectrocino}" for="correoElectronico" style="font-weight: bold"/>
+                        <p:inputText id="correoElectronico" value="#{referenciaPersonalController.selected.correoElectronico}" title="#{bundle.CreateReferenciaPersonalTitle_correoElectrocino}" style="width: 240px" maxlength="45"/>
                         <p:outputLabel value="#{bundle.CreateReferenciaPersonalLabel_telefono}" for="telefono"  style="font-weight: bold"/>
-                        <p:inputText id="telefono" value="#{referenciaPersonalController.selected.telefono}" title="#{bundle.CreateReferenciaPersonalTitle_telefono}" style="width: 200px"/>
+                        <p:inputText id="telefono" value="#{referenciaPersonalController.selected.telefono}" title="#{bundle.CreateReferenciaPersonalTitle_telefono}" style="width: 200px" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" maxlength="10"/>
                        <p:column/>
                        <p:column>
                            <p:commandButton styleClass="btn_g" actionListener="#{referenciaPersonalController.create}" value="#{bundle.Save}" update="display,:ReferenciaPersonalListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReferenciaPersonalCreateDialog');"/>

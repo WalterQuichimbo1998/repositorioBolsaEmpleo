@@ -13,13 +13,13 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{referenciaPersonalController.selected != null}">
                        <p:outputLabel value="#{bundle.EditReferenciaPersonalLabel_nombre}" for="nombre"  style="font-weight: bold"/>
-                        <p:inputText id="nombre" value="#{referenciaPersonalController.selected.nombre}" title="#{bundle.EditReferenciaPersonalTitle_nombre}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                       <p:inputText id="nombre" value="#{referenciaPersonalController.selected.nombre}" title="#{bundle.EditReferenciaPersonalTitle_nombre}" style="width: 240px" onkeyup="javascript:this.value = this.value.toUpperCase();" maxlength="25"/>
                         <p:outputLabel value="#{bundle.EditReferenciaPersonalLabel_apellido}" for="apellido"  style="font-weight: bold"/>
-                        <p:inputText id="apellido" value="#{referenciaPersonalController.selected.apellido}" title="#{bundle.EditReferenciaPersonalTitle_apellido}" style="width: 200px" onkeyup="javascript:this.value = this.value.toUpperCase();"/>
+                        <p:inputText id="apellido" value="#{referenciaPersonalController.selected.apellido}" title="#{bundle.EditReferenciaPersonalTitle_apellido}" style="width: 240px" onkeyup="javascript:this.value = this.value.toUpperCase();" maxlength="30"/>
                         <p:outputLabel value="#{bundle.EditReferenciaPersonalLabel_correoElectrocino}" for="correoElectrocino"  style="font-weight: bold"/>
                         <p:inputText id="correoElectrocino" value="#{referenciaPersonalController.selected.correoElectronico}" title="#{bundle.EditReferenciaPersonalTitle_correoElectrocino}" style="width: 200px"/>
                         <p:outputLabel value="#{bundle.EditReferenciaPersonalLabel_telefono}" for="telefono"  style="font-weight: bold"/>
-                        <p:inputText id="telefono" value="#{referenciaPersonalController.selected.telefono}" title="#{bundle.EditReferenciaPersonalTitle_telefono}" style="width: 200px"/>
+                        <p:inputText id="telefono" value="#{referenciaPersonalController.selected.telefono}" title="#{bundle.EditReferenciaPersonalTitle_telefono}" style="width: 200px" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" maxlength="10"/>
                         <p:column/>
                        <p:column>
                            <p:commandButton styleClass="btn_g" actionListener="#{referenciaPersonalController.update}" value="#{bundle.Save}" update="display,:ReferenciaPersonalListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReferenciaPersonalEditDialog');"/>

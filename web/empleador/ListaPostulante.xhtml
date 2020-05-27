@@ -24,7 +24,7 @@
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                     <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
-                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img>
+                         src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                 </p:commandLink>
             </li>
         </ui:define>
@@ -63,7 +63,7 @@
                             <img style="width: 100px;height: 110px;border-radius: 4px;margin: 0;padding: 0;margin: auto;
                                  object-fit:cover;object-position:center center;
                                  background-size: cover;"     
-                                 src="#{request.contextPath}/resources/#{postulanteController.existeFoto(item.personaIdPersona.foto)==true ? item.personaIdPersona.foto:'requerido/sin_foto_perfil.png'}" ></img>  
+                                 src="#{request.contextPath}/resources/#{item.personaIdPersona.foto}"></img>  
                         </p:column>
 
                         <p:column sortBy="#{item.personaIdPersona.nombre}" filterBy="#{item.personaIdPersona.nombre}"  filterMatchMode="contains"
@@ -158,21 +158,14 @@
                             </div>
                             <br/>
                             <h:commandButton value="Ayer"  actionListener="#{postulanteController.fecha2()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
                             </h:commandButton>
                             <h:commandButton value="Buscar" class="botonDescargar" 
                                              actionListener="#{postulanteController.verificarReporteEmpresa}" id="export" >
-                                <f:ajax execute="@form" render="mensaje" />                                                                       
-                                <f:ajax render="des" />                                                                       
+                                <f:ajax execute="@form" render="mensaje des" />                                                                       
                             </h:commandButton>
                             <h:commandButton value="Hoy"  actionListener="#{postulanteController.fecha1()}" class="f1">
-                                <f:ajax execute="@form" render="fechaInicio" /> 
-                                <f:ajax render="fechaFinal" /> 
-                                <f:ajax render="mensaje" /> 
-                                <f:ajax render="des" /> 
+                                <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
                             </h:commandButton>
                             <br/>
                             <br/>
@@ -215,12 +208,14 @@
                         #{postulanteController.selected.estado_postulante == null ? 'font-size: 24px;font-family: Arial;color:#007bff;':''}">
                         #{postulanteController.selected.estado_postulante==null ? 'NUEVO' : postulanteController.pasarTexto(postulanteController.selected.estado_postulante )}</h1>
                     <h2 class="postular" id="t2">#{postulanteController.selected.estado_postulante eq true ? 'Cancelar Postulante':'Aceptar Postulante'}</h2>
-                    <p:selectBooleanButton class="estado" value="#{postulanteController.selected.estado_postulante}"  onLabel="Cancelar" offLabel="Aceptar" >
+                    <center>
+                        <p:selectBooleanButton class="estado" value="#{postulanteController.selected.estado_postulante}"  onLabel="Cancelar" offLabel="Aceptar" >
                         <p:ajax listener="#{postulanteController.update}" update=":PostulanteListForm,:growl" oncomplete="PF('form_estado').hide()"/>
                     </p:selectBooleanButton> 
                     <br/>
                     <p:commandButton value="Cerrar" styleClass="eliminar" style="margin-top: 10px;width: 90px;"
                                      immediate="true" oncomplete="PF('form_estado').hide()"/>
+                    </center>
                     <br/>
                 </h:form>
             </p:dialog>

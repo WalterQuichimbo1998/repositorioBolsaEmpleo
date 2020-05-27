@@ -4,9 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       lang="es">
-   
+
     <h:head>
         <title>Bolsa de Empleo ISTL</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -47,7 +46,7 @@
                                         <p:commandButton value="Ofertas Laborales" class="btn2" actionListener="#{ofertaLaboralController.listaO()}" action="/estudiante/ofertaLaboral/List?faces-redirect=true" />
                                     </li>
                                     <li>
-                                        <p:commandButton value="Mis Postulaciones" class="btn2"  action="/estudiante/postulante/List?faces-redirect=true" />
+                                        <p:commandButton value="Mis Postulaciones" class="btn2" action="/estudiante/postulante/List?faces-redirect=true" />
                                     </li>
                                     <li id="ingresar0">
                                         <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
@@ -55,7 +54,7 @@
                                     <li id="ingresar1">                                   
                                         <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                                             <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                                 src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img>
+                                                 src="#{request.contextPath}/resources/#{personaController.selected.foto}" ></img>
                                         </p:commandLink>
                                     </li>
                                 </ui:insert>
@@ -78,7 +77,7 @@
                             <h:panelGroup style="display: inline-block; text-align: center; "> 
                                 <div class="botones2" style="padding-top: 31px;">
                                     <h:commandLink class="botones" actionListener="#{personaController.correoPersona()}"  action="/estudiante/verPerfilPersona?faces-redirect=true" >
-                                        <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'requerido/sin_foto_perfil.png'}" ></img> 
+                                        <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
                                     </h:commandLink>
                                     <div class="txt_boton">Mi Perfil</div>
                                 </div>  
@@ -135,7 +134,7 @@
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/curriculo.png" action="/estudiante/curriculoVitae?faces-redirect=true" 
                                                      style="width: 105px;height: 105px"/> 
-                                    <div class="txt_boton">Curriculo Vitae</div>
+                                    <div class="txt_boton">Currículo Vitae</div>
                                 </div>
                             </h:panelGroup>
                         </h:panelGrid>
@@ -156,19 +155,10 @@
                   closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" >
             <h:form style="margin: 0;padding: 0;padding-left: 40px;padding-right: 40px;display: block;margin-right: -3px" >
                 <center>
-                    <c:if test="#{personaController.existeFoto(personaController.selected.foto) == false}">
                         <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
                             <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                                 src="#{request.contextPath}/resources/foto/sin_foto_perfil.png"></img>
+                                 src="#{request.contextPath}/resources/#{personaController.selected.foto}" ></img>
                         </div>
-                    </c:if>
-                    <c:if test="#{personaController.existeFoto(personaController.selected.foto) == true}">
-                        <br/>
-                        <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; box-shadow: 0px 0px 2px 1px #454545;">
-                            <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                                 src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
-                        </div>
-                    </c:if>
                     <br/>
                     <br/>
                 </center>

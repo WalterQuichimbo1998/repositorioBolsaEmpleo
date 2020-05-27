@@ -852,6 +852,98 @@ background: #E3F2FD;
     box-shadow: 0px 0px 1px 1px #454545;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
 }
+.info2{
+    width: 60%;
+    margin: auto;
+}
+.textoClave{
+    width: 100%;
+    color: #039BE5; 
+    font-size: 20px; 
+    font-family:Arial;
+
+}
+.txtClave0{
+    width: 100%;
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #454545;
+    font-size: 24px;
+    font-family: Arial;
+    font-weight: normal;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    text-align: center;
+    transition: all .3s ease;
+    transition: all 300ms;
+    background: none;
+    border-bottom: 2px solid #f0f3f4;
+}
+.txtClave0:hover{
+    border-bottom: 2px solid #98c2bb;
+    font-size: 25px;
+    color: #024959;
+    transform: translateY(-3px);
+}
+.txtClave0:focus{
+    border-bottom: 2px solid #57a3f4;
+}
+.txtClave.ui-inputfield{
+    width: 99%;
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #454545;
+    font-size: 24px !important;
+    font-family: Arial;
+    font-weight: bold;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    outline: none;
+    text-align: center;
+    transition: all 300ms;
+    background: none;
+    border-bottom: 2px solid #f0f3f4;
+}
+.txtClave:hover{
+    border-bottom: 2px solid #98c2bb;
+    font-size: 25px;
+    color: #024959;
+    transform: translateY(-3px);
+}
+.txtClave:focus{
+    border-bottom: 2px solid #57a3f4;
+}
+.inputText.ui-inputfield{
+    width: 100%;
+    margin: auto;
+    font-size: 20px !important;
+    padding: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    box-shadow:none;
+    box-shadow:0px;
+    outline: none;
+    border:1px solid #007bff;
+    box-shadow: inset 0px 0px 0px 0px red;
+    background: #f7f9f9;
+
+}
+.postulacionesMas .ui-datatable-header{
+    background: none;
+    border:none;
+    box-shadow:none;
+
+}
+.tabla_c .ui-widget-content{
+    border:1px solid white;
+    text-align: center;
+}
+
 @media only screen and (min-width: 1440px){ 
     .contenedor{
         width: 1366px;
@@ -886,7 +978,9 @@ background: #E3F2FD;
     .caja_form{
         width: 100%;
     }
-    
+    #img_excel{
+        width: 100%;
+    }
 }
 @media only screen and (max-width: 768px){ 
     #caja2{
