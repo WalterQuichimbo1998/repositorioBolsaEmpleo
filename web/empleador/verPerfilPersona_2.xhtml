@@ -24,8 +24,8 @@
                     <div class="info">
                         <center style="padding-top: 25px">
                             <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 3px;">
-                                <img style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center; "  
-                                     src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
+                                <p:graphicImage style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center; "  
+                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
                             </div>
                       
                             <p:commandButton  styleClass="btn_guardar2" ajax="false" value="Cambiar Foto" immediate="true" action="/empleador/cambiarFoto?faces-redirect=true" 

@@ -54,6 +54,7 @@ import org.primefaces.model.UploadedFile;
 
 @Named("personaController")
 @SessionScoped
+
 public class PersonaController implements Serializable {
 
     @EJB
@@ -87,6 +88,7 @@ public class PersonaController implements Serializable {
     private Persona per = null;
     private final String key = "empleo";
     private String correoPersona;
+
     public PersonaController() {
     }
 
@@ -96,7 +98,7 @@ public class PersonaController implements Serializable {
         }
         if ("EMPLEADOR".equals(AccesoBean.obtenerIdPersona().getRol())) {
             this.selected = AccesoBean.obtenerIdPersona().getIdPersona();
-            
+
         }
         return selected;
     }
@@ -195,6 +197,7 @@ public class PersonaController implements Serializable {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
     /*--------Metodos accesores para la busqueda*/
     public List<Persona> getListaPersona() {
         return listaPersona;
@@ -267,7 +270,6 @@ public class PersonaController implements Serializable {
     public void setCorreoPersona(String correoPersona) {
         this.correoPersona = correoPersona;
     }
-    
 
     public Persona prepareCreate() {
         selected = new Persona();
@@ -283,18 +285,24 @@ public class PersonaController implements Serializable {
         }
     }
 
-    
     public void update() {
         persist(PersistAction.UPDATE, "Persona actualizada correctamente.");
     }
 
     public void datosActualizados() {
+        if(selected.getIdProvincia()==null){
+            this.selected.setIdCanton(null);
+            this.selected.setIdParroquia(null);
+        }
+        if(selected.getIdCanton()==null){
+            this.selected.setIdParroquia(null);
+        }
         persist(PersistAction.UPDATE, "Datos actualizados con éxito.");
     }
 
     public void actualizarFoto() {
         persist(PersistAction.UPDATE, "Foto subida con éxito.");
-        items=null;
+        items = null;
     }
 
     public void destroy() {
@@ -401,9 +409,11 @@ public class PersonaController implements Serializable {
         }
 
     }
-    public void correoPersona(){
-        correoPersona=AccesoBean.obtenerIdPersona().getIdPersona().getCorreo();
+
+    public void correoPersona() {
+        correoPersona = AccesoBean.obtenerIdPersona().getIdPersona().getCorreo();
     }
+
     public String fecha(Date d) {
         String resultado = "";
         if (d != null) {
@@ -437,50 +447,55 @@ public class PersonaController implements Serializable {
         return n;
     }
 //Administrador
+
     public void existeCorreo() {
         Persona p = getFacade().existeCorreoRegistrado(selected.getCorreo().trim());
         if (p != null) {
-            items=null;
+            items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
         } else {
             create();
         }
     }
+
     public void existeCorreo2() {
-        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(),selected.getCorreo().trim());
+        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(), selected.getCorreo().trim());
         if (p != null) {
-            items=null;
+            items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
         } else {
             update();
         }
     }
+
     //Persona
     public void existeCorreoPersona() {
-        if (correoPersona.trim()== null || "".equals(correoPersona.trim())) {
+        if (correoPersona.trim() == null || "".equals(correoPersona.trim())) {
             this.selected.setCorreo("");
             datosActualizados();
         } else {
-        Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(),correoPersona.trim()); 
-        if (p != null) {
-            correoPersona=selected.getCorreo();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
-        } else {
-            this.selected.setCorreo(correoPersona.trim());
-            datosActualizados();
-        }
+            Persona p = getFacade().existeCorreoRegistrado2(selected.getIdPersona(), correoPersona.trim());
+            if (p != null) {
+                correoPersona = selected.getCorreo();
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El correo electrónico ya existe. Ingrese otro", ""));
+            } else {
+                this.selected.setCorreo(correoPersona.trim());
+                datosActualizados();
+            }
         }
     }
 
-    
     boolean f = false;
+
     public void subirFoto() {
         String extension = "";
+
         if (file == null || file.getSize() == 0) {
-             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Foto", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Foto", ""));
         } else {
             String ex = file.getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
+                
                 if (null != ex) switch (ex) {
                     case "image/jpeg":
                         extension = ".jpeg";
@@ -502,36 +517,57 @@ public class PersonaController implements Serializable {
                             nombre = getSelected().getIdPersona() + "_" + selected.getNombre() + extension;
                         }
                         selected.setFoto("foto/" + nombre);
-                        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                        String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
-                        String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "foto" + File.separator + nombre;
-                        FileOutputStream out = new FileOutputStream(pathDefinition);
-                        InputStream in = file.getInputstream();
-                        if ((in != null)) {
-                            int read = 0;
-                            byte[] bytes = new byte[1024];
-                            while ((read = in.read(bytes)) != -1) {
-                                out.write(bytes, 0, read);
-                            }
-                            in.close();
-                            out.flush();
-                            out.close();
-                            actualizarFoto();
-                            
-                            
-                        }
+                        if (!"requerido/sin_foto_perfil.png".equals(selected.getFoto())) {
+                            cargar(nombre);
 
-                    } catch (IOException e) {
+                            actualizarFoto();
+                        } else {
+                            cargar(nombre);
+                            actualizarFoto();
+                        }
+                    } catch (Exception exx) {
+                        System.out.println("Error: " + exx.getMessage());
                     }
                 } else {
                     this.setFile(null);
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Foto muy pesada elija otra. Tamaño máximo: 3Mb", ""));
                 }
+
             } else {
                 this.setFile(null);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Formato no válido. Use formato .png o .jpg", ""));
             }
         }
+    }
+
+    public void cargar(String nombre) {
+        try {
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
+            String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "foto" + File.separator + nombre;
+            FileOutputStream out = new FileOutputStream(pathDefinition);
+            InputStream in = file.getInputstream();
+            if ((in != null)) {
+                int read = 0;
+                byte[] bytes = new byte[1024];
+                while ((read = in.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+                in.close();
+                out.flush();
+                out.close();
+
+            }
+        } catch (IOException e) {
+        }
+    }
+
+    public void eliminarImagen(String ruta) {
+        ExternalContext ecDelete = FacesContext.getCurrentInstance().getExternalContext();
+        String realPathDelete = UtilPath.getPathDefinida(ecDelete.getRealPath("/"));
+        String pathDefinitionDelete = realPathDelete + File.separator + "web" + File.separator + "resources" + File.separator + ruta;
+        File archivo = new File(pathDefinitionDelete);
+        archivo.delete();
     }
 
     public Boolean existeFoto(String f) {
@@ -546,20 +582,20 @@ public class PersonaController implements Serializable {
     }
 
     public void recuperarClave() {
-        if(correo.trim()==null || "".equals(correo.trim()) || cedula.trim()==null || "".equals(cedula.trim())){
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete los campos", ""));
-        }else{
-        per = getFacade().buscarCorreo(getCedula(), getCorreo());
-        mensaje = "";
-        cc = false;
-        if (per != null) {
-            cc = true;
-            buscarUser();
+        if (correo.trim() == null || "".equals(correo.trim()) || cedula.trim() == null || "".equals(cedula.trim())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete los campos", ""));
         } else {
+            per = getFacade().buscarCorreo(getCedula(), getCorreo());
+            mensaje = "";
             cc = false;
-            mensaje = "Correo electrónico o Cédula no registrado";
-            tiempoLimpiar();
-        }
+            if (per != null) {
+                cc = true;
+                buscarUser();
+            } else {
+                cc = false;
+                mensaje = "Correo electrónico o Cédula no registrado";
+                tiempoLimpiar();
+            }
         }
     }
 
@@ -575,6 +611,7 @@ public class PersonaController implements Serializable {
             tiempoLimpiar();
         }
     }
+
     public void tiempoLimpiar() {
         new Thread(() -> {
             try {

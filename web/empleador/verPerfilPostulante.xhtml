@@ -23,8 +23,8 @@
             </li>  
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
-                    <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
-                        src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
+                    <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
+                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
                 </p:commandLink>
             </li>
         </ui:define>
@@ -96,22 +96,28 @@
                         <br/>
                        <p:fieldset legend="Instrucción Formal" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                              <p:dataTable  class="tabla_c"  value="#{item.instruccionFormalList}" var="item2" emptyMessage="No hay datos." 
-                                     paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom">
+                                     paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom"
+                                     sortBy="#{item2.idInstruccion}"  sortOrder="descending">
                                 <p:column style="background:white; border:1px solid white;" headerText="Institución">  
                                     <h:outputText value="#{item2.institucion}" style="font-size: 17px; "/>               
                                 </p:column>
+                                  <p:column style="background:white; border:1px solid white; " headerText="Título">
+                                    <h:outputText value="#{item2.titulo}"  style="font-size: 17px; "/>
+                                </p:column>   
+                                  <p:column style="background:white; border:1px solid white; " headerText="Código Senescyt">
+                                    <h:outputText value="#{item2.codigoSenescyt}"  style="font-size: 17px; "/>
+                                </p:column>   
                                 <p:column style="background:white; border:1px solid white;" headerText="Nivel Académico">  
                                     <h:outputText value="#{item2.idNivelAcademico.nivelAcademico}" style="font-size: 17px;"/>
                                 </p:column>
-                                <p:column style="background:white; border:1px solid white; " headerText="Código Senescyt">
-                                    <h:outputText value="#{item2.codigoSenescyt}"  style="font-size: 17px; "/>
-                                </p:column>                            
+                                                        
                              </p:dataTable>
                         </p:fieldset>
                         <br/>
                         <p:fieldset legend="Oficios" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <p:dataTable class="tabla_c" value="#{item.oficioList}" var="item2" emptyMessage="No hay datos." 
-                                         paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom">
+                                         paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom"
+                                         sortBy="#{item2.idOficio}"  sortOrder="descending">
                                 <p:column style="background:white; border:1px solid white;" headerText="Oficio" >      
                                     <h:outputText value="#{item2.oficio}" style="font-size: 17px; "/>
                                 </p:column>
@@ -124,7 +130,8 @@
                          <br/>
                         <p:fieldset legend="Logros Personales" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <p:dataTable class="tabla_c" value="#{item.logroPersonalList}" var="item2" emptyMessage="No hay datos."  
-                                       paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom">
+                                       paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom"
+                                        sortBy="#{item2.idTipoLogro}"  sortOrder="descending">
                                 <p:column style="background:white; border:1px solid white;" headerText="Logro">  
                                     <h:outputText value="#{item2.idTipoLogro.tipoLogro}" style="font-size: 17px"/>
                                 </p:column>
@@ -136,7 +143,8 @@
                         <br/>
                         <p:fieldset legend="Idiomas" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                              <p:dataTable class="tabla_c"  value="#{item.idiomaList}" var="item2" emptyMessage="No hay datos."
-                                          paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom">
+                                          paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom"
+                                          sortBy="#{item2.idIdioma}"  sortOrder="descending">
                                 <p:column style="background:white; border:1px solid white;" headerText="Idioma">      
                                     <h:outputText value="#{item2.idListaIdiomas.nombreIdioma}" style="font-size: 17px"/>
                                 </p:column>
@@ -151,7 +159,8 @@
                         <br/>
                         <p:fieldset legend="Capacitaciones" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <p:dataTable class="tabla_c" value="#{item.capacitacionList}" var="item2" emptyMessage="No hay datos." 
-                                       paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom" >
+                                       paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom" 
+                                       sortBy="#{item2.idCapacitacion}"  sortOrder="descending">
                                 
                                 <p:column style="background:white; border:1px solid white" headerText="Evento">
                                     <h:outputText value="#{item2.nombreEvento}" style="font-size: 17px"/>
@@ -184,7 +193,8 @@
                        
                         <p:fieldset legend="Experiencia Laboral" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <p:dataTable class="tabla_c" value="#{item.experienciaLaboralList}" var="item2" emptyMessage="No hay datos."  
-                                       paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom">
+                                       paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom"
+                                       sortBy="#{item2.idExperienciaLaboral}"  sortOrder="descending">
                                 <p:column style="background:white; border:1px solid white" headerText="Institución">
                                     <h:outputText value="#{item2.institucion}" style="font-size: 17px"/>
                                 </p:column>      
@@ -212,7 +222,8 @@
                         <br/>
                         <p:fieldset legend="Referencia Personal" style="width: 90%; margin: auto;border: 1px solid #ccc;background: white;">
                             <p:dataTable class="tabla_c" value="#{item.referenciaPersonalList}" var="item2" emptyMessage="No hay datos."
-                                        paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom" style="margin-bottom: 20px;">
+                                        paginator="true" rows="5" rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom" style="margin-bottom: 20px;"
+                                        sortBy="#{item2.idReferencia}"  sortOrder="descending">
                                 <p:column style="background:white; border:1px solid white;" headerText="Persona">      
                                     <h:outputText value="#{item2.nombre} #{item2.apellido}" style="font-size: 18px"/>
                                 </p:column>

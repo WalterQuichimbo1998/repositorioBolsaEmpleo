@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -29,7 +30,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import org.primefaces.model.UploadedFile;
 
 @Named("imagenPortadaController")
@@ -90,7 +90,7 @@ public class ImagenPortadaController implements Serializable {
 
     public void update() {
         persist(PersistAction.UPDATE, "Imagen actualizada con éxito");
-        items=null;
+        items = null;
     }
 
     public void destroy() {
@@ -190,11 +190,27 @@ public class ImagenPortadaController implements Serializable {
     }
 
     public void subirImagen() throws IOException {
+        String extension = "";
         if (file == null || file.getSize() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Imagen", ""));
         } else {
             String ex = file.getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
+                if (null != ex) {
+                    switch (ex) {
+                        case "image/jpeg":
+                            extension = ".jpeg";
+                            break;
+                        case "image/jpg":
+                            extension = ".jpg";
+                            break;
+                        case "image/png":
+                            extension = ".png";
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 if (file.getSize() <= 2048000) {
                     InputStream in2 = file.getInputstream();
                     BufferedImage image = ImageIO.read(in2);
@@ -202,7 +218,9 @@ public class ImagenPortadaController implements Serializable {
                     height = image.getHeight();
                     if (width == 1300 && height == 500) {
                         try {
-                            nombre = file.getFileName();
+                            int n = (int) (Math.random() * 200);
+                            int n2 = (int) (Math.random() * file.getFileName().length());
+                            nombre = String.valueOf(n) +String.valueOf(n2)+ "-PortadaSeguimiento" + extension;
                             this.selected.setImagen(nombre);
                             ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
                             String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
@@ -239,41 +257,60 @@ public class ImagenPortadaController implements Serializable {
     }
 
     public void subirImagen2() throws IOException {
+        String extension = "";
         if (file == null || file.getSize() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Imagen", ""));
         } else {
             String ex = file.getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
-               if (file.getSize() <= 2048000) {
+                if (null != ex) {
+                    switch (ex) {
+                        case "image/jpeg":
+                            extension = ".jpeg";
+                            break;
+                        case "image/jpg":
+                            extension = ".jpg";
+                            break;
+                        case "image/png":
+                            extension = ".png";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if (file.getSize() <= 2048000) {
                     InputStream in2 = file.getInputstream();
                     BufferedImage image = ImageIO.read(in2);
                     width = image.getWidth();
                     height = image.getHeight();
                     if (width == 1300 && height == 500) {
-                    try {
-                        nombre = selected.getImagen();
-                        this.selected.setImagen(nombre);
-                        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                        String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
-                        String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + nombre;
-                        FileOutputStream out = new FileOutputStream(pathDefinition);
-                        InputStream in = file.getInputstream();
-                        if ((in != null)) {
-                            int read = 0;
-                            byte[] bytes = new byte[1024];
-                            while ((read = in.read(bytes)) != -1) {
-                                out.write(bytes, 0, read);
+                        try {
+                            String[] ruta = selected.getImagen().split(Pattern.quote("."));
+                            nombre = ruta[0] + extension;
+                            this.selected.setImagen(nombre);
+                            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                            String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
+                            String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + nombre;
+                            FileOutputStream out = new FileOutputStream(pathDefinition);
+                            InputStream in = file.getInputstream();
+
+                            if ((in != null)) {
+                                int read = 0;
+                                byte[] bytes = new byte[1024];
+                                while ((read = in.read(bytes)) != -1) {
+                                    out.write(bytes, 0, read);
+                                }
+                                in.close();
+                                out.flush();
+                                out.close();
+                                update();
+                                file = null;
+
                             }
-                            in.close();
-                            out.flush();
-                            out.close();
-                            update();
-                            file = null;
-                            
+
+                        } catch (IOException e) {
                         }
-                    } catch (IOException e) {
-                    }
-                      } else {
+                    } else {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Los píxeles de la imagen no son los requeridos. - Tamaño permitido 1600 x 500", ""));
                     }
                 } else {
@@ -294,6 +331,14 @@ public class ImagenPortadaController implements Serializable {
         File archivo = new File(pathDefinitionDelete);
         archivo.delete();
         destroy();
+    }
+
+    public void eliminarImagen2(String ruta) {
+        ExternalContext ecDelete = FacesContext.getCurrentInstance().getExternalContext();
+        String realPathDelete = UtilPath.getPathDefinida(ecDelete.getRealPath("/"));
+        String pathDefinitionDelete = realPathDelete + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + ruta;
+        File archivo = new File(pathDefinitionDelete);
+        archivo.delete();
     }
 
     public boolean limite(Integer n) {

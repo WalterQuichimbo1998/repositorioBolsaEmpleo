@@ -15,7 +15,8 @@
                         <p:outputLabel value="#{bundle.CreateOficioLabel_oficio}" for="oficio" style="font-weight: bold"/>
                         <p:inputText id="oficio" value="#{oficioController.selected.oficio}" title="#{bundle.CreateOficioTitle_oficio}" onkeyup="javascript:this.value = this.value.toUpperCase();" style="width:250px" required="true" requiredMessage="Escriba el nombre del oficio" maxlength="45"/>
                         <p:outputLabel value="#{bundle.CreateOficioLabel_descripcion}" for="descripcion" style="font-weight: bold"/>
-                       <p:inputTextarea id="descripcion"  maxlength="200" rows="3" cols="35" autoResize="false" value="#{oficioController.selected.descripcion}" title="#{bundle.CreateOficioTitle_descripcion}" required="true" requiredMessage="Escriba una descripción"/>
+                       <p:inputTextarea id="descripcion"  maxlength="200" rows="3" cols="35" autoResize="false" value="#{oficioController.selected.descripcion}" title="#{bundle.CreateOficioTitle_descripcion}" required="true" requiredMessage="Escriba una descripción"
+                                        style="resize: none;"/>
                        <p:column/>
                        <p:column>
                            <p:commandButton styleClass="btn_g" actionListener="#{oficioController.create}" value="#{bundle.Save}" update="display,:OficioListForm:datalist,:growl" oncomplete="handleSubmit(args,'OficioCreateDialog');"/>

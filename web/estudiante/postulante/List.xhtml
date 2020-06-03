@@ -24,8 +24,8 @@
             </li>  
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
-                    <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align: -17px;"
-                         src="#{request.contextPath}/resources/#{personaController.existeFoto(personaController.selected.foto)==true ? personaController.selected.foto:'foto/sin_foto_perfil.png'}" ></img>
+                    <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
+                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
                 </p:commandLink>
             </li>
         </ui:define>

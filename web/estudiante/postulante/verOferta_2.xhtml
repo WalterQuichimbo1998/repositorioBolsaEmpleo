@@ -8,7 +8,26 @@
 
     <ui:composition template="../Estudiante.xhtml"> 
 
-
+         <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/estudiante/Estudiante?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Ofertas Laborales" class="btn2" actionListener="#{ofertaLaboralController.listaO()}" action="/estudiante/ofertaLaboral/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Mis Postulaciones" class="btn2 bbt"  action="/estudiante/postulante/List?faces-redirect=true" />
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
+            </li>  
+            <li id="ingresar1">                                   
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
+                    <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
+                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
+                </p:commandLink>
+            </li>
+        </ui:define>
         <ui:define name="dir">
             <h:commandLink class="prin" value="Inicio" action="/estudiante/Estudiante?faces-redirect=true"/>
             <h:commandLink class="prin" value="/" disabled="true"/>
@@ -118,7 +137,7 @@
                                     <h3 class="txtO" >#{item.idNivelAcademico.nivelAcademico}</h3>
                                 </div>
                                 <div class="infoO2" >
-                                    <h3 class="textoO" >Horas capacitacines</h3>
+                                    <h3 class="textoO" >Horas de capacitación</h3>
                                     <c:if test="#{ofertaLaboralController.selected.idHorasCapacitaciones!=null}">
                                         <h3 class="txtO" >#{item.idHorasCapacitaciones.horasCapacitaciones} Horas</h3>
                                     </c:if>
@@ -136,7 +155,7 @@
                                 </div>
 
                                 <div class="infoO2" >
-                                    <h3 class="textoO" >Area de Estudio</h3>
+                                    <h3 class="textoO" >Área de Estudio</h3>
                                     <h3 class="txtO" >#{item.idAreaEstudio.areaEstudio}</h3>
                                 </div>
                             </p:fieldset>

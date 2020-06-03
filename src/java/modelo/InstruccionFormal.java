@@ -43,7 +43,10 @@ public class InstruccionFormal implements Serializable {
     @Size(max = 70)
     @Column(name = "institucion")
     private String institucion;
-    @Size(max = 100)
+    @Size(max = 80)
+    @Column(name = "titulo")
+    private String titulo;
+    @Size(max = 45)
     @Column(name = "codigo_senescyt")
     private String codigoSenescyt;
     @JoinColumn(name = "id_hoja_vida_estudiante", referencedColumnName = "id_hoja_vida_estudiante")
@@ -76,6 +79,14 @@ public class InstruccionFormal implements Serializable {
         this.institucion = institucion;
     }
 
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    
     public String getCodigoSenescyt() {
         return codigoSenescyt;
     }

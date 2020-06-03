@@ -7,7 +7,7 @@
       lang="es">
 
     <h:head>
-        <title>Bolsa de Empleo ISTL</title>
+        <title>Sistema de Seguimiento a Egresados y Graduados - ISTL</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/logo.png"/>
@@ -52,9 +52,9 @@
                                         <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
                                     </li>  
                                     <li id="ingresar1">                                   
-                                        <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
-                                            <img style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                                 src="#{request.contextPath}/resources/#{personaController.selected.foto}" ></img>
+                                        <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" id="foto">
+                                                 <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
+                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
                                         </p:commandLink>
                                     </li>
                                 </ui:insert>
@@ -73,11 +73,12 @@
             <div id="caja2">
                 <ui:insert name="caja">   
                     <h:form>
+                        
                         <h:panelGrid columns="1" style="margin: auto; ">
                             <h:panelGroup style="display: inline-block; text-align: center; "> 
                                 <div class="botones2" style="padding-top: 31px;">
                                     <h:commandLink class="botones" actionListener="#{personaController.correoPersona()}"  action="/estudiante/verPerfilPersona?faces-redirect=true" >
-                                        <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
+                                        <p:graphicImage class="fotoPerfil" value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
                                     </h:commandLink>
                                     <div class="txt_boton">Mi Perfil</div>
                                 </div>  
@@ -156,8 +157,8 @@
             <h:form style="margin: 0;padding: 0;padding-left: 40px;padding-right: 40px;display: block;margin-right: -3px" >
                 <center>
                         <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
-                            <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                                 src="#{request.contextPath}/resources/#{personaController.selected.foto}" ></img>
+                                 <p:graphicImage style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
+                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
                         </div>
                     <br/>
                     <br/>

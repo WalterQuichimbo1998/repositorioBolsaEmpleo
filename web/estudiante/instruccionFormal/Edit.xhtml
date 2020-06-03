@@ -16,9 +16,12 @@
                         <p:outputLabel value="#{bundle.EditInstruccionFormalLabel_institucion}" for="institucion" style="font-weight: bold" />
                         <p:inputText id="institucion" value="#{instruccionFormalController.selected.institucion}" title="#{bundle.EditInstruccionFormalTitle_institucion}" maxlength="45"
                                       style="width: 300px" onkeyup="javascript:this.value = this.value.toUpperCase();" required="true" requiredMessage="Escriba el nombre de la institución"/>
+                        <p:outputLabel value="Título" for="titulo" style="font-weight: bold"/>
+                       <p:inputTextarea id="titulo" maxlength="80" rows="2" cols="35" autoResize="false" value="#{instruccionFormalController.selected.titulo}" title="título"
+                                     style="width: 300px;resize: none;" required="true" requiredMessage="Escriba el nombre del Título"/>
                         <p:outputLabel value="#{bundle.EditInstruccionFormalLabel_codigoSenescyt}" for="codigoSenescyt" style="font-weight: bold"/>
                         <p:inputText id="codigoSenescyt" value="#{instruccionFormalController.selected.codigoSenescyt}" title="#{bundle.EditInstruccionFormalTitle_codigoSenescyt}" maxlength="45"
-                                      style="width: 190px" required="true" requiredMessage="Ingrese el código senescyt"/>
+                                      style="width: 190px"/>
                         
                         <p:outputLabel value="#{bundle.EditInstruccionFormalLabel_idNivelAcademico}" for="idNivelAcademico" style="font-weight: bold" />
                         <p:selectOneMenu id="idNivelAcademico" value="#{instruccionFormalController.selected.idNivelAcademico}"  style="width: 200px" required="true" requiredMessage="Seleccione el nivel académico">

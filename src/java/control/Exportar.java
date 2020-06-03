@@ -51,7 +51,7 @@ public class Exportar implements Serializable {
 
     public void reporteIndividual_Empresa(Integer id, String logotipo) throws JRException, IOException {
         String relativePath = "";
-        if (logotipo.equals("") || logotipo == null) {
+        if (logotipo.equals("requerido/sin_logotipo.jpg")) {
             relativePath = "/resources/requerido/empresa.png";
         } else {
             relativePath = "/resources/" + logotipo;
@@ -99,7 +99,7 @@ public class Exportar implements Serializable {
 
     public void reporteIndividual_Oferta(Integer id, String logotipo) throws JRException, IOException {
         String relativePath = "";
-        if (logotipo.equals("") || logotipo == null) {
+        if (logotipo.equals("requerido/sin_logotipo.jpg")) {
             relativePath = "/resources/requerido/empresa.png";
         } else {
             relativePath = "/resources/" + logotipo;
@@ -127,7 +127,7 @@ public class Exportar implements Serializable {
 
     public void exportarHojaVida(Integer id, String foto) throws JRException, IOException {
         String relativePath = "";
-        if (foto.equals("") || foto == null) {
+        if (foto.equals("requerido/sin_foto_perfil.png")) {
             relativePath = "/resources/requerido/sin_foto.jpg";
         } else {
             relativePath = "/resources/" + foto;

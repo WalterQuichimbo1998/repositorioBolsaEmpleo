@@ -67,8 +67,8 @@
                             <f:facet name="header">
                                 <h:outputText value="Imagen"/>
                             </f:facet>
-                            <img style="width: 260px;margin: auto;" 
-                                 src="#{request.contextPath}/resources/portada/#{item.imagen}"></img>
+                                  <p:graphicImage style="width: 260px;margin: auto;" 
+                                                  value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/portada/#{item.imagen}"/>
                         </p:column>
                         <p:column sortBy="#{item.imagen}" style="width: 280px">
                             <f:facet name="header">

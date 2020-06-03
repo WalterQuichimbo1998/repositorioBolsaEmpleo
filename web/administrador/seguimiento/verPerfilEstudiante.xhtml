@@ -100,12 +100,16 @@
                                 <p:column style="background:white; border:1px solid white;" headerText="Institución">  
                                     <h:outputText value="#{item2.institucion}" style="font-size: 17px; "/>               
                                 </p:column>
+                                 <p:column style="background:white; border:1px solid white;" headerText="Título">
+                                    <h:outputText value="#{item2.titulo}"  style="font-size: 17px; "/>
+                                </p:column>    
+                                 <p:column style="background:white; border:1px solid white;" headerText="Código Senescyt">
+                                    <h:outputText value="#{item2.codigoSenescyt}"  style="font-size: 17px; "/>
+                                </p:column>    
                                 <p:column style="background:white; border:1px solid white;" headerText="Nivel Académico">  
                                     <h:outputText value="#{item2.idNivelAcademico.nivelAcademico}" style="font-size: 17px;"/>
                                 </p:column>
-                                <p:column style="background:white; border:1px solid white;" headerText="Código Senescyt">
-                                    <h:outputText value="#{item2.codigoSenescyt}"  style="font-size: 17px; "/>
-                                </p:column>                            
+                                                        
                              </p:dataTable>
                         </p:fieldset>
                         <br/>
@@ -225,13 +229,13 @@
                                         sortBy="#{item2.idReferencia}"
                                  sortOrder="descending">
                                 <p:column style="background:white; border:1px solid white;" headerText="Persona">      
-                                    <h:outputText value="#{item2.nombre} #{item2.apellido}" style="font-size: 18px"/>
+                                    <h:outputText value="#{item2.nombre} #{item2.apellido}" style="font-size: 17px"/>
                                 </p:column>
                                 <p:column style="background:white; border:1px solid white;" headerText="Correo electrónico">  
-                                    <h:outputText value="#{item2.correoElectronico}" style="font-size: 18px"/>
+                                    <h:outputText value="#{item2.correoElectronico}" style="font-size: 17px"/>
                                 </p:column>
                                 <p:column style="background:white; border:1px solid white;" headerText="Teléfono">  
-                                    <h:outputText value="#{item2.telefono}" style="font-size: 18px"/>
+                                    <h:outputText value="#{item2.telefono}" style="font-size: 17px"/>
                                 </p:column>
                             </p:dataTable>
 

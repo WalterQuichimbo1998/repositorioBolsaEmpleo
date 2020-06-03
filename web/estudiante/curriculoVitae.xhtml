@@ -32,9 +32,9 @@
                             <div style="width: 90%;margin: auto;">
                                 <h1>#{personaController.selected.nombre} #{personaController.selected.apellido}</h1> 
                                 <div style="width: 100%;display:flex;">                                 
-                                    <div style="width: 180px; height: 200px;margin-left: 10px ">
-                                        <img style="width: 180px; height: 200px;object-fit:cover;object-position:center center;border-radius: 3px " 
-                                             src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
+                                    <div style="width: 180px; height: 200px;margin-left: 10px">
+                                    <p:graphicImage style="width: 180px; height: 200px;object-fit:cover;object-position:center center;border-radius: 3px" 
+                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
                                     </div>
                                     <div style="width: 60%; margin-left: 20px; ">                              
                                         <h:outputText value="Edad: " style="font-size: 17px; font-weight: bold"/>
@@ -76,13 +76,18 @@
                                 <p:column style="background:white; border:1px solid white;" headerText="Institución">   
                                     <h:outputText value="#{item.institucion}" style="font-size: 17px; "/>               
                                 </p:column>
-                                <p:column style="background:white; border:1px solid white;" headerText="Nivel Académico">      
-                                    <h:outputText value="#{item.idNivelAcademico.nivelAcademico}" style="font-size: 17px;"/>
+                                <p:column style="background:white; border:1px solid white;" headerText="Título">      
+         
+                                    <h:outputText value="#{item.titulo}"  style="font-size: 17px; "/>
                                 </p:column>
                                 <p:column style="background:white; border:1px solid white;" headerText="Código Senescyt">      
          
                                     <h:outputText value="#{item.codigoSenescyt}"  style="font-size: 17px; "/>
                                 </p:column>
+                                <p:column style="background:white; border:1px solid white;" headerText="Nivel Académico">      
+                                    <h:outputText value="#{item.idNivelAcademico.nivelAcademico}" style="font-size: 17px;"/>
+                                </p:column>
+                                
                             </p:dataTable>
                         </p:tab>
 

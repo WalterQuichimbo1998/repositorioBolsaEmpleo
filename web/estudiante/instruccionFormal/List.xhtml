@@ -39,19 +39,27 @@
                             </f:facet>
                             <h:outputText value="#{item.institucion}"/>
                         </p:column>
-                        <p:column sortBy="#{item.idNivelAcademico.nivelAcademico}">
+                         <p:column sortBy="#{item.titulo}">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListInstruccionFormalTitle_idNivelAcademico}"/>
+                                <h:outputText value="Título"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNivelAcademico.nivelAcademico}"/>
+                            <h:outputText value="#{item.titulo}"/>
                         </p:column>
-                        <p:column sortBy="#{item.codigoSenescyt}">
+                   
+                         <p:column sortBy="#{item.codigoSenescyt}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListInstruccionFormalTitle_codigoSenescyt}"/>
                             </f:facet>
                             <h:outputText value="#{item.codigoSenescyt}"/>
                         </p:column>
                    
+                        <p:column sortBy="#{item.idNivelAcademico.nivelAcademico}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInstruccionFormalTitle_idNivelAcademico}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idNivelAcademico.nivelAcademico}"/>
+                        </p:column>
+                       
                         
                     
                         <f:facet name="footer">

@@ -32,7 +32,8 @@
                         <p:outputLabel value="#{bundle.CreateExperienciaLaboralLabel_fechaFin}" for="fechaFin" style="font-weight: bold"/>
                         <p:calendar id="fechaFin" pattern="dd/MM/yyyy" locale="es" value="#{experienciaLaboralController.selected.fechaFin}" title="#{bundle.EditExperienciaLaboralTitle_fechaFin}" navigator="true" mask="true" requiredMessage="Seleccione la fecha de finalización"/>
                         <p:outputLabel value="#{bundle.CreateExperienciaLaboralLabel_actividades}" for="actividades" style="font-weight: bold"/>
-                        <p:inputTextarea id="actividades" maxlength="200" rows="3" cols="40" autoResize="false"  value="#{experienciaLaboralController.selected.actividades}" title="#{bundle.CreateExperienciaLaboralTitle_actividades}" />
+                        <p:inputTextarea id="actividades" maxlength="200" rows="3" cols="40" autoResize="false"  value="#{experienciaLaboralController.selected.actividades}" title="#{bundle.CreateExperienciaLaboralTitle_actividades}" 
+                                         style="resize: none;"/>
 
                         <p:outputLabel value="#{bundle.CreateExperienciaLaboralLabel_trabajaActualmente}" for="trabajaActualmente" style="font-weight: bold"/>
                         <p:selectOneRadio id="trabajaActualmente"  value="#{experienciaLaboralController.selected.trabajaActualmente}" required="true" requiredMessage="Seleccione el estado actual">                           
