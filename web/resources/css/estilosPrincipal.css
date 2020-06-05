@@ -345,7 +345,7 @@ nav ul li{
 }
 .texto_3{
     width: 98%;
-    height: 130px;
+    height: 110px;
     margin: auto;
     font-family: Arial;
     text-align: justify;
@@ -725,7 +725,7 @@ nav ul li{
 }
     
     .texto_3{
-        height: auto;
+        height: 70px;
     }
      .imagenes{
         width: 96%;
@@ -772,6 +772,9 @@ nav ul li{
         width:70%;
         margin: auto;
         display: block;
+    }
+    .texto_3{
+        height: auto;
     }
     .formOfertas{
         width: 100%;

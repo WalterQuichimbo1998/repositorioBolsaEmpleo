@@ -21,8 +21,7 @@
                                      style="width: 300px;resize: none;" required="true" requiredMessage="Escriba el nombre del Título"/>
                         <p:outputLabel value="#{bundle.CreateInstruccionFormalLabel_codigoSenescyt}" for="codigoSenescyt" style="font-weight: bold" />
                         <p:inputText id="codigoSenescyt" value="#{instruccionFormalController.selected.codigoSenescyt}" title="#{bundle.CreateInstruccionFormalTitle_codigoSenescyt}" maxlength="45"
-                                      style="width: 190px"/>
-                       
+                                     style="width: 190px"/>
                         <p:outputLabel value="#{bundle.CreateInstruccionFormalLabel_idNivelAcademico}" for="idNivelAcademico" style="font-weight: bold"/>
                         <p:selectOneMenu id="idNivelAcademico" value="#{instruccionFormalController.selected.idNivelAcademico}"  style="width: 200px" required="true" requiredMessage="Seleccione el nivel académico">
                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>   
