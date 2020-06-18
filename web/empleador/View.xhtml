@@ -9,7 +9,7 @@
 
         <p:dialog id="EmpresaViewDlg" widgetVar="EmpresaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEmpresaTitle}"
                   showEffect="fade" hideEffect="fade">
-            <h:form id="EmpresaViewForm" >
+            <h:form id="EmpresaViewForm" rendered="#{empresaController.selected!=null}">
                 <h2 style="text-align: center;width: 400px;margin: auto">#{empresaController.selected.nombreComercial}</h2>
                     <div style="width: 400px; height: auto;padding: 10px; ">
                           <img style="border-radius: 10px;" width="100%" src="#{request.contextPath}/resources/#{empresaController.selected.logotipo}"></img>                                         

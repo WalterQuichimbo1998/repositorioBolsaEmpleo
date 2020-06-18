@@ -4,7 +4,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       lang="es"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
@@ -22,7 +21,7 @@
         <h:outputScript library="js" name="menu_1.js"/>
         <h:outputScript library="js" name="waves.js"/>
     </h:head>
-    <h:body rendered="#{accesoBean.usuarioNavegacion() eq 'EMPLEADOR'}">
+    <h:body>
         <p:growl id="growl" life="3000" />
         <div class="contenedor">
             <div class="cont">
@@ -53,7 +52,9 @@
                                     <li id="ingresar1">                                   
                                         <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                                              <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
+                                                             name="#{personaController.selected.foto}">
+                                                  <div style="position: absolute;width: 10px;height: 10px;background: #00ff66;margin-top: 56px;margin-left: 38px;z-index: 100;border-radius: 7px;"></div>
+                                                 </p:graphicImage>
                                         </p:commandLink>
                                     </li>
                                 </ui:insert>
@@ -120,8 +121,8 @@
             <h:form style="margin: 0;padding: 0;padding-left: 40px;padding-right: 40px;display: block;" >            
                 <center>
                         <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
-                            <img style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                                 src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
+                                 <p:graphicImage style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
+                                                 name="#{personaController.selected.foto}"/>
                         </div>
                     <br/>
                     <br/>
@@ -129,8 +130,6 @@
                 <p:commandButton value="Mi Perfil" icon="ui-icon-contact" actionListener="#{personaController.correoPersona()}" action="/empleador/verPerfilPersona_2?faces-redirect=true" styleClass="b_1"/>
                 <br/>
                 <p:commandButton value="Cambiar Clave" icon="ui-icon-key" action="/empleador/cambiarClave?faces-redirect=true" styleClass="b_1"/>
-                <br/>
-                <p:commandButton value="Cambiar Foto" icon="ui-icon-image" action="/empleador/cambiarFoto?faces-redirect=true" styleClass="b_1"/> 
                 <br/>
                 <p:commandButton value="Cerrar Sesión"  styleClass="ss" icon="ui-icon-power"  action="#{accesoBean.logoutAdmin()}"/>
                 <br/>

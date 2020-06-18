@@ -25,7 +25,9 @@
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                     <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
+                                    name="#{personaController.selected.foto}">
+                        <div style="position: absolute;width: 10px;height: 10px;background: #00ff66;margin-top: 56px;margin-left: 38px;z-index: 100;border-radius: 7px;"></div>
+                    </p:graphicImage>
                 </p:commandLink>
             </li>
         </ui:define>
@@ -157,7 +159,7 @@
                             <br/>
                             <h:commandButton value="Ayer"  actionListener="#{empresaController.fecha2()}" class="f1">
                                 <f:ajax execute="@form" render="fechaInicio fechaFinal mensaje des" /> 
-                           
+
                             </h:commandButton>
                             <h:commandButton value="Buscar" class="botonDescargar" 
                                              actionListener="#{empresaController.verificarReporte}" id="export" >

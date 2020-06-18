@@ -18,7 +18,7 @@
         <h:outputScript library="js" name="menu_1.js"/>
         <h:outputScript library="js" name="waves.js"/>
     </h:head>
-    <h:body rendered="#{accesoBean.usuarioNavegacion() eq 'ESTUDIANTE'}">
+    <h:body>
         <p:growl id="growl" life="3000" />  
         <div class="contenedor">
           <div class="cont">
@@ -66,7 +66,7 @@
                                
                                         <div class="botones2" style="padding-top: 31px;">
                                             <h:commandLink class="botones"  action="/estudiante2/verPerfilPersona_D?faces-redirect=true" >
-                                                 <img class="fotoPerfil" src="#{request.contextPath}/resources/#{personaController.selected.foto}"></img>
+                                                 <p:graphicImage class="fotoPerfil" name="#{personaController.selected.foto}"/>
                                                 </h:commandLink>
                                             <div class="txt_boton">Mi Perfil</div>
                                         </div>  

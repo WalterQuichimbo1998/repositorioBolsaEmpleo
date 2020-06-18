@@ -46,8 +46,7 @@
                                 <h:outputText value="Logotipo"/>
                             </f:facet>
 
-                        <img style="width: 120px;margin: auto;" 
-                             src="#{request.contextPath}/resources/#{item.logotipo}"></img>
+                        <p:graphicImage style="width: 120px;margin: auto;" name="#{item.logotipo}"/>
                         </p:column>
                         <p:column style="width:280px" sortBy="#{item.idEmpresa}">
                             <f:facet name="header">

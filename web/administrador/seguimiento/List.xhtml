@@ -56,10 +56,10 @@
                                          /> 
                         </f:facet>
                          <p:column style="width:60px;" sortBy="#{item.idHojaVidaEstudiante}" headerText="Foto">
-                                <img style="width: 44px;height: 44px;border-radius: 20px;margin: 0;padding: 0;margin: auto;
+                             <p:graphicImage style="width: 44px;height: 44px;border-radius: 20px;margin: 0;padding: 0;margin: auto;
                                      object-fit:cover;object-position:center center;
                                      background-size: cover;"     
-                                     src="#{request.contextPath}/resources/#{item.idPersona.foto}" ></img>  
+                                     name="#{item.idPersona.foto}"/>
                             </p:column>
                         <p:column sortBy="#{item.idHojaVidaEstudiante}" filterBy="#{item.idHojaVidaEstudiante}" filterMatchMode="contains"  
                                   style="width: 80px">

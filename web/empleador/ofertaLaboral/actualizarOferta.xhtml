@@ -7,9 +7,9 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="../Empleador.xhtml">
-        
-       <ui:define name="link">
-           <li>
+
+        <ui:define name="link">
+            <li>
                 <p:commandButton value="Inicio" class="btn2" action="/empleador/Empleador?faces-redirect=true"/>
             </li>
             <li>
@@ -24,13 +24,15 @@
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
                     <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
+                                    name="#{personaController.selected.foto}">
+                        <div style="position: absolute;width: 10px;height: 10px;background: #00ff66;margin-top: 56px;margin-left: 38px;z-index: 100;border-radius: 7px;"></div>
+                    </p:graphicImage>
                 </p:commandLink>
             </li>
-           
+
         </ui:define>
         <ui:define name="dir">
-             <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
             <h:commandLink class="prin" value="/" disabled="true"/>
             <h:commandLink class="prin" value="Mis Empresas" action="/empleador/empresa/List?faces-redirect=true"/>
             <h:commandLink class="prin" value="/" disabled="true"/>
@@ -40,24 +42,24 @@
         </ui:define>
         <ui:define name="caja">
             <div class="caja_form">
-            <h3 class="titulo_pO">Actualizar Oferta Laboral</h3>
-            <br/>
-            <br/>
-             <center>
+                <h3 class="titulo_pO">Actualizar Oferta Laboral</h3>
+                <br/>
+                <br/>
+                <center>
                     <h:outputLabel rendered="#{ofertaLaboralController.selected==null}" value="Seleccione una oferta laboral"
                                    style="font-size: 20px;font-family: Arial"/>
                 </center>
-            <h:form id="formularioO" rendered="#{ofertaLaboralController.selected!=null}">
-                   <div class="infoO2">
+                <h:form id="formularioO" rendered="#{ofertaLaboralController.selected!=null}">
+                    <div class="infoO2">
                         <h3 class="textoO">Cargo solicitado<strong style="color: red;"> *</strong></h3>
                         <br style="margin-bottom: 3px"/>
                         <h:inputText id="car" class="txtO0" value="#{ofertaLaboralController.selected.cargoSolicitado}" 
                                      onkeyup="javascript:this.value = this.value.toUpperCase();" maxlength="60" title="Máximo 60 carácteres"
                                      required="true" requiredMessage="Ingrese al menos un CARGO SOLICITADO"/>
-                   <p:message for="car"/> 
-                   </div>
-            
-                     <div class="infoO">  
+                        <p:message for="car"/> 
+                    </div>
+
+                    <div class="infoO">  
                         <h3  class="textoO" >Nivel Académico</h3>
                         <h:selectOneMenu class="txtCO" value="#{ofertaLaboralController.selected.idNivelAcademico}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -65,9 +67,9 @@
                                            var="idNivelAcademicoItem"
                                            itemValue="#{idNivelAcademicoItem}"/>
                         </h:selectOneMenu>
-                       
+
                     </div>
-                        
+
                     <div class="infoO">
                         <h3 class="textoO" >Área de Estudio</h3>
                         <h:selectOneMenu class="txtCO" value="#{ofertaLaboralController.selected.idAreaEstudio}" >
@@ -87,27 +89,27 @@
                             <f:ajax event="change" render="ff" />
                         </h:selectOneMenu>
                     </div>
-                    
-                      <div class="infoO">
-                         <h3  class="textoO" >Remuneración($)<strong style="color: red;"> *</strong></h3>
-                        <h:inputText id="remu" maxlength="10" class="txtO" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" value="#{ofertaLaboralController.selected.remuneracion}"
+
+                    <div class="infoO">
+                        <h3  class="textoO" >Remuneración($)<strong style="color: red;"> *</strong></h3>
+                        <h:inputText id="remu" maxlength="10" class="txtO" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" value="#{ofertaLaboralController.selected.remuneracion}"
                                      required="true" requiredMessage="Ingrese una remuneración" />
-                                 <p:message for="remu"/>
+                        <p:message for="remu"/>
                     </div>
                     <div class="infoO">
                         <h3 class="textoO" >Jornada de trabajo(# horas)<strong style="color: red;"> *</strong></h3>
-                        <h:inputText id="jor" maxlength="2" class="txtO" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" value="#{ofertaLaboralController.selected.jornadaTrabajo}"
-                                      required="true" requiredMessage="Ingrese una Jornada de Trabajo" />
-                                 <p:message for="jor"/>
+                        <h:inputText id="jor" maxlength="2" class="txtO" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" value="#{ofertaLaboralController.selected.jornadaTrabajo}"
+                                     required="true" requiredMessage="Ingrese una Jornada de Trabajo" />
+                        <p:message for="jor"/>
                     </div>
-                    
+
                     <div class="infoO">
                         <h3 class="textoO" >Tiempo de Experiencia</h3>
                         <h:inputText maxlength="20" class="txtO" value="#{ofertaLaboralController.selected.tiempo_experiencia}"  />
                     </div>
-                    
-                <div class="infoO">
-                       <h3 class="textoO">Fecha inicio<strong style="color: red;"> *</strong></h3>
+
+                    <div class="infoO">
+                        <h3 class="textoO">Fecha inicio<strong style="color: red;"> *</strong></h3>
                         <br style="margin-bottom: 3px"/>
                         <p:calendar id="fi" styleClass="calendarClass" pattern="dd/MM/yyyy" locale="es" navigator="true" 
                                     value="#{ofertaLaboralController.selected.fechaInicio}"  mask="true" required="true" requiredMessage="Seleccione la fecha de inicio"/>
@@ -115,33 +117,33 @@
                     </div>
                     <div class="infoO">
                         <h3 class="textoO">Fecha Fin</h3>
-                         <br style="margin-bottom: 3px;"/>
-                         <p:calendar id="ff" styleClass="calendarClass" pattern="dd/MM/yyyy" locale="es" navigator="true" value="#{ofertaLaboralController.selected.fechaFin}" mask="true"
-                                     disabled="#{ofertaLaboralController.selected.idTipoContrato.tipoContrato eq 'INDEFINIDO'}" style="border-bottom-color: #{ofertaLaboralController.selected.idTipoContrato.tipoContrato eq 'INDEFINIDO' ? 'transparent':''}"/>
+                        <br style="margin-bottom: 3px;"/>
+                        <p:calendar id="ff" styleClass="calendarClass" pattern="dd/MM/yyyy" locale="es" navigator="true" value="#{ofertaLaboralController.selected.fechaFin}" mask="true"
+                                    disabled="#{ofertaLaboralController.selected.idTipoContrato.tipoContrato eq 'INDEFINIDO'}" style="border-bottom-color: #{ofertaLaboralController.selected.idTipoContrato.tipoContrato eq 'INDEFINIDO' ? 'transparent':''}"/>
                     </div>
                     <div class="infoO">
                         <h3 class="textoO" >Horas capacitacines</h3>
-                         <h:selectOneMenu class="txtCO" value="#{ofertaLaboralController.selected.idHorasCapacitaciones}" >
-                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                        <h:selectOneMenu class="txtCO" value="#{ofertaLaboralController.selected.idHorasCapacitaciones}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{horasCapacitacionesController.itemsAvailableSelectOne}"
                                            var="idHorasCapacitacionesItem"
                                            itemValue="#{idHorasCapacitacionesItem}"/>
                         </h:selectOneMenu>
                     </div>
                     <div class="infoO">
-         
-                </div>
-                <div class="infoO"> 
+
+                    </div>
+                    <div class="infoO"> 
                         <h3  class="textoO">Experiencias</h3>
-                       <p:inputTextarea class="txtOA" rows="5" cols="33" value="#{ofertaLaboralController.selected.experiencia}" title="Máximo 250 letras o carácteres"
-                                        placeholder="Ingrese una pequeña descripción" autoResize="off" />
+                        <p:inputTextarea class="txtOA" rows="5" cols="33" value="#{ofertaLaboralController.selected.experiencia}" title="Máximo 250 letras o carácteres"
+                                         placeholder="Ingrese una pequeña descripción" autoResize="off" />
                     </div>
                     <div class="infoO"> 
                         <h3  class="textoO">Conocimientos del cargo</h3>
                         <p:inputTextarea class="txtOA" rows="5" cols="33" value="#{ofertaLaboralController.selected.conocimientoCargo}" title="Máximo 250 letras o carácteres"
                                          placeholder="Ingrese una pequeña descripción" autoResize="off" />
                     </div>
-                    
+
                     <div class="infoO"> 
                         <h3  class="textoO">Actividades a desempeñar</h3>
                         <p:inputTextarea class="txtOA" rows="5" cols="33" value="#{ofertaLaboralController.selected.actividades}" title="Máximo 250 letras o carácteres"
@@ -152,15 +154,15 @@
                         <p:inputTextarea class="txtOA" rows="5" cols="33" value="#{ofertaLaboralController.selected.descripcion}" title="Máximo 250 letras o carácteres"
                                          placeholder="Ingrese una pequeña descripción" autoResize="off" />
                     </div>
-                    
+
                     <div style="margin: auto; width: 100%; display: flex">                
                         <p:commandButton  styleClass="btn_guardar" ajax="false" value="ACTUALIZAR OFERTA LABORAL" actionListener="#{ofertaLaboralController.update}"
                                           action="/empleador/ofertaLaboral/List?faces-redirect=true"/>
-                       
+
                     </div>
                 </h:form>
-            <br/>
-            <br/>
+                <br/>
+                <br/>
             </div>
             <br/>
             <br/>

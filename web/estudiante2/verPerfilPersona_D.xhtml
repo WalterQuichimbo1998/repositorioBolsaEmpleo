@@ -21,13 +21,18 @@
                 <h:form class="formulario" style="margin-top: 20px;">
                     
                     <div class="info">
-                        <center style="padding-top: 25px">
-                            <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 3px;">
-                                <p:graphicImage style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center; "  
-                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
+                        <center style="padding-top: 25px;padding-bottom: 8px;">
+                            <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 3px;" id="imagen">
+                                <p:graphicImage name="#{personaController.selected.foto}"
+                                                style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center;" > 
+                                                
+                                <p:commandLink styleClass="foto" title="Cambiar Foto"
+                                               oncomplete="PF('form_imagen').show()" update=":datos">
+                                    <img src="#{request.contextPath}/resources/img/camara.png" 
+                                         style="width:100%;height: 100%;"/>
+                                </p:commandLink>
+                                </p:graphicImage>
                             </div>
-                            <p:commandButton  styleClass="btn_guardar2" ajax="false" value="Cambiar Foto" immediate="true" action="/estudiante2/cambiarFoto_D?faces-redirect=true" 
-                                          style="width: 210px;margin-bottom: 40px;"/>
                         </center>
                         <h3 class="texto" >Nombres</h3> 
                         <h:inputText class="txt" maxlength="30" value="#{personaController.selected.nombre}" style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();" 
@@ -131,6 +136,40 @@
                     </div>
 
                 </h:form>
+                <p:dialog id="form_imagen" widgetVar="form_imagen" modal="false" resizable="false" appendTo="@(body)"
+                          closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" style="width: 500px !important;border-radius: 20px;"> 
+                    <h1 style="width: 100%;margin: auto;color:#fff;background: #186bbe;font-family: Arial;text-align: center;padding: 3px 0px;border-radius: 7px;">
+                        Cambiar Foto de Perfil</h1>
+                    <br/>
+                    <p style="font-family: Arial;text-align: center;color:#454545"><strong>Aviso: </strong>Seleccione una foto con extensión .png o .jpg - Tamaño máximo 3Mb.</p>
+                    <br/>
+                    <h:form enctype="multipart/form-data" id="datos" style="width: 100%;">
+                        <p:fileUpload style="width: 600px;margin: auto;background: none;text-align: center;" id="fil"
+                                      previewWidth="80"
+                                      fileUploadListener="#{personaController.subirFoto}" 
+                                      mode="advanced" 
+                                      dragDropSupport="false"
+                                      sizeLimit="3072000"
+                                      cancelLabel="Cancelar"
+                                      uploadLabel="Subir Foto"
+                                      fileLimitMessage="No Mayor a 3 MB"
+                                      invalidSizeMessage="Máximo 3 MB"
+                                      invalidFileMessage="Archivo Fallído"
+                                      label="Seleccionar Foto"
+                                      fileLimit="1" 
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                      update=":growl"/> 
+                    </h:form>
+                    <h:form>
+                        <br/>
+                        <center>
+                            <p:commandButton styleClass="eliminar" style="font-size: 16px" value="Cerrar" immediate="true" onclick="form_imagen.hide()"/>
+                        <br/>
+                        
+                     <p style="font-family: Arial;text-align: center;color:#039be5">Si la imagen actualizada no se muestra recargue la página.</p>
+                        </center>
+                    </h:form>
+                </p:dialog>
                 <br/>
             <br/>
             </div>

@@ -4,11 +4,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="./Estudiante.xhtml">
-      
+
         <ui:define name="dir">
             <h:commandLink class="prin" value="Inicio" action="/estudiante/Estudiante?faces-redirect=true"/>
             <h:commandLink class="prin" value="/" disabled="true" />
@@ -19,14 +18,18 @@
                 <h3 class="titulo_p" style="font-size: 44px;margin-top: 0;">Datos Personales</h3>
                 <h:form class="formulario" style="margin-top: 20px;">                  
                     <div class="info">                                 
-                        <center style="padding-top: 25px">
-                                <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 3px;">
-                                <p:graphicImage style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center; "  
-                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
-                                </div>
-                                            
-                            <p:commandButton  styleClass="btn_guardar2" ajax="false" value="Cambiar Foto" immediate="true" action="/estudiante/cambiarFoto?faces-redirect=true" 
-                                              style="width: 210px;margin-bottom: 40px;"/>
+                        <center style="padding-top: 25px;padding-bottom: 8px;">
+                            <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 3px;" id="imagen">
+                                <p:graphicImage name="#{personaController.selected.foto}"
+                                                style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center;" > 
+                                                
+                                <p:commandLink styleClass="foto" title="Cambiar Foto"
+                                               oncomplete="PF('form_imagen').show()" update=":datos">
+                                    <img src="#{request.contextPath}/resources/img/camara.png" 
+                                         style="width:100%;height: 100%;"/>
+                                </p:commandLink>
+                                </p:graphicImage>
+                            </div>
                         </center>
                         <h3 class="texto" >Nombres</h3> 
                         <h:inputText class="txt" maxlength="30" value="#{personaController.selected.nombre}" style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();" 
@@ -35,9 +38,9 @@
                         <h:inputText class="txt" maxlength="30" value="#{personaController.selected.apellido}"  style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();"
                                      required="true" requiredMessage="Ingrese su apellido"/>
                         <h3 class="texto" >Número de Cédula
-                           <h:outputLabel id="aviso0" style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" />
+                            <h:outputLabel id="aviso0" style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" />
                             <p:tooltip for="aviso0" value="Este número de cédula será de uso cuando usted necesite recuperar su clave de acceso" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> </h3>
-                            <h:inputText maxlength="10" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.cedula}" required="true" requiredMessage="Ingrese su número de cédula" />
+                        <h:inputText maxlength="10" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.cedula}" required="true" requiredMessage="Ingrese su número de cédula" />
                         <h3  class="texto" >Fecha de Nacimiento</h3>                  
                         <p:calendar styleClass="calendarClass" pattern="dd/MM/yyyy" locale="es" navigator="true" value="#{personaController.selected.fechaNacimiento}" mask="true" />
                         <h3  class="texto" >Género</h3>
@@ -94,7 +97,7 @@
                             <p:tooltip for="aviso" value="Este correo será de uso cuando usted necesite recuperar su clave de acceso" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
                         </h3>
                         <h:inputText maxlength="45" class="txt" value="#{personaController.correoPersona}" id="email"
-                            validatorMessage="El correo electrónico no es válido">
+                                     validatorMessage="El correo electrónico no es válido">
                             <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                         </h:inputText>
                         <p:message for="email" />
@@ -129,6 +132,40 @@
                         </center>
                     </div>                   
                 </h:form>
+                <p:dialog id="form_imagen" widgetVar="form_imagen" modal="false" resizable="false" appendTo="@(body)"
+                          closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" style="width: 500px !important;border-radius: 20px;"> 
+                    <h1 style="width: 100%;margin: auto;color:#fff;background: #186bbe;font-family: Arial;text-align: center;padding: 3px 0px;border-radius: 7px;">
+                        Cambiar Foto de Perfil</h1>
+                    <br/>
+                    <p style="font-family: Arial;text-align: center;color:#454545"><strong>Aviso: </strong>Seleccione una foto con extensión .png o .jpg - Tamaño máximo 3Mb.</p>
+                    <br/>
+                    <h:form enctype="multipart/form-data" id="datos" style="width: 100%;">
+                        <p:fileUpload style="width: 600px;margin: auto;background: none;text-align: center;" id="fil"
+                                      previewWidth="80"
+                                      fileUploadListener="#{personaController.subirFoto}" 
+                                      mode="advanced" 
+                                      dragDropSupport="false"
+                                      sizeLimit="3072000"
+                                      cancelLabel="Cancelar"
+                                      uploadLabel="Subir Foto"
+                                      fileLimitMessage="No Mayor a 3 MB"
+                                      invalidSizeMessage="Máximo 3 MB"
+                                      invalidFileMessage="Archivo Fallído"
+                                      label="Seleccionar Foto"
+                                      fileLimit="1" 
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                      update=":growl"/> 
+                    </h:form>
+                    <h:form>
+                        <br/>
+                        <center>
+                            <p:commandButton styleClass="eliminar" style="font-size: 16px" value="Cerrar" immediate="true" onclick="form_imagen.hide()"/>
+                        <br/>
+                        
+                     <p style="font-family: Arial;text-align: center;color:#039be5">Si la imagen actualizada no se muestra recargue la página.</p>
+                        </center>
+                    </h:form>
+                </p:dialog>
                 <br/>
                 <br/>
             </div>

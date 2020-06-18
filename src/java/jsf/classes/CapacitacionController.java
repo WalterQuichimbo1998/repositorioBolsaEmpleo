@@ -41,6 +41,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.primefaces.event.FileUploadEvent;
 
 import org.primefaces.model.UploadedFile;
 
@@ -245,16 +246,14 @@ public class CapacitacionController implements Serializable {
 
     }
 
-    public void subirExcel() {
-        if (file == null || file.getSize() == 0) {
+    public void subirExcel(FileUploadEvent event) {
+        if (event.getFile() == null || event.getFile().getSize() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione un archivo", ""));
         } else {
-            String archivo = file.getContentType();
-            if ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet".equals(archivo)) {
                 Conexion con = new Conexion();
                 PreparedStatement ps;
                 try {
-                    FileInputStream file2 = (FileInputStream) file.getInputstream();
+                    FileInputStream file2 = (FileInputStream) event.getFile().getInputstream();
                     XSSFWorkbook wb = new XSSFWorkbook(file2);
                     XSSFSheet sheet = wb.getSheetAt(0);
                     int numFilas = sheet.getLastRowNum();
@@ -279,17 +278,14 @@ public class CapacitacionController implements Serializable {
                     con.conexion().close();
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro subido correctamente.", ""));
                     lista = getFacade().findAll();
-                    file=null;
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(CapacitacionController.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException | SQLException ex) {
                     Logger.getLogger(CapacitacionController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Archivo no válido.", ""));
-            }
         }
-    }
+        }
+    
 
     public String fecha(Date d) {
         String resultado = "";

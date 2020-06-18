@@ -50,6 +50,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
 import org.apache.commons.codec.binary.Base64;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 @Named("personaController")
@@ -290,18 +291,18 @@ public class PersonaController implements Serializable {
     }
 
     public void datosActualizados() {
-        if(selected.getIdProvincia()==null){
+        if (selected.getIdProvincia() == null) {
             this.selected.setIdCanton(null);
             this.selected.setIdParroquia(null);
         }
-        if(selected.getIdCanton()==null){
+        if (selected.getIdCanton() == null) {
             this.selected.setIdParroquia(null);
         }
         persist(PersistAction.UPDATE, "Datos actualizados con éxito.");
     }
 
     public void actualizarFoto() {
-        persist(PersistAction.UPDATE, "Foto subida con éxito.");
+        persist(PersistAction.UPDATE, "Foto actualizada con éxito.");
         items = null;
     }
 
@@ -487,29 +488,30 @@ public class PersonaController implements Serializable {
 
     boolean f = false;
 
-    public void subirFoto() {
+    public void subirFoto(FileUploadEvent event) {
         String extension = "";
-
-        if (file == null || file.getSize() == 0) {
+        if (event.getFile() == null || event.getFile().getSize() == 0) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Foto", ""));
         } else {
-            String ex = file.getContentType();
+            String ex = event.getFile().getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
-                
-                if (null != ex) switch (ex) {
-                    case "image/jpeg":
-                        extension = ".jpeg";
-                        break;
-                    case "image/jpg":
-                        extension = ".jpg";
-                        break;
-                    case "image/png":
-                        extension = ".png";
-                        break;
-                    default:
-                        break;
+
+                if (null != ex) {
+                    switch (ex) {
+                        case "image/jpeg":
+                            extension = ".jpeg";
+                            break;
+                        case "image/jpg":
+                            extension = ".jpg";
+                            break;
+                        case "image/png":
+                            extension = ".png";
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                if (file.getSize() <= 3072000) {
+                if (event.getFile().getSize() <= 3072000) {
                     try {
                         if (selected.getNombre() == null || "".equals(selected.getNombre())) {
                             nombre = getSelected().getIdPersona() + "_Usuario" + extension;
@@ -518,11 +520,10 @@ public class PersonaController implements Serializable {
                         }
                         selected.setFoto("foto/" + nombre);
                         if (!"requerido/sin_foto_perfil.png".equals(selected.getFoto())) {
-                            cargar(nombre);
-
+                            cargar(nombre, event);
                             actualizarFoto();
                         } else {
-                            cargar(nombre);
+                            cargar(nombre, event);
                             actualizarFoto();
                         }
                     } catch (Exception exx) {
@@ -540,13 +541,13 @@ public class PersonaController implements Serializable {
         }
     }
 
-    public void cargar(String nombre) {
+    public void cargar(String nombre, FileUploadEvent event) {
         try {
             ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
             String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
             String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "foto" + File.separator + nombre;
             FileOutputStream out = new FileOutputStream(pathDefinition);
-            InputStream in = file.getInputstream();
+            InputStream in = event.getFile().getInputstream();
             if ((in != null)) {
                 int read = 0;
                 byte[] bytes = new byte[1024];

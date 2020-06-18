@@ -525,6 +525,25 @@ nav ul li{
     box-shadow: 0px 0px 1px 1px #454545;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
 }
+.foto{
+    position: absolute;
+    z-index: 100;
+    width: 36px;
+    height: 36px;
+    margin:0 auto;
+    margin-top: 200px;
+    margin-left: 10px;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    border:none;
+    transition: all .3s ease;
+}
+.foto:hover{
+     margin-top: 195px;
+     width: 42px;
+    height: 42px;
+}
 /*----------ESTILOS CLAVE----------<<<<<<<<<<<<<<<<<<<<<<<<<*/
 .info2{
     width: 70%;

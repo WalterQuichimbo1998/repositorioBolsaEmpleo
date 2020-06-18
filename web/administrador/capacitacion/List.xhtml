@@ -127,40 +127,52 @@
 
                             </f:facet>
                         </p:dataTable>
-
+                        <br/>
+                        <br/>
+                        <br/>
+                        <p:commandButton styleClass="crear" value="Subir archivo Excel" oncomplete="PF('form_subir').show()" update=":datos"/>
+                        <br/>
+                        <br/>
                     </p:panel>
 
                 </h:form>
-
-                <h:form enctype="multipart/form-data" style="text-align: center;background: #f2f2f2;padding-top: 15px;padding-bottom: 15px" >
-                    <h2 style="color: #086A87;text-align: center;font-family: Arial">Subir archivo Excel a la Base de Datos</h2>    
-                     <p:outputLabel style="color:#454545;font-size: 16px !important;" value="1. Todas las columnas del archivo de Excel deben estar llenas para subir a la base de datos."/>
-                   
-                    <h3 style="color: #ccc;text-align: center;font-family: Arial">Seleccione el archivo</h3>       
-                    <div class="selec">
-                        <div id="upload-button">
-                            <p:fileUpload  value="#{capacitacionController.file}" mode="simple" required="true" 
-                                           dragDropSupport="false"
-                                           update=":growl" 
-                                           fileLimit="1" 
-                                           allowTypes="/(\.|\/)(xls|xlsx)$/" ></p:fileUpload>
-                        </div>
-                    </div>
-                    <br/>
-                    <p:commandButton value="Subir archivo" ajax="false" styleClass="crear" style="font-weight: normal;" 
-                                     icon="ui-icon-document"
-                                     actionListener="#{capacitacionController.subirExcel()}"
-                                     update=":CapacitacionListForm,:datalist" />
-                    <br/>
-                    <p:commandButton id="aviso" ajax="false" value="Aviso" style="background: none;border:none;outline: none;color:#086A87;font-size: 15px !important;box-shadow: none;width: 100px"/> 
-                     <p style="font-family: Arial;text-align: center;color:#454545"><strong>2. </strong>El archivo Excel debe tener las siguientes columnas, tal como se muestra en la ilustración.</p>
-                     <img src="#{request.contextPath}/resources/img/excel.PNG" style="width: 90%" id="img_excel"></img>
-                     
-                     <p:tooltip for="aviso" value="Si algún registro no se sube a la base de datos revise la columnas del archivo Excel." trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
-                </h:form>
-                <br/>
-                <br/>
             </div>
+            <p:dialog id="form_subir" widgetVar="form_subir" modal="false" resizable="false" appendTo="@(body)"
+                      closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" style="width: 700px !important;border-radius: 20px;"> 
+                <center>
+                    <h1 style="width: 100%;margin: auto;color:#fff;background: #186bbe;font-family: Arial;text-align: center;padding: 3px 0px;border-radius: 7px;">
+                        Subir Archivo Excel</h1>
+                    <br/>
+                    <p style="font-family: Arial;text-align: center;color:#454545"><strong>1. </strong>El archivo Excel debe tener las siguientes columnas, tal como se muestra en la ilustración.</p>
+                    <p style="font-family: Arial;text-align: center;color:#454545"><strong>2. </strong>Todas las columnas del archivo de Excel deben estar llenas para subir a la base de datos.</p>
+                    <img src="#{request.contextPath}/resources/img/excel.PNG" style="width: 680px;margin: auto;" id="img_excel"></img>
+                </center>
+                <br/>
+                <h:form enctype="multipart/form-data" id="datos" style="width: 600px;margin: auto;">
+                    <p:fileUpload style="width: 600px;margin: auto;background: none;text-align: center;" id="fil"
+                                  previewWidth="80"
+                                  fileUploadListener="#{capacitacionController.subirExcel}" 
+                                  mode="advanced" 
+                                  dragDropSupport="false"
+                                  cancelLabel="Cancelar"
+                                  uploadLabel="Subir Archivo"
+                                  invalidFileMessage="Archivo Fallído"
+                                  label="Seleccionar Archivo"
+                                  fileLimit="1" 
+                                  allowTypes="/(\.|\/)(xls|xlsx)$/"
+                                  update=":growl"/> 
+                </h:form>
+                <h:form>
+                    <br/>
+                    <center>
+                        <p:commandButton styleClass="eliminar" style="font-size: 16px" value="Cerrar" immediate="true" onclick="form_subir.hide()"/>
+                        <br/>
+
+                        <p style="font-family: Arial;text-align: center;color:#039be5">Si algún registro no se sube revise la columnas del archivo Excel.</p>
+                    </center>
+                </h:form>
+            </p:dialog>
+
 
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
