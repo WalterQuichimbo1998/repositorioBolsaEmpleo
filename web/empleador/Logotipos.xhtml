@@ -53,8 +53,8 @@
                                 <h:outputText value="Acción"/>
                             </f:facet>
                             <p:commandButton rendered="#{item.logotipo == 'requerido/sin_logotipo.jpg'}" id="createButton" styleClass="crear" icon="ui-icon-plus"   value="Agregar" 
-                                             action="/empleador/subirLogotipo?faces-redirect=true" 
-                                             actionListener="#{empresaController.setSelected(item)}"/>
+                                             actionListener="#{empresaController.setSelected(item)}"
+                                             oncomplete="PF('form_imagen').show()" update=":datos"/>
                      <p:tooltip for="createButton" value="Agregar" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
                             <p:commandButton rendered="#{item.logotipo != 'requerido/sin_logotipo.jpg'}" styleClass="ver" icon="ui-icon-search" value="#{bundle.View}" 
                                              actionListener="#{empresaController.setSelected(item)}"
@@ -73,6 +73,38 @@
                     </p:dataTable>
                 </p:panel>
             </h:form>
+             <p:dialog id="form_imagen" widgetVar="form_imagen" modal="false" resizable="false" appendTo="@(body)"
+                          closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" style="width: 480px !important;border-radius: 20px;"> 
+                    <h1 style="width: 100%;margin: auto;color:#fff;background: #186bbe;font-family: Arial;text-align: center;padding: 3px 0px;border-radius: 7px;">
+                        Subir Logotipo</h1>
+                    <br/>
+                    <p style="font-family: Arial;text-align: center;color:#454545"><strong>Aviso: </strong>Seleccione un logotipo con extensión .png o .jpg - Tamaño máximo 2Mb.</p>
+                    <br/>
+                    <h:form enctype="multipart/form-data" id="datos" style="width: 100%;">
+                        <p:fileUpload style="width: 580px;margin: auto;background: none;text-align: center;" id="fil"
+                                      previewWidth="80"
+                                      fileUploadListener="#{empresaController.subirLogo}" 
+                                      mode="advanced" 
+                                      dragDropSupport="false"
+                                      sizeLimit="2048000"
+                                      cancelLabel="Cancelar"
+                                      uploadLabel="Subir Logotipo"
+                                      fileLimitMessage="No Mayor a 2 MB"
+                                      invalidSizeMessage="Máximo 2 MB"
+                                      invalidFileMessage="Archivo Fallído"
+                                      label="Seleccionar Logotipo"
+                                      fileLimit="1" 
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                      update=":growl"/> 
+                    </h:form>
+                    <h:form>
+                        <br/>
+                        <center>
+                            <p:commandButton styleClass="eliminar" style="font-size: 16px" value="Cerrar" immediate="true" onclick="form_imagen.hide()"/>
+                        <br/>
+                        </center>
+                    </h:form>
+                </p:dialog>
             <p:dialog id="DeleteDlg" widgetVar="DeleteDlg" modal="false" resizable="false" 
                       appendTo="@(body)" showHeader="false" showEffect="clip" hideEffect="clip" 
                       style="background: white; padding-bottom: 10px;box-shadow: none;
@@ -87,6 +119,7 @@
                     </center>
                 </h:form>
             </p:dialog>
+            
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

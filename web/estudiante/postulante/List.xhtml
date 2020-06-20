@@ -24,8 +24,10 @@
             </li>  
             <li id="ingresar1">                                   
                 <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
-                    <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
+                    <p:graphicImage name="#{personaController.selected.foto}"
+                                    style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle">
+                                   <div style="position: absolute;width: 10px;height: 10px;background: #00ff66;margin-top: 56px;margin-left: 38px;z-index: 100;border-radius: 7px;"></div>
+                    </p:graphicImage>
                 </p:commandLink>
             </li>
         </ui:define>
@@ -76,12 +78,8 @@
 
                         <p:column headerText="Estado" style="width:110px" sortBy="#{item.estado_postulante}"
                                   filterBy="#{item.ofertaLaboralIdOferta.idEmpresa.nombreComercial}" filterMatchMode="contains">
-                            <img  style="width: 50px;margin: 0;padding: 0;margin: auto;
-                                  #{item.estado_postulante eq true ? '' :'display:none'}"     
-                                  src="#{request.contextPath}/resources/img/visto.png" ></img>
-                            <img  style="width: 30px;margin: 0;padding: 0;margin: auto;
-                                  #{item.estado_postulante eq false ? '' :'display:none'}"     
-                                  src="#{request.contextPath}/resources/img/cancelar.png" ></img>
+                            <p:graphicImage rendered="#{item.estado_postulante == true }"  style="width: 50px;margin: 0;padding: 0;margin: auto;" name="/img/visto.png"/>
+                            <p:graphicImage rendered="#{item.estado_postulante == false }" style="width: 30px;margin: 0;padding: 0;margin: auto;" name="/img/cancelar.png"/>
                             <br/>
                             <h:outputText  value="#{item.estado_postulante==null ? 'PENDIENTE' : postulanteController.pasarTexto(item.estado_postulante )}"  
                                            style=" #{item.estado_postulante eq true ? 'font-size: 16px;color:#454545;font-weight:bold;':'font-size: 16px;font-weight:bold;color:#454545;'}
@@ -95,9 +93,7 @@
                                              style="#{item.confirmacion==true ? 'display:none;':'display:inline-block;'}"/>
 
 
-                            <img  style="width: 60px;margin: 0;padding: 0;margin: auto;
-                                  #{item.confirmacion eq true ? '' :'display:none'}"     
-                                  src="#{request.contextPath}/resources/img/ok.png" ></img>  
+                            <p:graphicImage rendered="#{item.confirmacion == true}" style="width: 60px;margin: 0;padding: 0;margin: auto;" name="/img/ok.png"/>  
 
                             <br/>     
                             <h:outputText value="#{item.confirmacion eq true ? 'Puesto Confirmado' :''}"  
@@ -131,7 +127,6 @@
 
 
                         </p:column>
-
                     </p:dataTable>
                     <br/>
                     <br/>
@@ -227,12 +222,12 @@
                     <br/>
                     <br/>
 
-                    <p:commandButton styleClass="ver" value="Cancelar" style="width:120px;height: 40px;font-weight: bold;font-size: 14px !important" 
+                    <p:commandButton styleClass="eliminar" value="Cancelar" style="width:120px;height: 40px;font-weight: bold;font-size: 15px !important" 
                                      action="#{postulanteController.update3}" update=":PostulanteListForm,:growl" oncomplete="PF('form_estado2').hide()">
                         <f:actionListener binding="#{ofertaLaboralController.update4()}" />
                     </p:commandButton>
                     <br/>
-                    <p:commandButton value="Cerrar" styleClass="eliminar" style="margin-top: 10px;width: 90px;"
+                    <p:commandButton value="Cerrar" styleClass="ver" style="margin-top: 10px;width: 90px;"
                                      immediate="true" oncomplete="PF('form_estado2').hide()"/>
                     <br/>
                 </h:form>

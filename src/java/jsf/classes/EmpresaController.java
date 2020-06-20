@@ -33,6 +33,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import net.sf.jasperreports.engine.JRException;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 @Named("empresaController")
@@ -356,12 +357,12 @@ public class EmpresaController implements Serializable {
 
     boolean f = false;
 
-    public void subirLogo() {
+    public void subirLogo(FileUploadEvent event) {
         String extension = "";
-        if (file == null || file.getSize() == 0) {
+        if (event.getFile() == null || event.getFile().getSize() == 0) {
              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione un logotipo", ""));
         } else {
-            String ex = file.getContentType();
+            String ex = event.getFile().getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
                 if (null != ex) switch (ex) {
                     case "image/jpeg":
@@ -376,7 +377,7 @@ public class EmpresaController implements Serializable {
                     default:
                         break;
                 }
-                if (file.getSize() <= 2048000) {
+                if (event.getFile().getSize() <= 2048000) {
                     try {
                         if (selected.getNombreComercial() == null || "".equals(selected.getNombreComercial())) {
                             nombre = getSelected().getIdEmpresa() + "_Empresa" + extension;
@@ -388,7 +389,7 @@ public class EmpresaController implements Serializable {
                         String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
                         String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "logotipo" + File.separator + nombre;
                         FileOutputStream out = new FileOutputStream(pathDefinition);
-                        InputStream in = file.getInputstream();
+                        InputStream in = event.getFile().getInputstream();
                         if ((in != null)) {
                             int read = 0;
                             byte[] bytes = new byte[1024];
@@ -401,7 +402,7 @@ public class EmpresaController implements Serializable {
                             actualizarLogo();
                             lista=null;
                         }
-                    } catch (Exception e) {
+                    } catch (IOException e) {
                     }
                 } else {
                     this.setFile(null);

@@ -63,16 +63,11 @@
             </h:form>
             <div class="caja_central" >
                 <ui:insert name="caja">
-
-                   
                     <div id="slider_main">
-                        
                         <p:imageSwitch rendered="#{imagenPortadaController.items.size()!=0}" effect="fade" widgetVar="switcher" id="manuelSwitcher"
                                            slideshowAuto="true" style="width: 100%;height:auto;margin:0;padding: 0; margin:auto;" speed="1000" slideshowSpeed="6000">
                                 <ui:repeat value="#{imagenPortadaController.items}" var="image" id="manuelSwitcherImages">
-                             
-                                     <p:graphicImage style="width: 100%;height:auto;margin: auto;border-radius: 6px;"
-                                                     value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/portada/#{image.imagen}"/>
+                                     <p:graphicImage style="width: 100%;height:auto;margin: auto;border-radius: 6px;" name="portada/#{image.imagen}"/>
                                 </ui:repeat>
                             </p:imageSwitch>
                         <h:form rendered="#{imagenPortadaController.items.size()!=1}" 
@@ -83,12 +78,11 @@
                             <p:commandButton type="button" onclick="PF('switcher').next();"
                                              icon="ui-icon-seek-next" id="next" styleClass="prev"/>    
                             </center>                            
-
                         </h:form>     
                     </div>
                     <br/>
                     <br/>
-                    <h1 style="margin: 0;font-family: Arial;font-size: 34px;font-weight: bold;
+                    <h1 style="margin: 0;font-family: Arial;font-size: 36px;font-weight: bold;
                         margin-bottom: 10px;text-align: center;color: #039be5;"> 
                         Sistema de Seguimiento a Egresados y Graduados</h1>
                     <br/>

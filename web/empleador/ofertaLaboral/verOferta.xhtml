@@ -57,7 +57,7 @@
                             <br/>
                             <div style="width: 270px; height: auto; margin: auto; background: white; border-radius: 10px; padding: 10px;
                                  #{item.idEmpresa.logotipo eq 'requerido/sin_logotipo.jpg' ? 'display:none;':''}">
-                                <img style="border-radius: 10px;"  width="100%" src="#{request.contextPath}/resources/#{item.idEmpresa.logotipo}"></img>
+                                <p:graphicImage style="border-radius: 10px;"  width="100%" name="#{item.idEmpresa.logotipo}"/>
                             </div>
 
                         </p:fieldset>

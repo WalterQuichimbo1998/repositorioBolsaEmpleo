@@ -62,9 +62,7 @@
                                                  actionListener="#{ofertaLaboralController.setSelected(item)}" 
                                                  action="/verOferta?faces-redirect=true" class="ver"/>
                                 <p:tooltip id="toolTipTrack" for="track" value="Ver detalles" trackMouse="true"  style="box-shadow: none;font-size: 12px"/>
-                                <img  style="width: 50px;margin: 0;padding: 0;margin: auto;float: right;margin-right: 50px;margin-top: 20px;
-                                      #{item.estado eq false ? '' :'display:none'}"     
-                                      src="#{request.contextPath}/resources/img/cancelar.png" ></img>
+                                <p:graphicImage rendered="#{item.estado == false}"  style="width: 50px;margin: 0;padding: 0;margin: auto;float: right;margin-right: 50px;margin-top: 20px;" name="/img/cancelar.png"/>
                                 <h3 class ="linkOferta">#{item.cargoSolicitado} </h3> 
                                 <h:outputText value="#{item.idEmpresa.nombreComercial}" class="textoDescripcion" style="font-weight: bold;color:#024959"/>
                                 <br/>
@@ -82,7 +80,6 @@
                                 <h:outputText rendered="#{item.remuneracion!=''}" value="Remuneración: " class="textoDescripcion" style="color: #024959;"/>
                                 <h:outputText rendered="#{item.remuneracion!=''}" value="$ #{item.remuneracion}" class="textoDescripcion"/>
                                 <br/>                              
-
                                 <br/>
                                 <h:outputText value="Actividades a Desempeñar:" class="textoDescripcion2" />
                                 <br/>
@@ -91,7 +88,6 @@
                             </div>
                         </div>
                     </p:column>
-
                 </p:dataTable>
             </h:form>
         </ui:define>

@@ -12,7 +12,7 @@
             <h:form id="EmpresaViewForm" rendered="#{empresaController.selected!=null}">
                 <h2 style="text-align: center;width: 400px;margin: auto">#{empresaController.selected.nombreComercial}</h2>
                     <div style="width: 400px; height: auto;padding: 10px; ">
-                          <img style="border-radius: 10px;" width="100%" src="#{request.contextPath}/resources/#{empresaController.selected.logotipo}"></img>                                         
+                        <p:graphicImage style="border-radius: 10px;" width="100%" name="#{empresaController.selected.logotipo}"/>                                       
                     </div>
 
             </h:form>

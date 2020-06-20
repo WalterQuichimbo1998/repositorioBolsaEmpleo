@@ -71,9 +71,8 @@
                                          padding: 7px 0px;width: 500px; "  /> 
                         </f:facet> 
                         <p:column style="width:110px;" sortBy="#{item.personaIdPersona.idPersona}" headerText="Foto">
-                            <p:graphicImage style="width: 100px;height: 110px;border-radius: 4px;margin: 0;padding: 0;margin: auto;
-                                 object-fit:cover;object-position:center center;
-                                 background-size: cover;"     
+                            <p:graphicImage style="width: 90px;height: 100px;border-radius: 4px;margin: 0;padding: 0;margin: auto;
+                                 object-fit:cover;object-position:center center; background-size: cover;"     
                                  name="#{item.personaIdPersona.foto}"/>
                         </p:column>
                         <p:column sortBy="#{item.personaIdPersona.nombre}" filterBy="#{item.personaIdPersona.nombre}"  filterMatchMode="contains"
@@ -89,12 +88,8 @@
                         </p:column>
                         <p:column style="width:110px" sortBy="#{item.estado_postulante}" 
                                   headerText="Estado">
-                            <img  style="width: 50px;margin: 0;padding: 0;margin: auto;
-                                  #{item.estado_postulante eq true ? '' :'display:none'}"     
-                                  src="#{request.contextPath}/resources/img/visto.png" ></img>  
-                            <img  style="width: 40px;margin: 0;padding: 0;margin: auto;
-                                  #{item.estado_postulante eq false ? '' :'display:none'}"     
-                                  src="#{request.contextPath}/resources/img/cancelar.png" ></img>
+                            <p:graphicImage rendered="#{item.estado_postulante == true}" style="width: 50px;margin: 0;padding: 0;margin: auto;" name="/img/visto.png"/>
+                            <p:graphicImage rendered="#{item.estado_postulante == false}"  style="width: 40px;margin: 0;padding: 0;margin: auto;" name="/img/cancelar.png"/>
                             <br/>
                             <h:outputText value="#{item.estado_postulante==null ? 'NUEVO' : postulanteController.pasarTexto(item.estado_postulante )}"  
                                           style=" #{item.estado_postulante eq true ? 'font-size: 18px;color:#454545;font-weight:bold;':'font-size: 16px;color:#454545;font-weight:bold;'}
@@ -102,13 +97,10 @@
                         </p:column>
                         <p:column style="width:110px" sortBy="#{item.confirmacion}"
                                   headerText="Confirmación">
-                            <img  style="width: 60px;margin: 0;padding: 0;margin: auto;
-                                  #{item.confirmacion eq true ? '' :'display:none'}"     
-                                  src="#{request.contextPath}/resources/img/ok.png" ></img>  
-                            <img  style="width: 50px;margin: 0;padding: 0;margin: auto;
-                                  #{postulanteController.aceptacion(item.estado_postulante, item.confirmacion) eq true ? '' :'display:none'}"     
-                                  src="#{request.contextPath}/resources/img/proceso.png" ></img>  
-                            <br/>     
+                           <p:graphicImage rendered="#{item.confirmacion == true}" style="width: 60px;margin: 0;padding: 0;margin: auto;" name="/img/ok.png"/>
+                            <p:graphicImage rendered="#{postulanteController.aceptacion(item.estado_postulante, item.confirmacion) == true}"
+                                            style="width: 50px;margin: 0;padding: 0;margin: auto;" name="/img/proceso.png"/>
+                            <br/>   
                             <h:outputText value="#{item.confirmacion eq true ? 'Puesto Aceptado' :''}"  
                                           style=" #{item.confirmacion eq true ? 'font-size: 16px;color:#454545;font-weight:bold;font-family:Arial;':''}"/>
 

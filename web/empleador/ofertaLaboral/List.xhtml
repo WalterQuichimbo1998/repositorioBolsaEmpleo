@@ -247,13 +247,13 @@
                 <h:form id="veri" style="width: 200px;margin: auto;text-align: center;">
                     <h3 style="#{ofertaLaboralController.selected.estado == true ? 'color:#007bff;font-family: Arial;font-size:20px;':'color:red;font-family: Arial;font-size:20px;'}">
                         #{ofertaLaboralController.selected.estado == true ? 'DISPONIBLE':'NO DISPONIBLE'} </h3>
-                    <p:selectBooleanButton class="estado" value="#{ofertaLaboralController.selected.estado}"  onLabel="NO Disponible" offLabel="Disponible">
+                    <p:selectBooleanButton class="#{ofertaLaboralController.selected.estado==true ? 'estado2':'estado'}" value="#{ofertaLaboralController.selected.estado}"  onLabel="NO Disponible" offLabel="Disponible">
                         <p:ajax update=":OfertaLaboralListForm,:growl" listener="#{ofertaLaboralController.update2}" oncomplete="PF('form_estado').hide()"/>
 
                     </p:selectBooleanButton>  
 
                     <br/>
-                    <p:commandButton value="Cerrar" styleClass="eliminar" style="margin-top: 10px;width: 90px;"
+                    <p:commandButton value="Cerrar" styleClass="ver" style="margin-top: 10px;width: 90px;"
                                      immediate="true" oncomplete="PF('form_estado').hide()"/>
                     <br/>
                 </h:form>

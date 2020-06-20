@@ -22,9 +22,11 @@
                 <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
             </li>  
             <li id="ingresar1">                                   
-                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
-                    <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                                                 value="#{FacesContext.getCurrentInstance().getExternalContext()}/resources/#{personaController.selected.foto}"/>
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" id="foto">
+                    <p:graphicImage name="#{personaController.selected.foto}"
+                                    style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle;position: relative;">
+                        <div style="position: absolute;width: 10px;height: 10px;background: #00ff66;margin-top: 56px;margin-left: 38px;z-index: 100;border-radius: 7px;"></div>
+                    </p:graphicImage>
                 </p:commandLink>
             </li>
         </ui:define>
@@ -70,9 +72,9 @@
                                                  action="/estudiante/ofertaLaboral/verOferta?faces-redirect=true" style="float: right; margin-top: 20px;" />
 
                                 <p:tooltip id="toolTipTrack" for="track" value="Ver detalle" trackMouse="true"  style="box-shadow: none"/>
-                                <img  style="width: 50px;margin: 0;padding: 0;margin: auto;float: right;margin-right: 50px;margin-top: 20px;
-                                      #{item.estado eq false ? '' :'display:none'}"     
-                                      src="#{request.contextPath}/resources/img/cancelar.png" ></img>
+                                <p:graphicImage rendered="#{item.estado==false}"
+                                                style="width: 50px;margin: 0;padding: 0;margin: auto;float: right;margin-right: 50px;margin-top: 20px;"     
+                                                name="/img/cancelar.png"/>
                                 <h3 class ="linkOferta">#{item.cargoSolicitado} </h3> 
                                 <h:outputText value="#{item.idEmpresa.nombreComercial}" class="textoDescripcion" style="font-weight: bold;color:#024959"/>
                                 <br/>

@@ -195,14 +195,12 @@ nav ul li{
         display: none;
     }
     
-
 }
 
 #slider_main{
     width: 90%;
     height: auto;
     margin: auto;
-    /*display: block;*/
     border-radius: 6px;
     cursor: pointer;
     margin-top: 40px;
@@ -307,11 +305,11 @@ nav ul li{
     text-align: justify;  
     margin: auto; 
     font-family: Tahoma; 
-    font-size: 17px;
+    font-size: 18px;
     font-weight: normal;
     color:#454545;
-
 }
+
 .imagenes{
     width: 100%;
     height: auto;

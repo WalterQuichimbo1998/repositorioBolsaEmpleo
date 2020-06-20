@@ -58,8 +58,7 @@
                                 <h1>#{item.idPersona.nombre} #{item.idPersona.apellido}</h1> 
                                 <div style="width: 100%;display:flex">
                                     <div style="width: 170px; height: 195px; ">
-                                        <img style="width: 170px; height: 195px;border-radius: 3px; object-fit:cover;object-position:center center; " 
-                                             src="#{request.contextPath}/resources/#{postulanteController.existeFoto(item.idPersona.foto)==true ? item.idPersona.foto:'requerido/sin_foto_perfil.png'}" ></img>  
+                                        <p:graphicImage style="width: 170px; height: 195px;border-radius: 3px; object-fit:cover;object-position:center center;"  name="#{item.idPersona.foto}"/>
                                     </div>
 
                                     <div style="width: 60%; margin-left: 20px; padding-top: 10px;">
