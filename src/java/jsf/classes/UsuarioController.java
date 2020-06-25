@@ -9,21 +9,10 @@ import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.UsuarioFacade;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -34,7 +23,19 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.validator.ValidatorException;
-import org.apache.commons.codec.binary.Base64;
+//import java.io.UnsupportedEncodingException;
+//import java.security.InvalidKeyException;
+//import java.security.MessageDigest;
+//import java.security.NoSuchAlgorithmException;
+//import java.util.Arrays;
+//import javax.crypto.BadPaddingException;
+//import javax.crypto.Cipher;
+//import javax.crypto.IllegalBlockSizeException;
+//import javax.crypto.NoSuchPaddingException;
+//import javax.crypto.SecretKey;
+//import javax.crypto.spec.SecretKeySpec;
+
+//import org.apache.commons.codec.binary.Base64;
 
 @Named("usuarioController")
 @SessionScoped
@@ -46,7 +47,7 @@ public class UsuarioController implements Serializable {
     private List<Usuario> listaUsuario = null;
     private Usuario selected;
     private String claveAntigua = "";
-    private final String key = "empleo";
+//    private final String key = "@ISTL_2020";
     private String claveNueva = "";
     private String mensaje = "";
     private boolean ver;
@@ -153,7 +154,7 @@ public class UsuarioController implements Serializable {
     }
 
     public void create() {
-        this.selected.setClaveCifrada(encriptar(selected.getClave()));
+//        this.selected.setClaveCifrada(selected.getClave());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -161,13 +162,13 @@ public class UsuarioController implements Serializable {
     }
 
     public void update() {
-        this.selected.setClaveCifrada(encriptar(selected.getClave()));
+//        this.selected.setClaveCifrada(selected.getClave());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
         items = null;
     }
 
     public void update2() {
-        this.selected.setClaveCifrada(encriptar(selected.getClave()));
+//        this.selected.setClaveCifrada(selected.getClave());
         persist(PersistAction.UPDATE, "Clave actualizada con éxito.");
     }
 
@@ -275,7 +276,6 @@ public class UsuarioController implements Serializable {
      public boolean existePerfilPersona(Persona id) {
          boolean perfil=false;
         HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
-        String m = "";
         if (h != null) {
               perfil=true;
         } else {
@@ -343,7 +343,7 @@ public class UsuarioController implements Serializable {
             if (selected.getClave().length() <= 5) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Clave nueva muy corta. Ingrese al menos 6 caracteres", ""));
             } else {
-                if (!encriptar(claveAntigua).equals(AccesoBean.usuarioLogueadoClave())) {
+                if (!claveAntigua.equals(AccesoBean.usuarioLogueadoClave())) {
                     ver = false;
                     mensaje = "Clave actual incorrecta.";
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Clave actual incorrecta", ""));
@@ -381,41 +381,41 @@ public class UsuarioController implements Serializable {
         }
     }
 
-    public String encriptar(String pass) {
-        String encri = "";
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] llavePass = md.digest(key.getBytes("utf-8"));
-            byte[] bytesPass = Arrays.copyOf(llavePass, 24);
-            SecretKey secretKey = new SecretKeySpec(bytesPass, "DESede");
-            Cipher cifrado = Cipher.getInstance("DESede");
-            cifrado.init(Cipher.ENCRYPT_MODE, secretKey);
-            byte[] plainTextBytes = pass.getBytes("utf-8");
-            byte[] buf = cifrado.doFinal(plainTextBytes);
-            byte[] base64Bytes = Base64.encodeBase64(buf);
-            encri = new String(base64Bytes);
-        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            System.out.println("Error: " + e);
-        }
-        return encri;
-    }
-
-    public String descencriptar(String pass) {
-        String descencri = "";
-        try {
-            byte[] m = Base64.decodeBase64(pass.getBytes("utf-8"));
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] digestPass = md.digest(key.getBytes("utf-8"));
-            byte[] keyBytes = Arrays.copyOf(digestPass, 24);
-            SecretKey secretKey = new SecretKeySpec(keyBytes, "DESede");
-            Cipher decipher = Cipher.getInstance("DESede");
-            decipher.init(Cipher.DECRYPT_MODE, secretKey);
-            byte[] plainText = decipher.doFinal(m);
-            descencri = new String(plainText, "UTF-8");
-
-        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            System.out.println("Error: " + e);
-        }
-        return descencri;
-    }
+//    public String encriptar(String pass) {
+//        String encri = "";
+//        try {
+//            MessageDigest md = MessageDigest.getInstance("MD5");
+//            byte[] llavePass = md.digest(key.getBytes("utf-8"));
+//            byte[] bytesPass = Arrays.copyOf(llavePass, 24);
+//            SecretKey secretKey = new SecretKeySpec(bytesPass, "DESede");
+//            Cipher cifrado = Cipher.getInstance("DESede");
+//            cifrado.init(Cipher.ENCRYPT_MODE, secretKey);
+//            byte[] plainTextBytes = pass.getBytes("utf-8");
+//            byte[] buf = cifrado.doFinal(plainTextBytes);
+//            byte[] base64Bytes = Base64.encodeBase64(buf);
+//            encri = new String(base64Bytes);
+//        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+//            System.out.println("Error: " + e);
+//        }
+//        return encri;
+//    }
+//
+//    public String descencriptar(String pass) {
+//        String descencri = "";
+//        try {
+//            byte[] m = Base64.decodeBase64(pass.getBytes("utf-8"));
+//            MessageDigest md = MessageDigest.getInstance("MD5");
+//            byte[] digestPass = md.digest(key.getBytes("utf-8"));
+//            byte[] keyBytes = Arrays.copyOf(digestPass, 24);
+//            SecretKey secretKey = new SecretKeySpec(keyBytes, "DESede");
+//            Cipher decipher = Cipher.getInstance("DESede");
+//            decipher.init(Cipher.DECRYPT_MODE, secretKey);
+//            byte[] plainText = decipher.doFinal(m);
+//            descencri = new String(plainText, "UTF-8");
+//
+//        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+//            System.out.println("Error: " + e);
+//        }
+//        return descencri;
+//    }
 }

@@ -65,7 +65,7 @@ ORDER BY fecha_postulante DESC;]]>
 			<staticText>
 				<reportElement mode="Transparent" x="188" y="3" width="430" height="79" backcolor="#FFFFFF" uuid="5b48f929-3013-46b9-aac2-dad0c69ca883"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="28" isBold="true"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE POSTULANTES]]></text>
 			</staticText>
@@ -157,7 +157,7 @@ $F{(SELECT apellido FROM persona WHERE persona.id_persona=persona_id_persona)}]]
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{estado_postulante}==null ? "Nuevo" : 
+				<textFieldExpression><![CDATA[( $F{estado_postulante}==null ? "" : 
 ( $F{estado_postulante}==true ? "Aceptado" : "No Aceptado" ) )]]></textFieldExpression>
 			</textField>
 			<textField>

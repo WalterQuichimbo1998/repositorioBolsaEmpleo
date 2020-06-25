@@ -19,6 +19,10 @@
                         <h:outputText value="Nombre y Apellido: " style="font-weight: bold;"/>
                         <h:outputText value="#{personaController.selected.nombre} #{personaController.selected.apellido}" title="#{bundle.ViewPersonaTitle_nombre}"/>
                           
+                        <c:if test="#{personaController.selected.idPromocion!=null}">
+                            <h:outputText value="Promoción: " style="font-weight: bold;"/>
+                        <h:outputText value="#{personaController.selected.idPromocion.promocion}" title="Promoción"/>
+                        </c:if>
                         <c:if test="#{personaController.selected.idCarrera!=null}">
                             <h:outputText value="Carrera: " style="font-weight: bold;"/>
                         <h:outputText value="#{personaController.selected.idCarrera.carrera}" title="Carrera"/>

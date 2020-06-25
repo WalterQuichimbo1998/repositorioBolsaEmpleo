@@ -16,7 +16,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -117,6 +116,10 @@ public class Persona implements Serializable {
     @JoinColumn(name = "id_carrera", referencedColumnName = "id_carrera")
     @ManyToOne
     private Carrera idCarrera;
+    
+    @JoinColumn(name = "id_promocion", referencedColumnName = "id_promocion")
+    @ManyToOne
+    private Promocion idPromocion;
     
     @JoinColumn(name = "id_parroquia", referencedColumnName = "id_parroquia")
     @ManyToOne
@@ -311,8 +314,15 @@ public class Persona implements Serializable {
     public void setIdCarrera(Carrera idCarrera) {
         this.idCarrera = idCarrera;
     }
-    
 
+    public Promocion getIdPromocion() {
+        return idPromocion;
+    }
+
+    public void setIdPromocion(Promocion idPromocion) {
+        this.idPromocion = idPromocion;
+    }
+    
     public Parroquia getIdParroquia() {
         return idParroquia;
     }

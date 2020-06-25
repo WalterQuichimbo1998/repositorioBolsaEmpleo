@@ -34,7 +34,7 @@
             <h3 class="titulo_p">Registro de Usuarios</h3>
             <h:form id="UsuarioListForm" style="text-align: center">
                 <p:panel>
-                    <h:outputLabel value="Todo usuario ESTUDIANTE debe tener el Perfil Habilitado." style="font-size:16px;"/>
+                    <p style="font-family:Arial;font-size: 15px;margin: auto; ">Todo usuario <strong>ESTUDIANTE</strong> debe tener el Perfil Habilitado.</p>
                     <p:dataTable styleClass="tablaPersonalizada" id="datalist" value="#{usuarioController.items}" var="item"
                                  selectionMode="single" selection="#{usuarioController.selected}" style="margin-top: 5px"
                                  paginator="true"
@@ -98,15 +98,14 @@
                             </f:facet>
                             <p:commandLink rendered="#{usuarioController.existePerfilPersona(item.idPersona)==true}"
                                            style="#{item.rol eq 'ESTUDIANTE'?'':'display:none;'}">
-                               <img style="width: 30px;margin: 0;padding: 0;margin: auto;"     
-                                  src="#{request.contextPath}/resources/img/ok.png" ></img> 
-                                  </p:commandLink>
-                                <p:commandLink rendered="#{usuarioController.existePerfilPersona(item.idPersona)==false}"
-                                               style="#{item.rol eq 'ESTUDIANTE'?'':'display:none;'}">
-                               <img  style="width: 26px;margin: 0;padding: 0;margin: auto;"     
-                                  src="#{request.contextPath}/resources/img/disable.png" ></img> 
-                                  </p:commandLink>
-                           
+                                <img style="width: 30px;margin: 0;padding: 0;margin: auto;"     
+                                     src="#{request.contextPath}/resources/img/ok.png" ></img> 
+                            </p:commandLink>
+                            <p:commandLink rendered="#{usuarioController.existePerfilPersona(item.idPersona)==false}"
+                                           style="#{item.rol eq 'ESTUDIANTE'?'':'display:none;'}">
+                                <img  style="width: 26px;margin: 0;padding: 0;margin: auto;"     
+                                      src="#{request.contextPath}/resources/img/disable.png" ></img> 
+                            </p:commandLink>
 
                         </p:column>
                         <f:facet name="footer">
@@ -123,12 +122,10 @@
                                 <p:commandButton style="width: 70px;margin-left: 17px;font-size: 16px !important;background: #29a0c7;outline: none;box-shadow: none" value="Si" type="button"  styleClass="ui-confirmdialog-yes"></p:commandButton>
                                 <p:commandButton style="width: 70px;font-size: 16px !important;background: #e26c6c;outline: none;box-shadow: none;" value="No" type="button" styleClass="ui-confirmdialog-no" immediate="true"></p:commandButton>
                             </p:confirmDialog>
-                            <p:commandLink rendered="#{usuarioController.items.size()!=0}" ajax="false"  actionListener="#{exportar.reporteUsuarios()}">
-                                <p:commandButton styleClass="ver"  icon="ui-icon-document" value="Descargar Reporte"/>
-                            </p:commandLink>
+                            <p:commandButton rendered="#{usuarioController.items.size()!=0}" ajax="false" styleClass="ver"  
+                                             icon="ui-icon-document" value="Descargar Reporte" actionListener="#{exportar.reporteUsuarios()}"/>
                         </f:facet>
                     </p:dataTable>
-
                 </p:panel>
             </h:form>
 

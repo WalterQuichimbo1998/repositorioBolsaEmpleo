@@ -23,7 +23,7 @@
             <li>
                 <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
             </li>  
-            
+
         </ui:define>
         <ui:define name="dir">
             <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
@@ -55,14 +55,14 @@
                                          style="font-size: 18px !important;margin: 10px; text-align: center;border-radius: 20px;padding: 7px 0px;width: 500px;"
                                          /> 
                         </f:facet>
-                         <p:column style="width:60px;" sortBy="#{item.idHojaVidaEstudiante}" headerText="Foto">
-                             <p:graphicImage style="width: 44px;height: 44px;border-radius: 20px;margin: 0;padding: 0;margin: auto;
-                                     object-fit:cover;object-position:center center;
-                                     background-size: cover;"     
-                                     name="#{item.idPersona.foto}"/>
-                            </p:column>
+                        <p:column style="width:50px;" sortBy="#{item.idHojaVidaEstudiante}" headerText="Foto">
+                            <p:graphicImage style="width: 44px;height: 44px;border-radius: 22px;-webkit-border-radius: 22px; margin: 0;padding: 0;margin: auto;
+                                            object-fit:cover;object-position:center center;
+                                            background-size: cover;"     
+                                            name="#{item.idPersona.foto}"/>
+                        </p:column>
                         <p:column sortBy="#{item.idHojaVidaEstudiante}" filterBy="#{item.idHojaVidaEstudiante}" filterMatchMode="contains"  
-                                  style="width: 80px">
+                                  style="width: 70px">
                             <f:facet name="header">
                                 <h:outputText value="Código"/>
                             </f:facet>
@@ -74,12 +74,18 @@
                             </f:facet>
                             <h:outputText value="#{item.idPersona.nombre} #{item.idPersona.apellido}"/>
                         </p:column>
-                       
-                         <p:column sortBy="#{item.idPersona.idCarrera.carrera}" filterBy="#{item.idPersona.idCarrera.carrera}" filterMatchMode="contains" >
+
+                        <p:column sortBy="#{item.idPersona.idCarrera.carrera}" filterBy="#{item.idPersona.idCarrera.carrera}" filterMatchMode="contains" >
                             <f:facet name="header">
                                 <h:outputText value="Carrera"/>
                             </f:facet>
                             <h:outputText value="#{item.idPersona.idCarrera.carrera}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idPersona.idPromocion.promocion}" filterBy="#{item.idPersona.idPromocion.promocion}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="Promoción"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPersona.idPromocion.promocion}"/>
                         </p:column>
                         <p:column sortBy="#{item.idPersona.apellido}" style="width: 120px;">
                             <f:facet name="header">
@@ -102,10 +108,43 @@
                             <h:outputLabel value="Total estudiantes registrados: " style="font-size: 17px; font-weight: normal"/>
                             <h:outputLabel value="#{hojaVidaEstudianteController.items.size()}" style="font-size: 17px;"/>
                             <br/>
-                            
+
                         </f:facet>
                     </p:dataTable>
+                    <div class="c_fechas" style="margin-top: 40px;" >
+                        <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                            font-size: 20px;color:#304860;">Descargar Reporte de Experiencia Laboral de los Estudiantes</h1>
+                        <br/>
+                        <p style="width: 100%;margin:auto;text-align: center;font-family: Arial;font-size: 16px;color: #454545;">Seleccione las opciones de su interés</p>
+                        <br/>
+                        <h:panelGrid columns="1" style="width: 90%; margin: auto; ">
+                            <h:panelGroup style="display: inline-block; text-align: center;width: 100%;"> 
+                                <div class="botones3">
+                                    <h3 class="texto" style="width: 94%;text-align: left;color:#445A6F;margin: auto;">Carrera</h3>
+                                    <h:selectOneMenu id="idCarrera" class="txtC" value="#{hojaVidaEstudianteController.carrera}">                   
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"
+                                                       var="idCarreraItem"
+                                                       itemValue="#{idCarreraItem}"/>
 
+                                    </h:selectOneMenu>
+                                </div>
+                                 <div class="botones3">
+                                    <h3 class="texto" style="width: 94%;text-align: left;color:#445A6F;margin: auto;">Promoción</h3>
+                                    <h:selectOneMenu id="idPromocion" class="txtC" value="#{hojaVidaEstudianteController.promocion}">                   
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{promocionController.itemsAvailableSelectOne}"
+                                                       var="idPromocionItem"
+                                                       itemValue="#{idPromocionItem}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                        <br/>
+                        <br/>
+                        <p:commandButton styleClass="crear" ajax="false" value="Descargar Reporte" icon="ui-icon-document"
+                                         actionListener="#{hojaVidaEstudianteController.descargarReporte()}"/>
+                    </div>
                 </p:panel>
             </h:form>
         </ui:define>

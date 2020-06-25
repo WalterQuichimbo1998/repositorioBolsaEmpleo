@@ -21,10 +21,9 @@
                 <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
             </li>  
             <li id="ingresar1">                                   
-                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
-                    <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                    name="#{personaController.selected.foto}">
-                        <div style="position: absolute;width: 10px;height: 10px;background: #00ff66;margin-top: 56px;margin-left: 38px;z-index: 100;border-radius: 7px;"></div>
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" id="foto">
+                    <p:graphicImage styleClass="foto_perfil_inicio" name="#{personaController.selected.foto}">
+                        <div class="circulo_verde"></div>
                     </p:graphicImage>
                 </p:commandLink>
             </li>

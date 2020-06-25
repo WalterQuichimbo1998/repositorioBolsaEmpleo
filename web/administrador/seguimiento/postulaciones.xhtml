@@ -39,7 +39,7 @@
                 <h3 class="titulo_p">Postulaciones del estudiante</h3>
                 <center>
                     <h:outputLabel rendered="#{postulanteController.per==null}" value="No se a seleccionado un estudiante"
-                               style="font-size: 22px;margin: auto;color: #454545;"/>
+                                   style="font-size: 22px;margin: auto;color: #454545;"/>
                 </center>
                 <h:form id="formularioPerfil" rendered="#{postulanteController.per!=null}" style="text-align: center">
                     <center>
@@ -49,29 +49,36 @@
                         <br/>
                         <br/>
                     </center>
-                <p:dataTable id="datalist" styleClass="tabla2" value="#{postulanteController.lista_2}" var="item"
-                                         selectionMode="single"
-                                         widgetVar="postulante"
-                                         paginator="true"
-                                         rowKey="#{item.idPostulante}"
-                                         rows="4"
-                                         rowsPerPageTemplate="4,8,12,16"
-                                         paginatorPosition="bottom"
-                                         sortBy="#{item.fechaPostulante}"
-                                         sortOrder="descending"
-                                         emptyMessage="No se encontraron datos.">
+                    <p:dataTable id="datalist" styleClass="tabla2" value="#{postulanteController.lista_2}" var="item"
+                                 selectionMode="single"
+                                 widgetVar="postulante"
+                                 paginator="true"
+                                 rowKey="#{item.idPostulante}"
+                                 rows="4"
+                                 rowsPerPageTemplate="4,8,12,16"
+                                 paginatorPosition="bottom"
+                                 sortBy="#{item.fechaPostulante}"
+                                 sortOrder="descending"
+                                 emptyMessage="No se encontraron datos."
+                                 style="padding: 0px 30px !important;">
 
-                                <p:column style="border:none;border:1px solid white">
-                                    <br/>
-                                    <h:outputText value="#{item.ofertaLaboralIdOferta.cargoSolicitado}" style="font-size: 22px;font-weight: bold;"/>
-                                    <br/>
-                                    <h:outputText value="#{item.ofertaLaboralIdOferta.idEmpresa.nombreComercial}" style="font-size: 17px;"/>
-                                    <br/>
-                                    <h:outputText value="Fecha de Postulación: #{personaController.fecha(item.fechaPostulante)}" style="font-size: 16px;"/>
-                                    <br/>
-                                    <h:outputLabel rendered="#{item.confirmacion==true}" style="color:#007bff;font-size: 17px;" value="Puesto de trabajo aceptado."/>
-                                </p:column>
-                            </p:dataTable>
+                        <p:column style="border:none;border:1px solid white;">
+                            <br/>
+                            <h:outputText value="#{item.ofertaLaboralIdOferta.cargoSolicitado}" style="font-size: 22px;font-weight: bold;"/>
+                            <br/>
+                            <h:outputText value="#{item.ofertaLaboralIdOferta.idEmpresa.nombreComercial}" style="font-size: 17px;"/>
+                            <br/>
+                            <h:outputText value="Fecha de Postulación: #{personaController.fecha(item.fechaPostulante)}" style="font-size: 16px;"/>
+                            <br/>
+                            <h:outputLabel rendered="#{item.confirmacion==true}" style="color:#007bff;font-size: 17px;" value="Puesto de trabajo aceptado."/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <h:outputLabel value="Total Postulaciones: " style="font-size: 17px; font-weight: normal"/>
+                            <h:outputLabel value="#{postulanteController.lista_2.size()}" style="font-size: 17px;"/>
+                            <br/>
+
+                        </f:facet>
+                    </p:dataTable>
 
                 </h:form>
             </div>

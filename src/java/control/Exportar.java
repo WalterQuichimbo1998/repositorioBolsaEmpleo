@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Persona;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -142,6 +143,33 @@ public class Exportar implements Serializable {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
             HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
             response.addHeader("Content-disposition", "attachment; filename=Hoja_de_vida.pdf");
+            try (ServletOutputStream stream = response.getOutputStream()) {
+                JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+
+                stream.flush();
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+            con.conexion().close();
+        } catch (IOException | SQLException | JRException e) {
+        }
+    }
+    public void exportarPersona(Integer id, String foto) throws JRException, IOException {
+        String relativePath = "";
+        if (foto.equals("requerido/sin_foto_perfil.png")) {
+            relativePath = "/resources/requerido/sin_foto.jpg";
+        } else {
+            relativePath = "/resources/" + foto;
+        }
+        String absolutePath = FacesContext.getCurrentInstance().getExternalContext().getRealPath(relativePath);
+        InputStream in = new FileInputStream(absolutePath);
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("id", id);
+        parametro.put("foto", in);
+        try {
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/reportePersonaAdmin.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=reporte_Estudiante.pdf");
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
 
@@ -398,6 +426,88 @@ public class Exportar implements Serializable {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
             HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
             response.addHeader("Content-disposition", "attachment; filename=Reporte_Postulante_Empresa_Fechas.pdf");
+            try (ServletOutputStream stream = response.getOutputStream()) {
+                JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+                stream.flush();
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+            con.conexion().close();
+        } catch (IOException | SQLException | JRException ex) {
+            Logger.getLogger(Exportar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void reporteExperienciaEstudiante1(Integer id_carrera,Integer id_promocion) throws JRException, IOException {
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("carrera", id_carrera);
+        parametro.put("promocion", id_promocion);
+        try {
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/reporteExperienciaEstudiante1.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=Reporte_Experiencia_Estudiante.pdf");
+            try (ServletOutputStream stream = response.getOutputStream()) {
+                JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+                stream.flush();
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+            con.conexion().close();
+        } catch (IOException | SQLException | JRException ex) {
+            Logger.getLogger(Exportar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void reporteExperienciaEstudiante2(Integer id_promocion) throws JRException, IOException {
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("promocion", id_promocion);
+        try {
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/reporteExperienciaEstudiante2.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=Reporte_Experiencia_Estudiante_Promocion.pdf");
+            try (ServletOutputStream stream = response.getOutputStream()) {
+                JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+                stream.flush();
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+            con.conexion().close();
+        } catch (IOException | SQLException | JRException ex) {
+            Logger.getLogger(Exportar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void reporteExperienciaEstudiante3(Integer id_carrera) throws JRException, IOException {
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("carrera", id_carrera);
+        try {
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/reporteExperienciaEstudiante3.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=Reporte_Experiencia_Estudiante_Carrera.pdf");
+            try (ServletOutputStream stream = response.getOutputStream()) {
+                JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+                stream.flush();
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+            con.conexion().close();
+        } catch (IOException | SQLException | JRException ex) {
+            Logger.getLogger(Exportar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void reporteExperienciaEstudianteIndividual(Persona p) throws JRException, IOException {
+         String relativePath = "";
+        if (p.getFoto().equals("requerido/sin_foto_perfil.png")) {
+            relativePath = "/resources/requerido/sin_foto.jpg";
+        } else {
+            relativePath = "/resources/" + p.getFoto();
+        }
+        String absolutePath = FacesContext.getCurrentInstance().getExternalContext().getRealPath(relativePath);
+        InputStream in = new FileInputStream(absolutePath);
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("id", p.getIdPersona());
+        parametro.put("foto", in);
+        try {
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/reporteExperienciaEstudianteIndividual.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=Reporte_Experiencia_Estudiante_Individual.pdf");
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();

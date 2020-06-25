@@ -12,7 +12,7 @@
                   closeOnEscape="true" showEffect="clip" hideEffect="clip">
             <h:form id="PersonaEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                    <p:panelGrid columns="4" rendered="#{personaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditPersonaLabel_nombre}" for="nombre" style="font-weight: bold;"/>
                         <p:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.EditPersonaTitle_nombre}" style="width: 260px;" onkeyup="javascript:this.value = this.value.toUpperCase();"
                                      required="true" requiredMessage="Ingrese un nombre" maxlength="25" autocomplete="off"/>
@@ -34,15 +34,6 @@
                          <p:outputLabel value="#{bundle.EditPersonaLabel_direccion}" for="direccion" style="font-weight: bold;" />
                         <p:inputText id="direccion" value="#{personaController.selected.direccion}" title="#{bundle.EditPersonaTitle_direccion}" style="width: 260px;" maxlength="45"/>
                         
-                        
-                            <p:outputLabel value="Carrera: " for="idCarrera" style="font-weight: bold;"/>
-                        <p:selectOneMenu id="idCarrera" value="#{personaController.selected.idCarrera}" style="width: 270px;">                   
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"
-                                           var="idCarreraItem"
-                                           itemValue="#{idCarreraItem}"/>
-                       
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_idProvincia}" for="idProvincia" style="font-weight: bold;"/>
                         <p:selectOneMenu id="idProvincia" value="#{personaController.selected.idProvincia}" style="width: 270px;"
                                          effect="fade" filter="true" filterMatchMode="contains" height="100">
@@ -71,12 +62,29 @@
                                            var="idParroquiaItem"
                                            itemValue="#{idParroquiaItem}"/>
                         </p:selectOneMenu>
-                        <p:column/>
-                        <p:column>
-                            <p:commandButton styleClass="btn_g" actionListener="#{personaController.existeCorreo2()}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaEditDialog');"/>
-                            <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('PersonaEditDialog').hide();"/>
+                         <p:outputLabel/>
+                        <p:outputLabel value="Seleccione en caso de ser estudiante"/>
+                        <p:outputLabel/>
+                        <p:outputLabel value="Seleccione en caso de ser estudiante"/>
+                        <p:outputLabel value="Promoción: " for="idPromocion" style="font-weight: bold;"/>
+                        <p:selectOneMenu id="idPromocion" value="#{personaController.selected.idPromocion}" style="width: 270px;">                   
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{promocionController.itemsAvailableSelectOne}"
+                                           var="idPromocionItem"
+                                           itemValue="#{idPromocionItem}"/>
+                       
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Carrera: " for="idCarrera" style="font-weight: bold;"/>
+                        <p:selectOneMenu id="idCarrera" value="#{personaController.selected.idCarrera}" style="width: 270px;">                   
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"
+                                           var="idCarreraItem"
+                                           itemValue="#{idCarreraItem}"/>
+                       
+                        </p:selectOneMenu>
+                            <p:commandButton styleClass="btn_g" actionListener="#{personaController.existeCorreo2()}" action="#{hojaVidaEstudianteController.resetea()}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaEditDialog');"/>
 
-                        </p:column>
+                     
                     </p:panelGrid>
                 </h:panelGroup>
             </h:form>

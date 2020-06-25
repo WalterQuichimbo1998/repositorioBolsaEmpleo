@@ -190,7 +190,26 @@ nav ul li{
     color:white;
 }
 }
-
+.foto_perfil_inicio{
+    width: 50px; 
+    height: 50px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    object-fit:cover;
+    object-position:center center;
+    vertical-align:middle;
+    position: relative;
+}
+.circulo_verde{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #00ff66;
+    margin-top: 56px;
+    margin-left: 34px;
+    z-index: 100;
+    border-radius: 7px;
+}
 .cabecera{
     width: 100%;
     height: auto;
@@ -298,12 +317,25 @@ nav ul li{
     border-radius: 4px;
 }
 .fotoPerfil { 
-    border-radius: 60px; 
     width: 100px;
     height: 100px;
+    border-radius: 60px; 
     object-fit:cover;
     object-position:center center;
     border:2px solid #7c9fb6;
+}
+.botones3{
+    width: 44%;
+    height: auto;
+    border:none;   
+    background: none;
+    margin: 10px;
+    outline: none;
+    display: inline-block;
+    border:none;
+    transition: all .3s ease;
+vertical-align: top;
+margin: auto;
 }
 /*------ESTILOS PERFIL--------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 
@@ -369,10 +401,12 @@ nav ul li{
     margin: 0;
     margin-top: 15px;
     margin-bottom: 5px;
+    text-align: left;
 }
 .txt{
-    width: 98%;
+     width: 94%;
     height: 30px;
+    margin: auto;
     padding-top: 5px;
     padding-bottom: 5px;
     color: #454545;
@@ -399,8 +433,9 @@ nav ul li{
 
 }
 .calendarClass0 .ui-inputfield{
-    width:98%;
+    width:90%;
     height: 32px;
+     margin: auto;
     border-radius: 0px;
     box-shadow: none;
     color: #454545;
@@ -424,8 +459,9 @@ nav ul li{
 
 }
 .txtC{
-    width: 100%;
+    width: 94%;
     height: 42px;
+     margin: auto;
     padding-top: 5px;
     padding-bottom: 5px;
     color: #454545;
@@ -782,6 +818,29 @@ nav ul li{
     border: 1px solid #999999;
     color: black;
     text-shadow:none;
+}
+
+.tabla2 .ui-datatable-header{
+    background:#ccc;
+    border:1px solid #ccc;
+    box-shadow:none;
+
+}
+.tabla2.ui-datatable .ui-column-filter{
+     background:none;
+    width:0px;
+    height:0px;
+    padding: 0;
+    margin: 0;
+    box-shadow:none;
+    border:none;
+    outline: none;
+    display: none;
+}
+.tabla2.ui-datatable .ui-sortable-column{
+    background: #eee;
+    border:1px solid #ccc;
+    box-shadow:none;
 }
 .tabla2.ui-datatable thead tr {
     background: #f2f2f2;
@@ -1328,13 +1387,13 @@ nav ul li{
     margin: auto;
 }
 .c_fechas{
-    width: 94%;
+    width: 96%;
     margin: auto;
     padding-top: 20px;
     padding-bottom: 20px;
     display: inline-block;
     background: #e4e4e6;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     transition: all .3s ease;
 }
 .c_fechas2{
@@ -1462,7 +1521,10 @@ nav ul li{
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
 }
 
-
+.caja_postulacion{
+    width:90%;
+    margin: auto;
+}
 @media only screen and (min-width: 1400px){ 
   .contenedor{
         width: 1366px;
@@ -1522,7 +1584,10 @@ nav ul li{
         width: 100%;
     }
    
-
+.caja_postulacion{
+    width:100%;
+    margin: auto;
+}
 }
 @media only screen and (max-width: 768px){ 
     .form_botones{
@@ -1538,6 +1603,10 @@ nav ul li{
     }
     .botones2{
         width: 180px;
+    }
+     .botones3{
+        width:90%;
+        margin: auto;
     }
     .txt_boton{
         font-size: 16px;

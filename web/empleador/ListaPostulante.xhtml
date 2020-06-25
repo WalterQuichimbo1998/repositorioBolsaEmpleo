@@ -22,10 +22,9 @@
                 <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
             </li>  
             <li id="ingresar1">                                   
-                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" >
-                    <p:graphicImage style="width: 50px; height: 50px;border-radius: 35px;object-fit:cover;object-position:center center;vertical-align:middle"
-                                    name="#{personaController.selected.foto}">
-                        <div style="position: absolute;width: 10px;height: 10px;background: #00ff66;margin-top: 56px;margin-left: 38px;z-index: 100;border-radius: 7px;"></div>
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" id="foto">
+                    <p:graphicImage styleClass="foto_perfil_inicio" name="#{personaController.selected.foto}">
+                        <div class="circulo_verde"></div>
                     </p:graphicImage>
                 </p:commandLink>
             </li>
@@ -37,18 +36,17 @@
         </ui:define>
 
         <ui:define name="caja">
-            <h3 class="titulo_p" style="background: none;color: #086A87;text-shadow:none;margin-top: 0px">Mis Postulantes</h3>
-
-            <h:form id="PostulanteListForm" class="ppp">
-                <p:panel style="background: white;">
-
+            <div class="caja_postulacion">
+            <h3 class="titulo_p">Mis Postulantes</h3>
+            <p:panel>
+                <h:form id="PostulanteListForm" style="text-align: center;">
                     <p:dataTable id="datalist" class="tabla2" value="#{postulanteController.listaPostulantes}" var="item" style="margin-top: 5px"                 
                                  selectionMode="single"
                                  paginator="true"
                                  widgetVar="postulante"
                                  rowKey="#{item.idPostulante}" 
-                                 rows="6"
-                                 rowsPerPageTemplate="3,6,9,12"
+                                 rows="4"
+                                 rowsPerPageTemplate="4,8,12,16"
                                  emptyMessage="No hay datos."
                                  sortBy="#{item.fechaPostulante}"
                                  sortOrder="descending"
@@ -62,9 +60,9 @@
                                          padding: 7px 0px;width: 500px; "  /> 
                         </f:facet> 
                         <p:column style="width:110px;" sortBy="#{item.personaIdPersona.idPersona}" headerText="Foto">
-                            <p:graphicImage style="width: 90px;height: 100px;border-radius: 4px;margin: 0;padding: 0;margin: auto;
+                            <p:graphicImage style="width: 90px;height: 90px;border-radius: 45px;margin: 0;padding: 0;margin: auto;
                                             object-fit:cover;object-position:center center;background-size: cover;"     
-                                             name="#{item.personaIdPersona.foto}"/> 
+                                            name="#{item.personaIdPersona.foto}"/> 
                         </p:column>
 
                         <p:column sortBy="#{item.personaIdPersona.nombre}" filterBy="#{item.personaIdPersona.nombre}"  filterMatchMode="contains"
@@ -132,7 +130,7 @@
                     </p:dataTable>
                     <br/>                  
                     <c:if test="#{postulanteController.listaPostulantes.size()!=0}">                   
-                        <div class="c_fechas2">
+                        <div class="c_fechas">
                             <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
                                 font-size: 22px;background: none;padding-top: 20px;padding-bottom: 10px">Descargar Reporte por Fechas</h1>
                             <br/>
@@ -179,7 +177,7 @@
                             </p:commandButton>
                         </div>
                         <br/>
-                        <div class="c_fechas2">
+                        <div class="c_fechas">
                             <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
                                 font-size: 22px;background: none;padding-top: 20px;padding-bottom: 10px">Descargar Reporte Total</h1>
                             <br/>
@@ -191,9 +189,10 @@
                         <br/>
                         <br/>
                     </c:if>
+                    </h:form>
                 </p:panel>
-            </h:form>
-
+            
+            </div>
             <p:dialog id="form_estado" widgetVar="form_estado" modal="false" resizable="false" appendTo="@(body)" header="ACEPTACIÓN" 
                       closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false"
                       style="box-shadow: none; box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75) !important;background: white">

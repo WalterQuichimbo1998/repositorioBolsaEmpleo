@@ -1,5 +1,7 @@
 package jsf.classes;
 
+import control.Exportar;
+import java.io.IOException;
 import modelo.HojaVidaEstudiante;
 import modelo.Persona;
 import jsf.classes.util.JsfUtil;
@@ -20,6 +22,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import modelo.Carrera;
+import modelo.Promocion;
+import net.sf.jasperreports.engine.JRException;
 
 @Named("hojaVidaEstudianteController")
 @SessionScoped
@@ -30,10 +35,11 @@ public class HojaVidaEstudianteController implements Serializable {
     private List<HojaVidaEstudiante> items = null;
     private List<HojaVidaEstudiante> listaPerfil = null;
     private HojaVidaEstudiante selected;
-    private Persona selectedPer; 
-    private Persona persona; 
-     private List<HojaVidaEstudiante> hojaVida = null;
-
+    private Persona selectedPer;
+    private Persona persona;
+    private Carrera carrera;
+    private Promocion promocion;
+    private List<HojaVidaEstudiante> hojaVida = null;
 
     public HojaVidaEstudianteController() {
     }
@@ -44,6 +50,22 @@ public class HojaVidaEstudianteController implements Serializable {
 
     public void setSelected(HojaVidaEstudiante selected) {
         this.selected = selected;
+    }
+
+    public Carrera getCarrera() {
+        return carrera;
+    }
+
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
+    }
+
+    public Promocion getPromocion() {
+        return promocion;
+    }
+
+    public void setPromocion(Promocion promocion) {
+        this.promocion = promocion;
     }
 
     protected void setEmbeddableKeys() {
@@ -71,11 +93,10 @@ public class HojaVidaEstudianteController implements Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-    
 
     public List<HojaVidaEstudiante> getHojaVida() {
-        if(persona!=null){
-            hojaVida=getFacade().listaHojaEstudiante(persona.getIdPersona());
+        if (persona != null) {
+            hojaVida = getFacade().listaHojaEstudiante(persona.getIdPersona());
         }
         return hojaVida;
     }
@@ -83,8 +104,6 @@ public class HojaVidaEstudianteController implements Serializable {
     public void setHojaVida(List<HojaVidaEstudiante> hojaVida) {
         this.hojaVida = hojaVida;
     }
-
-    
 
     public HojaVidaEstudiante prepareCreate() {
         selected = new HojaVidaEstudiante();
@@ -112,13 +131,16 @@ public class HojaVidaEstudianteController implements Serializable {
         }
     }
 
+    public void resetea() {
+        items = null;
+    }
+
     public List<HojaVidaEstudiante> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
         return items;
     }
-
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
@@ -204,7 +226,7 @@ public class HojaVidaEstudianteController implements Serializable {
     public void existePerfil() {
         HojaVidaEstudiante h = getFacade().buscarIdPersona(selected.getIdPersona());
         if (h != null) {
-            items=null;
+            items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Este estudiante ya tiene el perfil habilitado", ""));
         } else {
             create();
@@ -220,14 +242,40 @@ public class HojaVidaEstudianteController implements Serializable {
             update();
         }
     }
-public Boolean existeFoto(String f){
-        boolean r=true;
-        if("".equals(f)){
-            r=false;
+
+    public Boolean existeFoto(String f) {
+        boolean r = true;
+        if ("".equals(f)) {
+            r = false;
         }
-        if(f.isEmpty()){
-            r=false;
-        }       
+        if (f.isEmpty()) {
+            r = false;
+        }
         return r;
+    }
+
+    public void descargarReporte() {
+        Exportar exportar = new Exportar();
+        if(promocion!=null && carrera!=null){
+            try {
+                 exportar.reporteExperienciaEstudiante1(carrera.getIdCarrera(),promocion.getIdPromocion());
+            } catch (IOException | JRException e) {
+                System.out.println("Error: "+e);
+            }
+        }else if(promocion!=null && carrera==null){
+           try {
+                 exportar.reporteExperienciaEstudiante2(promocion.getIdPromocion());
+            } catch (IOException | JRException e) {
+                 System.out.println("Error: "+e);
+            }
+        }else if(promocion==null && carrera!=null){
+           try {
+                 exportar.reporteExperienciaEstudiante3(carrera.getIdCarrera());
+            } catch (IOException | JRException e) {
+                 System.out.println("Error: "+e);
+            }
+        }else{
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione almenos una opción", ""));
+        }
     }
 }

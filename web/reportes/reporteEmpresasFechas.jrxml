@@ -91,7 +91,7 @@ ORDER BY fecha_creacion DESC]]>
 			<staticText>
 				<reportElement mode="Transparent" x="223" y="0" width="355" height="79" backcolor="#FFFFFF" uuid="804bff13-eb0b-40f0-bb7c-ff89cccfc862"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="28" isBold="true"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE EMPRESAS]]></text>
 			</staticText>
@@ -110,7 +110,7 @@ ORDER BY fecha_creacion DESC]]>
 			<textField>
 				<reportElement x="0" y="0" width="800" height="31" uuid="a1416f1b-31e7-4d60-a735-6b1643e82223"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Desde "+$P{fecha1}+" hasta "+$P{fecha2}]]></textFieldExpression>
 			</textField>
@@ -166,35 +166,35 @@ ORDER BY fecha_creacion DESC]]>
 			<textField>
 				<reportElement x="14" y="1" width="262" height="40" uuid="89731d95-c620-43f7-a8da-5fb407f0bc6e"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_comercial}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="276" y="1" width="146" height="40" uuid="474956a4-5c6f-489c-9f15-ba526c10a70c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{ruc_cedula}==null ? "" : $F{ruc_cedula}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="422" y="1" width="160" height="40" uuid="228e4a93-6f78-4479-989e-e4bb105da9ca"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{direccion}==null ? "" : $F{direccion}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="582" y="1" width="104" height="40" uuid="122c3b70-beec-4ff9-991d-063f01032708"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{telefono_oficina}==null ? "" : $F{telefono_oficina}+"" )]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="686" y="1" width="114" height="40" uuid="5f8d0d98-f345-4126-871b-ccdae37ea50b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_creacion}]]></textFieldExpression>
 			</textField>
@@ -206,16 +206,24 @@ ORDER BY fecha_creacion DESC]]>
 	<pageFooter>
 		<band height="24" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="36" y="4" width="168" height="20" uuid="e24a083d-55c1-4346-b7b6-05271b4a854a"/>
+				<reportElement x="36" y="2" width="168" height="20" uuid="e24a083d-55c1-4346-b7b6-05271b4a854a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="682" y="0" width="80" height="20" uuid="58183f39-d2c9-41de-a5f4-dbb08c2c218c"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="762" y="0" width="40" height="20" uuid="5f4925fe-6c45-476b-85f8-069b7e4c8d1a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>

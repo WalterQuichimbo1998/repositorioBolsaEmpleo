@@ -375,7 +375,7 @@ public class OfertaLaboralController implements Serializable {
                     listaE = getFacade().comprobarOfertas(empresa.getIdEmpresa(), getFecha_inicio(), getFecha_fin());
                     if (listaE.size() != 0) {
                         SimpleDateFormat f = new SimpleDateFormat("dd-MM-YYYY");
-                        mensaje = "Si hay registro con estas fechas: " + f.format(getFecha_inicio()) + " - " + f.format(getFecha_fin());
+                        mensaje = "Si hay registro con estas fechas: " + f.format(getFecha_inicio()) + " / " + f.format(getFecha_fin());
                         v = true;
                     } else {
                         mensaje = "No hay registros. Intente con otras fechas.";

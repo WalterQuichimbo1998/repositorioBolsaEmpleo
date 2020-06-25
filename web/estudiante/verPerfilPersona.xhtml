@@ -16,114 +16,168 @@
         <ui:define name="caja">
             <div class="caja_form">
                 <h3 class="titulo_p" style="font-size: 44px;margin-top: 0;">Datos Personales</h3>
-                <h:form class="formulario" style="margin-top: 20px;">                  
-                    <div class="info">                                 
-                        <center style="padding-top: 25px;padding-bottom: 8px;">
-                            <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 3px;" id="imagen">
-                                <p:graphicImage name="#{personaController.selected.foto}"
-                                                style="width: 210px; height: 240px;margin: auto; border-radius: 3px;object-fit:cover;object-position:center center;" > 
-                                                
-                                <p:commandLink styleClass="foto" title="Cambiar Foto"
-                                               oncomplete="PF('form_imagen').show()" update=":datos">
-                                    <img src="#{request.contextPath}/resources/img/camara.png" 
-                                         style="width:100%;height: 100%;"/>
-                                </p:commandLink>
-                                </p:graphicImage>
+                <h:form class="formulario" style="margin-top: 20px;">   
+
+                    <h:panelGrid columns="1" style="margin: auto; ">
+                        <h:panelGroup style="display: inline-block; text-align: center; "> 
+
+                            <div class="botones3">                              
+                                <center style="padding-top: 25px;padding-bottom: 8px;">
+                                    <div style="width: 210px; height: 240px; margin: auto; background: white; border-radius: 6px;" id="imagen">
+                                        <p:graphicImage name="#{personaController.selected.foto}"
+                                                        style="width: 210px; height: 240px;margin: auto; border-radius: 6px;object-fit:cover;object-position:center center;" > 
+
+                                            <p:commandLink styleClass="foto" title="Cambiar Foto"
+                                                           oncomplete="PF('form_imagen').show()" update=":datos">
+                                                <img src="#{request.contextPath}/resources/img/camara.png" 
+                                                     style="width:100%;height: 100%;"/>
+                                            </p:commandLink>
+                                        </p:graphicImage>
+                                    </div>
+                                </center>
                             </div>
-                        </center>
-                        <h3 class="texto" >Nombres</h3> 
-                        <h:inputText class="txt" maxlength="30" value="#{personaController.selected.nombre}" style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();" 
-                                     required="true" requiredMessage="Ingrese su nombre"/>
-                        <h3 class="texto" >Apellidos</h3>
-                        <h:inputText class="txt" maxlength="30" value="#{personaController.selected.apellido}"  style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();"
-                                     required="true" requiredMessage="Ingrese su apellido"/>
-                        <h3 class="texto" >Número de Cédula
-                            <h:outputLabel id="aviso0" style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" />
-                            <p:tooltip for="aviso0" value="Este número de cédula será de uso cuando usted necesite recuperar su clave de acceso" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> </h3>
-                        <h:inputText maxlength="10" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.cedula}" required="true" requiredMessage="Ingrese su número de cédula" />
-                        <h3  class="texto" >Fecha de Nacimiento</h3>                  
-                        <p:calendar styleClass="calendarClass" pattern="dd/MM/yyyy" locale="es" navigator="true" value="#{personaController.selected.fechaNacimiento}" mask="true" />
-                        <h3  class="texto" >Género</h3>
-                        <h:selectOneMenu class="txtC" value="#{personaController.selected.genero}"   >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItem itemLabel="MASCULINO" itemValue="0"/>
-                            <f:selectItem itemLabel="FEMENINO" itemValue="1"/>
-                        </h:selectOneMenu>
-                        <h3  class="texto" >Estado civil</h3>
-                        <h:selectOneMenu class="txtC" value="#{personaController.selected.idEstadoCivil}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
-                                           var="idEstadoCivilItem"
-                                           itemValue="#{idEstadoCivilItem}"/>
-                        </h:selectOneMenu>
-                        <h3 class="texto" >Edad</h3>
-                        <h:inputText maxlength="2" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.edad}"  
-                                     required="true" requiredMessage="Ingrese su edad"/>                    
-                    </div>               
-                    <div class="info"> 
-                        <br/>
-                        <h3  class="texto"  >Provincia</h3>
-                        <h:selectOneMenu class="txtC"   id="combo" value="#{personaController.selected.idProvincia}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.listaProvincias}"
-                                           var="idProvinciaItem"
-                                           itemValue="#{idProvinciaItem}"/>
-                            <f:ajax execute="combo" render="combo2"/>
-                            <f:ajax render="menuParroquia"/>
-                        </h:selectOneMenu>
-                        <h3  class="texto" >Canton</h3>
-                        <h:selectOneMenu class="txtC" id="combo2" value="#{personaController.selected.idCanton}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{personaController.listaCanton}" 
-                                           var="idCantonItem"
-                                           itemValue="#{idCantonItem}" />
-                            <f:ajax execute="combo2" render="menuParroquia" />
-                        </h:selectOneMenu>
-                        <h3  class="texto" >Parroquia</h3>
-                        <h:selectOneMenu class="txtC" value="#{personaController.selected.idParroquia}" id="menuParroquia">                  
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>                
-                            <f:selectItems value="#{personaController.listaParroquia}"
-                                           var="idParroquiaItem"
-                                           itemValue="#{idParroquiaItem}"/>
-                        </h:selectOneMenu>
-                        <h3 class="texto" >Dirección</h3>
-                        <h:inputText maxlength="45" class="txt" value="#{personaController.selected.direccion}" />
-                        <h3 class="texto" >Celular</h3>
-                        <h:inputText maxlength="10" class="txt" value="#{personaController.selected.celular}"  />
-                        <h3 class="texto" >Teléfono</h3>
-                        <h:inputText maxlength="10" class="txt" value="#{personaController.selected.telefono}" />
-                        <h3 class="texto" >Correo electrónico 
-                            <h:outputLabel id="aviso" style="color: #f18487;font-size: 14px;cursor: pointer" value="Atención" />
-                            <p:tooltip for="aviso" value="Este correo será de uso cuando usted necesite recuperar su clave de acceso" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
-                        </h3>
-                        <h:inputText maxlength="45" class="txt" value="#{personaController.correoPersona}" id="email"
-                                     validatorMessage="El correo electrónico no es válido">
-                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                        </h:inputText>
-                        <p:message for="email" />
-                        <h3  class="texto" >Estado laboral</h3>
-                        <h:selectOneMenu class="txtC" value="#{personaController.selected.estadoLaboral}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItem itemLabel="Empleado" itemValue="0"/>
-                            <f:selectItem itemLabel="Desempleado" itemValue="1"/>
-                        </h:selectOneMenu>
-                        <h3  class="texto" >Tipo sangre</h3>
-                        <h:selectOneMenu class="txtC" value="#{personaController.selected.idTipoSangre}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{tipoSangreController.itemsAvailableSelectOne}"
-                                           var="idTipoSangreItem"
-                                           itemValue="#{idTipoSangreItem}"/>
-                        </h:selectOneMenu>
-                        <h3  class="texto" >Etnia</h3>
-                        <h:selectOneMenu class="txtC" value="#{personaController.selected.idEtnia}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{etniaController.itemsAvailableSelectOne}"
-                                           var="idEtniaItem"
-                                           itemValue="#{idEtniaItem}"/>
-                        </h:selectOneMenu>
-                        <h3 class="texto" >Código Postal</h3>
-                        <h:inputText maxlength="30" class="txt" value="#{personaController.selected.codigoPostal}"  />
-                    </div>
+                            <div class="botones3">  
+                                <h3 class="texto" >Nombres</h3> 
+                                <h:inputText class="txt" maxlength="30" value="#{personaController.selected.nombre}" style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();" 
+                                             required="true" requiredMessage="Ingrese su nombre"/>
+                                <h3 class="texto" >Apellidos</h3>
+                                <h:inputText class="txt" maxlength="30" value="#{personaController.selected.apellido}"  style="text-transform: uppercase;" onkeyup="javascript:this.value = this.value.toUpperCase();"
+                                             required="true" requiredMessage="Ingrese su apellido"/>
+                                <h3 class="texto" >Número de Cédula
+                                    <h:outputLabel id="aviso0" style="color: #f18487;font-size: 18px;cursor: pointer;font-weight: bold;" value="!" />
+                                    <p:tooltip for="aviso0" value="Su número de cédula será de uso cuando usted necesite recuperar su clave de acceso" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> </h3>
+                                <h:inputText maxlength="10" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.cedula}" required="true" requiredMessage="Ingrese su número de cédula" />
+                               </div>
+                            <div class="botones3">  
+                                <h3  class="texto" >Fecha de Nacimiento</h3>                  
+                                <p:calendar styleClass="calendarClass" pattern="dd/MM/yyyy" locale="es" navigator="true" value="#{personaController.selected.fechaNacimiento}" mask="true" />
+                               </div>
+                            <div class="botones3">  
+                                <h3  class="texto" >Género</h3>
+                                <h:selectOneMenu class="txtC" value="#{personaController.selected.genero}"   >
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItem itemLabel="MASCULINO" itemValue="0"/>
+                                    <f:selectItem itemLabel="FEMENINO" itemValue="1"/>
+                                </h:selectOneMenu>
+                                </div>
+                            <div class="botones3">  
+                                <h3  class="texto" >Estado civil</h3>
+                                <h:selectOneMenu class="txtC" value="#{personaController.selected.idEstadoCivil}" >
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{estadoCivilController.itemsAvailableSelectOne}"
+                                                   var="idEstadoCivilItem"
+                                                   itemValue="#{idEstadoCivilItem}"/>
+                                </h:selectOneMenu>
+                                </div>
+                            <div class="botones3">  
+                                <h3 class="texto" >Edad</h3>
+                                <h:inputText maxlength="2" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) return false;" class="txt" value="#{personaController.selected.edad}"  
+                                             required="true" requiredMessage="Ingrese su edad"/>                    
+                           </div>
+                            <div class="botones3">  
+                                <h3  class="texto"  >Provincia</h3>
+                                <h:selectOneMenu class="txtC"   id="combo" value="#{personaController.selected.idProvincia}">
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{personaController.listaProvincias}"
+                                                   var="idProvinciaItem"
+                                                   itemValue="#{idProvinciaItem}"/>
+                                    <f:ajax execute="combo" render="combo2"/>
+                                    <f:ajax render="menuParroquia"/>
+                                </h:selectOneMenu>
+                                </div>
+                            <div class="botones3">  
+                                <h3  class="texto">Canton</h3>
+                                <h:selectOneMenu class="txtC" id="combo2" value="#{personaController.selected.idCanton}" >
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{personaController.listaCanton}" 
+                                                   var="idCantonItem"
+                                                   itemValue="#{idCantonItem}" />
+                                    <f:ajax execute="combo2" render="menuParroquia" />
+                                </h:selectOneMenu>
+                                </div>
+                            <div class="botones3">  
+                                <h3  class="texto">Parroquia</h3>
+                                <h:selectOneMenu class="txtC" value="#{personaController.selected.idParroquia}" id="menuParroquia">                  
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>                
+                                    <f:selectItems value="#{personaController.listaParroquia}"
+                                                   var="idParroquiaItem"
+                                                   itemValue="#{idParroquiaItem}"/>
+                                </h:selectOneMenu>
+                                </div>
+                            <div class="botones3">  
+                                <h3 class="texto">Dirección</h3>
+                                <h:inputText maxlength="45" class="txt" value="#{personaController.selected.direccion}" />
+                               </div>
+                            <div class="botones3">  
+                                <h3 class="texto" >Celular</h3>
+                                <h:inputText maxlength="10" class="txt" value="#{personaController.selected.celular}"  />
+                               </div>
+                            <div class="botones3">  
+                                <h3 class="texto" >Teléfono</h3>
+                                <h:inputText maxlength="10" class="txt" value="#{personaController.selected.telefono}" />
+                               </div>
+                            <div class="botones3">  
+                                <h3 class="texto" >Correo electrónico 
+                                    <h:outputLabel id="aviso" style="color: #f18487;font-size: 18px;cursor: pointer;font-weight: bold;" value="!" />
+                                    <p:tooltip for="aviso" value="Su correo será de uso cuando usted necesite recuperar su clave de acceso" trackMouse="true" style="box-shadow: none;font-size: 16px !important" /> 
+                                </h3>
+                                <h:inputText maxlength="45" class="txt" value="#{personaController.correoPersona}" id="email"
+                                             validatorMessage="El correo electrónico no es válido">
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                </h:inputText>
+                                <p:message for="email" />
+                                </div>
+                            
+                            <div class="botones3">  
+                                <h3  class="texto">Tipo sangre</h3>
+                                <h:selectOneMenu class="txtC" value="#{personaController.selected.idTipoSangre}" >
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{tipoSangreController.itemsAvailableSelectOne}"
+                                                   var="idTipoSangreItem"
+                                                   itemValue="#{idTipoSangreItem}"/>
+                                </h:selectOneMenu>
+                                </div>
+                            <div class="botones3">  
+                                <h3  class="texto">Etnia</h3>
+                                <h:selectOneMenu class="txtC" value="#{personaController.selected.idEtnia}" >
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{etniaController.itemsAvailableSelectOne}"
+                                                   var="idEtniaItem"
+                                                   itemValue="#{idEtniaItem}"/>
+                                </h:selectOneMenu>
+                                </div>
+                            <div class="botones3">  
+                                <h3 class="texto">Código Postal</h3>
+                                <h:inputText maxlength="30" class="txt" value="#{personaController.selected.codigoPostal}"  />
+                                </div>
+                                <div class="botones3">
+                                    <h3 class="texto" style="color:#454545;">Datos Académicos</h3>
+                                </div>
+                                <div class="botones3">
+                            </div>
+                            <div class="botones3">
+                                <h3 class="texto" >Promoción</h3>
+                                <h:selectOneMenu id="idPromocion" class="txtC" value="#{personaController.selected.idPromocion}">                   
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{promocionController.itemsAvailableSelectOne}"
+                                                   var="idPromocionItem"
+                                                   itemValue="#{idPromocionItem}"/>
+
+                                </h:selectOneMenu>
+                                </div>
+                            <div class="botones3">
+                                <h3 class="texto">Carrera</h3>
+                                <h:selectOneMenu id="idCarrera" class="txtC" value="#{personaController.selected.idCarrera}">                   
+                                    <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                    <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"
+                                                   var="idCarreraItem"
+                                                   itemValue="#{idCarreraItem}"/>
+
+                                </h:selectOneMenu>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGrid>
+
                     <div style="margin: auto; width: 80%; display: block">     
                         <center>
                             <p:commandButton  styleClass="btn_guardar" ajax="false" value="Actualizar Datos" actionListener="#{personaController.existeCorreoPersona()}"/> 
@@ -160,9 +214,7 @@
                         <br/>
                         <center>
                             <p:commandButton styleClass="eliminar" style="font-size: 16px" value="Cerrar" immediate="true" onclick="form_imagen.hide()"/>
-                        <br/>
-                        
-                     <p style="font-family: Arial;text-align: center;color:#039be5">Si la foto actualizada no se muestra recargue la página.</p>
+                            <br/>
                         </center>
                     </h:form>
                 </p:dialog>

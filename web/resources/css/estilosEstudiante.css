@@ -178,8 +178,26 @@ nav ul li{
         color:white;
     }
 }
-
-
+.foto_perfil_inicio{
+    width: 50px; 
+    height: 50px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    object-fit:cover;
+    object-position:center center;
+    vertical-align:middle;
+    position: relative;
+}
+.circulo_verde{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #00ff66;
+    margin-top: 56px;
+    margin-left: 34px;
+    z-index: 100;
+    border-radius: 7px;
+}
 .cabecera{
     width: 100%;
     height: auto;
@@ -287,12 +305,26 @@ nav ul li{
 
 }
 .fotoPerfil { 
-    border-radius: 60px; 
     width: 100px;
     height: 100px;
+    border-radius: 60px; 
     object-fit:cover;
     object-position:center center;
     border:2px solid #7c9fb6;
+}
+
+.botones3{
+    width: 44%;
+    height: auto;
+    border:none;   
+    background: none;
+    margin: 10px;
+    outline: none;
+    display: inline-block;
+    border:none;
+    transition: all .3s ease;
+vertical-align: top;
+margin: auto;
 }
 /*-ESTILOS PERFIL----------------------------------------------->>>>>>>>>>>>>>>>>>>>>>>*/
 .c_oferta{
@@ -357,10 +389,12 @@ nav ul li{
     margin: 0;
     margin-top: 15px;
     margin-bottom: 5px;
+    text-align: left;
 }
 .txt{
-    width: 98%;
+    width: 94%;
     height: 30px;
+    margin: auto;
     padding-top: 5px;
     padding-bottom: 5px;
     color: #454545;
@@ -387,8 +421,9 @@ nav ul li{
 
 }
 .calendarClass .ui-inputfield{
-    width:98%;
+    width:90%;
     height: 32px;
+    margin: auto;
     border-radius: 0px;
     box-shadow: none;
     color: #454545;
@@ -412,8 +447,9 @@ nav ul li{
 
 }
 .txtC{
-    width: 100%;
+    width: 94%;
     height: 42px;
+    margin: auto;
     padding-top: 5px;
     padding-bottom: 5px;
     color: #454545;
@@ -767,8 +803,8 @@ nav ul li{
 
 }
 .tabla2 .ui-datatable-header{
-    background:#29a0c7;
-    border:1px solid #999999;
+    background:#ccc;
+    border:1px solid #ccc;
     box-shadow:none;
 
 }
@@ -783,6 +819,11 @@ nav ul li{
     outline: none;
     display: none;
 }
+.tabla2.ui-datatable .ui-sortable-column{
+    background: #eee;
+    border:1px solid #ccc;
+    box-shadow:none;
+}
 .tabla2.ui-datatable thead tr {
     background: #f2f2f2;
 }
@@ -796,12 +837,9 @@ nav ul li{
     border: none;
     border: 1px solid #ccc;
     background: #fdfde9;
-
 }
 
-
 .tabla2.ui-datatable tr.ui-state-highlight{
-    /*background: #e0f0f5;*/
     background: #f9f9d6;
     border: 1px solid #ccc;
     color: black;
@@ -1318,9 +1356,9 @@ nav ul li{
     margin-bottom: 20px;
 }
 .c_fechas2{
-    width: 100%;
+    width: 97%;
     margin: auto;
-    background: whitesmoke;
+    background: #e4e4e6;
     padding-bottom: 20px;
     display: inline-block;
     margin-bottom: 20px;
@@ -1428,6 +1466,10 @@ nav ul li{
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
     cursor: pointer;
 }
+.caja_postulacion{
+    width:90%;
+    margin: auto;
+}
 @media only screen and (min-width: 1440px){ 
     .contenedor{
         width: 1366px;
@@ -1479,6 +1521,10 @@ nav ul li{
         margin: auto;
         padding: 0;
     }
+    .caja_postulacion{
+    width:100%;
+    margin: auto;
+}
 
 }
 @media only screen and (max-width: 768px){ 
@@ -1495,6 +1541,10 @@ nav ul li{
     }
     .botones2{
         width: 180px;
+    }
+     .botones3{
+        width:90%;
+        margin: auto;
     }
     .txt_boton{
         font-size: 16px;

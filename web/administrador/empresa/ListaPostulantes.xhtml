@@ -48,10 +48,10 @@
                                      sortBy="#{item.fechaPostulante}"
                                      sortOrder="descending">
                             <p:column style="width:110px;" sortBy="#{item.personaIdPersona.idPersona}" headerText="Foto">
-                                <img style="width: 100px;height: 110px;border-radius: 4px;margin: 0;padding: 0;margin: auto;
+                                <p:graphicImage style="width: 92px;height: 92px;border-radius: 46px;margin: 0;padding: 0;margin: auto;
                                      object-fit:cover;object-position:center center;
                                      background-size: cover;"     
-                                     src="#{request.contextPath}/resources/#{item.personaIdPersona.foto}" ></img>  
+                                     name="#{item.personaIdPersona.foto}"/> 
                             </p:column>
                             <p:column headerText="Postulante" sortBy="#{item.personaIdPersona.nombre}">
                                 <h:outputText value="#{item.personaIdPersona.nombre} #{item.personaIdPersona.apellido}" style="font-size: 18px;font-weight: bold"/>

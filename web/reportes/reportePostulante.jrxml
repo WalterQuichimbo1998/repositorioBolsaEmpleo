@@ -161,7 +161,7 @@ WHERE oferta_laboral_id_oferta=$P{id}]]>
 			<staticText>
 				<reportElement mode="Transparent" x="188" y="0" width="452" height="79" backcolor="#FFFFFF" uuid="fe4837ee-998a-41c2-b3ee-386dc1fadb68"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="28" isBold="true"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE POSTULANTES]]></text>
 			</staticText>
@@ -170,7 +170,7 @@ WHERE oferta_laboral_id_oferta=$P{id}]]>
 				<imageExpression><![CDATA["logo.png"]]></imageExpression>
 			</image>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="732" y="5" width="70" height="70" uuid="d1a08d74-13f5-4b0f-b7c5-e8a22ef1127b"/>
+				<reportElement x="725" y="5" width="70" height="70" uuid="d1a08d74-13f5-4b0f-b7c5-e8a22ef1127b"/>
 				<imageExpression><![CDATA["empresa.png"]]></imageExpression>
 			</image>
 		</band>
@@ -187,7 +187,7 @@ WHERE oferta_laboral_id_oferta=$P{id}]]>
 			<textField>
 				<reportElement x="0" y="24" width="802" height="28" uuid="df31417d-e021-4382-851f-2187db2485cd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cargo_solicitado}]]></textFieldExpression>
 			</textField>
@@ -236,28 +236,28 @@ WHERE oferta_laboral_id_oferta=$P{id}]]>
 			<textField>
 				<reportElement x="8" y="3" width="291" height="20" uuid="2da886e3-d914-46a1-bbf2-0884dcb9df73"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="315" y="3" width="137" height="20" uuid="5617795f-16c1-41df-a7da-015ab8c13ef3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{celular}==null ? "" : $F{celular}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="457" y="3" width="183" height="20" uuid="9df8fc57-43eb-4a25-bb0a-de3b21d719bb"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{direccion}==null ? "" : $F{direccion}+"" )]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="640" y="3" width="146" height="20" uuid="093291eb-9836-4df5-bdcd-fc134a7f9e38"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_postulante}]]></textFieldExpression>
 			</textField>
@@ -270,15 +270,23 @@ WHERE oferta_laboral_id_oferta=$P{id}]]>
 		<band height="24" splitType="Stretch">
 			<textField>
 				<reportElement x="703" y="4" width="62" height="20" uuid="1b1686fe-2eb6-4ecc-a9e3-8ddc6c93a1bc"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="25" y="4" width="150" height="20" uuid="5e98c53d-2202-420c-b31e-fae83b2dd5e8"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="765" y="4" width="38" height="20" uuid="08ca711f-ee0b-4984-9bca-1863f7e56b62"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>

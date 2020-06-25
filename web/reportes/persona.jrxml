@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f79a4ff-fe74-4cdc-a6dc-049ea79abc5a">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="179"/>
+	<property name="ireport.y" value="1115"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -515,185 +515,182 @@ persona.id_persona =$P{id};]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="392" splitType="Stretch">
+		<band height="405" splitType="Stretch">
 			<staticText>
-				<reportElement x="56" y="286" width="96" height="20" uuid="ca9754c2-1f73-4be4-9321-3c8290b0408b"/>
-				<textElement>
+				<reportElement x="56" y="298" width="86" height="20" uuid="ca9754c2-1f73-4be4-9321-3c8290b0408b"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Provincia:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="286" width="177" height="20" uuid="d6c735df-5dc7-4795-a240-62b934491daf"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="298" width="205" height="20" uuid="d6c735df-5dc7-4795-a240-62b934491daf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{provincia}==null ? "" : $F{provincia}+"" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="56" y="306" width="96" height="20" uuid="d377b410-72e2-4a80-b13b-af02acaf79d0"/>
-				<textElement>
+				<reportElement x="56" y="318" width="86" height="20" uuid="d377b410-72e2-4a80-b13b-af02acaf79d0"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cantón:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="306" width="177" height="20" uuid="8aa97d77-2f8f-42f2-b60a-c59dd8db5671"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="318" width="205" height="20" uuid="8aa97d77-2f8f-42f2-b60a-c59dd8db5671"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{canton}==null ? "" : $F{canton}+"" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="56" y="326" width="96" height="20" uuid="c4c007ec-9868-4485-932f-041377781c5f"/>
-				<textElement>
+				<reportElement x="56" y="338" width="86" height="20" uuid="c4c007ec-9868-4485-932f-041377781c5f"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Parroquia:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="326" width="177" height="20" uuid="fe75711a-0ebf-43f2-8d01-5c73d1d96fa8"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="338" width="205" height="20" uuid="fe75711a-0ebf-43f2-8d01-5c73d1d96fa8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{parroquia}==null ? "" : $F{parroquia}+"" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="56" y="168" width="96" height="20" uuid="6543afad-223b-4f41-aa5c-6477ddfb0c5b"/>
-				<textElement>
+				<reportElement x="56" y="180" width="86" height="20" uuid="6543afad-223b-4f41-aa5c-6477ddfb0c5b"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cédula:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="168" width="177" height="20" uuid="9af826c8-0a2d-40f6-9bce-b95bba44193f"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="180" width="177" height="20" uuid="9af826c8-0a2d-40f6-9bce-b95bba44193f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{cedula}==null ? "" : $F{cedula}+"" )]]></textFieldExpression>
 			</textField>
 			<image hAlign="Center" vAlign="Middle" isUsingCache="false">
-				<reportElement mode="Opaque" x="378" y="170" width="117" height="130" backcolor="#FFFFFF" uuid="06452b6e-f12d-4508-9a20-3624ec9720d8"/>
+				<reportElement mode="Opaque" x="378" y="182" width="110" height="124" backcolor="#FFFFFF" uuid="06452b6e-f12d-4508-9a20-3624ec9720d8"/>
 				<graphicElement>
-					<pen lineWidth="0.5"/>
+					<pen lineWidth="0.5" lineColor="#666666"/>
 				</graphicElement>
 				<imageExpression><![CDATA[$P{foto}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="56" y="188" width="96" height="20" uuid="59bf0591-a738-4d12-af2b-e852c6ce8e45"/>
-				<textElement>
+				<reportElement x="56" y="200" width="86" height="20" uuid="59bf0591-a738-4d12-af2b-e852c6ce8e45"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="188" width="177" height="20" uuid="50971050-1858-42f5-aad3-408532898539"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="200" width="177" height="20" uuid="50971050-1858-42f5-aad3-408532898539"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{edad}==null ? "" :$F{edad}+" años")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="56" y="208" width="96" height="20" uuid="876164d1-bff1-452a-85ec-b20cd3b63e82"/>
-				<textElement>
+				<reportElement x="56" y="220" width="86" height="20" uuid="876164d1-bff1-452a-85ec-b20cd3b63e82"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estado civil:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="208" width="177" height="20" uuid="3af7ab31-63db-4541-8b6b-d819283289f0"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="220" width="177" height="20" uuid="3af7ab31-63db-4541-8b6b-d819283289f0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{estado_civil}==null ? "" : $F{estado_civil}+"" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="56" y="228" width="96" height="20" uuid="47a943b8-ee10-4abd-8d95-0e35cc1b475c"/>
-				<textElement>
+				<reportElement x="56" y="240" width="86" height="20" uuid="47a943b8-ee10-4abd-8d95-0e35cc1b475c"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Teléfono:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="228" width="177" height="20" uuid="4521838d-973b-4daa-9141-092e2b96d857"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="240" width="177" height="20" uuid="4521838d-973b-4daa-9141-092e2b96d857"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{telefono}==null ? "" : $F{telefono}+"" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="56" y="248" width="96" height="20" uuid="258b5412-d3a8-4427-84f4-550371fa5737"/>
-				<textElement>
+				<reportElement x="56" y="260" width="86" height="20" uuid="258b5412-d3a8-4427-84f4-550371fa5737"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Celular:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="248" width="177" height="20" uuid="4622938e-e190-4d86-a368-0d6adb11840c"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="260" width="177" height="20" uuid="4622938e-e190-4d86-a368-0d6adb11840c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{celular}==null ? "" : $F{celular}+"" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="56" y="268" width="96" height="20" uuid="8bffbd9f-bfeb-47a1-840c-64e272c988af"/>
-				<textElement>
+				<reportElement x="56" y="280" width="86" height="20" uuid="8bffbd9f-bfeb-47a1-840c-64e272c988af"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Correo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="268" width="177" height="20" uuid="0e474a09-fe7a-464f-a3ba-03c4945cac3d"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="280" width="205" height="20" uuid="0e474a09-fe7a-464f-a3ba-03c4945cac3d"/>
 				<textElement>
-					<font size="12"/>
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{correo}==null ? "" : $F{correo}+"" )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="56" y="346" width="96" height="20" uuid="5329acb9-f439-4c95-9a81-373bd9d998eb"/>
-				<textElement>
+				<reportElement x="56" y="358" width="86" height="20" uuid="5329acb9-f439-4c95-9a81-373bd9d998eb"/>
+				<textElement verticalAlignment="Middle">
 					<font size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dirección:]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="152" y="346" width="177" height="20" uuid="ff0a45e2-75eb-4ddc-9b53-4b9c2606bb3d"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement isPrintRepeatedValues="false" x="143" y="358" width="205" height="20" uuid="ff0a45e2-75eb-4ddc-9b53-4b9c2606bb3d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{direccion}==null ? "" : $F{direccion}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="51" y="119" width="434" height="32" uuid="2517efed-553c-4289-8b24-04614577b006"/>
+				<reportElement x="51" y="131" width="434" height="32" uuid="2517efed-553c-4289-8b24-04614577b006"/>
 				<textElement verticalAlignment="Middle">
 					<font size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="56" y="376" width="450" height="1" uuid="1d9e6a2b-28de-48f3-93cb-9a7f4fc77e0d"/>
-			</line>
 			<staticText>
-				<reportElement x="121" y="9" width="234" height="70" uuid="143df6b3-a0de-4356-8629-3e07726a5204"/>
+				<reportElement x="131" y="16" width="234" height="70" uuid="143df6b3-a0de-4356-8629-3e07726a5204"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Serif" size="29" isBold="true"/>
+					<font fontName="SansSerif" size="28" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HOJA DE VIDA]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="0" width="121" height="90" uuid="38a94a74-4e2e-4f55-810d-d4241e7cd7d1"/>
+				<reportElement x="0" y="6" width="121" height="90" uuid="38a94a74-4e2e-4f55-810d-d4241e7cd7d1"/>
 				<imageExpression><![CDATA["logo.png"]]></imageExpression>
 			</image>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="387" y="2" width="153" height="82" uuid="bb1b11e6-1fbc-4617-a1b6-afd751fc4453"/>
+				<reportElement x="387" y="8" width="153" height="82" uuid="bb1b11e6-1fbc-4617-a1b6-afd751fc4453"/>
 				<imageExpression><![CDATA["logo_senescyt.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<detail>
-		<band height="135">
+		<band height="132">
 			<componentElement>
-				<reportElement key="table 2" style="table 2" x="47" y="66" width="468" height="55" uuid="0f97d282-28cf-477f-9f7f-b21c02a0f3de"/>
+				<reportElement key="table 2" style="table 2" x="49" y="65" width="464" height="55" uuid="0f97d282-28cf-477f-9f7f-b21c02a0f3de"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="instruccion" uuid="5c39e3b6-7352-4039-8c8b-6f1b2d3ba8bd">
 						<datasetParameter name="id_persona">
@@ -701,10 +698,10 @@ persona.id_persona =$P{id};]]>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="222" uuid="853db578-36f5-4b54-9d75-da8231c60832">
+					<jr:column width="228" uuid="853db578-36f5-4b54-9d75-da8231c60832">
 						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="222" height="30" uuid="e7b4c230-8bfe-4c22-bc5a-a2b1e92585f6"/>
+								<reportElement x="0" y="0" width="228" height="30" uuid="e7b4c230-8bfe-4c22-bc5a-a2b1e92585f6"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -713,39 +710,42 @@ persona.id_persona =$P{id};]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 2_TD" height="54" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="222" height="23" uuid="b37d2be0-4fd9-4916-b0f3-615de11cb7a8"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<reportElement x="0" y="0" width="228" height="23" uuid="b37d2be0-4fd9-4916-b0f3-615de11cb7a8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
 								<textFieldExpression><![CDATA[( $F{institucion}==null ? "" : $F{institucion}+"" )]]></textFieldExpression>
 							</textField>
 							<textField>
-								<reportElement x="0" y="23" width="222" height="31" uuid="08b54c07-c248-445c-ba17-3a3541bb9bae"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[( $F{titulo}==null ? "" : $F{titulo}+"" )
-]]></textFieldExpression>
+								<reportElement x="0" y="23" width="228" height="31" uuid="08b54c07-c248-445c-ba17-3a3541bb9bae"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial"/>
+								</textElement>
+								<textFieldExpression><![CDATA[( $F{titulo}==null ? "" : $F{titulo}+"" )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="109" uuid="75bfe730-affc-487b-9628-93049d834f0d">
+					<jr:column width="102" uuid="75bfe730-affc-487b-9628-93049d834f0d">
 						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="109" height="30" uuid="0e721af7-6055-4cea-ae8a-e2c8d4d40bed"/>
+								<reportElement x="0" y="0" width="102" height="30" uuid="0e721af7-6055-4cea-ae8a-e2c8d4d40bed"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Código Senesyt]]></text>
+								<text><![CDATA[Código Senescyt]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 2_TD" height="54" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="109" height="54" uuid="bd2bca0a-9afe-4535-9157-5eb37124ca21"/>
+								<reportElement x="0" y="0" width="102" height="54" uuid="bd2bca0a-9afe-4535-9157-5eb37124ca21"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{codigo_senescyt}==null ? "" : $F{codigo_senescyt}+"" )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="137" uuid="c5a33d77-0d02-46d8-a59f-8ac748cc77e6">
+					<jr:column width="126" uuid="c5a33d77-0d02-46d8-a59f-8ac748cc77e6">
 						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
 							<box>
 								<pen lineWidth="0.25"/>
@@ -755,7 +755,7 @@ persona.id_persona =$P{id};]]>
 								<rightPen lineWidth="0.25"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="137" height="30" uuid="6dcac98a-4220-4985-8999-4b60404aeded"/>
+								<reportElement x="1" y="0" width="124" height="30" uuid="6dcac98a-4220-4985-8999-4b60404aeded"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -764,9 +764,9 @@ persona.id_persona =$P{id};]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 2_TD" height="54" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="137" height="54" uuid="84bbe17a-0f78-461a-ac60-1cf9d0263aa8"/>
+								<reportElement x="1" y="0" width="124" height="54" uuid="84bbe17a-0f78-461a-ac60-1cf9d0263aa8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{nivel_academico}==null ? "" : $F{nivel_academico}+"" )]]></textFieldExpression>
 							</textField>
@@ -775,23 +775,23 @@ persona.id_persona =$P{id};]]>
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement x="47" y="40" width="190" height="24" uuid="3100f751-632e-483b-a6b1-80ffde2e87a9"/>
+				<reportElement x="49" y="39" width="190" height="24" uuid="3100f751-632e-483b-a6b1-80ffde2e87a9"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Instrucción Formal]]></text>
 			</staticText>
 		</band>
-		<band height="106">
+		<band height="166">
 			<staticText>
-				<reportElement x="47" y="11" width="190" height="24" uuid="f7b746cc-a026-4a08-9f54-fc80d640998a"/>
+				<reportElement x="49" y="11" width="190" height="24" uuid="f7b746cc-a026-4a08-9f54-fc80d640998a"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Idiomas]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement key="table 4" style="table 4" x="47" y="37" width="468" height="55" uuid="e747b628-d051-439d-a934-c1134a564d04"/>
+				<reportElement key="table 4" style="table 4" x="49" y="37" width="464" height="55" uuid="e747b628-d051-439d-a934-c1134a564d04"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="idioma" uuid="15d5478d-e6e0-4643-b59b-b7e6f3210723">
 						<datasetParameter name="id_persona">
@@ -799,7 +799,7 @@ persona.id_persona =$P{id};]]>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="155" uuid="e6bb0897-523c-47d5-b6d6-dd429c250d7f">
+					<jr:column width="152" uuid="e6bb0897-523c-47d5-b6d6-dd429c250d7f">
 						<jr:columnHeader style="table 4_CH" height="30" rowSpan="1">
 							<box>
 								<pen lineWidth="0.5"/>
@@ -809,24 +809,24 @@ persona.id_persona =$P{id};]]>
 								<rightPen lineWidth="0.5"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="155" height="30" uuid="704ebc96-b6f4-4ba5-99b7-814f7bdbd7dd"/>
+								<reportElement x="0" y="0" width="152" height="30" uuid="704ebc96-b6f4-4ba5-99b7-814f7bdbd7dd"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Idioma]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 4_TD" height="25" rowSpan="1">
+						<jr:detailCell style="table 4_TD" height="21" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="155" height="20" uuid="4da5aca2-269e-46e8-9f1e-9bfbfde478ef"/>
+								<reportElement x="0" y="0" width="152" height="20" uuid="4da5aca2-269e-46e8-9f1e-9bfbfde478ef"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{nombre_idioma}==null ? "" : $F{nombre_idioma}+"" )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="155" uuid="86f0ee1b-6c18-4acc-9631-25c095f3aa13">
+					<jr:column width="152" uuid="86f0ee1b-6c18-4acc-9631-25c095f3aa13">
 						<jr:columnHeader style="table 4_CH" height="30" rowSpan="1">
 							<box>
 								<pen lineWidth="0.5"/>
@@ -836,24 +836,24 @@ persona.id_persona =$P{id};]]>
 								<rightPen lineWidth="0.5"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="155" height="30" uuid="0fe9af49-1794-4973-968c-30b194acd029"/>
+								<reportElement x="0" y="0" width="152" height="30" uuid="0fe9af49-1794-4973-968c-30b194acd029"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Nivel Hablado]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 4_TD" height="25" rowSpan="1">
+						<jr:detailCell style="table 4_TD" height="21" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="155" height="20" uuid="cb70999c-0c7c-4566-a48e-247d49508dcb"/>
+								<reportElement x="0" y="0" width="152" height="20" uuid="cb70999c-0c7c-4566-a48e-247d49508dcb"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{nivel_hablado}==null ? "" : $F{nivel_hablado}+"" )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="157" uuid="d7746524-aae8-4e8a-bda8-0ba9144f4de9">
+					<jr:column width="153" uuid="d7746524-aae8-4e8a-bda8-0ba9144f4de9">
 						<jr:columnHeader style="table 4_CH" height="30" rowSpan="1">
 							<box>
 								<pen lineWidth="0.5"/>
@@ -863,18 +863,18 @@ persona.id_persona =$P{id};]]>
 								<rightPen lineWidth="0.5"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="156" height="30" uuid="22330f85-606d-49f0-937e-bce9242803cb"/>
+								<reportElement x="0" y="0" width="152" height="30" uuid="22330f85-606d-49f0-937e-bce9242803cb"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Nivel Escrito]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 4_TD" height="25" rowSpan="1">
+						<jr:detailCell style="table 4_TD" height="21" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="156" height="20" uuid="be6d568f-c2c4-4b00-9265-42260de247f4"/>
+								<reportElement x="0" y="0" width="152" height="20" uuid="be6d568f-c2c4-4b00-9265-42260de247f4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{nivel_escrito}==null ? "" : $F{nivel_escrito}+"" )]]></textFieldExpression>
 							</textField>
@@ -885,14 +885,14 @@ persona.id_persona =$P{id};]]>
 		</band>
 		<band height="106">
 			<staticText>
-				<reportElement x="46" y="11" width="190" height="24" uuid="01d36fd5-5f36-4e42-8a41-840f09f24549"/>
+				<reportElement x="48" y="11" width="190" height="24" uuid="01d36fd5-5f36-4e42-8a41-840f09f24549"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Capacitaciones]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement key="table 6" style="table 6" x="46" y="37" width="468" height="60" uuid="3a2ea085-55c0-4cd5-a19c-d543c18149c4"/>
+				<reportElement key="table 6" style="table 6" x="48" y="37" width="464" height="60" uuid="3a2ea085-55c0-4cd5-a19c-d543c18149c4"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="capacitacion" uuid="809abc90-9c95-47d3-b1ff-b86b91d7ccc0">
 						<datasetParameter name="id_persona">
@@ -914,20 +914,20 @@ persona.id_persona =$P{id};]]>
 							<textField>
 								<reportElement x="0" y="0" width="139" height="39" uuid="bd8757e4-e2ec-425d-9983-15c9fc249301"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="13" isBold="true"/>
+									<font fontName="Arial" size="13" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{evento}==null ? "" : $F{evento}+"" )]]></textFieldExpression>
 							</textField>
 							<textField>
 								<reportElement x="0" y="40" width="139" height="28" uuid="60518c43-9d5d-4d0a-be3b-44973d041aee"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{horas_capacitaciones}==null ? "" : $F{horas_capacitaciones}+" Horas" )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="328" uuid="43f32210-917f-4386-860b-09b02497dcc2">
+					<jr:column width="318" uuid="43f32210-917f-4386-860b-09b02497dcc2">
 						<jr:columnHeader style="table 6_CH" height="30" rowSpan="1">
 							<box>
 								<pen lineWidth="0.25"/>
@@ -939,23 +939,23 @@ persona.id_persona =$P{id};]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 6_TD" height="79" rowSpan="1">
 							<textField>
-								<reportElement x="5" y="0" width="320" height="40" uuid="2811afb5-6863-45e6-bfbc-36a7a710551c"/>
-								<textElement verticalAlignment="Middle">
-									<font size="13" isBold="true"/>
+								<reportElement x="5" y="0" width="310" height="40" uuid="2811afb5-6863-45e6-bfbc-36a7a710551c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="SansSerif" size="13" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{nombre_evento}==null ? "" : $F{nombre_evento}+"" )]]></textFieldExpression>
 							</textField>
 							<textField>
-								<reportElement x="5" y="39" width="320" height="20" uuid="6afcdb07-9303-4018-a1ff-c82e785624a7"/>
-								<textElement verticalAlignment="Middle">
-									<font size="11"/>
+								<reportElement x="5" y="39" width="310" height="20" uuid="6afcdb07-9303-4018-a1ff-c82e785624a7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{institucion}==null ? "" : $F{institucion}+"" )]]></textFieldExpression>
 							</textField>
 							<textField>
-								<reportElement x="5" y="59" width="320" height="20" uuid="2cb652ab-81e2-40b4-86a9-6b4de95f7e93"/>
-								<textElement verticalAlignment="Middle">
-									<font size="11"/>
+								<reportElement x="5" y="59" width="310" height="20" uuid="2cb652ab-81e2-40b4-86a9-6b4de95f7e93"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{area_estudio}==null ? "" : $F{area_estudio}+"" )]]></textFieldExpression>
 							</textField>
@@ -966,7 +966,7 @@ persona.id_persona =$P{id};]]>
 		</band>
 		<band height="105">
 			<componentElement>
-				<reportElement key="table 9" style="table 9" x="46" y="35" width="468" height="60" uuid="1d3d820c-d3f1-41af-b19e-0c43d72dd10e"/>
+				<reportElement key="table 9" style="table 9" x="48" y="35" width="464" height="60" uuid="1d3d820c-d3f1-41af-b19e-0c43d72dd10e"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="experiencia" uuid="39da7ab5-dc4b-430f-b446-c580f8a4cc2c">
 						<datasetParameter name="id">
@@ -988,23 +988,23 @@ persona.id_persona =$P{id};]]>
 							<textField>
 								<reportElement x="0" y="0" width="170" height="40" uuid="7854ebcf-e5e7-492b-b583-9a6839a9f32a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{puesto}==null ? "" : $F{puesto}+"" )]]></textFieldExpression>
 							</textField>
 							<textField>
 								<reportElement x="0" y="40" width="170" height="40" uuid="e9521e69-e99f-4c26-a621-8edd4eb9db48"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{area_trabajo}==null ? "" : $F{area_trabajo}+"" )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="298" uuid="53c9027f-164d-420f-9106-6075d028d325">
+					<jr:column width="287" uuid="53c9027f-164d-420f-9106-6075d028d325">
 						<jr:columnHeader style="table 9_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="297" height="30" uuid="cf7b56a9-83e7-4139-9266-b272f6f8534d"/>
+								<reportElement x="0" y="0" width="286" height="30" uuid="cf7b56a9-83e7-4139-9266-b272f6f8534d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="13" isBold="true"/>
 								</textElement>
@@ -1013,23 +1013,23 @@ persona.id_persona =$P{id};]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 9_TD" height="80" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="297" height="40" uuid="b07cd599-813c-4aea-a6be-4af618b75050"/>
+								<reportElement x="0" y="0" width="286" height="40" uuid="b07cd599-813c-4aea-a6be-4af618b75050"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{institucion}==null ? "" : $F{institucion}+"" )]]></textFieldExpression>
 							</textField>
 							<textField pattern="dd/MM/yyyy">
-								<reportElement x="0" y="40" width="142" height="40" uuid="b35e3d2b-e391-476c-859b-c6992dbe7c2a"/>
+								<reportElement x="44" y="40" width="100" height="40" uuid="b35e3d2b-e391-476c-859b-c6992dbe7c2a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{fecha_inicio}==null ? "" : $F{fecha_inicio}+"" )]]></textFieldExpression>
 							</textField>
 							<textField pattern="dd/MM/yyyy">
-								<reportElement x="142" y="40" width="155" height="40" uuid="88efa3cf-be87-4bbe-8455-50f31d785c17"/>
+								<reportElement x="144" y="40" width="100" height="40" uuid="88efa3cf-be87-4bbe-8455-50f31d785c17"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{fecha_fin}==null ? "" : $F{fecha_fin}+"" )]]></textFieldExpression>
 							</textField>
@@ -1038,7 +1038,7 @@ persona.id_persona =$P{id};]]>
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement x="46" y="9" width="190" height="24" uuid="00017a23-4e8c-464a-9eef-78f88bcf5882"/>
+				<reportElement x="48" y="9" width="190" height="24" uuid="00017a23-4e8c-464a-9eef-78f88bcf5882"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
@@ -1047,7 +1047,7 @@ persona.id_persona =$P{id};]]>
 		</band>
 		<band height="98">
 			<componentElement>
-				<reportElement key="table 7" style="table 7" x="46" y="36" width="468" height="50" uuid="7bb61981-3b0b-4daf-9dd2-bc2f514e6d40"/>
+				<reportElement key="table 7" style="table 7" x="48" y="36" width="464" height="50" uuid="7bb61981-3b0b-4daf-9dd2-bc2f514e6d40"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="referencia" uuid="95c22da5-02a6-4da1-9e81-1e62493d3eed">
 						<datasetParameter name="id">
@@ -1065,11 +1065,11 @@ persona.id_persona =$P{id};]]>
 								<text><![CDATA[Nombres]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 7_TD" height="41" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="111" height="20" uuid="7dc6e7c6-2033-41fd-8b1b-bf8f6f802466"/>
+								<reportElement x="0" y="0" width="111" height="40" uuid="7dc6e7c6-2033-41fd-8b1b-bf8f6f802466"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{nombre}==null ? "" : $F{nombre}+"" )]]></textFieldExpression>
 							</textField>
@@ -1085,37 +1085,37 @@ persona.id_persona =$P{id};]]>
 								<text><![CDATA[Apellidos]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 7_TD" height="41" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="112" height="20" uuid="4d4c2e71-9f4f-4051-a9bf-e40616540a91"/>
+								<reportElement x="0" y="0" width="112" height="40" uuid="4d4c2e71-9f4f-4051-a9bf-e40616540a91"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{apellido}==null ? "" : $F{apellido}+"" )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="147" uuid="5707cbb1-7f24-40de-b1ad-1f63d5432db8">
+					<jr:column width="152" uuid="5707cbb1-7f24-40de-b1ad-1f63d5432db8">
 						<jr:columnHeader style="table 7_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="147" height="30" uuid="f0ff13bb-d3f0-4d6a-bfa8-6761007c4d11"/>
+								<reportElement x="0" y="0" width="152" height="30" uuid="f0ff13bb-d3f0-4d6a-bfa8-6761007c4d11"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Correo electrónico]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 7_TD" height="41" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="147" height="20" uuid="9ad0e4dd-f67d-4975-8a7e-79ed1cfd1bd4"/>
+								<reportElement x="0" y="0" width="152" height="40" uuid="9ad0e4dd-f67d-4975-8a7e-79ed1cfd1bd4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{correo_electronico}==null ? "" : $F{correo_electronico}+"" )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="97" uuid="f7c8db52-0bad-4e4d-965f-14214163f56f">
+					<jr:column width="81" uuid="f7c8db52-0bad-4e4d-965f-14214163f56f">
 						<jr:columnHeader style="table 7_CH" height="30" rowSpan="1">
 							<box>
 								<pen lineWidth="0.25"/>
@@ -1125,18 +1125,18 @@ persona.id_persona =$P{id};]]>
 								<rightPen lineWidth="0.25"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="96" height="30" uuid="38119a34-0cad-4a66-93ef-96aa0ba70c8a"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="38119a34-0cad-4a66-93ef-96aa0ba70c8a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Teléfono]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 7_TD" height="20" rowSpan="1">
+						<jr:detailCell style="table 7_TD" height="41" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="96" height="20" uuid="b801ae15-3769-494e-a13c-240d96b79c4f"/>
+								<reportElement x="0" y="0" width="80" height="40" uuid="b801ae15-3769-494e-a13c-240d96b79c4f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="11"/>
+									<font fontName="Arial" size="11"/>
 								</textElement>
 								<textFieldExpression><![CDATA[( $F{telefono}==null ? "" : $F{telefono}+"" )]]></textFieldExpression>
 							</textField>
@@ -1145,7 +1145,7 @@ persona.id_persona =$P{id};]]>
 				</jr:table>
 			</componentElement>
 			<staticText>
-				<reportElement x="46" y="10" width="190" height="24" uuid="ccbfa2f1-b5f8-47b6-8f96-82cd7ffe8b69"/>
+				<reportElement x="48" y="10" width="190" height="24" uuid="ccbfa2f1-b5f8-47b6-8f96-82cd7ffe8b69"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
@@ -1159,14 +1159,14 @@ persona.id_persona =$P{id};]]>
 	<pageFooter>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="436" y="0" width="80" height="20" uuid="6a2ddffc-e13f-4aa0-82d4-4d7307f9b049"/>
+				<reportElement x="414" y="0" width="80" height="20" uuid="6a2ddffc-e13f-4aa0-82d4-4d7307f9b049"/>
 				<textElement textAlignment="Right">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="516" y="0" width="40" height="20" uuid="8a72afce-f01b-4f3f-8242-15993cdde02e"/>
+				<reportElement x="494" y="0" width="40" height="20" uuid="8a72afce-f01b-4f3f-8242-15993cdde02e"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
@@ -1175,6 +1175,6 @@ persona.id_persona =$P{id};]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="17" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>

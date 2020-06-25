@@ -100,6 +100,11 @@
                                     <div class="txt_boton">Carrera</div>
                                 </div>
                                 <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/promocion.png" action="/administrador/promocion/List?faces-redirect=true" 
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Promoción</div>
+                                </div>
+                                <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/ubicacion.png" action="/administrador/provincia/List?faces-redirect=true" 
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Provincias / Cantones</div>
@@ -171,11 +176,7 @@
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Estado Civil</div>
                                 </div>
-                                 <div class="botones2">
-                                    <h:commandButton class="botones" image="../resources/img/maleta.png" action="/administrador/empresa/ofertas?faces-redirect=true"
-                                                     style="width: 105px;height: 105px"/> 
-                                    <div class="txt_boton">Ofertas Laborales</div>
-                                </div>    
+                                    
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/capacitacion.png" action="/administrador/capacitacion/List?faces-redirect=true"
                                                      style="width: 105px;height: 105px"/> 
@@ -185,7 +186,12 @@
                                     <h:commandButton class="botones" image="../resources/img/empresa.png" action="/administrador/empresa/List?faces-redirect=true"
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Listado de todas <br/>las empresas</div>
-                                </div>                                    
+                                </div>     
+                                 <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/maleta.png" action="/administrador/empresa/ofertas?faces-redirect=true"
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Ofertas Laborales <br/>de las empresas</div>
+                                </div>
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/portada.png" action="/administrador/imagenPortada/List?faces-redirect=true"
                                                      style="width: 105px;height: 105px"/> 
@@ -216,8 +222,8 @@
             <h:form class="session2" >
                 <br/>
                 <div style="width: 120px; height: 120px; margin: auto; background: white; border-radius: 120px;">
-                    <img style="width: 120px; height: 120px; border-radius: 120px;object-fit:cover;object-position:center center;" 
-                         src="#{request.contextPath}/resources/requerido/sin_foto_perfil.png"></img>
+                    <img style="width: 110px; height: 120px;object-fit:cover;object-position:center center;" 
+                         src="#{request.contextPath}/resources/img/salir.png"></img>
                 </div>
                 <br/>
                 <center>

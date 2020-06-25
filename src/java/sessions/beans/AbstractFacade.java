@@ -67,7 +67,7 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    public Usuario validarUsuario(String user, String pass) {
+    public Usuario validarUsuarioSesion(String user, String pass) {
         EntityManager em = getEntityManager();
         Usuario usuario = null;
         try {

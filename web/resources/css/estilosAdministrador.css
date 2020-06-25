@@ -702,7 +702,7 @@ background: #E3F2FD;
     border:1px solid #57a3f4;
 }
 .c_fechas{
-    width: 94%;
+    width: 96%;
     margin: auto;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -943,7 +943,49 @@ background: #E3F2FD;
     border:1px solid white;
     text-align: center;
 }
+.botones3{
+    width: 48%;
+    height: auto;
+    border:none;   
+    background: none;
+    margin: 10px;
+    outline: none;
+    display: inline-block;
+    border:none;
+    transition: all .3s ease;
+vertical-align: top;
+margin: auto;
+}
+.txtC{
+    width: 94%;
+    height: 42px;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #024959;
+    font-size: 18px !important;
+    font-family: Arial;
+    font-weight: normal;
+    border: none;
+    -moz-border:none;
+    box-shadow: none;
+    -moz-box-shadow:none;
+    outline: none;
+    -moz-outline:none;
+    transition: all 300ms;
+    background: none;
+    -moz-background:none;
+    border-bottom: 2px solid #98c2bb;
+}
 
+.txtC:hover{
+    font-size: 20px;
+    color: #454545;
+    border-bottom: 2px solid #57a3f4;
+}
+.txtC:focus{
+    border-bottom: 2px solid #57a3f4;
+}
 @media only screen and (min-width: 1440px){ 
     .contenedor{
         width: 1366px;
@@ -994,7 +1036,10 @@ background: #E3F2FD;
         margin-top: 0px;
         margin-top: 10px;
     }
-
+ .botones3{
+        width:90%;
+        margin: auto;
+    }
 }
 
 

@@ -15,18 +15,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sessions.beans.HojaVidaEstudianteFacade;
 import sessions.beans.UsuarioFacade;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import org.apache.commons.codec.binary.Base64;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
+//import java.io.UnsupportedEncodingException;
+//import java.security.InvalidKeyException;
+//import java.security.MessageDigest;
+//import java.security.NoSuchAlgorithmException;
+//import java.util.Arrays;
+//import org.apache.commons.codec.binary.Base64;
+//import javax.crypto.BadPaddingException;
+//import javax.crypto.Cipher;
+//import javax.crypto.IllegalBlockSizeException;
+//import javax.crypto.NoSuchPaddingException;
+//import javax.crypto.SecretKey;
+//import javax.crypto.spec.SecretKeySpec;
 
 /**
  *
@@ -43,7 +43,7 @@ public class AccesoBean implements Serializable {
     private HojaVidaEstudianteFacade hojaFacade;
     private String user;
     private String pass;
-    private final String key = "empleo";
+    private final String key = "@ISTL_2020";
    
     public AccesoBean() {
     }
@@ -77,8 +77,9 @@ public class AccesoBean implements Serializable {
         if (user.trim() == null || "".equals(user.trim()) || pass.trim() == null || "".equals(pass.trim())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete los campos correspondientes", ""));
         } else {
-            Usuario us = getEjbFacade().validarUsuario2(user.trim(), encriptar(pass.trim()));
-            if (us != null) {
+            Usuario us = getEjbFacade().validarUsuarioSesion(user.trim(), pass.trim()); 
+            if(us!=null){
+            if (us.getUsuario().equals(user.trim()) && us.getClave().equals(pass.trim())) {
                 if ("ADMINISTRADOR".equals(us.getRol())) {
                     try {
                         asignarRecursoWeb("/administrador/administrador.xhtml", us);
@@ -121,6 +122,9 @@ public class AccesoBean implements Serializable {
                 }
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Credenciales incorrectas", ""));
+            }
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Usuario no existe", ""));
             }
         }
     }
@@ -177,7 +181,7 @@ public class AccesoBean implements Serializable {
 
     public static String usuarioLogueadoClave() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-        return us.getClaveCifrada();
+        return us.getClave();
     }
 
     public static Usuario obtenerIdPersona() {
@@ -192,25 +196,25 @@ public class AccesoBean implements Serializable {
         }
         return hv;
     }
-
-    public String encriptar(String pass) {
-        String encri = "";
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] llavePass = md.digest(key.getBytes("utf-8"));
-            byte[] bytesPass = Arrays.copyOf(llavePass, 24);
-            SecretKey secretKey = new SecretKeySpec(bytesPass, "DESede");
-            Cipher cifrado = Cipher.getInstance("DESede");
-            cifrado.init(Cipher.ENCRYPT_MODE, secretKey);
-            byte[] plainTextBytes = pass.getBytes("utf-8");
-            byte[] buf = cifrado.doFinal(plainTextBytes);
-            byte[] base64Bytes = Base64.encodeBase64(buf);
-            encri = new String(base64Bytes);
-        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            System.out.println("Error: " + e);
-        }
-        return encri;
-    }
+//
+//    public String encriptar(String pass) {
+//        String encri = "";
+//        try {
+//            MessageDigest md = MessageDigest.getInstance("MD5");
+//            byte[] llavePass = md.digest(key.getBytes("utf-8"));
+//            byte[] bytesPass = Arrays.copyOf(llavePass, 24);
+//            SecretKey secretKey = new SecretKeySpec(bytesPass, "DESede");
+//            Cipher cifrado = Cipher.getInstance("DESede");
+//            cifrado.init(Cipher.ENCRYPT_MODE, secretKey);
+//            byte[] plainTextBytes = pass.getBytes("utf-8");
+//            byte[] buf = cifrado.doFinal(plainTextBytes);
+//            byte[] base64Bytes = Base64.encodeBase64(buf);
+//            encri = new String(base64Bytes);
+//        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+//            System.out.println("Error: " + e);
+//        }
+//        return encri;
+//    }
     public Boolean existeFoto(String f) {
         boolean r = true;
         if ("".equals(f)) {

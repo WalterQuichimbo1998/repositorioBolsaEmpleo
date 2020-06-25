@@ -46,7 +46,7 @@ ORDER BY empresa.fecha_creacion DESC]]>
 			<staticText>
 				<reportElement mode="Transparent" x="186" y="4" width="430" height="79" backcolor="#FFFFFF" uuid="936b8be1-259e-46bc-a105-346f0e906c75"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="28" isBold="true"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE EMPRESAS]]></text>
 			</staticText>
@@ -67,7 +67,9 @@ ORDER BY empresa.fecha_creacion DESC]]>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="0" y="32" width="802" height="20" uuid="f94a6040-b28a-4971-9e88-d8e01b67dabf"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Desde "+$P{fecha1}+" Hasta "+$P{fecha2}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -122,35 +124,35 @@ ORDER BY empresa.fecha_creacion DESC]]>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="687" y="0" width="113" height="40" uuid="c2d0b627-244f-42db-b703-396f2e9a813a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fecha_creacion}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="8" y="0" width="222" height="40" uuid="1a3c12af-036e-42f9-a6bf-a33c4f8d2391"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_comercial}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="424" y="0" width="108" height="40" uuid="6563db48-90e7-4f4a-b7d6-7dddce971122"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{telefono_oficina}==null ? "" : $F{telefono_oficina}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="532" y="0" width="155" height="40" uuid="a11a1877-20bd-4157-bafd-9272cc1bac1c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{direccion}==null ? "" : $F{direccion}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="232" y="0" width="192" height="40" uuid="e03bac95-8c5d-4413-aac8-70d3e9657215"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
 			</textField>
@@ -163,17 +165,23 @@ ORDER BY empresa.fecha_creacion DESC]]>
 		<band height="25" splitType="Stretch">
 			<textField evaluationTime="Report">
 				<reportElement x="761" y="0" width="40" height="20" uuid="e4f464c1-d93b-45e6-a6c2-03bda04a7b5c"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="27" y="0" width="183" height="20" uuid="38396fc6-17c4-46e4-a778-285d644c6b6d"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="681" y="0" width="80" height="20" uuid="1cb69f84-7dbd-4c0f-bc0d-afa27c734e6a"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 		</band>

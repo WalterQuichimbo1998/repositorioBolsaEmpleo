@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08fc2059-ebf5-438a-8546-14051b2a65bd">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="198"/>
+	<property name="ireport.y" value="27"/>
 	<parameter name="id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -187,6 +187,9 @@ oferta_laboral.id_area_estudio
 			</staticText>
 			<line>
 				<reportElement x="38" y="25" width="488" height="1" uuid="fd871a07-f67b-4ae5-8478-52e3f7eee469"/>
+				<graphicElement>
+					<pen lineWidth="0.75" lineColor="#666666"/>
+				</graphicElement>
 			</line>
 		</band>
 	</pageHeader>
@@ -219,7 +222,7 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="173" width="170" height="20" uuid="208384f8-42d9-48ac-bed3-534077d68e47"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{provincia}]]></textFieldExpression>
 			</textField>
@@ -233,7 +236,7 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="33" width="327" height="20" uuid="1c814227-9006-45d9-9435-c10af03420d4"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_comercial}]]></textFieldExpression>
 			</textField>
@@ -245,9 +248,9 @@ oferta_laboral.id_area_estudio
 				<text><![CDATA[Conocimiento del cargo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="37" y="459" width="479" height="50" uuid="bb32f470-bc69-40d1-9e20-e046859e008e"/>
+				<reportElement x="38" y="459" width="478" height="50" uuid="bb32f470-bc69-40d1-9e20-e046859e008e"/>
 				<textElement verticalAlignment="Top">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{conocimiento_cargo}==null ? "" : $F{conocimiento_cargo}+"" )]]></textFieldExpression>
 			</textField>
@@ -259,9 +262,9 @@ oferta_laboral.id_area_estudio
 				<text><![CDATA[Experiencia:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="37" y="319" width="479" height="50" uuid="57df8ad3-1416-40a9-b7ac-2032ba8da687"/>
+				<reportElement x="38" y="319" width="478" height="50" uuid="57df8ad3-1416-40a9-b7ac-2032ba8da687"/>
 				<textElement verticalAlignment="Top">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{experiencia}==null ? "" : $F{experiencia}+"" )]]></textFieldExpression>
 			</textField>
@@ -275,7 +278,7 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="193" width="170" height="20" uuid="d775949f-f8a4-43f7-9f5f-4988d4501662"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{canton}]]></textFieldExpression>
 			</textField>
@@ -289,7 +292,7 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="213" width="170" height="20" uuid="bcdf4918-332e-4cd8-89fa-ed696fe052bf"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{parroquia}]]></textFieldExpression>
 			</textField>
@@ -303,7 +306,7 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="273" width="170" height="20" uuid="0be91e75-7475-4fae-a6a4-a3d9673fc94f"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{horas_capacitaciones}==null ? "" : $F{horas_capacitaciones}+" Horas" )]]></textFieldExpression>
 			</textField>
@@ -317,7 +320,7 @@ oferta_laboral.id_area_estudio
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="199" y="73" width="147" height="20" uuid="cc1e4723-37db-4667-a44d-99229817a94a"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{fecha_inicio}==null ? "" : $F{fecha_inicio}+"" )]]></textFieldExpression>
 			</textField>
@@ -338,21 +341,21 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="113" width="170" height="20" uuid="ac5e3461-7e95-4982-b5ea-40734c2c2e53"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[( $F{jornada_trabajo}==null ? "" : $F{jornada_trabajo}+" Horas" )]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $F{jornada_trabajo}==null ? "" :$F{jornada_trabajo}+"")]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="37" y="53" width="160" height="20" uuid="0208fc0e-3a0a-401f-b42b-e6d04b14512f"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Area de estudio:]]></text>
+				<text><![CDATA[Área de estudio:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="199" y="53" width="170" height="20" uuid="b4acea0d-1675-483a-a16e-bfca83600194"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{area_estudio}==null ? "" : $F{area_estudio}+"" )]]></textFieldExpression>
 			</textField>
@@ -366,7 +369,7 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="253" width="170" height="20" uuid="847afae7-91eb-4283-800a-8de6553874c3"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{tiempo_experiencia}==null ? "" : $F{tiempo_experiencia}+"" )]]></textFieldExpression>
 			</textField>
@@ -378,9 +381,9 @@ oferta_laboral.id_area_estudio
 				<text><![CDATA[Descripción:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="37" y="389" width="479" height="50" uuid="a4ef1dd6-1237-44b5-91f4-a7096bc2d028"/>
+				<reportElement x="38" y="389" width="478" height="50" uuid="a4ef1dd6-1237-44b5-91f4-a7096bc2d028"/>
 				<textElement verticalAlignment="Top">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{descripcion}==null ? "" : $F{descripcion}+"" )]]></textFieldExpression>
 			</textField>
@@ -394,7 +397,7 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="153" width="147" height="20" uuid="bd685071-848e-462a-b14e-f5aca14b5606"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{tipo_contrato}==null ? "" : $F{tipo_contrato}+"" )]]></textFieldExpression>
 			</textField>
@@ -408,14 +411,14 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="233" width="170" height="20" uuid="a04935e0-52be-442c-96e2-fb9dc956470b"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="199" y="93" width="147" height="20" uuid="a5bf6dcb-ec86-4832-b3d1-e9dab6041507"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{fecha_fin}==null ? "" : $F{fecha_fin}+"" )]]></textFieldExpression>
 			</textField>
@@ -429,7 +432,7 @@ oferta_laboral.id_area_estudio
 			<textField>
 				<reportElement x="199" y="133" width="147" height="20" uuid="ffb4bf55-c403-4e55-ac69-2495c01f177a"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{remuneracion}==null ? "" : "$ "+$F{remuneracion} )]]></textFieldExpression>
 			</textField>
@@ -442,15 +445,23 @@ oferta_laboral.id_area_estudio
 		<band height="21" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="18" y="1" width="150" height="20" uuid="33c6a1a2-de28-448e-98cf-74acec2e68e8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="456" y="0" width="62" height="20" uuid="8bfd7388-7b07-4810-a910-caa752bedd61"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="518" y="0" width="37" height="20" uuid="a3cdc89b-33f0-4609-a095-34fb421a681b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>

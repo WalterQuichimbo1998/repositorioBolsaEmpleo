@@ -87,7 +87,7 @@ public class PersonaController implements Serializable {
     private boolean cc_2;
     private boolean cc_3;
     private Persona per = null;
-    private final String key = "empleo";
+//    private final String key = "@ISTL_2020";
     private String correoPersona;
 
     public PersonaController() {
@@ -557,7 +557,6 @@ public class PersonaController implements Serializable {
                 in.close();
                 out.flush();
                 out.close();
-
             }
         } catch (IOException e) {
         }
@@ -586,15 +585,23 @@ public class PersonaController implements Serializable {
         if (correo.trim() == null || "".equals(correo.trim()) || cedula.trim() == null || "".equals(cedula.trim())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete los campos", ""));
         } else {
-            per = getFacade().buscarCorreo(getCedula(), getCorreo());
+            per = getFacade().buscarCorreo(cedula.trim(), correo.trim());
             mensaje = "";
             cc = false;
             if (per != null) {
-                cc = true;
-                buscarUser();
+                if (per.getCorreo().equals(correo.trim()) && per.getCedula().equals(cedula.trim())) {
+                    cc = true;
+                    buscarUser();
+                } else {
+                    cc = false;
+                    mensaje = "Correo electrónico o Cédula no registrado";
+                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correo electrónico o Cédula no registrado", ""));
+                    tiempoLimpiar();
+                }
             } else {
                 cc = false;
-                mensaje = "Correo electrónico o Cédula no registrado";
+                mensaje = "Datos incorrectos";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Datos incorrectos", ""));
                 tiempoLimpiar();
             }
         }
@@ -604,11 +611,13 @@ public class PersonaController implements Serializable {
         Usuario user = getFacade().buscarUser(per);
         if (user != null) {
             mensaje = "Su clave de acceso a sido enviado a su correo electrónico";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Su clave de acceso a sido enviado a su correo electrónico", ""));
             enviarCorreo(user.getClave());
             tiempoLimpiar();
         } else {
             cc = false;
             mensaje = "Usuario no encontrado o registrado";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Usuario no encontrado o registrado", ""));
             tiempoLimpiar();
         }
     }
@@ -627,28 +636,27 @@ public class PersonaController implements Serializable {
         }).start();
     }
 
-    public String descencriptar(String pass) {
-        String descencri = "";
-        try {
-            byte[] m = Base64.decodeBase64(pass.getBytes("utf-8"));
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] digestPass = md.digest(key.getBytes("utf-8"));
-            byte[] keyBytes = Arrays.copyOf(digestPass, 24);
-            SecretKey secretKey = new SecretKeySpec(keyBytes, "DESede");
-            Cipher decipher = Cipher.getInstance("DESede");
-            decipher.init(Cipher.DECRYPT_MODE, secretKey);
-            byte[] plainText = decipher.doFinal(m);
-            descencri = new String(plainText, "UTF-8");
-        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-            System.out.println("Error: " + e);
-        }
-        return descencri;
-    }
-
+//    public String descencriptar(String pass) {
+//        String descencri = "";
+//        try {
+//            byte[] m = Base64.decodeBase64(pass.getBytes("utf-8"));
+//            MessageDigest md = MessageDigest.getInstance("MD5");
+//            byte[] digestPass = md.digest(key.getBytes("utf-8"));
+//            byte[] keyBytes = Arrays.copyOf(digestPass, 24);
+//            SecretKey secretKey = new SecretKeySpec(keyBytes, "DESede");
+//            Cipher decipher = Cipher.getInstance("DESede");
+//            decipher.init(Cipher.DECRYPT_MODE, secretKey);
+//            byte[] plainText = decipher.doFinal(m);
+//            descencri = new String(plainText, "UTF-8");
+//        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+//            System.out.println("Error: " + e);
+//        }
+//        return descencri;
+//    }
     public void enviarCorreo(String clave) {
         final String remitente = "empleoistl2020@gmail.com";
         final String r_clave = "upqnawmrjfowxjyd";
-        String receptor = getCorreo();
+        String receptor = correo.trim();
         Properties prop = new Properties();
         try {
             prop.put("mail.smtp.host", "smtp.gmail.com");

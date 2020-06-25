@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd656045-e8ac-4c44-89f5-363ca4a9d9a4">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
@@ -38,7 +38,7 @@ ORDER BY usuario.id_usuario DESC]]>
 			<staticText>
 				<reportElement x="156" y="23" width="466" height="70" uuid="e98fa94d-8f4b-4c8e-96a8-81ace91009a6"/>
 				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="24" isBold="true"/>
+					<font fontName="SansSerif" size="22" isBold="true"/>
 				</textElement>
 				<text><![CDATA[INSTITUTO SUPERIOR TECNOLÓGICO "LIMÓN"]]></text>
 			</staticText>
@@ -53,7 +53,7 @@ ORDER BY usuario.id_usuario DESC]]>
 			<staticText>
 				<reportElement mode="Transparent" x="1" y="1" width="802" height="25" backcolor="#EDEEEE" uuid="a6e6ce82-698c-4ea3-b802-7eb443ddf241"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="14"/>
+					<font fontName="SansSerif" size="13"/>
 				</textElement>
 				<text><![CDATA[Reporte de Usuarios]]></text>
 			</staticText>
@@ -62,7 +62,7 @@ ORDER BY usuario.id_usuario DESC]]>
 	<columnHeader>
 		<band height="27" splitType="Stretch">
 			<rectangle>
-				<reportElement x="1" y="0" width="802" height="24" backcolor="#F5F5F5" uuid="ac68b48c-8a97-4f80-b8fa-157dfd250ec7"/>
+				<reportElement x="1" y="1" width="802" height="24" backcolor="#F5F5F5" uuid="ac68b48c-8a97-4f80-b8fa-157dfd250ec7"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
@@ -136,7 +136,7 @@ ORDER BY usuario.id_usuario DESC]]>
 		<band height="21" splitType="Stretch">
 			<textField>
 				<reportElement x="682" y="1" width="80" height="20" uuid="4f4bb75b-40fb-47e6-a6b2-e96df1dda60c"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
@@ -146,6 +146,7 @@ ORDER BY usuario.id_usuario DESC]]>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="762" y="1" width="40" height="20" uuid="b206215f-7bc5-4873-a233-08c735ff40c9"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>

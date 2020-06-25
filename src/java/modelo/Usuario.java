@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author TOSHIBA
+ * @author Walter Quichimbo
  */
 @Entity
 @Table(name = "usuario", catalog = "bolsa_empleo_istl", schema = "")
@@ -56,11 +56,6 @@ public class Usuario implements Serializable {
     @Size(max = 45)
     @Column(name = "rol")
     private String rol;
-   
-    @Size(max = 80)
-    @Column(name = "clave_cifrada")
-    private String claveCifrada;
-   
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne
     private Persona idPersona;
@@ -99,16 +94,6 @@ public class Usuario implements Serializable {
     public void setClave(String clave) {
         this.clave = clave;
     }
-
-    public String getClaveCifrada() {
-        return claveCifrada;
-    }
-
-    public void setClaveCifrada(String claveCifrada) {
-        this.claveCifrada = claveCifrada;
-    }
-    
-
     public Persona getIdPersona() {
         return idPersona;
     }

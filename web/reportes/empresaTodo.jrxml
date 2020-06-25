@@ -142,7 +142,7 @@ WHERE
 			<staticText>
 				<reportElement mode="Transparent" x="218" y="0" width="355" height="79" backcolor="#FFFFFF" uuid="c5b413a9-181b-43b6-94d8-b743eba54c3a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="28" isBold="true"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE EMPRESAS]]></text>
 			</staticText>
@@ -217,35 +217,35 @@ WHERE
 			<textField>
 				<reportElement x="12" y="2" width="257" height="40" uuid="afe7e21f-411e-4a4d-9c11-1371501333d4"/>
 				<textElement verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_comercial}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="269" y="2" width="110" height="40" uuid="54071b34-4c9e-46af-ab5d-a88add316bec"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{ruc_cedula}==null ? "" : $F{ruc_cedula}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="382" y="2" width="119" height="40" uuid="362f2181-1a00-477d-b35b-c49ed0033aba"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{razon_social}==null ? "" : $F{razon_social}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="503" y="2" width="175" height="40" uuid="d3527f02-accc-49d0-94c6-b6a1d5f542ac"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{direccion}==null ? "" : $F{direccion}+"" )]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="680" y="2" width="100" height="40" uuid="510e6210-34f4-49db-b7d8-a919509021c5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[( $F{telefono_oficina}==null ? "" : $F{telefono_oficina}+"" )]]></textFieldExpression>
 			</textField>
@@ -258,15 +258,23 @@ WHERE
 		<band height="24" splitType="Stretch">
 			<textField evaluationTime="Report">
 				<reportElement x="762" y="0" width="40" height="20" uuid="6fbe9c7a-f80c-4b5e-a003-b8245042d590"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="682" y="0" width="80" height="20" uuid="fc4c6ed0-7e69-45de-8a65-9fb99b1e8874"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="32" y="0" width="150" height="20" uuid="958fce52-6326-44e7-a03c-c19a4f4aca7d"/>
+				<textElement>
+					<font fontName="Arial" size="11"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>

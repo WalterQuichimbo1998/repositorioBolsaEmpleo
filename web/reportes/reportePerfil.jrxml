@@ -1,26 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="882718d1-cf69-496c-93a6-d83d96178058">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT
-     hoja_vida_estudiante.`id_hoja_vida_estudiante` AS hoja_vida_estudiante_id_hoja_vida_estudiante,
-     hoja_vida_estudiante.`id_persona` AS hoja_vida_estudiante_id_persona,
-     persona.`id_persona` AS persona_id_persona,
-     persona.`nombre` AS persona_nombre,
-     persona.`apellido` AS persona_apellido,
-     persona.`cedula` AS persona_cedula
-FROM
-     `persona` persona INNER JOIN `hoja_vida_estudiante` hoja_vida_estudiante ON persona.`id_persona` = hoja_vida_estudiante.`id_persona`
+		<![CDATA[SELECT * FROM  hoja_vida_estudiante
+LEFT JOIN persona ON hoja_vida_estudiante.id_persona = persona.id_persona
+LEFT JOIN carrera ON persona.id_carrera=carrera.id_carrera
+LEFT JOIN promocion ON persona.id_promocion=promocion.id_promocion
 ORDER BY hoja_vida_estudiante.id_hoja_vida_estudiante DESC;]]>
 	</queryString>
-	<field name="hoja_vida_estudiante_id_hoja_vida_estudiante" class="java.lang.Integer"/>
-	<field name="hoja_vida_estudiante_id_persona" class="java.lang.Integer"/>
-	<field name="persona_id_persona" class="java.lang.Integer"/>
-	<field name="persona_nombre" class="java.lang.String"/>
-	<field name="persona_apellido" class="java.lang.String"/>
-	<field name="persona_cedula" class="java.lang.String"/>
+	<field name="id_hoja_vida_estudiante" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_persona" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_carrera" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_promocion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cedula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="celular" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="genero" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_nacimiento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ciudad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_postal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="edad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado_laboral" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="foto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_tipo_sangre" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_etnia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_estado_civil" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_provincia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_canton" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_parroquia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="carrera" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="promocion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -29,7 +96,7 @@ ORDER BY hoja_vida_estudiante.id_hoja_vida_estudiante DESC;]]>
 			<staticText>
 				<reportElement x="154" y="25" width="466" height="70" uuid="891dbfd7-6cad-4f9e-82e5-6d8c8c04e329"/>
 				<textElement textAlignment="Center">
-					<font fontName="Serif" size="24" isBold="true"/>
+					<font fontName="SansSerif" size="22" isBold="true"/>
 				</textElement>
 				<text><![CDATA[INSTITUTO SUPERIOR TECNOLÓGICO "LIMÓN"]]></text>
 			</staticText>
@@ -48,65 +115,79 @@ ORDER BY hoja_vida_estudiante.id_hoja_vida_estudiante DESC;]]>
 			<staticText>
 				<reportElement mode="Transparent" x="0" y="2" width="802" height="25" backcolor="#FFFFFF" uuid="54d90bfd-ddd5-4d97-affe-df296cafb017"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="14"/>
+					<font fontName="SansSerif" size="13"/>
 				</textElement>
-				<text><![CDATA[Reporte de Perfiles Habilitados de Estudiante]]></text>
+				<text><![CDATA[Reporte de Perfiles Habilitados de los Estudiantes]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="25" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="802" height="22" backcolor="#F5F5F5" uuid="ad8ac1f4-1038-44d6-8758-b7f7c3a54354"/>
+				<reportElement x="0" y="2" width="802" height="22" backcolor="#F5F5F5" uuid="ad8ac1f4-1038-44d6-8758-b7f7c3a54354"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="267" height="20" uuid="f27706e7-989a-43ed-8ac7-885512eae4ed"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="13" isBold="true"/>
+				<reportElement x="10" y="3" width="250" height="20" uuid="f27706e7-989a-43ed-8ac7-885512eae4ed"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombres]]></text>
+				<text><![CDATA[ESTUDIANTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="267" y="0" width="267" height="20" uuid="4968d6db-ca0b-4991-8c86-182a5fac5c2b"/>
+				<reportElement x="261" y="3" width="116" height="20" uuid="5d64b450-eddf-4001-b2f6-6b65ea7fbb9a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="13" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Apellidos]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="534" y="0" width="267" height="20" uuid="5d64b450-eddf-4001-b2f6-6b65ea7fbb9a"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="13" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cédula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="3" width="243" height="20" uuid="3ebdc2f7-2033-4893-8a9c-95e207c5767e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carrera]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="621" y="3" width="177" height="20" uuid="5436022e-44f4-44d0-9fd9-55705abf4bc5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Promoción]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="267" height="20" uuid="22e41f97-f2f3-4371-a0e9-2c4cec70d402"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+				<reportElement x="10" y="0" width="250" height="20" uuid="22e41f97-f2f3-4371-a0e9-2c4cec70d402"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{persona_nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="267" y="0" width="267" height="20" uuid="36379999-f010-4abb-92c8-23ef383cdf26"/>
+				<reportElement x="261" y="0" width="116" height="20" uuid="69147fd2-fc7e-4f3b-9751-9ea27751a56e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{persona_apellido}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{cedula}==null ? "":$F{cedula}+"")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="534" y="0" width="267" height="20" uuid="69147fd2-fc7e-4f3b-9751-9ea27751a56e"/>
+				<reportElement x="377" y="0" width="243" height="20" uuid="5f970893-7195-454c-82d3-be96c40e0780"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{persona_cedula}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{carrera}==null ? "":$F{carrera}+"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="621" y="0" width="177" height="20" uuid="30927bbe-b9cc-42c9-be59-737cbef245e1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{promocion}==null ? "":$F{promocion}+"")]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -117,16 +198,17 @@ ORDER BY hoja_vida_estudiante.id_hoja_vida_estudiante DESC;]]>
 		<band height="22" splitType="Stretch">
 			<textField evaluationTime="Report">
 				<reportElement x="762" y="1" width="40" height="20" uuid="57e262d8-1ec4-4640-afe0-02fe811ca049"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="31" y="0" width="182" height="20" uuid="7ccd984d-6c76-4849-ae3d-3c0837dbc30b"/>
+				<reportElement x="10" y="2" width="182" height="20" uuid="7ccd984d-6c76-4849-ae3d-3c0837dbc30b"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="682" y="1" width="80" height="20" uuid="00270e45-3287-4d57-ae23-055921eadc97"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 		</band>
