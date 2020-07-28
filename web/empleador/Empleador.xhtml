@@ -27,7 +27,9 @@
             <div class="cont">
                 <h:form>
                     <div class="cont">
-                        <img src="#{request.contextPath}/resources/img/logo_sistema.jpg"  class="logo"/>
+                        <h:commandLink action="/empleador/Empleador?faces-redirect=true">
+                            <img src="#{request.contextPath}/resources/img/logo_sistema.jpg"  class="logo"/>
+                        </h:commandLink>
                         <div class="menu_bar">
                             <p:commandLink class="btn-menu" title="Menú" >
                                 <img style="width: 50px;object-fit:cover;object-position:center center;margin-top: 15px"
@@ -51,9 +53,9 @@
                                     </li>  
                                     <li id="ingresar1">                                   
                                         <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" id="foto">
-                                                 <p:graphicImage styleClass="foto_perfil_inicio" name="#{personaController.selected.foto}">
-                                                     <div class="circulo_verde"></div>
-                                                 </p:graphicImage>
+                                            <p:graphicImage styleClass="foto_perfil_inicio" name="#{personaController.selected.foto}">
+                                                <div class="circulo_verde"></div>
+                                            </p:graphicImage>
                                         </p:commandLink>
                                     </li>
                                 </ui:insert>
@@ -84,15 +86,15 @@
                                 </div>                             
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/empresa.png" action="/empleador/empresa/List?faces-redirect=true" 
-                                        style="width: 105px;height: 105px">
-                                          <f:actionListener binding="#{empresaController.limpiarFechas()}" />               
+                                                     style="width: 105px;height: 105px">
+                                        <f:actionListener binding="#{empresaController.limpiarFechas()}" />               
                                     </h:commandButton> 
                                     <div class="txt_boton">Mis Empresas</div>
                                 </div>
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/estudiante.png"  action="/empleador/ListaPostulante?faces-redirect=true"
-                                        style="width: 105px;height: 105px">
-                                       <f:actionListener binding="#{postulanteController.limpiarFechas()}" />                   
+                                                     style="width: 105px;height: 105px">
+                                        <f:actionListener binding="#{postulanteController.limpiarFechas()}" />                   
                                     </h:commandButton> 
                                     <div class="txt_boton">Mis Postulantes</div>
                                 </div>
@@ -107,8 +109,8 @@
                     </h:form>
                 </ui:insert> 
             </div>
-        <span class="ir-arriba"><img src="#{request.contextPath}/resources/img/flecha_arriba.png" style="width: 16px;margin: auto"/></span> 
-             <footer id="head3">        
+            <span class="ir-arriba"><img src="#{request.contextPath}/resources/img/flecha_arriba.png" style="width: 16px;margin: auto"/></span> 
+            <footer id="head3">        
                 <h3 class="texto_f1">
                     COPYRIGHT © 2020 <strong>|</strong> Decide ser un Profesional de éxito</h3>
                 <h3 class="texto_f2">
@@ -119,10 +121,10 @@
                   closeOnEscape="true" showEffect="clip" hideEffect="clip" showHeader="false" >
             <h:form style="margin: 0;padding: 0;padding-left: 40px;padding-right: 40px;display: block;" >            
                 <center>
-                        <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
-                                 <p:graphicImage style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
-                                                 name="#{personaController.selected.foto}"/>
-                        </div>
+                    <div style="width: 150px; height: 175px; margin: auto; background: white; border-radius: 3px; ">
+                        <p:graphicImage style="width: 150px; height: 175px; border-radius: 3px;object-fit:cover;object-position:center center; " 
+                                        name="#{personaController.selected.foto}"/>
+                    </div>
                     <br/>
                     <br/>
                 </center>
@@ -130,10 +132,10 @@
                 <br/>
                 <p:commandButton value="Cambiar Clave" icon="ui-icon-key" action="/empleador/cambiarClave?faces-redirect=true" styleClass="b_1"/>
                 <br/>
-                <p:commandButton value="Cerrar Sesión"  styleClass="ss" icon="ui-icon-power"  action="#{accesoBean.logoutAdmin()}"/>
+                <p:commandButton value="Cerrar Sesión"  styleClass="b_2" icon="ui-icon-power"  action="#{accesoBean.logoutAdmin()}"/>
                 <br/>
                 <br/>
-                <p:commandButton  value="Cerrar" styleClass="b_2"   oncomplete="PF('form_perfil').hide()"/>
+                <p:commandButton  value="Cerrar" styleClass="ss"   oncomplete="PF('form_perfil').hide()"/>
             </h:form>	
         </p:dialog>      
         <script type="text/javascript">

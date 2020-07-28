@@ -39,6 +39,8 @@ public class HojaVidaEstudianteController implements Serializable {
     private Persona persona;
     private Carrera carrera;
     private Promocion promocion;
+    private Carrera carrera2;
+    private Promocion promocion2;
     private List<HojaVidaEstudiante> hojaVida = null;
 
     public HojaVidaEstudianteController() {
@@ -67,6 +69,23 @@ public class HojaVidaEstudianteController implements Serializable {
     public void setPromocion(Promocion promocion) {
         this.promocion = promocion;
     }
+
+    public Carrera getCarrera2() {
+        return carrera2;
+    }
+
+    public void setCarrera2(Carrera carrera2) {
+        this.carrera2 = carrera2;
+    }
+
+    public Promocion getPromocion2() {
+        return promocion2;
+    }
+
+    public void setPromocion2(Promocion promocion2) {
+        this.promocion2 = promocion2;
+    }
+    
 
     protected void setEmbeddableKeys() {
     }
@@ -116,7 +135,8 @@ public class HojaVidaEstudianteController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
-        items = getFacade().findAll();
+        items = getFacade().findAll();     
+  
     }
 
     public void update() {
@@ -271,6 +291,30 @@ public class HojaVidaEstudianteController implements Serializable {
         }else if(promocion==null && carrera!=null){
            try {
                  exportar.reporteExperienciaEstudiante3(carrera.getIdCarrera());
+            } catch (IOException | JRException e) {
+                 System.out.println("Error: "+e);
+            }
+        }else{
+             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione almenos una opción", ""));
+        }
+    }
+    public void descargarReporteReco() {
+        Exportar exportar = new Exportar();
+        if(promocion2!=null && carrera2!=null){
+            try {
+                 exportar.reporteRecomendacionEstudiante1(carrera2.getIdCarrera(),promocion2.getIdPromocion());
+            } catch (IOException | JRException e) {
+                System.out.println("Error: "+e);
+            }
+        }else if(promocion2!=null && carrera2==null){
+           try {
+                 exportar.reporteRecomendacionEstudiante2(promocion2.getIdPromocion());
+            } catch (IOException | JRException e) {
+                 System.out.println("Error: "+e);
+            }
+        }else if(promocion2==null && carrera2!=null){
+           try {
+                 exportar.reporteRecomendacionEstudiante3(carrera2.getIdCarrera());
             } catch (IOException | JRException e) {
                  System.out.println("Error: "+e);
             }

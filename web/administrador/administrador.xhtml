@@ -26,7 +26,9 @@
             <div class="cont">
                 <h:form>
                     <div class="cont">
-                        <img src="#{request.contextPath}/resources/img/logo_sistema.jpg"  class="logo"/>
+                        <h:commandLink action="/administrador/administrador?faces-redirect=true">
+                            <img src="#{request.contextPath}/resources/img/logo_sistema.jpg"  class="logo"/>
+                        </h:commandLink>
                         <div class="menu_bar">
                             <p:commandLink class="btn-menu" title="Menú" >
                                 <img style="width: 50px;object-fit:cover;object-position:center center;margin-top: 15px"
@@ -84,12 +86,12 @@
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Usuarios</div>
                                 </div>
-                                 <div class="botones2">
+                                <div class="botones2">
                                     <h:commandButton class="botones"  image="../resources/img/curriculo.png" action="/administrador/hojaVidaEstudiante/List?faces-redirect=true" 
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Habilitar Perfil</div>
                                 </div>
-                                 <div class="botones2">
+                                <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/instruccion.png" action="/administrador/nivelAcademico/List?faces-redirect=true" 
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Nivel Académico</div>
@@ -176,7 +178,7 @@
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Estado Civil</div>
                                 </div>
-                                    
+
                                 <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/capacitacion.png" action="/administrador/capacitacion/List?faces-redirect=true"
                                                      style="width: 105px;height: 105px"/> 
@@ -187,7 +189,7 @@
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Listado de todas <br/>las empresas</div>
                                 </div>     
-                                 <div class="botones2">
+                                <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/maleta.png" action="/administrador/empresa/ofertas?faces-redirect=true"
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Ofertas Laborales <br/>de las empresas</div>
@@ -228,7 +230,7 @@
                 <br/>
                 <center>
                     <p:commandButton styleClass="ver" style="font-size: 18px;" value="Cambiar clave o usuario" actionListener="#{usuarioController.setSelected(accesoBean.userAdmin())}" 
-                                 icon="ui-icon-key" action="/administrador/cambiarClave?faces-redirect=true"/> 
+                                     icon="ui-icon-key" action="/administrador/cambiarClave?faces-redirect=true"/> 
                 </center>          
                 <br/>
                 <h2 class="textoSalida">Cerrar Sesión</h2>

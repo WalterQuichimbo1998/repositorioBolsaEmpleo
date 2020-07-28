@@ -491,6 +491,61 @@ public class Exportar implements Serializable {
             Logger.getLogger(Exportar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void reporteRecomendacionEstudiante1(Integer id_carrera,Integer id_promocion) throws JRException, IOException {
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("carrera", id_carrera);
+        parametro.put("promocion", id_promocion);
+        try {
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/reporteRecomendacionEstudiante1.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=Reporte_Recomendacion_Estudiante.pdf");
+            try (ServletOutputStream stream = response.getOutputStream()) {
+                JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+                stream.flush();
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+            con.conexion().close();
+        } catch (IOException | SQLException | JRException ex) {
+            Logger.getLogger(Exportar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void reporteRecomendacionEstudiante2(Integer id_promocion) throws JRException, IOException {
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("promocion", id_promocion);
+        try {
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/reporteRecomendacionEstudiante2.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=Reporte_Recomendacion_Estudiante_Promocion.pdf");
+            try (ServletOutputStream stream = response.getOutputStream()) {
+                JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+                stream.flush();
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+            con.conexion().close();
+        } catch (IOException | SQLException | JRException ex) {
+            Logger.getLogger(Exportar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void reporteRecomendacionEstudiante3(Integer id_carrera) throws JRException, IOException {
+        Map<String, Object> parametro = new HashMap<>();
+        parametro.put("carrera", id_carrera);
+        try {
+            File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/reportes/reporteRecomendacionEstudiante3.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametro, con.conexion());
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            response.addHeader("Content-disposition", "attachment; filename=Reporte_Recomendacion_Estudiante_Carrera.pdf");
+            try (ServletOutputStream stream = response.getOutputStream()) {
+                JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+                stream.flush();
+            }
+            FacesContext.getCurrentInstance().responseComplete();
+            con.conexion().close();
+        } catch (IOException | SQLException | JRException ex) {
+            Logger.getLogger(Exportar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void reporteExperienciaEstudianteIndividual(Persona p) throws JRException, IOException {
          String relativePath = "";
         if (p.getFoto().equals("requerido/sin_foto_perfil.png")) {

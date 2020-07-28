@@ -311,11 +311,11 @@ public class ImagenPortadaController implements Serializable {
                         } catch (IOException e) {
                         }
                     } else {
-                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Los píxeles de la imagen no son los requeridos. - Tamaño permitido 1600 x 500", ""));
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Los píxeles de la imagen no son los requeridos. - Tamaño permitido 1300 x 500", ""));
                     }
                 } else {
                     this.setFile(null);
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Imagen muy pesada elija otro. Tamaño máximo: 4Mb", ""));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Imagen muy pesada elija otro. Tamaño máximo: 2Mb", ""));
                 }
             } else {
                 this.setFile(null);

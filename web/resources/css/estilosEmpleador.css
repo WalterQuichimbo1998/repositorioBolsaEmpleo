@@ -35,7 +35,7 @@ body{
 .logo{
     width: 420px;
     position: absolute;
-    margin-top: 10px;
+    margin-top: 14px;
     margin-left: 20px;
 }
 nav{
@@ -308,13 +308,15 @@ nav ul li{
 }
 .botones2:hover{
     background: #8cebce;
-    border:1px solid #454545;
+    border:1px solid #1b9bff;
 }
+
 .botones2:hover .txt_boton{
     text-shadow:1px 1px #000;
     transition: all .3s ease;
     background: #096bd4;
-    border-radius: 4px;
+    border-radius: 3px;
+
 }
 .fotoPerfil { 
     width: 100px;
@@ -351,13 +353,14 @@ margin: auto;
     font-size: 40px;
     background: #007bff;
     margin-top: 50px;
-
+    border-radius: 5px 5px 0px 0px;
 }
 .caja_form{
-    width: 86%;
+    width: 70%;
     margin: auto;
     background: #fafbfc;
     border:1px solid #57a3f4;
+    border-radius: 5px 5px;
 }
 .formulario{
     width: 90%;
@@ -752,7 +755,7 @@ margin: auto;
     background: #eee;
     border: none;
     margin-bottom: 100px;
-
+    border-radius: 0px 0px 5px 5px;
 }
 
 .ui-button {
@@ -1343,7 +1346,7 @@ margin: auto;
     background: #e25555;
     font-size: 16px !important;
     font-weight: normal;
-    color: #000;
+    color: #fff;
     border: none;    
     border-radius: 3px;
     outline: none;
@@ -1354,6 +1357,7 @@ margin: auto;
 }
 .b_2:hover{
     cursor: pointer;
+    color: #000;
 }
 .ss.ui-button{
     width: 160px;
@@ -1394,6 +1398,7 @@ margin: auto;
     display: inline-block;
     background: #e4e4e6;
     margin-bottom: 10px;
+    border-radius: 5px 5px;
     transition: all .3s ease;
 }
 .c_fechas2{
@@ -1403,6 +1408,7 @@ margin: auto;
     padding-bottom: 20px;
     display: inline-block;
     margin-bottom: 20px;
+    border-radius: 5px 5px;
     transition: all .3s ease;
 }
 .fecha .ui-inputfield{
@@ -1546,7 +1552,7 @@ margin: auto;
 
     }
     .caja_form{
-        width: 96%;
+        width: 92%;
     }
     .ppp{
         width: 96%;
@@ -1560,7 +1566,7 @@ margin: auto;
         margin-bottom: 50px;
     }
     .caja_form{
-        width: 100%;
+        width: 96%;
     }
      .formulario{
         width: 92%;

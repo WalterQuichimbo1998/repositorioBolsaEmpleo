@@ -16,24 +16,24 @@ import jsf.classes.util.JsfUtil;
 import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.PersonaFacade;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
+//import java.io.UnsupportedEncodingException;
+//import java.security.InvalidKeyException;
+//import java.security.MessageDigest;
+//import java.security.NoSuchAlgorithmException;
+//import java.util.Arrays;
+//import javax.crypto.BadPaddingException;
+//import javax.crypto.Cipher;
+//import javax.crypto.IllegalBlockSizeException;
+//import javax.crypto.NoSuchPaddingException;
+//import javax.crypto.SecretKey;
+//import javax.crypto.spec.SecretKeySpec;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
+import java.text.SimpleDateFormat;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -49,7 +49,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
-import org.apache.commons.codec.binary.Base64;
+//import org.apache.commons.codec.binary.Base64;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -595,7 +595,7 @@ public class PersonaController implements Serializable {
                 } else {
                     cc = false;
                     mensaje = "Correo electrónico o Cédula no registrado";
-                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correo electrónico o Cédula no registrado", ""));
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Correo electrónico o Cédula no registrado", ""));
                     tiempoLimpiar();
                 }
             } else {
@@ -610,8 +610,6 @@ public class PersonaController implements Serializable {
     public void buscarUser() {
         Usuario user = getFacade().buscarUser(per);
         if (user != null) {
-            mensaje = "Su clave de acceso a sido enviado a su correo electrónico";
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Su clave de acceso a sido enviado a su correo electrónico", ""));
             enviarCorreo(user.getClave());
             tiempoLimpiar();
         } else {
@@ -655,7 +653,7 @@ public class PersonaController implements Serializable {
 //    }
     public void enviarCorreo(String clave) {
         final String remitente = "empleoistl2020@gmail.com";
-        final String r_clave = "upqnawmrjfowxjyd";
+        final String r_clave = "ftiypahaipdkzryb";
         String receptor = correo.trim();
         Properties prop = new Properties();
         try {
@@ -674,7 +672,16 @@ public class PersonaController implements Serializable {
             Transport trans = session.getTransport("smtp");
             trans.connect(remitente, r_clave);
             trans.sendMessage(msg, msg.getAllRecipients());
+            if (trans.isConnected()) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Su clave de acceso a sido enviado a su correo electrónico", ""));
+                mensaje = "Su clave de acceso a sido enviado a su correo electrónico";
+            } else {
+                cc = false;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "No se pudo realizar el envió del correo electrónico", ""));
+                mensaje = "No se pudo realizar el envió del correo electrónico";
+            }
             trans.close();
+
         } catch (MessagingException e) {
             System.out.println("Error: " + e.getMessage());
         }

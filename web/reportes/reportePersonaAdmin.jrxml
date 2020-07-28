@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7f79a4ff-fe74-4cdc-a6dc-049ea79abc5a">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="639"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -823,7 +823,7 @@ persona.id_persona =$P{id};]]>
 				<text><![CDATA[Instrucción Formal]]></text>
 			</staticText>
 		</band>
-		<band height="187">
+		<band height="195">
 			<staticText>
 				<reportElement x="52" y="19" width="190" height="24" uuid="f7b746cc-a026-4a08-9f54-fc80d640998a"/>
 				<textElement>
@@ -924,16 +924,16 @@ persona.id_persona =$P{id};]]>
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="116">
+		<band height="118">
 			<staticText>
-				<reportElement x="51" y="18" width="190" height="24" uuid="01d36fd5-5f36-4e42-8a41-840f09f24549"/>
+				<reportElement x="51" y="23" width="190" height="24" uuid="01d36fd5-5f36-4e42-8a41-840f09f24549"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Capacitaciones]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement key="table 6" style="table 6" x="51" y="45" width="450" height="60" uuid="3a2ea085-55c0-4cd5-a19c-d543c18149c4"/>
+				<reportElement key="table 6" style="table 6" x="51" y="50" width="450" height="60" uuid="3a2ea085-55c0-4cd5-a19c-d543c18149c4"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="capacitacion" uuid="809abc90-9c95-47d3-b1ff-b86b91d7ccc0">
 						<datasetParameter name="id_persona">
@@ -1005,14 +1005,14 @@ persona.id_persona =$P{id};]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{fecha_inicio}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[($F{fecha_inicio}==null ? "":$F{fecha_inicio}+"")]]></textFieldExpression>
 							</textField>
 							<textField pattern="dd/MM/yyyy">
 								<reportElement x="157" y="70" width="100" height="25" uuid="08e7f873-4b65-4c09-aedb-8e72fbda0240"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{fecha_fin}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[($F{fecha_fin}==null ? "":$F{fecha_fin}+"")]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -1079,14 +1079,14 @@ persona.id_persona =$P{id};]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11"/>
 								</textElement>
-								<textFieldExpression><![CDATA[( $F{fecha_inicio}==null ? "" : $F{fecha_inicio}+"" )]]></textFieldExpression>
+								<textFieldExpression><![CDATA[( $F{fecha_inicio}==null ? "" : $F{fecha_inicio}+"")]]></textFieldExpression>
 							</textField>
 							<textField pattern="dd/MM/yyyy">
 								<reportElement x="144" y="40" width="140" height="40" uuid="88efa3cf-be87-4bbe-8455-50f31d785c17"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font fontName="Arial" size="11"/>
 								</textElement>
-								<textFieldExpression><![CDATA[( $F{fecha_fin}==null ? "" : $F{fecha_fin}+"" )]]></textFieldExpression>
+								<textFieldExpression><![CDATA[( $F{fecha_fin}==null ? "" : $F{fecha_fin}+"")]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

@@ -10,39 +10,20 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT * FROM experiencia_laboral 
- LEFT JOIN  hoja_vida_estudiante ON experiencia_laboral.id_hoja_vida_estudiante=hoja_vida_estudiante.id_hoja_vida_estudiante
- LEFT JOIN  persona ON hoja_vida_estudiante.id_persona = persona.id_persona
+		<![CDATA[SELECT * FROM baul_recomendaciones
+ LEFT JOIN  hoja_vida_estudiante ON baul_recomendaciones.id_hoja_vida_estudiante=hoja_vida_estudiante.id_hoja_vida_estudiante
+LEFT JOIN  persona ON hoja_vida_estudiante.id_persona = persona.id_persona
 LEFT JOIN  carrera ON persona.id_carrera = carrera.id_carrera
 LEFT JOIN  promocion ON persona.id_promocion = promocion.id_promocion
-LEFT JOIN  area_trabajo ON experiencia_laboral.id_area_trabajo = area_trabajo.id_area_trabajo
-WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDER BY experiencia_laboral.fecha_inicio DESC]]>
+WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDER BY persona.nombre ASC]]>
 	</queryString>
-	<field name="id_experiencia" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="id_area_trabajo" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="institucion" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="puesto" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="fecha_inicio" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="fecha_fin" class="java.sql.Date">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="actividades" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="trabaja_actualmente" class="java.lang.Integer">
+	<field name="id_baul_recomendaciones" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="id_hoja_vida_estudiante" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="recomendacion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="id_persona" class="java.lang.Integer">
@@ -120,9 +101,6 @@ WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDE
 	<field name="promocion" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="area_trabajo" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -133,7 +111,7 @@ WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDE
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="22" isBold="true"/>
 				</textElement>
-				<text><![CDATA[REPORTE DE EXPERIENCIA LABORAL DE LOS ESTUDIANTES]]></text>
+				<text><![CDATA[REPORTE DE RECOMENDACIONES DE LOS ESTUDIANTES]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="45" y="8" width="95" height="80" uuid="f4c97176-c65a-46ad-8638-56a29e584394"/>
@@ -165,7 +143,7 @@ WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDE
 				<text><![CDATA[CARRERA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="471" y="104" width="281" height="24" uuid="1bce907d-68fc-43b3-9b9b-0c11573d022c"/>
+				<reportElement x="471" y="104" width="314" height="24" uuid="1bce907d-68fc-43b3-9b9b-0c11573d022c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -182,99 +160,40 @@ WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDE
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="7" y="11" width="150" height="20" uuid="2d88c54a-ee50-46d9-9059-be08ffb73537"/>
+				<reportElement x="8" y="11" width="150" height="20" uuid="2d88c54a-ee50-46d9-9059-be08ffb73537"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTUDIANTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="314" y="11" width="142" height="20" uuid="a9c3a955-01e1-4948-bfea-6a654e07a094"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="true"/>
+				<reportElement x="277" y="11" width="231" height="20" uuid="0017d5a6-a456-4ee6-8ffd-9538914fb542"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Puesto de Trabajo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="459" y="11" width="157" height="20" uuid="38250139-2246-4d75-aa15-3ac88b212ce2"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Área de Trabajo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="719" y="0" width="82" height="39" uuid="dde33ddf-4e10-4f80-8298-09aa42dc74a8"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Trabaja Actualmente]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="618" y="11" width="100" height="20" uuid="98a5eecb-2589-44e4-8303-2d15d68f4fe5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha de Trabajo]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="158" y="11" width="155" height="20" uuid="b5027ee8-68f0-4bcd-aa07-253f80129e45"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Institución]]></text>
+				<text><![CDATA[Recomendación]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="66" splitType="Stretch">
+		<band height="43" splitType="Stretch">
 			<textField>
-				<reportElement x="7" y="0" width="150" height="60" uuid="394d90dd-5dfb-40f3-8f40-72e62024994b"/>
+				<reportElement x="8" y="0" width="250" height="40" uuid="394d90dd-5dfb-40f3-8f40-72e62024994b"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="314" y="0" width="142" height="60" uuid="bf9bac2d-c8a4-4f94-87d5-cd31d658b2ef"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="276" y="0" width="520" height="40" uuid="e65aafe4-bb5e-4e03-924a-dc1d20c52ad4"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($F{puesto}==null ? "":$F{puesto}+"")]]></textFieldExpression>
+				<textFieldExpression><![CDATA[( $F{recomendacion}==null ? "" : $F{recomendacion}+"" )]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="459" y="0" width="157" height="60" uuid="c02f04cd-1e6c-41ee-8bf5-ec10cf6f13fa"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[( $F{area_trabajo}==null ? "" : $F{area_trabajo}+"")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="719" y="0" width="82" height="59" forecolor="#009900" uuid="dfd6424b-2e2a-45c9-826b-4ece7a486800"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{trabaja_actualmente}==null ? "":$F{trabaja_actualmente}.intValue()==1 ? "SI":"No")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="158" y="0" width="155" height="60" uuid="f3f2951f-9ebe-4528-8d97-ecbacd23269c"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{institucion}==null ? "":$F{institucion}+"")]]></textFieldExpression>
-			</textField>
-			<line>
-				<reportElement x="6" y="59" width="790" height="2" uuid="599b5253-dc14-4763-88f8-f9b9ccf7c136"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="618" y="0" width="100" height="59" uuid="aa584b26-cd5a-4181-8e76-8e9310bded0a"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{fecha_inicio}==null ? "":$F{fecha_inicio}+"")+($F{fecha_fin}==null ? "":"\n"+$F{fecha_fin})]]></textFieldExpression>
-			</textField>
+			<rectangle>
+				<reportElement x="265" y="18" width="5" height="5" forecolor="#00CC33" backcolor="#00CC33" uuid="c662be3b-e75a-49bd-850a-2c2b512180a3"/>
+			</rectangle>
 		</band>
 	</detail>
 	<columnFooter>
@@ -295,21 +214,7 @@ WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDE
 		<band splitType="Stretch"/>
 	</pageFooter>
 	<lastPageFooter>
-		<band height="25">
-			<line>
-				<reportElement x="320" y="4" width="176" height="1" uuid="4aede667-2ff5-42ad-8aad-c03f2af0c181"/>
-				<graphicElement>
-					<pen lineWidth="0.25"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement x="276" y="5" width="256" height="20" uuid="b40e80fe-adab-4fee-bd11-e123da568f04"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="11"/>
-				</textElement>
-				<text><![CDATA[Rector del Instituto Superior Tecnológico Limón]]></text>
-			</staticText>
-		</band>
+		<band height="25"/>
 	</lastPageFooter>
 	<summary>
 		<band splitType="Stretch"/>

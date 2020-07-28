@@ -63,6 +63,8 @@ public class HojaVidaEstudiante implements Serializable {
     private List<PreferenciaLaboral> preferenciaLaboralList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHojaVidaEstudiante")
     private List<ExperienciaLaboral> experienciaLaboralList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHojaVidaEstudiante")
+    private List<BaulRecomendaciones> baulRecomendacionesList;
 
     public HojaVidaEstudiante() {
     }
@@ -158,6 +160,15 @@ public class HojaVidaEstudiante implements Serializable {
     public void setExperienciaLaboralList(List<ExperienciaLaboral> experienciaLaboralList) {
         this.experienciaLaboralList = experienciaLaboralList;
     }
+
+    public List<BaulRecomendaciones> getBaulRecomendacionesList() {
+        return baulRecomendacionesList;
+    }
+
+    public void setBaulRecomendacionesList(List<BaulRecomendaciones> baulRecomendacionesList) {
+        this.baulRecomendacionesList = baulRecomendacionesList;
+    }
+    
 
     @Override
     public int hashCode() {

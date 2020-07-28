@@ -120,6 +120,7 @@ public class Persona implements Serializable {
     @JoinColumn(name = "id_promocion", referencedColumnName = "id_promocion")
     @ManyToOne
     private Promocion idPromocion;
+   
     
     @JoinColumn(name = "id_parroquia", referencedColumnName = "id_parroquia")
     @ManyToOne
@@ -322,6 +323,7 @@ public class Persona implements Serializable {
     public void setIdPromocion(Promocion idPromocion) {
         this.idPromocion = idPromocion;
     }
+
     
     public Parroquia getIdParroquia() {
         return idParroquia;

@@ -61,13 +61,7 @@
                                             background-size: cover;"     
                                             name="#{item.idPersona.foto}"/>
                         </p:column>
-                        <p:column sortBy="#{item.idHojaVidaEstudiante}" filterBy="#{item.idHojaVidaEstudiante}" filterMatchMode="contains"  
-                                  style="width: 70px">
-                            <f:facet name="header">
-                                <h:outputText value="Código"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idHojaVidaEstudiante}" style="font-size: 16px !important"/>
-                        </p:column>
+                       
                         <p:column sortBy="#{item.idPersona.nombre}" filterBy="#{item.idPersona.nombre}" filterMatchMode="contains" >
                             <f:facet name="header">
                                 <h:outputText value="Estudiante"/>
@@ -145,6 +139,40 @@
                         <p:commandButton styleClass="crear" ajax="false" value="Descargar Reporte" icon="ui-icon-document"
                                          actionListener="#{hojaVidaEstudianteController.descargarReporte()}"/>
                     </div>
+                    <div class="c_fechas" style="margin-top: 10px;" >
+                        <h1 style="width: 100%;margin: auto;text-align: center;font-family: Arial;
+                            font-size: 20px;color:#304860;">Descargar Reporte de Recomendaciones de los Estudiantes</h1>
+                        <br/>
+                        <p style="width: 100%;margin:auto;text-align: center;font-family: Arial;font-size: 16px;color: #454545;">Seleccione las opciones de su interés</p>
+                        <br/>
+                        <h:panelGrid columns="1" style="width: 90%; margin: auto; ">
+                            <h:panelGroup style="display: inline-block; text-align: center;width: 100%;"> 
+                                <div class="botones3">
+                                    <h3 class="texto" style="width: 94%;text-align: left;color:#445A6F;margin: auto;">Carrera</h3>
+                                    <h:selectOneMenu id="idCarrera1" class="txtC" value="#{hojaVidaEstudianteController.carrera2}">                   
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"
+                                                       var="idCarreraItem"
+                                                       itemValue="#{idCarreraItem}"/>
+
+                                    </h:selectOneMenu>
+                                </div>
+                                 <div class="botones3">
+                                    <h3 class="texto" style="width: 94%;text-align: left;color:#445A6F;margin: auto;">Promoción</h3>
+                                    <h:selectOneMenu id="idPromocion1" class="txtC" value="#{hojaVidaEstudianteController.promocion2}">                   
+                                        <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                                        <f:selectItems value="#{promocionController.itemsAvailableSelectOne}"
+                                                       var="idPromocionItem"
+                                                       itemValue="#{idPromocionItem}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                        <br/>
+                        <br/>
+                        <p:commandButton styleClass="crear" ajax="false" value="Descargar Reporte" icon="ui-icon-document"
+                                         actionListener="#{hojaVidaEstudianteController.descargarReporteReco()}"/>
+                       </div>
                 </p:panel>
             </h:form>
         </ui:define>

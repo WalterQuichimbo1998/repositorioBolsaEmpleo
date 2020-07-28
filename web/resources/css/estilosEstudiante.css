@@ -33,7 +33,7 @@ body{
 .logo{
     width: 420px;
     position: absolute;
-    margin-top: 10px;
+    margin-top: 14px;
     margin-left: 20px;
 }
 nav{
@@ -294,14 +294,14 @@ nav ul li{
 }
 .botones2:hover{
     background: #8cebce;
-    border:1px solid #454545;
+    border:1px solid #1b9bff;
 }
 
 .botones2:hover .txt_boton{
     text-shadow:1px 1px #000;
     transition: all .3s ease;
     background: #096bd4;
-    border-radius: 4px;
+    border-radius: 3px;
 
 }
 .fotoPerfil { 
@@ -344,13 +344,14 @@ margin: auto;
     font-size: 40px;
     background: #57a3f4;
     margin-top: 50px;
-
+    border-radius: 5px 5px 0px 0px;
 }
 .caja_form{
-    width: 86%;
+    width: 70%;
     margin: auto;
     background: #fafbfc;
     border:1px solid #57a3f4;
+    border-radius: 5px 5px;
 }
 .formulario{
     width: 90%;
@@ -742,7 +743,7 @@ margin: auto;
     background: #eee;
     border: none;
     margin-bottom: 100px;
-
+    border-radius: 0px 0px 5px 5px;
 }
 .ui-inputfield{
     font-size: 14px !important;
@@ -916,8 +917,16 @@ margin: auto;
 
 }
 .ofertas.ui-datatable tbody tr {
-    background: white;
+    background: none;
     border: white;
+    height: 0px;
+    margin: 0;
+    padding: 0;
+
+}
+.reco.ui-datatable tbody tr {
+    background: #f6f7f8;
+    border: #f6f7f8;
     height: 0px;
     margin: 0;
     padding: 0;
@@ -1028,7 +1037,7 @@ margin: auto;
     background: #e25555;
     font-size: 16px !important;
     font-weight: normal;
-    color: #000;
+    color: #fff;
     border: none;    
     border-radius: 3px;
     outline: none;
@@ -1039,6 +1048,7 @@ margin: auto;
 }
 .b_2:hover{
     cursor: pointer;
+    color: #000;
 }
 .ss.ui-button{
     width: 160px;
@@ -1315,8 +1325,8 @@ margin: auto;
 #cajaCurriculo{
     width: 90%; 
     margin: auto;
-    border:1px solid #007bff;
     background: #f2f2f2;
+    border-radius: 5px 5px;
 }
 
 .caja_p{
@@ -1354,6 +1364,7 @@ margin: auto;
     display: inline-block;
     background: #e4e4e6;
     margin-bottom: 20px;
+    border-radius: 5px 5px;
 }
 .c_fechas2{
     width: 97%;
@@ -1362,7 +1373,7 @@ margin: auto;
     padding-bottom: 20px;
     display: inline-block;
     margin-bottom: 20px;
-    
+    border-radius: 5px 5px;
 }
 .fecha .ui-inputfield{
     width:90%;
@@ -1470,6 +1481,51 @@ margin: auto;
     width:90%;
     margin: auto;
 }
+.caja_reco{
+    width:90%;
+    margin:auto;
+    border:1px solid #eee;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    padding: 5px 5px;
+}
+.caja_reco:hover{
+    border:1px solid #039BE5;
+    background: #fafbfb;
+}
+.txt_r{
+    width:100%;
+    margin: auto;
+    font-family: Arial;
+    font-size: 16px !important;
+    font-weight: normal;
+    margin-bottom: 0px;
+    margin-bottom: 5px;
+    margin-top:10px;
+    
+}
+.txt_editar{
+    text-decoration: none;
+    color:#088eb5 !important;
+    margin: 5px;
+    outline: none;
+    transition: all .3s ease;
+}
+.txt_editar:hover{
+    font-size: 14px !important;
+    color:#096bd4;
+}
+.txt_eliminar{
+    text-decoration: none;
+    color:#e36060 !important;
+    margin: 5px;
+    outline: none;
+    transition: all .3s ease;
+}
+.txt_eliminar:hover{
+    font-size: 14px !important;
+    color:#e25555;
+}
 @media only screen and (min-width: 1440px){ 
     .contenedor{
         width: 1366px;
@@ -1491,7 +1547,7 @@ margin: auto;
         width: 94%; 
     }
     .caja_form{
-        width: 96%;
+        width: 92%;
     }
 }
 @media only screen and (max-width: 1024px){ 
@@ -1503,7 +1559,7 @@ margin: auto;
         width: 100%;
     }
     .caja_form{
-        width: 100%;
+        width: 96%;
     }
     #formOfertas{
         width: 98%; 

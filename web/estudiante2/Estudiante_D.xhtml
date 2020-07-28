@@ -21,10 +21,12 @@
     <h:body>
         <p:growl id="growl" life="3000" />  
         <div class="contenedor">
-          <div class="cont">
+            <div class="cont">
                 <h:form>
                     <div class="cont">
-                        <img src="#{request.contextPath}/resources/img/logo_sistema.jpg"  class="logo"/>
+                        <h:commandLink action="/estudiante2/Estudiante_D?faces-redirect=true">
+                            <img src="#{request.contextPath}/resources/img/logo_sistema.jpg"  class="logo"/>
+                        </h:commandLink>
                         <div class="menu_bar">
                             <p:commandLink class="btn-menu" title="Menu" >
                                 <img style="width: 50px;object-fit:cover;object-position:center center;margin-top: 15px"
@@ -56,67 +58,67 @@
                 </h:form>
 
             </div>
-                <div id="caja2">
+            <div id="caja2">
 
-                    <ui:insert name="caja">                     
+                <ui:insert name="caja">                     
 
-                        <h:form>
-                            <h:panelGrid columns="2" style="margin: auto; ">
-                                <h:panelGroup style="display: inline-block; text-align: center; "> 
-                               
-                                        <div class="botones2" style="padding-top: 31px;">
-                                            <h:commandLink class="botones"  action="/estudiante2/verPerfilPersona_D?faces-redirect=true" >
-                                                 <p:graphicImage class="fotoPerfil" name="#{personaController.selected.foto}"/>
-                                                </h:commandLink>
-                                            <div class="txt_boton">Mi Perfil</div>
-                                        </div>  
-                                   
-                                    <div style="width: 100%; height: auto; text-align: center; margin-top: 20px; margin-bottom: 20px;
-                                         font-family: Arial; font-size: 22px; color: #29a0c7">Solicite al Administrador la habilitación de su perfil para poder acceder a las demás funciones.
-                                    </div>
+                    <h:form>
+                        <h:panelGrid columns="2" style="margin: auto; ">
+                            <h:panelGroup style="display: inline-block; text-align: center; "> 
 
-                                    <div class="botones2">
-                                        <h:commandButton class="botones" image="../resources/img/instruccion.png" disabled="true" readonly="true" 
-                                                         style="width: 105px;height: 105px"/> 
-                                        <div class="txt_boton">Instrución Fromal</div>
-                                    </div>
-                                    <div class="botones2">
-                                        <h:commandButton class="botones"  image="../resources/img/oficio.png" disabled="true" readonly="true"   
-                                                         style="width: 105px;height: 105px"/> 
-                                        <div class="txt_boton">Oficios</div>
-                                    </div>
-                                    <div class="botones2">
-                                        <h:commandButton class="botones"  image="../resources/img/idioma.png" disabled="true" readonly="true"  
-                                                         style="width: 105px;height: 105px"/> 
-                                        <div class="txt_boton">Idiomas</div>
-                                    </div>
-                                    <div class="botones2">
-                                        <h:commandButton class="botones" image="../resources/img/capacitacion.png" disabled="true" readonly="true" 
-                                                         style="width: 105px;height: 105px"/> 
-                                        <div class="txt_boton">Capacitaciones</div>
-                                    </div>
-                                    <div class="botones2">
-                                        <h:commandButton class="botones" image="../resources/img/logro.png" disabled="true" readonly="true"   
-                                                         style="width: 105px;height: 105px"/> 
-                                        <div class="txt_boton">Logros Personales</div>
-                                    </div>
-                                    <div class="botones2">
-                                        <h:commandButton class="botones" image="../resources/img/experiencia.png" disabled="true" readonly="true" 
-                                                         style="width: 105px;height: 105px"/> 
-                                        <div class="txt_boton">Experiencia Laboral</div>
-                                    </div>
-                                    <div class="botones2">
-                                        <h:commandButton class="botones" image="../resources/img/ubicacion.png" disabled="true" readonly="true" 
-                                                         style="width: 105px;height: 105px"/> 
-                                        <div class="txt_boton">Preferencia Laboral</div>
-                                    </div>
+                                <div class="botones2" style="padding-top: 31px;">
+                                    <h:commandLink class="botones"  action="/estudiante2/verPerfilPersona_D?faces-redirect=true" >
+                                        <p:graphicImage class="fotoPerfil" name="#{personaController.selected.foto}"/>
+                                    </h:commandLink>
+                                    <div class="txt_boton">Mi Perfil</div>
+                                </div>  
 
-                                    <div class="botones2">
-                                        <h:commandButton class="botones" image="../resources/img/estudiante.png" disabled="true" readonly="true" 
-                                                         style="width: 105px;height: 105px"/> 
-                                        <div class="txt_boton">Referencias Personales</div>
-                                    </div>
-                                    <div class="botones2">
+                                <div style="width: 100%; height: auto; text-align: center; margin-top: 20px; margin-bottom: 20px;
+                                     font-family: Arial; font-size: 22px; color: #29a0c7">Solicite al Administrador la habilitación de su perfil para poder acceder a las demás funciones.
+                                </div>
+
+                                <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/instruccion.png" disabled="true" readonly="true" 
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Instrución Fromal</div>
+                                </div>
+                                <div class="botones2">
+                                    <h:commandButton class="botones"  image="../resources/img/oficio.png" disabled="true" readonly="true"   
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Oficios</div>
+                                </div>
+                                <div class="botones2">
+                                    <h:commandButton class="botones"  image="../resources/img/idioma.png" disabled="true" readonly="true"  
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Idiomas</div>
+                                </div>
+                                <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/capacitacion.png" disabled="true" readonly="true" 
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Capacitaciones</div>
+                                </div>
+                                <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/logro.png" disabled="true" readonly="true"   
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Logros Personales</div>
+                                </div>
+                                <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/experiencia.png" disabled="true" readonly="true" 
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Experiencia Laboral</div>
+                                </div>
+                                <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/ubicacion.png" disabled="true" readonly="true" 
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Preferencia Laboral</div>
+                                </div>
+
+                                <div class="botones2">
+                                    <h:commandButton class="botones" image="../resources/img/estudiante.png" disabled="true" readonly="true" 
+                                                     style="width: 105px;height: 105px"/> 
+                                    <div class="txt_boton">Referencias Personales</div>
+                                </div>
+                                <div class="botones2">
                                     <h:commandButton class="botones" image="../resources/img/maleta3.png" disabled="true" readonly="true"  
                                                      style="width: 105px;height: 105px"/> 
                                     <div class="txt_boton">Ofertas Laborales</div>
@@ -128,14 +130,14 @@
                                 </div>
 
 
-                                </h:panelGroup>
-                            </h:panelGrid>
-                        </h:form>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </h:form>
 
-                    </ui:insert> 
+                </ui:insert> 
 
-                </div>
-        <span class="ir-arriba"><img src="#{request.contextPath}/resources/img/flecha_arriba.png" style="width: 16px;margin: auto"/></span> 
+            </div>
+            <span class="ir-arriba"><img src="#{request.contextPath}/resources/img/flecha_arriba.png" style="width: 16px;margin: auto"/></span> 
             <footer id="head3">        
                 <h3 class="texto_f1">
                     COPYRIGHT © 2020 <strong>|</strong> Decide ser un Profesional de éxito</h3>
@@ -143,8 +145,8 @@
                     <strong>Estudiante </strong>#{accesoBean.usuarioLogueado()}</h3>
             </footer> 
         </div>
-    
-         <script type="text/javascript">
+
+        <script type="text/javascript">
             Waves.init();
             Waves.attach('.btn3', ['waves-button']);
             Waves.attach('.botones2', ['waves-button']);

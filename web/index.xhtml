@@ -25,7 +25,9 @@
         <div class="contenedor">
             <h:form>
                 <div class="cont">
-                    <img src="resources/img/logo_sistema.jpg"  class="logo"/>
+                    <h:commandLink action="index?faces-redirect=true">
+                        <img src="resources/img/logo_sistema.jpg"  class="logo"/>
+                    </h:commandLink>
                     <div class="menu_bar">
                         <p:commandLink class="btn-menu" title="Iniciar Sesión" >
                             <img style="width: 50px;object-fit:cover;object-position:center center;vertical-align: middle"
@@ -34,7 +36,7 @@
                     </div>
                     <nav>
                         <ul>
-                            <ui:insert name="link">
+                            <ui:insert name="link"> 
                                 <li>
                                     <p:commandButton value="Inicio" class="btn2 bbt"  action="index?faces-redirect=true"/>
                                 </li>
@@ -44,7 +46,6 @@
                                 <li>
                                     <p:commandButton value="Contacto" class="btn2" action="contacto?faces-redirect=true" />
                                 </li>
-
                                 <li id="ingresar0">
                                     <p:commandButton  value="Iniciar Sesión" class="btn2" oncomplete="PF('login_estudiante').show()" update=":datos"/>
                                 </li>  
@@ -53,9 +54,7 @@
                                         <img style="width: 50px;object-fit:cover;object-position:center center;vertical-align: middle"
                                              src="#{request.contextPath}/resources/img/internet.png" ></img>
                                     </p:commandLink>
-
                                 </li>
-
                             </ui:insert>
                         </ul>
                     </nav>
@@ -105,7 +104,6 @@
                     </div>
                     <br/>
                     <br/>
-
                     <div class="imagenes">
                         <h:panelGrid columns="2" style="margin: auto; ">
                             <h:panelGroup style="display: inline-block; text-align: center;"> 
@@ -146,8 +144,6 @@
             </footer>
         </div>
         <span class="ir-arriba"><img src="#{request.contextPath}/resources/img/flecha_arriba.png" style="width: 16px;margin: auto"/></span> 
-
-
         <script type="text/javascript">
             Waves.init();
             Waves.attach('.btn3', ['waves-button']);
@@ -155,7 +151,7 @@
         </script> 
         <script src="resources/js/sheetslider.min.js"></script>
     </h:body>
-    <ui:include src="login.xhtml"/>
+    <ui:include src="login.xhtml"/>  
 </html>
 
 

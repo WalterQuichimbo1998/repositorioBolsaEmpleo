@@ -80,7 +80,7 @@ body{
 .logo{
     width: 420px;
     position: absolute;
-    margin-top: 10px;
+    margin-top: 14px;
     margin-left: 20px;
 }
 nav{
@@ -330,17 +330,17 @@ nav ul li{
 
 }
 .botones2:hover{
-
     background: #8cebce;
-    border:1px solid #454545;
+    border:1px solid #1b9bff;
 }
+
 .botones2:hover .txt_boton{
     text-shadow:1px 1px #000;
     transition: all .3s ease;
     background: #096bd4;
-    border-radius: 4px;
-}
+    border-radius: 3px;
 
+}
 
 .titulo_p{
     width: 100%; 
@@ -354,6 +354,7 @@ nav ul li{
     font-size: 40px;
     background: #007bff;
     margin-top: 30px;
+    border-radius: 5px 5px 0px 0px;
 }
 #head3{
     width: 100%;
@@ -404,6 +405,7 @@ nav ul li{
     background: #eee;
     border: none;
     margin-bottom: 100px;
+    border-radius: 0px 0px 5px 5px;
 }
 .ui-inputfield{
     font-size: 14px !important;
@@ -696,10 +698,11 @@ background: #E3F2FD;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
 }
 .caja_form{
-    width: 86%;
+    width: 70%;
     margin: auto;
     background: #fafbfc;
     border:1px solid #57a3f4;
+    border-radius: 5px 5px;
 }
 .c_fechas{
     width: 96%;
@@ -709,6 +712,7 @@ background: #E3F2FD;
     display: inline-block;
     background: #e4e4e6;
     margin-bottom: 20px;
+    border-radius: 5px 5px;
 }
 .fecha .ui-inputfield{
     width:90%;
@@ -1003,7 +1007,7 @@ margin: auto;
         width: 96%;
     }  
     .caja_form{
-        width: 96%;
+        width: 92%;
     }
 }
 
@@ -1018,7 +1022,7 @@ margin: auto;
         width: 94%;
     }
     .caja_form{
-        width: 100%;
+        width: 96%;
     }
     #img_excel{
         width: 100%;
@@ -1038,6 +1042,10 @@ margin: auto;
     }
  .botones3{
         width:90%;
+        margin: auto;
+    }
+    .info2{
+        width: 90%;
         margin: auto;
     }
 }
