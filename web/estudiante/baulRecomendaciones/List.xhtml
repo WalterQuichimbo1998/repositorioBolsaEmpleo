@@ -20,7 +20,7 @@
                         <p:outputLabel style="color:#454545;width: 100%;font-size: 20px !important;font-weight: bold;" value="Carrera: "/>
                         <p:outputLabel style="color:#086A87;width: 100%;font-size: 19px !important;margin-right: 20px;" value="#{personaController.selected.idCarrera.carrera}"/>
                         <p:outputLabel style="color:#454545;width: 100%;font-size: 20px !important;font-weight: bold;" value="Promoción: "/>
-                        <p:outputLabel style="color:#086A87;width: 100%;font-size: 17px !important;" value="#{personaController.selected.idPromocion.promocion}"/>
+                        <p:outputLabel style="color:#086A87;width: 100%;font-size: 19px !important;" value="#{personaController.selected.idPromocion.promocion}"/>
                         <br/> 
                         <br/> 
                         <p:outputLabel style="color:#454545;width: 100%;font-size: 19px !important;" value="Mis Recomendaciones"/>
@@ -55,8 +55,8 @@
                             <br/>
                             <p:outputLabel rendered="#{baulRecomendacionesController.numReco() == true}" style="font-size: 13px !important;color:#f79a9a;font-weight: normal;" value="(Máximo 200 carácteres)"/>
                             <br/>
-                            <p:inputTextarea rendered="#{baulRecomendacionesController.numReco() == true}" maxlength="200" rows="3" autoResize="false" value="#{baulRecomendacionesController.texto}"
-                                             style="font-family: Arial;font-size: 15px !important;resize: none;width: 80%;" required="true" requiredMessage="Escriba una recomendación"/>
+                            <p:inputTextarea rendered="#{baulRecomendacionesController.numReco() == true}" maxlength="200" rows="2" autoResize="false" value="#{baulRecomendacionesController.texto}"
+                                             style="font-family: Arial;font-size: 15px !important;resize: none;width: 80%;text-align: center;padding-top: 10px;" required="true" requiredMessage="Escriba una recomendación"/>
                             <br/> 
                             <p:commandButton id="d4" rendered="#{baulRecomendacionesController.numReco() == true}" actionListener="#{baulRecomendacionesController.crearR()}" icon="ui-icon-plus" styleClass="crear" 
                                              value="Guardar" update=":BaulRecomendacionesListForm:datalist,:growl"> 

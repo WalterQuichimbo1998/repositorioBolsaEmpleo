@@ -51,6 +51,12 @@
                             </f:facet>
                             <h:outputText value="#{item.idTipoEvento.evento}"/>
                         </p:column>
+                         <p:column sortBy="#{item.idAreaEstudio.areaEstudio}">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCapacitacionTitle_idAreaEstudio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idAreaEstudio.areaEstudio}"/>
+                        </p:column>
                         <p:column sortBy="#{item.fechaInicio}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCapacitacionTitle_fechaInicio}"/>
@@ -59,7 +65,7 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
-                        <p:column sortBy="#{item.fechaFin}">
+                        <p:column sortBy="#{item.fechaFin}" class="columna">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCapacitacionTitle_fechaFin}"/>
                             </f:facet>
@@ -67,18 +73,13 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
-                        <p:column sortBy="#{item.dias}">
+                        <p:column sortBy="#{item.dias}" class="columna">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCapacitacionTitle_dias}"/>
                             </f:facet>
                             <h:outputText value="#{item.dias}"/>
                         </p:column>
-                        <p:column sortBy="#{item.idAreaEstudio.areaEstudio}">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCapacitacionTitle_idAreaEstudio}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idAreaEstudio.areaEstudio}"/>
-                        </p:column>
+                       
                      
                         <p:column sortBy="#{item.idHorasCapacitaciones.horasCapacitaciones}">
                             <f:facet name="header">

@@ -147,12 +147,12 @@
                                 <p:column style="background:white; border:1px solid white" headerText="Horas de capacitación">
                                     <h:outputText rendered="#{item.idHorasCapacitaciones!=null}" value="#{item.idHorasCapacitaciones.horasCapacitaciones} Horas" style="font-size: 17px"/>
                                 </p:column>      
-                                <p:column style="background:white; border:1px solid white" headerText="Fecha de inicio">
+                                <p:column style="background:white; border:1px solid white" headerText="Fecha de inicio" class="columna">
                                     <h:outputText value="#{item.fechaInicio}" style="font-size: 17px;">
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:outputText>
                                 </p:column>      
-                                <p:column style="background:white; border:1px solid white" headerText="Fecha de finalización">
+                                <p:column style="background:white; border:1px solid white" headerText="Fecha de finalización" class="columna">
                                     <h:outputText value="#{item.fechaFin}" style="font-size: 17px;">
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:outputText>
@@ -181,7 +181,7 @@
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:outputText>
                                 </p:column>      
-                                <p:column style="background:white; border:1px solid white" headerText="Fecha de Fin">
+                                <p:column style="background:white; border:1px solid white" headerText="Fecha de Fin" class="columna">
                                     <h:outputText value="#{item.fechaFin}" style="font-size: 17px;">
                                         <f:convertDateTime pattern="dd/MM/yyyy" />
                                     </h:outputText>

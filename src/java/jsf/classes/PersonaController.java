@@ -652,13 +652,14 @@ public class PersonaController implements Serializable {
 //        return descencri;
 //    }
     public void enviarCorreo(String clave) {
-        final String remitente = "empleoistl2020@gmail.com";
-        final String r_clave = "ftiypahaipdkzryb";
+        final String remitente = "tecnologicolimon@gmail.com";
+        //Aqui se hizo uso de una contraseña de aplicación generada por Gmail
+        final String r_clave = "btidhxnmlqbkxdbs";
         String receptor = correo.trim();
         Properties prop = new Properties();
         try {
             prop.put("mail.smtp.host", "smtp.gmail.com");
-            prop.put("mail.from", "empleoistl2020@gmail.com");
+            prop.put("mail.from", remitente);
             prop.put("mail.smtp.starttls.enable", "true");
             prop.put("mail.smtp.port", "587");
             prop.put("mail.smtp.auth", "true");

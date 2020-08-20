@@ -1566,7 +1566,6 @@ margin: auto;
     }
     #cajaCurriculo{
         width: 100%; 
-
     }
     .formulario{
         width: 92%;
@@ -1580,6 +1579,9 @@ margin: auto;
     .caja_postulacion{
     width:100%;
     margin: auto;
+}
+.columna{
+    display: none;
 }
 
 }

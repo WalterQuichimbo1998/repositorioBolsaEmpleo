@@ -195,58 +195,14 @@ nav ul li{
     }
     
 }
-
-#slider_main{
-    width: 90%;
-    height: auto;
-    margin: auto;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 40px;
-}
-
-
-
-/* .next.ui-button{
-    background: #eee; 
-    font-size: 16px !important; 
-    border-radius: 3px;
-    border:none;
-    box-shadow: none;
-    text-shadow:none;
-    outline: none;
-    margin-right: 5px;  
-    margin-top: 4px; 
-    margin-bottom: 5px;
-    width: 60px;
-    transition: all .3s ease; 
-}
-.next:hover{
-    color: white;
-    background: #42A5F5;
-    
-}*/
- .prev.ui-button{
-    background: #eee; 
-    font-size: 16px !important; 
-    border-radius: 3px;
-    border:none;
-    box-shadow: none;
-    text-shadow:none;
-    outline: none;
-    margin-right: 5px;  
-    margin-top: 4px; 
-    margin-bottom: 5px;
-    width: 80px;  
-    transition: all .5s ease; 
-    display: inline-block;
-}
-.prev:hover{ 
-    color: white;
-    background: #007bff;
-    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.46);
-    transition: all .3s ease;
-    
+.titulo{
+    margin: 0;
+    font-family: Arial;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #039be5;
 }
 .direccion{
     font-size: 20px;
@@ -332,8 +288,10 @@ nav ul li{
     object-fit:cover; 
     object-position:center center;
     box-shadow: 0px 2px 2px #454545;
-    
-
+}
+.img_portada:hover{
+    width: 99%;
+    height: 178px;
 }
 .texto_2{
     text-align: center;
@@ -697,6 +655,10 @@ nav ul li{
     .caja_central{
         width: 99%;
     }
+    .carousel{
+        padding-left: 6px;
+        padding-right: 6px;
+    }
     
     .listaOfertas.ui-datatable{
         width: 96%;
@@ -714,8 +676,9 @@ nav ul li{
     }
 } 
 @media only screen and (max-width: 1024px){ 
-    #slider_main{
-        margin-top: 20px;
+    .carousel{
+        padding-left: 4px; 
+        padding-right: 4px;
     }
     .texto{
     width: 96%;
@@ -738,6 +701,10 @@ nav ul li{
     .img_portada{
         height: auto;
     }
+    .img_portada:hover{
+    width: 99%;
+     height: auto;
+}
     .caja_oferta1{
         width: 99%;
     }
@@ -750,8 +717,12 @@ nav ul li{
     
 }
 @media only screen and (max-width: 768px){ 
-    #slider_main{
-        margin-top: 10px;
+    .carousel{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .titulo{
+        font-size: 32px;
     }
     .texto{
     width: 94%;

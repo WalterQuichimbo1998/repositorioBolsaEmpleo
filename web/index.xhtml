@@ -4,13 +4,15 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      lang="es">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      lang="es"> 
     <h:head>
         <title>Sistema de Seguimiento a Egresados y Graduados - ISTL</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
         <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/logo.png"/> 
         <link rel="stylesheet" type="text/css" href="ie7-old.css" />
+        <h:outputStylesheet name="css/sheetslider.min.css"/>
         <h:outputStylesheet name="css/jsfcrud.css"/>
         <h:outputStylesheet name="css/estilosPrincipal.css"/>
         <h:outputStylesheet name="css/estilosLogin.css"/>
@@ -18,7 +20,7 @@
         <h:outputScript library="js" name="jsfcrud.js"/>
         <h:outputScript library="js" name="menu_1.js"/>
         <h:outputScript library="js" name="waves.js"/>
-        <h:outputStylesheet name="css/sheetslider.min.css"/>
+        <f:event type="preRenderView" listener="#{accesoBean.isLogged}"/>
     </h:head>
     <h:body> 
         <p:growl id="growl" life="3000"/>   
@@ -62,28 +64,33 @@
             </h:form>
             <div class="caja_central" >
                 <ui:insert name="caja">
-                    <div id="slider_main">
-                        <p:imageSwitch rendered="#{imagenPortadaController.items.size()!=0}" effect="fade" widgetVar="switcher" id="manuelSwitcher"
-                                           slideshowAuto="true" style="width: 100%;height:auto;margin:0;padding: 0; margin:auto;" speed="1000" slideshowSpeed="6000">
-                                <ui:repeat value="#{imagenPortadaController.items}" var="image" id="manuelSwitcherImages">
-                                     <p:graphicImage style="width: 100%;height:auto;margin: auto;border-radius: 6px;" name="portada/#{image.imagen}"/>
+                    <br/>
+                    <br/>
+                    <h:form rendered="#{imagenPortadaController.items.size()!=0}">
+                        <div id="carousel1" class="carousel slide" data-ride="carousel" style="border-radius:6px;">
+                            <ol class="carousel-indicators">
+                                <ui:repeat value="#{imagenPortadaController.items}" var="item">
+                                    <li data-target="#carousel1" data-slide-to="0" class="#{imagenPortadaController.imagenLista(item.idImagen)== true?'active':''}"></li>
                                 </ui:repeat>
-                            </p:imageSwitch>
-                        <h:form rendered="#{imagenPortadaController.items.size()!=1}" 
-                                style="width: 100%;margin: auto;">
-                            <center>
-                                 <p:commandButton type="button" onclick="PF('switcher').previous();"
-                                             icon="ui-icon-seek-prev" id="prev" styleClass="prev"/>
-                            <p:commandButton type="button" onclick="PF('switcher').next();"
-                                             icon="ui-icon-seek-next" id="next" styleClass="prev"/>    
-                            </center>                            
-                        </h:form>     
-                    </div>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <ui:repeat value="#{imagenPortadaController.items}" var="item">
+                                    <div class="#{imagenPortadaController.imagenLista(item.idImagen)== true?'item active':'item'}" style="border-radius:6px;"> 
+                                        <img src="#{request.contextPath}/resources/portada/#{item.imagen}" alt="#{item.imagen}" style="height: auto;border-radius:6px;"/>
+                                    </div>   
+                                </ui:repeat>
+                            </div>
+                            <a class="left carousel-control" href="#carousel1" role="button" data-slide="prev" style="background: none;opacity: none;">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"><img class="img_boton" src="#{request.contextPath}/resources/img/flecha_izquierda.png"/></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel1" role="button" data-slide="next" style="background: none;opacity: none;">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"><img class="img_boton" src="#{request.contextPath}/resources/img/flecha_derecha.png"/></span>
+                            </a>
+                        </div>
+                    </h:form>
                     <br/>
                     <br/>
-                    <h1 style="margin: 0;font-family: Arial;font-size: 36px;font-weight: bold;
-                        margin-bottom: 10px;text-align: center;color: #039be5;"> 
-                        Sistema de Seguimiento a Egresados y Graduados</h1>
+                    <h1 class="titulo">Sistema de Seguimiento a Egresados y Graduados</h1>
                     <br/>
                     <h4 class="texto">
                         El <strong>Instituto Superior Tecnológico Limón</strong> ofrece el sistema de Seguimiento a todos los estudiantes 
@@ -95,7 +102,6 @@
                         El <strong>propósito fundamental</strong> de esta herramienta informática es tener una base de datos con información 
                         de los estudiantes egresados y graduados, y asi tener una información más eficiente.
                     </h4>
-                    <br/>
                     <br/>
                     <br/>
                     <br/>
@@ -149,7 +155,7 @@
             Waves.attach('.btn3', ['waves-button']);
             Waves.attach('.post', ['waves-button']);
         </script> 
-        <script src="resources/js/sheetslider.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
     </h:body>
     <ui:include src="login.xhtml"/>  
 </html>

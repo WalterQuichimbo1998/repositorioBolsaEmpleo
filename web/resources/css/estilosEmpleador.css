@@ -1594,6 +1594,9 @@ margin: auto;
     width:100%;
     margin: auto;
 }
+.columna{
+    display: none;
+}
 }
 @media only screen and (max-width: 768px){ 
     .form_botones{

@@ -34,7 +34,7 @@ import sessions.beans.UsuarioFacade;
  */
 @Named(value = "accesoBean")
 @SessionScoped
-public class AccesoBean implements Serializable {  
+public class AccesoBean implements Serializable {
 
     public final static String USER_KEY = "auth_user";
     @EJB
@@ -43,8 +43,9 @@ public class AccesoBean implements Serializable {
     private HojaVidaEstudianteFacade hojaFacade;
     private String user;
     private String pass;
-    private final String key = "@ISTL_2020";
-   
+    private boolean isLoggedIn;
+//    private final String key = "@ISTL_2020";
+
     public AccesoBean() {
     }
 
@@ -72,58 +73,64 @@ public class AccesoBean implements Serializable {
         this.pass = pass;
     }
 
-
     public void login() {
         if (user.trim() == null || "".equals(user.trim()) || pass.trim() == null || "".equals(pass.trim())) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete los campos correspondientes", ""));
         } else {
-            Usuario us = getEjbFacade().validarUsuarioSesion(user.trim(), pass.trim()); 
-            if(us!=null){
-            if (us.getUsuario().equals(user.trim()) && us.getClave().equals(pass.trim())) {
-                if ("ADMINISTRADOR".equals(us.getRol())) {
-                    try {
-                        asignarRecursoWeb("/administrador/administrador.xhtml", us);
-                    } catch (IOException ex) {
-                        Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
-                }
-                if ("ESTUDIANTE".equals(us.getRol())) {
-                    HojaVidaEstudiante hv = null;
-                    try {
-                        hv = hojaFacade.buscarIdPersona(us.getIdPersona());
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
-                        hv = null;
-                    }
-                    if (hv != null) {
-                        try {
-                            asignarRecursoWeb("/estudiante/Estudiante.xhtml", us);
-                        } catch (IOException ex) {
-                            Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
+            Usuario us = getEjbFacade().validarUsuarioSesion(user.trim());
+            if (us != null) {
+                if (us.getUsuario().equals(user.trim())) {
+                    if (us.getClave().equals(pass.trim())) {
+                        if ("ADMINISTRADOR".equals(us.getRol())) {
+                            isLoggedIn = true;
+                            try {
+                                asignarRecursoWeb("/administrador/administrador.xhtml", us);
+                            } catch (IOException ex) {
+                                Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+                        }
+                        if ("ESTUDIANTE".equals(us.getRol())) {
+                            isLoggedIn = true;
+                            HojaVidaEstudiante hv = null;
+                            try {
+                                hv = hojaFacade.buscarIdPersona(us.getIdPersona());
+                            } catch (Exception ex) {
+                                System.out.println(ex.getMessage());
+                                hv = null;
+                            }
+                            if (hv != null) {
+                                try {
+                                    asignarRecursoWeb("/estudiante/Estudiante.xhtml", us);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            } else {
+                                try {
+                                    asignarRecursoWeb("/estudiante2/Estudiante_D.xhtml", us);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+                            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("hojaVida", hv);
+                        }
+                        if ("EMPLEADOR".equals(us.getRol())) {
+                            isLoggedIn = true;
+                            try {
+                                asignarRecursoWeb("/empleador/Empleador.xhtml", us);
+                            } catch (IOException ex) {
+                                Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
                         }
                     } else {
-                        try {
-                            asignarRecursoWeb("/estudiante2/Estudiante_D.xhtml", us);
-                        } catch (IOException ex) {
-                            Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Clave incorrecta", ""));
                     }
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("hojaVida", hv);
-                }
-                if ("EMPLEADOR".equals(us.getRol())) {
-                    try {
-                        asignarRecursoWeb("/empleador/Empleador.xhtml", us);
-                    } catch (IOException ex) {
-                        Logger.getLogger(AccesoBean.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", us);
+                } else {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuario incorrecto", ""));
                 }
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Credenciales incorrectas", ""));
-            }
-            }else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Usuario no existe", ""));
             }
         }
@@ -138,42 +145,63 @@ public class AccesoBean implements Serializable {
     }
 
     public void logoutAdmin() throws IOException {
+        isLoggedIn = false;
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext extContext = context.getExternalContext();
         extContext.getSessionMap().remove(USER_KEY);
-         HttpSession session = SessionUtils.getSession();
+        HttpSession session = SessionUtils.getSession();
         session.invalidate();
         String url = extContext.encodeActionURL(context.getApplication().getViewHandler().getActionURL(context, "/index.xhtml"));
         extContext.redirect(url);
-       
+
+    }
+
+    public void isLogged() throws IOException {
+        if (isLoggedIn) {
+            Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+            if ("ESTUDIANTE".equals(us.getRol())) {
+                asignarRecursoWeb("/estudiante/Estudiante.xhtml", us);
+            }
+            if ("EMPLEADOR".equals(us.getRol())) {
+                asignarRecursoWeb("/empleador/Empleador.xhtml", us);
+            }
+            if ("ADMINISTRADOR".equals(us.getRol())) {
+                asignarRecursoWeb("/administrador/administrador.xhtml", us);
+            }
+        }
     }
 
     public Usuario userAdmin() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return us;
     }
+
     public String usuarioLogueado() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return us.getIdPersona().getNombre() + " " + us.getIdPersona().getApellido();
     }
+
     public String usuarioNavegacion() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return us.getRol();
     }
-  public  HojaVidaEstudiante hojaVida() {
+
+    public HojaVidaEstudiante hojaVida() {
         HojaVidaEstudiante hv = null;
-             Usuario uus = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-                if("ESTUDIANTE".equals(uus.getRol())){
-                   hv = (HojaVidaEstudiante) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("hojaVida");
-                }else{
-                    hv=null;
-                }
+        Usuario uus = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        if ("ESTUDIANTE".equals(uus.getRol())) {
+            hv = (HojaVidaEstudiante) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("hojaVida");
+        } else {
+            hv = null;
+        }
         return hv;
     }
+
     public String usuarioLogueado2() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return us.getUsuario();
     }
+
     public String userFoto() {
         Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         return us.getIdPersona().getFoto();
@@ -215,6 +243,7 @@ public class AccesoBean implements Serializable {
 //        }
 //        return encri;
 //    }
+
     public Boolean existeFoto(String f) {
         boolean r = true;
         if ("".equals(f)) {

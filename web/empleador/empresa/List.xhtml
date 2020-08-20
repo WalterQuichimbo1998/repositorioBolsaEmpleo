@@ -62,14 +62,14 @@
                         </p:column>
 
 
-                        <p:column style="width: 180px;" sortBy="#{item.direccion}">
+                        <p:column style="width: 160px;" sortBy="#{item.direccion}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListEmpresaTitle_direccion}"/>
                             </f:facet>
                             <h:outputText value="#{item.direccion}"/>
                         </p:column>
 
-                        <p:column style="width: 90px;" sortBy="#{item.telefonoOficina}">
+                        <p:column style="width: 90px;" sortBy="#{item.telefonoOficina}" class="columna">
                             <f:facet name="header">
                                 <h:outputText value="Teléfono"/>
                             </f:facet>

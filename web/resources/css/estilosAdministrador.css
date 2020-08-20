@@ -1027,6 +1027,9 @@ margin: auto;
     #img_excel{
         width: 100%;
     }
+    .columna{
+        display:none;
+    }
 }
 @media only screen and (max-width: 768px){ 
     #caja2{

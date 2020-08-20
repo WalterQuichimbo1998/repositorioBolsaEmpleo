@@ -67,14 +67,13 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    public Usuario validarUsuarioSesion(String user, String pass) {
+    public Usuario validarUsuarioSesion(String user) {
         EntityManager em = getEntityManager();
         Usuario usuario = null;
         try {
             try {
-                TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findByUserPassword", Usuario.class);
+                TypedQuery<Usuario> query = em.createNamedQuery("Usuario.findByUser", Usuario.class);
                 query.setParameter("usuario", user);
-                query.setParameter("clave", pass);
                 try {
                     usuario = query.getSingleResult();
                 } catch (NoResultException e) {

@@ -2,9 +2,7 @@ package jsf.classes;
 
 import control.UtilPath;
 import modelo.ImagenPortada;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -349,5 +347,16 @@ public class ImagenPortadaController implements Serializable {
             l = false;
         }
         return l;
+    }
+
+  
+        public boolean imagenLista(Integer num){
+        boolean r=false;
+            if(num.equals(items.get(0).getIdImagen())){
+                r=true;
+            }else{
+                r=false;
+            }
+        return r;
     }
 }
