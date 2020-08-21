@@ -196,9 +196,10 @@ nav ul li{
     
 }
 .titulo{
-    margin: 0;
+    width: 98%;
+    margin: auto;
     font-family: Arial;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
@@ -244,19 +245,17 @@ nav ul li{
     margin: auto;
     
 }
-.imageSwitch{
-    width:100%; 
-    margin: auto;
+.c_texto1{
+    width: 67%;
+    height: auto;
+    display: inline-block;
+    margin: 0px 10px;
+    border:1px solid red;
+    vertical-align: top;  
 }
-.imagenSlider{
-    width: 100%;
-    height: 300px;
-    object-fit:cover; 
-    object-position:center center;
 
-}
 .texto{
-    width: 98%; 
+    width: 90%; 
     text-align: justify;  
     margin: auto; 
     font-family: Tahoma; 
@@ -265,34 +264,24 @@ nav ul li{
     color:#454545;
 }
 
-.imagenes{
-    width: 100%;
-    height: auto;
-    margin: auto;
-    display: flex;   
-    justify-content: center;
-    vertical-align: middle;
-
-}
 .c_img{
-    width:30%;
-    margin: 5px;
+    width:28%;
     height: auto;
     display: inline-block;
-     vertical-align: middle;
+    justify-content: space-between;
+    vertical-align: middle;
+    margin: 5px;
 }
 .img_portada{
     width: 100%;
-    height: 180px;
+    height: auto;
+    margin: auto;
      border-radius:4px;
     object-fit:cover; 
     object-position:center center;
     box-shadow: 0px 2px 2px #454545;
 }
-.img_portada:hover{
-    width: 99%;
-    height: 178px;
-}
+
 .texto_2{
     text-align: center;
     font-family: Verdana;
@@ -659,7 +648,10 @@ nav ul li{
         padding-left: 6px;
         padding-right: 6px;
     }
-    
+ 
+    .texto{
+        font-size: 17px;
+    }
     .listaOfertas.ui-datatable{
         width: 96%;
     }
@@ -687,24 +679,12 @@ nav ul li{
     .texto_3{
         height: 70px;
     }
-     .imagenes{
-        width: 96%;
-        margin: auto;
-        display: block;
+    .titulo{
+        font-size: 29px;
     }
     .c_img{
-        width:40%;
-        margin: auto;
-        margin: 5px;
-        justify-content: center;
+        width: 31%;
     }
-    .img_portada{
-        height: auto;
-    }
-    .img_portada:hover{
-    width: 99%;
-     height: auto;
-}
     .caja_oferta1{
         width: 99%;
     }
@@ -722,24 +702,13 @@ nav ul li{
         padding-right: 10px;
     }
     .titulo{
-        font-size: 32px;
+        font-size: 28px;
     }
     .texto{
     width: 94%;
 }
-    .img_portada{
-        height: auto;
-    }
-    
-    .imagenes{
-        width: 80%;
-        margin: auto;
-        display: block;
-    }
-    .c_img{
-        width:70%;
-        margin: auto;
-        display: block;
+   .c_img{
+        margin: 3px;
     }
     .texto_3{
         height: auto;
