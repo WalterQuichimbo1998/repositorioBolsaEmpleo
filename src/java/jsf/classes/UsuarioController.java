@@ -47,6 +47,7 @@ public class UsuarioController implements Serializable {
     private List<Usuario> listaUsuario = null;
     private Usuario selected;
     private String claveAntigua = "";
+    private String claveIngresada = "";
 //    private final String key = "@ISTL_2020";
     private String claveNueva = "";
     private String mensaje = "";
@@ -138,6 +139,15 @@ public class UsuarioController implements Serializable {
         this.claveAntigua = claveAntigua;
     }
 
+    public String getClaveIngresada() {
+        return claveIngresada;
+    }
+
+    public void setClaveIngresada(String claveIngresada) {
+        this.claveIngresada = claveIngresada;
+    }
+    
+
     public String getUser() {
         return user;
     }
@@ -169,7 +179,9 @@ public class UsuarioController implements Serializable {
 
     public void update2() {
 //        this.selected.setClaveCifrada(selected.getClave());
+        this.selected.setClave(claveIngresada);
         persist(PersistAction.UPDATE, "Clave actualizada con éxito.");
+        
     }
 
     public void update3() {
@@ -343,7 +355,7 @@ public class UsuarioController implements Serializable {
             if (selected.getClave().length() <= 5) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Clave nueva muy corta. Ingrese al menos 6 caracteres", ""));
             } else {
-                if (!claveAntigua.equals(AccesoBean.usuarioLogueadoClave())) {
+                if (!claveAntigua.equals(selected.getClave())) {
                     ver = false;
                     mensaje = "Clave actual incorrecta.";
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Clave actual incorrecta", ""));
