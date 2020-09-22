@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:form>
+        <p:idleMonitor timeout="#{session.maxInactiveInterval * 1000}" onidle="PF('idleDialog').show();PF('timeoutTimer').start();" />
+        <p:dialog id="timeoutDialog" header="¿Se ha cerrado la sesión?" widgetVar="idleDialog" modal="true" closable="false" draggable="false" resizable="false" >
+            <h3 style="font-family: Arial;text-align: center;">La sesión estaba inactiva demasiado tiempo.</h3>
+                  <p style="font-family: Arial;color:#454545;text-align: center;font-size: 16px;">Por favor vuelva loguearse</p>
+            <center>
+                <h:commandButton action="#{accesoBean.logoutAdmin()}" value="Click para volver Iniciar Sesión" class="reLogin"/>
+            </center>
+            <br/>
+              
+        </p:dialog>
+    </h:form>
+</ui:composition>

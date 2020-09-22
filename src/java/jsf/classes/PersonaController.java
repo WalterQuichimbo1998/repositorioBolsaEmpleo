@@ -60,6 +60,7 @@ public class PersonaController implements Serializable {
 
     @EJB
     private sessions.beans.PersonaFacade ejbFacade;
+    
     @EJB
     private sessions.beans.ProvinciaFacade ejbFacadeP;
     @EJB
@@ -311,7 +312,8 @@ public class PersonaController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
-        }
+         }
+        
     }
 
     public List<Persona> getItems() {

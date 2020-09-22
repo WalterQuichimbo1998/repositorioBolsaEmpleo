@@ -197,11 +197,11 @@ public class UsuarioController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
     public List<Usuario> getItems() {
-        if (items == null) {
+        if (items != null) {
             items = getFacade().listaUsuario(AccesoBean.obtenerIdPersona().getIdUsuario());
-        }
+             }
         return items;
     }
 
@@ -430,4 +430,4 @@ public class UsuarioController implements Serializable {
 //        }
 //        return descencri;
 //    }
-}
+  }

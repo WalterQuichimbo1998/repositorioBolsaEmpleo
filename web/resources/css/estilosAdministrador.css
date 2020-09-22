@@ -990,6 +990,29 @@ margin: auto;
 .txtC:focus{
     border-bottom: 2px solid #57a3f4;
 }
+.reLogin{
+    background: #57a3f4; 
+    width: 220px;
+    height: 38px; 
+    font-size: 13px !important; 
+    font-weight: bold;
+    border-radius: 3px;
+    border:none;
+    box-shadow: none;
+    text-shadow:none;
+    outline: none;
+    margin-right: 5px;  
+    margin-top: 4px; 
+    margin-bottom: 5px;
+    transition: all .3s ease; 
+  
+}
+.reLogin:hover{
+    color: #000;
+    box-shadow: 0px 0px 1px 1px #454545;
+    -webkit-box-shadow: 0px 0px 1px 1px #454545;
+    cursor: pointer;
+}
 @media only screen and (min-width: 1440px){ 
     .contenedor{
         width: 1366px;
