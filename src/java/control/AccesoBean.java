@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletResponse;
 import sessions.beans.HojaVidaEstudianteFacade;
 import sessions.beans.UsuarioFacade;
 
@@ -143,21 +144,24 @@ public class AccesoBean implements Serializable {
         extContext.redirect(url);
 
     }
+      public void reasignarRecursoWeb(String path) throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext extContext = context.getExternalContext();
+        String url = extContext.encodeActionURL(context.getApplication().getViewHandler().getActionURL(context, path));
+        extContext.redirect(url);
+    }
 
     public void isLogged() throws IOException {
         if (isLoggedIn) {
-              FacesContext context = FacesContext.getCurrentInstance();
-        ExternalContext extContext = context.getExternalContext();
             Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             if ("ESTUDIANTE".equals(us.getRol())) {
-                 extContext.redirect("/estudiante/Estudiante.xhtml");
-                /*asignarRecursoWeb("/estudiante/Estudiante.xhtml", us);*/
+                reasignarRecursoWeb("/estudiante/Estudiante.xhtml");
             }
             if ("EMPLEADOR".equals(us.getRol())) {
-                extContext.redirect("/empleador/Empleador.xhtml");
+                reasignarRecursoWeb("/empleador/Empleador.xhtml");
             }
             if ("ADMINISTRADOR".equals(us.getRol())) {
-                extContext.redirect("/administrador/administrador.xhtml");
+                reasignarRecursoWeb("/administrador/administrador.xhtml");
             }
         }
     }
