@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "HojaVidaEstudiante.findAll", query = "SELECT h FROM HojaVidaEstudiante h")
     , @NamedQuery(name = "HojaVidaEstudiante.findByIdHojaVidaEstudiante", query = "SELECT h FROM HojaVidaEstudiante h WHERE h.idHojaVidaEstudiante = :idHojaVidaEstudiante")
      ,@NamedQuery(name = "HojaVidaEstudiante.findByIdPersona", query = "SELECT h FROM HojaVidaEstudiante h WHERE h.idPersona = :id")
+     ,@NamedQuery(name = "HojaVidaEstudiante.findByIdPersonaEstado", query = "SELECT h FROM HojaVidaEstudiante h WHERE h.idPersona = :id AND h.estado=:estado")
 
 })
 public class HojaVidaEstudiante implements Serializable {
@@ -44,6 +46,9 @@ public class HojaVidaEstudiante implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_hoja_vida_estudiante")
     private Integer idHojaVidaEstudiante;
+    @Size(max = 45)
+    @Column(name = "estado")
+    private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHojaVidaEstudiante")
     private List<Capacitacion> capacitacionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHojaVidaEstudiante")
@@ -65,6 +70,7 @@ public class HojaVidaEstudiante implements Serializable {
     private List<ExperienciaLaboral> experienciaLaboralList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHojaVidaEstudiante")
     private List<BaulRecomendaciones> baulRecomendacionesList;
+    
 
     public HojaVidaEstudiante() {
     }
@@ -80,6 +86,16 @@ public class HojaVidaEstudiante implements Serializable {
     public void setIdHojaVidaEstudiante(Integer idHojaVidaEstudiante) {
         this.idHojaVidaEstudiante = idHojaVidaEstudiante;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
 
     @XmlTransient
     public List<Capacitacion> getCapacitacionList() {

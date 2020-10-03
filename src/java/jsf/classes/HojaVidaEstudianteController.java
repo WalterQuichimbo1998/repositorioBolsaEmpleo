@@ -244,7 +244,7 @@ public class HojaVidaEstudianteController implements Serializable {
     }
 
     public void existePerfil() {
-        HojaVidaEstudiante h = getFacade().buscarIdPersona(selected.getIdPersona());
+        HojaVidaEstudiante h = getFacade().buscarIdPersonaEstado(selected.getIdPersona(),selected.getEstado());
         if (h != null) {
             items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Este estudiante ya tiene el perfil habilitado", ""));
@@ -254,7 +254,7 @@ public class HojaVidaEstudianteController implements Serializable {
     }
 
     public void existePerfil2() {
-        HojaVidaEstudiante h = getFacade().buscarIdPersona(selected.getIdPersona());
+        HojaVidaEstudiante h = getFacade().buscarIdPersonaEstado(selected.getIdPersona(),selected.getEstado());
         if (h != null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Este estudiante ya tiene el perfil habilitado", ""));
             items = null;

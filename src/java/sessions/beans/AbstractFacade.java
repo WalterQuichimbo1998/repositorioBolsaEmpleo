@@ -109,6 +109,28 @@ public abstract class AbstractFacade<T> {
         }
         return hojaVidaEstudiante;
     }
+      public HojaVidaEstudiante buscarIdPersonaEstado(Persona id,String estado) {
+        EntityManager em = getEntityManager();
+        HojaVidaEstudiante hojaVidaEstudiante = null;
+        try {
+            try {
+                TypedQuery<HojaVidaEstudiante> query = em.createNamedQuery("HojaVidaEstudiante.findByIdPersonaEstado", HojaVidaEstudiante.class);
+                query.setParameter("id", id);
+                query.setParameter("estado", estado);
+                try {
+                    hojaVidaEstudiante = query.getSingleResult();
+                } catch (NoResultException e) {
+                    hojaVidaEstudiante=null;
+                }
+            } catch (NullPointerException e) {
+                hojaVidaEstudiante = null;
+            }
+        } catch (NoResultException e ) {
+            hojaVidaEstudiante = null;
+            System.out.println("Error: " + e);
+        }
+        return hojaVidaEstudiante;
+    }
 
        public Postulante existePostulante(OfertaLaboral idO,Persona idP) {
         EntityManager em = getEntityManager();

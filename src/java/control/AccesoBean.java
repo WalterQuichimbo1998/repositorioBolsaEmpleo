@@ -15,18 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sessions.beans.HojaVidaEstudianteFacade;
 import sessions.beans.UsuarioFacade;
-//import java.io.UnsupportedEncodingException;
-//import java.security.InvalidKeyException;
-//import java.security.MessageDigest;
-//import java.security.NoSuchAlgorithmException;
-//import java.util.Arrays;
-//import org.apache.commons.codec.binary.Base64;
-//import javax.crypto.BadPaddingException;
-//import javax.crypto.Cipher;
-//import javax.crypto.IllegalBlockSizeException;
-//import javax.crypto.NoSuchPaddingException;
-//import javax.crypto.SecretKey;
-//import javax.crypto.spec.SecretKeySpec;
 
 /**
  *
@@ -158,15 +146,18 @@ public class AccesoBean implements Serializable {
 
     public void isLogged() throws IOException {
         if (isLoggedIn) {
+              FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext extContext = context.getExternalContext();
             Usuario us = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             if ("ESTUDIANTE".equals(us.getRol())) {
-                asignarRecursoWeb("/estudiante/Estudiante.xhtml", us);
+                 extContext.redirect("/estudiante/Estudiante.xhtml");
+                /*asignarRecursoWeb("/estudiante/Estudiante.xhtml", us);*/
             }
             if ("EMPLEADOR".equals(us.getRol())) {
-                asignarRecursoWeb("/empleador/Empleador.xhtml", us);
+                extContext.redirect("/empleador/Empleador.xhtml");
             }
             if ("ADMINISTRADOR".equals(us.getRol())) {
-                asignarRecursoWeb("/administrador/administrador.xhtml", us);
+                extContext.redirect("/administrador/administrador.xhtml");
             }
         }
     }
@@ -224,25 +215,6 @@ public class AccesoBean implements Serializable {
         }
         return hv;
     }
-//
-//    public String encriptar(String pass) {
-//        String encri = "";
-//        try {
-//            MessageDigest md = MessageDigest.getInstance("MD5");
-//            byte[] llavePass = md.digest(key.getBytes("utf-8"));
-//            byte[] bytesPass = Arrays.copyOf(llavePass, 24);
-//            SecretKey secretKey = new SecretKeySpec(bytesPass, "DESede");
-//            Cipher cifrado = Cipher.getInstance("DESede");
-//            cifrado.init(Cipher.ENCRYPT_MODE, secretKey);
-//            byte[] plainTextBytes = pass.getBytes("utf-8");
-//            byte[] buf = cifrado.doFinal(plainTextBytes);
-//            byte[] base64Bytes = Base64.encodeBase64(buf);
-//            encri = new String(base64Bytes);
-//        } catch (UnsupportedEncodingException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
-//            System.out.println("Error: " + e);
-//        }
-//        return encri;
-//    }
 
     public Boolean existeFoto(String f) {
         boolean r = true;

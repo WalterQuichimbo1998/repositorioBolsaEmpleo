@@ -29,9 +29,6 @@ public class AuthAdminFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;  
          HttpServletResponse res = (HttpServletResponse) response;
         if (((HttpServletRequest) request).getSession().getAttribute(AccesoBean.USER_KEY) == null) {
-                res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-            res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            res.setDateHeader("Expires", 0); // Proxies.
             ((HttpServletResponse) response).sendRedirect("../index.xhtml");
         } else {
             Usuario u = (Usuario) ((HttpServletRequest) request).getSession().getAttribute("usuario");

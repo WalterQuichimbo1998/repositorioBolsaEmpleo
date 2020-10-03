@@ -81,6 +81,12 @@
                             </f:facet>
                             <h:outputText value="#{item.idPersona.idPromocion.promocion}"/>
                         </p:column>
+                         <p:column sortBy="#{item.estado}" filterBy="#{item.estado}" filterMatchMode="contains" style="width: 120px;">
+                            <f:facet name="header">
+                                <h:outputText value="Estado"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estado}"/>
+                        </p:column>
                         <p:column sortBy="#{item.idPersona.apellido}" style="width: 120px;">
                             <f:facet name="header">
                                 <h:outputText value="Perfil"/>

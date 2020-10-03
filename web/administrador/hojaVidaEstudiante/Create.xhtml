@@ -21,6 +21,12 @@
                                            var="idPersonaItem"
                                            itemValue="#{idPersonaItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="Estado" for="estado" style="font-weight: bold;"/>
+                        <p:selectOneMenu id="estado" value="#{hojaVidaEstudianteController.selected.estado}" style="width: 260px;" required="true" requiredMessage="Seleccione el estado">
+                             <f:selectItem itemLabel="-Seleccione-" />   
+                            <f:selectItem itemLabel="Egresado" itemValue="Egresado"/>
+                            <f:selectItem itemLabel="Graduado" itemValue="Graduado"/>  
+                        </p:selectOneMenu>
                         <p:column/>
                         <p:column>
                             <p:commandButton styleClass="btn_g" actionListener="#{hojaVidaEstudianteController.existePerfil}" value="Habilitar" update="display,:HojaVidaEstudianteListForm:datalist,:growl" oncomplete="handleSubmit(args,'HojaVidaEstudianteCreateDialog');"/>
