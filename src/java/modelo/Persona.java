@@ -54,6 +54,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Persona.findByEstadoLaboral", query = "SELECT p FROM Persona p WHERE p.estadoLaboral = :estadoLaboral")})
 public class Persona implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private List<HojaVidaEstudiante> hojaVidaEstudianteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaIdPersona")
+    private List<Postulante> postulanteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private List<Empresa> empresaList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -96,13 +103,10 @@ public class Persona implements Serializable {
     private Integer edad;
     @Column(name = "estado_laboral")
     private Integer estadoLaboral;
-      @Size(max = 60)
+    @Size(max = 60)
     @Column(name = "foto")
     private String foto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
-    private List<HojaVidaEstudiante> hojaVidaEstudianteList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personaIdPersona")
-    private List<Postulante> postulanteList;
+
     @JoinColumn(name = "id_canton", referencedColumnName = "id_canton")
     @ManyToOne
     private Canton idCanton;
@@ -112,16 +116,15 @@ public class Persona implements Serializable {
     @JoinColumn(name = "id_etnia", referencedColumnName = "id_etnia")
     @ManyToOne
     private Etnia idEtnia;
-    
+
     @JoinColumn(name = "id_carrera", referencedColumnName = "id_carrera")
     @ManyToOne
     private Carrera idCarrera;
-    
+
     @JoinColumn(name = "id_promocion", referencedColumnName = "id_promocion")
     @ManyToOne
     private Promocion idPromocion;
-   
-    
+
     @JoinColumn(name = "id_parroquia", referencedColumnName = "id_parroquia")
     @ManyToOne
     private Parroquia idParroquia;
@@ -131,10 +134,9 @@ public class Persona implements Serializable {
     @JoinColumn(name = "id_tipo_sangre", referencedColumnName = "id_tipo_sangre")
     @ManyToOne
     private TipoSangre idTipoSangre;
+
     @OneToMany(mappedBy = "idPersona")
     private List<Usuario> usuarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
-    private List<Empresa> empresaList;
 
     public Persona() {
     }
@@ -263,9 +265,6 @@ public class Persona implements Serializable {
         this.foto = foto;
     }
 
-    
-    
-
     @XmlTransient
     public List<HojaVidaEstudiante> getHojaVidaEstudianteList() {
         return hojaVidaEstudianteList;
@@ -324,7 +323,6 @@ public class Persona implements Serializable {
         this.idPromocion = idPromocion;
     }
 
-    
     public Parroquia getIdParroquia() {
         return idParroquia;
     }
@@ -389,7 +387,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return this.nombre+" "+this.apellido;
+        return this.nombre + " " + this.apellido;
     }
-    
+
 }

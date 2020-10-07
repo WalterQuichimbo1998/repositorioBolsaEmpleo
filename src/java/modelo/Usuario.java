@@ -112,6 +112,7 @@ public class Usuario implements Serializable {
 
    
 
+ 
     @Override
     public int hashCode() {
         int hash = 0;
@@ -131,7 +132,6 @@ public class Usuario implements Serializable {
         }
         return true;
     }
-
     @Override
     public String toString() {
         return "controller.Usuario[ idUsuario=" + idUsuario + " ]";

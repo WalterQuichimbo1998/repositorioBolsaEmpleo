@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="882718d1-cf69-496c-93a6-d83d96178058">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
@@ -14,6 +14,9 @@ ORDER BY hoja_vida_estudiante.id_hoja_vida_estudiante DESC;]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="id_persona" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="id_carrera" class="java.lang.Integer">
@@ -130,64 +133,76 @@ ORDER BY hoja_vida_estudiante.id_hoja_vida_estudiante DESC;]]>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="10" y="3" width="250" height="20" uuid="f27706e7-989a-43ed-8ac7-885512eae4ed"/>
+				<reportElement x="10" y="3" width="201" height="20" uuid="f27706e7-989a-43ed-8ac7-885512eae4ed"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTUDIANTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="261" y="3" width="116" height="20" uuid="5d64b450-eddf-4001-b2f6-6b65ea7fbb9a"/>
+				<reportElement x="213" y="3" width="105" height="20" uuid="5d64b450-eddf-4001-b2f6-6b65ea7fbb9a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cédula]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="377" y="3" width="243" height="20" uuid="3ebdc2f7-2033-4893-8a9c-95e207c5767e"/>
+				<reportElement x="320" y="3" width="214" height="20" uuid="3ebdc2f7-2033-4893-8a9c-95e207c5767e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Carrera]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="621" y="3" width="177" height="20" uuid="5436022e-44f4-44d0-9fd9-55705abf4bc5"/>
+				<reportElement x="536" y="3" width="177" height="20" uuid="5436022e-44f4-44d0-9fd9-55705abf4bc5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Promoción]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="713" y="3" width="89" height="20" uuid="adc2063c-5f61-4128-8187-b84324c798f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="22" splitType="Stretch">
+		<band height="41" splitType="Stretch">
 			<textField>
-				<reportElement x="10" y="0" width="250" height="20" uuid="22e41f97-f2f3-4371-a0e9-2c4cec70d402"/>
+				<reportElement x="10" y="0" width="201" height="40" uuid="22e41f97-f2f3-4371-a0e9-2c4cec70d402"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="261" y="0" width="116" height="20" uuid="69147fd2-fc7e-4f3b-9751-9ea27751a56e"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[($F{cedula}==null ? "":$F{cedula}+"")]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="377" y="0" width="243" height="20" uuid="5f970893-7195-454c-82d3-be96c40e0780"/>
+				<reportElement x="320" y="0" width="214" height="40" uuid="5f970893-7195-454c-82d3-be96c40e0780"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{carrera}==null ? "":$F{carrera}+"")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="621" y="0" width="177" height="20" uuid="30927bbe-b9cc-42c9-be59-737cbef245e1"/>
+				<reportElement x="536" y="0" width="177" height="40" uuid="30927bbe-b9cc-42c9-be59-737cbef245e1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{promocion}==null ? "":$F{promocion}+"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="213" y="0" width="105" height="40" uuid="69147fd2-fc7e-4f3b-9751-9ea27751a56e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{cedula}==null ? "":$F{cedula}+"")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="713" y="0" width="89" height="40" uuid="d6014318-ee34-4fab-9906-34e031c23f81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

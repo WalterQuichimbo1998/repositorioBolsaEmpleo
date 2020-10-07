@@ -23,19 +23,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.validator.ValidatorException;
-//import java.io.UnsupportedEncodingException;
-//import java.security.InvalidKeyException;
-//import java.security.MessageDigest;
-//import java.security.NoSuchAlgorithmException;
-//import java.util.Arrays;
-//import javax.crypto.BadPaddingException;
-//import javax.crypto.Cipher;
-//import javax.crypto.IllegalBlockSizeException;
-//import javax.crypto.NoSuchPaddingException;
-//import javax.crypto.SecretKey;
-//import javax.crypto.spec.SecretKeySpec;
-
-//import org.apache.commons.codec.binary.Base64;
 
 @Named("usuarioController")
 @SessionScoped
@@ -47,8 +34,7 @@ public class UsuarioController implements Serializable {
     private List<Usuario> listaUsuario = null;
     private Usuario selected;
     private String claveAntigua = "";
-    private String claveIngresada = "";
-//    private final String key = "@ISTL_2020";
+    private String claveIngresada = ""; 
     private String claveNueva = "";
     private String mensaje = "";
     private boolean ver;
@@ -199,7 +185,7 @@ public class UsuarioController implements Serializable {
     }
     
     public List<Usuario> getItems() {
-        if (items != null) {
+        if (items == null) {
             items = getFacade().listaUsuario(AccesoBean.obtenerIdPersona().getIdUsuario());
              }
         return items;
@@ -347,12 +333,12 @@ public class UsuarioController implements Serializable {
     public void verificarClave() {
         mensaje = "";
         ver = false;
-        if (selected.getClave().trim() == null || "".equals(selected.getClave().trim())) {
+        if (claveIngresada.trim() == null || "".equals(selected.getClave().trim())) {
             ver = false;
             mensaje = "Complete el campo clave. Al menos 6 caracteres";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete el campo clave.", ""));
         } else {
-            if (selected.getClave().length() <= 5) {
+            if (claveIngresada.length() <= 5) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Clave nueva muy corta. Ingrese al menos 6 caracteres", ""));
             } else {
                 if (!claveAntigua.equals(selected.getClave())) {
