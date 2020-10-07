@@ -141,7 +141,7 @@ WHERE persona.id_promocion=$P{promocion} ORDER BY experiencia_laboral.fecha_inic
 				<imageExpression><![CDATA["logo_senescyt.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement mode="Transparent" x="280" y="99" width="81" height="24" backcolor="#EAEAEB" uuid="8196e17a-b64e-4f59-b25a-76850d72dc0c"/>
+				<reportElement mode="Transparent" x="274" y="99" width="85" height="24" backcolor="#EAEAEB" uuid="8196e17a-b64e-4f59-b25a-76850d72dc0c"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>

@@ -42,6 +42,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -70,6 +71,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -89,6 +91,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -118,6 +121,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -145,8 +149,8 @@ public class Exportar implements Serializable {
             response.addHeader("Content-disposition", "attachment; filename=Hoja_de_vida.pdf");
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
-
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -172,8 +176,8 @@ public class Exportar implements Serializable {
             response.addHeader("Content-disposition", "attachment; filename=reporte_Estudiante.pdf");
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
-
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -191,6 +195,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -208,6 +213,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -225,6 +231,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -263,6 +270,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -286,6 +294,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -309,6 +318,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -330,6 +340,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -350,6 +361,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -368,6 +380,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -388,6 +401,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -408,6 +422,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -429,6 +444,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -448,6 +464,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -466,6 +483,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -484,6 +502,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -503,6 +522,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -521,6 +541,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -539,6 +560,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();
@@ -566,6 +588,7 @@ public class Exportar implements Serializable {
             try (ServletOutputStream stream = response.getOutputStream()) {
                 JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
                 stream.flush();
+                stream.close();
             }
             FacesContext.getCurrentInstance().responseComplete();
             con.conexion().close();

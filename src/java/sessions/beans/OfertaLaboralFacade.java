@@ -5,8 +5,6 @@
  */
 package sessions.beans;
 
-import control.AccesoBean;
-import modelo.Empresa;
 import modelo.OfertaLaboral;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,26 +32,39 @@ public class OfertaLaboralFacade extends AbstractFacade<OfertaLaboral> {
     public OfertaLaboralFacade() {
         super(OfertaLaboral.class);
     }
-      public List<OfertaLaboral> listaOferta(Integer n){
-        Query q=em.createNativeQuery("SELECT * FROM oferta_laboral WHERE id_empresa ="+n+";", OfertaLaboral.class);
-        List<OfertaLaboral> lista=q.getResultList();
+
+    public List<OfertaLaboral> listaOferta(Integer n) {
+        List<OfertaLaboral> lista = null;
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM oferta_laboral WHERE id_empresa =" + n + ";", OfertaLaboral.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
-      public List<OfertaLaboral> listaOferta2(Integer n){
-        Query q=em.createNativeQuery("SELECT * FROM oferta_laboral WHERE id_oferta ="+n+";", OfertaLaboral.class);
-        List<OfertaLaboral> lista=q.getResultList();
+
+    public List<OfertaLaboral> listaOferta2(Integer n) {
+        List<OfertaLaboral> lista = null;
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM oferta_laboral WHERE id_oferta =" + n + ";", OfertaLaboral.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
-       public List<OfertaLaboral> comprobarOfertas(Integer id,Date d1,Date d2){
-          SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-          String f1=formato.format(d1);
-          String f2=formato.format(d2);
-        Query q=em.createNativeQuery("SELECT * FROM oferta_laboral WHERE id_empresa = '"+id+"' AND fecha_creacion BETWEEN '"+f1+"' AND '"+f2+"';", OfertaLaboral.class);
-                    
-        List<OfertaLaboral> lista=q.getResultList();
-        f1="";
-        f2="";
+
+    public List<OfertaLaboral> comprobarOfertas(Integer id, Date d1, Date d2) {
+        List<OfertaLaboral> lista = null;
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String f1 = formato.format(d1);
+            String f2 = formato.format(d2);
+            Query q = em.createNativeQuery("SELECT * FROM oferta_laboral WHERE id_empresa = '" + id + "' AND fecha_creacion BETWEEN '" + f1 + "' AND '" + f2 + "';", OfertaLaboral.class);
+            f1 = "";
+            f2 = "";
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
-   
 }

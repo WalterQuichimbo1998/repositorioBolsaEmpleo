@@ -32,6 +32,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.ServletContext;
 import net.sf.jasperreports.engine.JRException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -110,12 +111,12 @@ public class EmpresaController implements Serializable {
     }
 
     public List<Canton> getListaCanton() {
-        if (selected.getIdProvincia()!= null) {
-             if (getListaProvincias().contains(selected.getIdProvincia()) == true) {
-                  return listaCanton = ejbFacadeC.listaCanton(selected.getIdProvincia().getIdProvincia());
-             }else{
-                  return null;
-             }
+        if (selected.getIdProvincia() != null) {
+            if (getListaProvincias().contains(selected.getIdProvincia()) == true) {
+                return listaCanton = ejbFacadeC.listaCanton(selected.getIdProvincia().getIdProvincia());
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
@@ -196,38 +197,39 @@ public class EmpresaController implements Serializable {
     }
 
     public void create() {
-        
-        if(selected.getIdProvincia()==null){
+
+        if (selected.getIdProvincia() == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Provincia", ""));
-        }else if(selected.getIdCanton()==null){
+        } else if (selected.getIdCanton() == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione un Cantón", ""));
-        }else{
-             this.selected.setIdPersona(AccesoBean.obtenerIdPersona().getIdPersona());
-        this.selected.setFechaCreacion(new Date());
-         this.selected.setLogotipo("requerido/sin_logotipo.jpg");
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-            lista = null;    // Invalidate list of items to trigger re-query.
-            lista = getFacade().listaEmpresa();
+        } else {
+            this.selected.setIdPersona(AccesoBean.obtenerIdPersona().getIdPersona());
+            this.selected.setFechaCreacion(new Date());
+            this.selected.setLogotipo("requerido/sin_logotipo.jpg");
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+                lista = null;    // Invalidate list of items to trigger re-query.
+                lista = getFacade().listaEmpresa();
+            }
         }
-        }
-       
+
     }
 
     public void update() {
-         if(selected.getIdProvincia()==null){
+        if (selected.getIdProvincia() == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione una Provincia", ""));
-        }else if(selected.getIdCanton()==null){
+        } else if (selected.getIdCanton() == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione un Cantón", ""));
-        }else{
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaUpdated"));
-        items=null;
+        } else {
+            persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaUpdated"));
+            items = null;
+        }
     }
-    }
+
     public void update2() {
         this.selected.setLogotipo("requerido/sin_logotipo.jpg");
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("EmpresaUpdated"));
+        persist(PersistAction.UPDATE,"Logotipo eliminado con éxito.");
     }
 
     public void actualizarLogo() {
@@ -360,22 +362,24 @@ public class EmpresaController implements Serializable {
     public void subirLogo(FileUploadEvent event) {
         String extension = "";
         if (event.getFile() == null || event.getFile().getSize() == 0) {
-             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione un logotipo", ""));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Seleccione un logotipo", ""));
         } else {
             String ex = event.getFile().getContentType();
             if ("image/jpeg".equals(ex) || "image/jpg".equals(ex) || "image/png".equals(ex)) {
-                if (null != ex) switch (ex) {
-                    case "image/jpeg":
-                        extension = ".jpeg";
-                        break;
-                    case "image/jpg":
-                        extension = ".jpg";
-                        break;
-                    case "image/png":
-                        extension = ".png";
-                        break;
-                    default:
-                        break;
+                if (null != ex) {
+                    switch (ex) {
+                        case "image/jpeg":
+                            extension = ".jpeg";
+                            break;
+                        case "image/jpg":
+                            extension = ".jpg";
+                            break;
+                        case "image/png":
+                            extension = ".png";
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 if (event.getFile().getSize() <= 2048000) {
                     try {
@@ -385,24 +389,9 @@ public class EmpresaController implements Serializable {
                             nombre = getSelected().getIdEmpresa() + "_" + selected.getNombreComercial() + extension;
                         }
                         selected.setLogotipo("logotipo/" + nombre);
-                        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                        String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
-                        String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "logotipo" + File.separator + nombre;
-                        FileOutputStream out = new FileOutputStream(pathDefinition);
-                        InputStream in = event.getFile().getInputstream();
-                        if ((in != null)) {
-                            int read = 0;
-                            byte[] bytes = new byte[1024];
-                            while ((read = in.read(bytes)) != -1) {
-                                out.write(bytes, 0, read);
-                            }
-                            in.close();
-                            out.flush();
-                            out.close();
-                            actualizarLogo();
-                            lista=null;
-                        }
+                       cargar(nombre, event.getFile().getInputstream());
                     } catch (IOException e) {
+                        System.out.println("No se pudo cargar la imagen");
                     }
                 } else {
                     this.setFile(null);
@@ -412,6 +401,26 @@ public class EmpresaController implements Serializable {
                 this.setFile(null);
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Formato no válido. Use formato .png o .jpg", ""));
             }
+        }
+    }
+ public void cargar(String nombreArchivo, InputStream original) {
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext(); 
+        String path = servletContext.getRealPath("") + File.separatorChar + "resources" + File.separatorChar + "logotipo" + File.separatorChar + nombreArchivo;
+        File f = null;
+        try {
+            f = new File(path);
+            FileOutputStream out = new FileOutputStream(f.getAbsolutePath());
+            int c = 0;
+            while ((c = original.read()) >= 0) {
+                out.write(c);
+            }
+            original.close();
+            out.flush();
+            out.close();         
+            actualizarLogo();
+            lista = null;
+        } catch (IOException e) {
+            System.out.println("No se pudo cargar la imagen");
         }
     }
 
@@ -593,15 +602,16 @@ public class EmpresaController implements Serializable {
         mensaje = "";
         v = false;
     }
-     public void eliminarImagen() {
-        ExternalContext ecDelete = FacesContext.getCurrentInstance().getExternalContext();
-        String realPathDelete = UtilPath.getPathDefinida(ecDelete.getRealPath("/"));
-        String pathDefinitionDelete = realPathDelete + File.separator + "web" + File.separator + "resources" + File.separator + selected.getLogotipo();
-        File archivo = new File(pathDefinitionDelete);
+
+    public void eliminarImagen() {
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext(); 
+        String path = servletContext.getRealPath("") + File.separatorChar + "resources" + File.separatorChar + selected.getLogotipo();
+        File archivo = new File(path);
         archivo.delete();
         update2();
     }
-     public Boolean existeImagen(String i) {
+
+    public Boolean existeImagen(String i) {
         boolean r = true;
         if ("".equals(i)) {
             r = false;
@@ -611,10 +621,11 @@ public class EmpresaController implements Serializable {
         }
         return r;
     }
-      public void limpiarFechas(){
-         fecha_inicio=null;
-         fecha_fin=null;
-         v=false;
-         mensaje="";
-     }
+
+    public void limpiarFechas() {
+        fecha_inicio = null;
+        fecha_fin = null;
+        v = false;
+        mensaje = "";
+    }
 }

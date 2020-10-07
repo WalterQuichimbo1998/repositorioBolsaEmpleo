@@ -1,6 +1,5 @@
 package jsf.classes;
 
-import control.AccesoBean;
 import modelo.Canton;
 import modelo.Parroquia;
 import jsf.classes.util.JsfUtil;
@@ -8,7 +7,6 @@ import jsf.classes.util.JsfUtil.PersistAction;
 import sessions.beans.ParroquiaFacade;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,7 +19,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.faces.event.AjaxBehaviorEvent;
 
 @Named("parroquiaController")
 @SessionScoped

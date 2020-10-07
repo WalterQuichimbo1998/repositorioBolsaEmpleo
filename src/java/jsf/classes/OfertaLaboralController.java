@@ -145,9 +145,6 @@ public class OfertaLaboralController implements Serializable {
         this.selected.setIdEmpresa(empresa);
         this.selected.setFechaCreacion(new Date());
         this.selected.setEstado(true);
-        if(selected.getIdTipoContrato().getTipoContrato().equals("INDEFINIDO")){
-             this.selected.setFechaFin(null);
-        }
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("OfertaLaboralCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -158,9 +155,6 @@ public class OfertaLaboralController implements Serializable {
     }
 
     public void update() {
-         if(selected.getIdTipoContrato().getTipoContrato().equals("INDEFINIDO")){
-             this.selected.setFechaFin(null);
-        }
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("OfertaLaboralUpdated"));
         items=null;
     }

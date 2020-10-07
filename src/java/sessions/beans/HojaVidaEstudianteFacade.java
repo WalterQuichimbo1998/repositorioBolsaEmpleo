@@ -6,7 +6,6 @@
 package sessions.beans;
 
 import modelo.HojaVidaEstudiante;
-import modelo.OfertaLaboral;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,10 +30,15 @@ public class HojaVidaEstudianteFacade extends AbstractFacade<HojaVidaEstudiante>
     public HojaVidaEstudianteFacade() {
         super(HojaVidaEstudiante.class);
     }
-     public List<HojaVidaEstudiante> listaHojaEstudiante(Integer n){
-        Query q=em.createNativeQuery("SELECT * FROM hoja_vida_estudiante WHERE id_persona ="+n+";", HojaVidaEstudiante.class);
-        List<HojaVidaEstudiante> lista=q.getResultList();
+
+    public List<HojaVidaEstudiante> listaHojaEstudiante(Integer n) {
+        List<HojaVidaEstudiante> lista = null;
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM hoja_vida_estudiante WHERE id_persona =" + n + ";", HojaVidaEstudiante.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
- 
+
 }

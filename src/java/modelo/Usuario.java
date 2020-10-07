@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Usuario.buscarUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.idUsuario != :id_usuario")
     , @NamedQuery(name = "Usuario.buscarUsuarioClave", query = "SELECT u FROM Usuario u WHERE u.idPersona = :id")
     , @NamedQuery(name = "Usuario.findByUser", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario")        
+    , @NamedQuery(name = "Usuario.buscarUsuarios", query = "SELECT u FROM Usuario u WHERE u.idUsuario != :id")        
 })
 public class Usuario implements Serializable {
 
@@ -112,6 +113,7 @@ public class Usuario implements Serializable {
 
    
 
+ 
     @Override
     public int hashCode() {
         int hash = 0;
@@ -131,7 +133,6 @@ public class Usuario implements Serializable {
         }
         return true;
     }
-
     @Override
     public String toString() {
         return "controller.Usuario[ idUsuario=" + idUsuario + " ]";

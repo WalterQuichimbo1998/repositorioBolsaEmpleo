@@ -109,7 +109,28 @@ public abstract class AbstractFacade<T> {
         }
         return hojaVidaEstudiante;
     }
-      public HojaVidaEstudiante buscarIdPersonaEstado(Persona id,String estado) {
+      public HojaVidaEstudiante buscarIdPersonaEstado(Persona id) {
+        EntityManager em = getEntityManager();
+        HojaVidaEstudiante hojaVidaEstudiante = null;
+        try {
+            try {
+                TypedQuery<HojaVidaEstudiante> query = em.createNamedQuery("HojaVidaEstudiante.findByIdPersona", HojaVidaEstudiante.class);
+                query.setParameter("id", id);
+                try {
+                    hojaVidaEstudiante = query.getSingleResult();
+                } catch (NoResultException e) {
+                    hojaVidaEstudiante=null;
+                }
+            } catch (NullPointerException e) {
+                hojaVidaEstudiante = null;
+            }
+        } catch (NoResultException e ) {
+            hojaVidaEstudiante = null;
+            System.out.println("Error: " + e);
+        }
+        return hojaVidaEstudiante;
+    }
+      public HojaVidaEstudiante buscarIdPersonaEstado2(Persona id,String estado) {
         EntityManager em = getEntityManager();
         HojaVidaEstudiante hojaVidaEstudiante = null;
         try {
@@ -330,4 +351,25 @@ public abstract class AbstractFacade<T> {
         }
         return usuario;
     }
+//        public List<Usuario> listaUsuarios(Integer id) {
+//        EntityManager em = getEntityManager();
+//        List<Usuario> lista = null;
+//        try {
+//            try {
+//                TypedQuery<Usuario> query = em.createNamedQuery("Usuario.buscarUsuarios", Usuario.class);
+//                query.setParameter("id", id);
+//                try {
+//                    lista = query.getResultList();
+//                } catch (NoResultException e) {
+//                    lista=null;
+//                }
+//            } catch (NullPointerException e) {
+//                lista = null;
+//            }
+//        } catch (NoResultException e ) {
+//            lista = null;
+//            System.out.println("Error: " + e);
+//        }
+//        return lista;
+//    }
 }

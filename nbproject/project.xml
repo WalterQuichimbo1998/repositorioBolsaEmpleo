@@ -19,22 +19,6 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.commons-codec-1.6-javadoc.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.commons-codec-1.6-sources.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.commons-codec-1.6-tests.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.commons-codec-1.6.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
                     <file>${file.reference.commons-collections-3.2.1.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
@@ -116,6 +100,22 @@
                 </library>
                 <library dirs="200">
                     <file>${file.reference.xmlbeans-2.6.0.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-codec-1.6-javadoc.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-codec-1.6-sources.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-codec-1.6-tests.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-codec-1.6.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>

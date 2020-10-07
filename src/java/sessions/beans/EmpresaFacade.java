@@ -7,7 +7,6 @@ package sessions.beans;
 
 import control.AccesoBean;
 import modelo.Empresa;
-import modelo.Idioma;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -34,26 +33,41 @@ public class EmpresaFacade extends AbstractFacade<Empresa> {
     public EmpresaFacade() {
         super(Empresa.class);
     }
-      public List<Empresa> listaEmpresa(){
-        Query q=em.createNativeQuery("SELECT * FROM empresa WHERE id_persona ="+AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona()+";", Empresa.class);
-        List<Empresa> lista=q.getResultList();
+
+    public List<Empresa> listaEmpresa() {
+        List<Empresa> lista = null;
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM empresa WHERE id_persona =" + AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona() + ";", Empresa.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
-      public List<Empresa> comprobarEmpresas(Integer id,Date d1,Date d2){
-          SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-          String f1=formato.format(d1);
-          String f2=formato.format(d2);
-        Query q=em.createNativeQuery("SELECT * FROM empresa WHERE id_persona = '"+id+"' AND fecha_creacion BETWEEN '"+f1+"' AND '"+f2+"';", Empresa.class);
-        List<Empresa> lista=q.getResultList();
+
+    public List<Empresa> comprobarEmpresas(Integer id, Date d1, Date d2) {
+        List<Empresa> lista = null;
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String f1 = formato.format(d1);
+            String f2 = formato.format(d2);
+            Query q = em.createNativeQuery("SELECT * FROM empresa WHERE id_persona = '" + id + "' AND fecha_creacion BETWEEN '" + f1 + "' AND '" + f2 + "';", Empresa.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
-      public List<Empresa> comprobarEmpresasAdmin(Date d1,Date d2){
-          SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-          String f1=formato.format(d1);
-          String f2=formato.format(d2);
-        Query q=em.createNativeQuery("SELECT * FROM empresa WHERE fecha_creacion BETWEEN '"+f1+"' AND '"+f2+"';", Empresa.class);
-        List<Empresa> lista=q.getResultList();
+
+    public List<Empresa> comprobarEmpresasAdmin(Date d1, Date d2) {
+        List<Empresa> lista = null;
+        try {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String f1 = formato.format(d1);
+            String f2 = formato.format(d2);
+            Query q = em.createNativeQuery("SELECT * FROM empresa WHERE fecha_creacion BETWEEN '" + f1 + "' AND '" + f2 + "';", Empresa.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
-    
+
 }

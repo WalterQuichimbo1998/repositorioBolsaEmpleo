@@ -23,19 +23,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.validator.ValidatorException;
-//import java.io.UnsupportedEncodingException;
-//import java.security.InvalidKeyException;
-//import java.security.MessageDigest;
-//import java.security.NoSuchAlgorithmException;
-//import java.util.Arrays;
-//import javax.crypto.BadPaddingException;
-//import javax.crypto.Cipher;
-//import javax.crypto.IllegalBlockSizeException;
-//import javax.crypto.NoSuchPaddingException;
-//import javax.crypto.SecretKey;
-//import javax.crypto.spec.SecretKeySpec;
-
-//import org.apache.commons.codec.binary.Base64;
 
 @Named("usuarioController")
 @SessionScoped
@@ -43,12 +30,12 @@ public class UsuarioController implements Serializable {
 
     @EJB
     private sessions.beans.UsuarioFacade ejbFacade;
+
     private List<Usuario> items = null;
     private List<Usuario> listaUsuario = null;
     private Usuario selected;
     private String claveAntigua = "";
     private String claveIngresada = "";
-//    private final String key = "@ISTL_2020";
     private String claveNueva = "";
     private String mensaje = "";
     private boolean ver;
@@ -146,7 +133,6 @@ public class UsuarioController implements Serializable {
     public void setClaveIngresada(String claveIngresada) {
         this.claveIngresada = claveIngresada;
     }
-    
 
     public String getUser() {
         return user;
@@ -155,7 +141,6 @@ public class UsuarioController implements Serializable {
     public void setUser(String user) {
         this.user = user;
     }
-
 
     public Usuario prepareCreate() {
         selected = new Usuario();
@@ -181,13 +166,13 @@ public class UsuarioController implements Serializable {
 //        this.selected.setClaveCifrada(selected.getClave());
         this.selected.setClave(claveIngresada);
         persist(PersistAction.UPDATE, "Clave actualizada con éxito.");
-        
+
     }
 
     public void update3() {
         this.selected.setUsuario(user);
         persist(PersistAction.UPDATE, "Usuario actualizado con éxito.");
-         
+
     }
 
     public void destroy() {
@@ -197,11 +182,11 @@ public class UsuarioController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public List<Usuario> getItems() {
-        if (items != null) {
+        if (items == null) {
             items = getFacade().listaUsuario(AccesoBean.obtenerIdPersona().getIdUsuario());
-             }
+        }
         return items;
     }
 
@@ -285,22 +270,28 @@ public class UsuarioController implements Serializable {
         }
 
     }
-     public boolean existePerfilPersona(Persona id) {
-         boolean perfil=false;
-        HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
-        if (h != null) {
-              perfil=true;
-        } else {
-          perfil=false;
+
+    public boolean existePerfilPersona(Persona id) {
+        boolean perfil = false;
+        try {
+            HojaVidaEstudiante h = getFacade().buscarIdPersona(id);
+            if (h != null) {
+                perfil = true;
+            } else {
+                perfil = false;
+            }
+
+        } catch (Exception e) {
         }
         return perfil;
     }
-     public boolean existePerfilPersonaVer(Usuario id) {
-         boolean perfil_ver=false;
+
+    public boolean existePerfilPersonaVer(Usuario id) {
+        boolean perfil_ver = false;
         if ("ESTUDIANTE".equals(id.getRol())) {
-            perfil_ver=true;
+            perfil_ver = true;
         } else {
-            perfil_ver=false;
+            perfil_ver = false;
         }
         return perfil_ver;
     }
@@ -317,13 +308,13 @@ public class UsuarioController implements Serializable {
             items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe.Ingrese otro.", ""));
         } else {
-            Usuario u2 = getFacade().existePersonaRegistradoAdmin(selected.getIdPersona(),selected.getRol()); 
-           if(u2!=null){
-               items = null;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
-           }else{
+            Usuario u2 = getFacade().existePersonaRegistradoAdmin(selected.getIdPersona(), selected.getRol());
+            if (u2 != null) {
+                items = null;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
+            } else {
                 create();
-           }
+            }
         }
     }
 
@@ -333,26 +324,25 @@ public class UsuarioController implements Serializable {
             items = null;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe.Ingrese otro.", ""));
         } else {
-             Usuario u2 = getFacade().existePersonaRegistradoAdmin2(selected.getIdPersona(),selected.getRol(),selected.getIdUsuario()); 
-           if(u2!=null){
-               items = null;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
-           }else{
+            Usuario u2 = getFacade().existePersonaRegistradoAdmin2(selected.getIdPersona(), selected.getRol(), selected.getIdUsuario());
+            if (u2 != null) {
+                items = null;
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "La Persona y Rol ya existe en otro usuario. Seleccione otro.", ""));
+            } else {
                 update();
-           }
+            }
         }
-        }
-    
+    }
 
     public void verificarClave() {
         mensaje = "";
         ver = false;
-        if (selected.getClave().trim() == null || "".equals(selected.getClave().trim())) {
+        if (claveIngresada.trim() == null || "".equals(selected.getClave().trim())) {
             ver = false;
             mensaje = "Complete el campo clave. Al menos 6 caracteres";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete el campo clave.", ""));
         } else {
-            if (selected.getClave().length() <= 5) {
+            if (claveIngresada.length() <= 5) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Clave nueva muy corta. Ingrese al menos 6 caracteres", ""));
             } else {
                 if (!claveAntigua.equals(selected.getClave())) {
@@ -367,10 +357,11 @@ public class UsuarioController implements Serializable {
             }
         }
     }
+
     public void verficarUsuario() {
         mensaje2 = "";
         ver2 = false;
-        if (user.trim()== null || "".equals(user.trim())) {
+        if (user.trim() == null || "".equals(user.trim())) {
             ver2 = false;
             mensaje2 = "Complete el campo usuario. Al menos 6 caracteres";
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Complete el campo usuario.", ""));
@@ -380,7 +371,7 @@ public class UsuarioController implements Serializable {
             } else {
                 Usuario u = getFacade().existeUsuarioRegistrado(AccesoBean.obtenerIdPersona().getIdUsuario(), user.trim());
                 if (u != null) {
-                    user="";
+                    user = "";
                     ver2 = false;
                     mensaje2 = "El usuario ya existe. Ingrese otro.";
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "El usuario ya existe. Ingrese otro.", ""));
@@ -430,4 +421,4 @@ public class UsuarioController implements Serializable {
 //        }
 //        return descencri;
 //    }
-  }
+}

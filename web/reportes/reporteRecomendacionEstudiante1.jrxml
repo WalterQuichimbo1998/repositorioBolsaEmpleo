@@ -122,7 +122,7 @@ WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDE
 				<imageExpression><![CDATA["logo_senescyt.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement mode="Transparent" x="98" y="104" width="81" height="24" backcolor="#EAEAEB" uuid="8196e17a-b64e-4f59-b25a-76850d72dc0c"/>
+				<reportElement mode="Transparent" x="94" y="104" width="85" height="24" backcolor="#EAEAEB" uuid="8196e17a-b64e-4f59-b25a-76850d72dc0c"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -136,7 +136,7 @@ WHERE persona.id_carrera=$P{carrera} AND persona.id_promocion=$P{promocion} ORDE
 				<textFieldExpression><![CDATA[$F{promocion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="405" y="104" width="66" height="24" backcolor="#EAEAEB" uuid="9c9b3d2f-54ab-45cd-8a24-b15fe8ff8eb4"/>
+				<reportElement mode="Transparent" x="404" y="104" width="67" height="24" backcolor="#EAEAEB" uuid="9c9b3d2f-54ab-45cd-8a24-b15fe8ff8eb4"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>

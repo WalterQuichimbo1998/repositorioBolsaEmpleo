@@ -32,17 +32,24 @@ public class PersonaFacade extends AbstractFacade<Persona> {
     }
 
     public List<Persona> listaPersona(Integer n) {
-        Query q = em.createNativeQuery("SELECT * FROM persona WHERE id_persona =" + n + ";", Persona.class);
-        List<Persona> lista = q.getResultList();
+        List<Persona> lista = null;
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM persona WHERE id_persona =" + n + ";", Persona.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
-    
 
     public List<Persona> listaEstudiantes() {
-        Query q = em.createNativeQuery("SELECT * FROM persona\n"
-                + " LEFT JOIN usuario ON usuario.id_persona=persona.id_persona \n"
-                + "WHERE usuario.rol='ESTUDIANTE';", Persona.class);
-        List<Persona> lista = q.getResultList();
+        List<Persona> lista = null;
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM persona\n"
+                    + " LEFT JOIN usuario ON usuario.id_persona=persona.id_persona \n"
+                    + "WHERE usuario.rol='ESTUDIANTE';", Persona.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
         return lista;
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="656bc1f7-d255-464e-a73e-ac1e66a46bc6">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="id" class="java.lang.Integer">
@@ -144,49 +144,49 @@ WHERE persona.id_persona=$P{id} ORDER BY experiencia_laboral.fecha_inicio DESC]]
 				<imageExpression><![CDATA["logo_senescyt.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement mode="Transparent" x="302" y="118" width="82" height="20" backcolor="#EAEAEB" uuid="9c9b3d2f-54ab-45cd-8a24-b15fe8ff8eb4"/>
+				<reportElement mode="Transparent" x="294" y="118" width="92" height="20" backcolor="#EAEAEB" uuid="9c9b3d2f-54ab-45cd-8a24-b15fe8ff8eb4"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CARRERA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="385" y="118" width="266" height="20" uuid="1bce907d-68fc-43b3-9b9b-0c11573d022c"/>
+				<reportElement x="387" y="118" width="266" height="20" uuid="1bce907d-68fc-43b3-9b9b-0c11573d022c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{carrera}==null ? "":$F{carrera}+"")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="302" y="98" width="82" height="20" uuid="2d88c54a-ee50-46d9-9059-be08ffb73537"/>
+				<reportElement x="294" y="98" width="92" height="20" uuid="2d88c54a-ee50-46d9-9059-be08ffb73537"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTUDIANTE:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="385" y="98" width="266" height="20" uuid="394d90dd-5dfb-40f3-8f40-72e62024994b"/>
+				<reportElement x="387" y="98" width="266" height="20" uuid="394d90dd-5dfb-40f3-8f40-72e62024994b"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="385" y="138" width="266" height="20" uuid="d0117ecc-c6b8-4a6f-8f73-b4f9e14792eb"/>
+				<reportElement x="387" y="138" width="266" height="20" uuid="d0117ecc-c6b8-4a6f-8f73-b4f9e14792eb"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[($F{promocion}==null ? "":$F{promocion}+"")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="302" y="138" width="82" height="20" backcolor="#EAEAEB" uuid="3b49abf4-eb7e-45e4-b6c8-1985a1602c74"/>
+				<reportElement mode="Transparent" x="294" y="138" width="92" height="20" backcolor="#EAEAEB" uuid="3b49abf4-eb7e-45e4-b6c8-1985a1602c74"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PROMOCIÓN:]]></text>
 			</staticText>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="230" y="93" width="64" height="68" uuid="32943025-32ce-4f24-8893-fc7754dc1551"/>
+				<reportElement x="224" y="93" width="64" height="68" uuid="32943025-32ce-4f24-8893-fc7754dc1551"/>
 				<graphicElement>
 					<pen lineWidth="0.25" lineColor="#454545"/>
 				</graphicElement>
@@ -324,7 +324,7 @@ WHERE persona.id_persona=$P{id} ORDER BY experiencia_laboral.fecha_inicio DESC]]
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="276" y="6" width="256" height="20" uuid="b40e80fe-adab-4fee-bd11-e123da568f04"/>
+				<reportElement x="257" y="6" width="303" height="20" uuid="b40e80fe-adab-4fee-bd11-e123da568f04"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11"/>
 				</textElement>

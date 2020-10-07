@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:composition template="../administrador.xhtml">
 
         <ui:define name="link">
@@ -43,10 +44,10 @@
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  paginatorPosition="bottom"
-                                 emptyMessage="No se encontraron datos..."
-                                 filteredValue="#{usuarioController.listaUsuario}"
+                                 emptyMessage="No se encontraron datos..."                                
                                  sortBy="#{item.idUsuario}"
-                                 sortOrder="descending">
+                                 sortOrder="descending"
+                                 filteredValue="#{usuarioController.listaUsuario}">
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
@@ -66,9 +67,9 @@
                         </p:column>
                         <p:column filterBy="#{item.clave}" sortBy="#{item.clave}" filterMatchMode="contains">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_clave}"/>
+                                <h:outputText value="#{bundle.ListUsuarioTitle_clave}"/> 
                             </f:facet>
-                            <h:outputText value="#{item.clave}"/>
+                            <h:outputText value="#{item.clave}"/> 
                         </p:column>
 
                         <p:column filterBy="#{item.idPersona.nombre}" sortBy="#{item.idPersona.nombre}"  filterMatchMode="contains">
@@ -96,17 +97,10 @@
                             <f:facet name="header">
                                 <h:outputText value="Perfil Habilitado"/>
                             </f:facet>
-                            <p:commandLink rendered="#{usuarioController.existePerfilPersona(item.idPersona)==true}"
-                                           style="#{item.rol eq 'ESTUDIANTE'?'':'display:none;'}">
-                                <img style="width: 30px;margin: 0;padding: 0;margin: auto;"     
-                                     src="#{request.contextPath}/resources/img/ok.png" ></img> 
-                            </p:commandLink>
-                            <p:commandLink rendered="#{usuarioController.existePerfilPersona(item.idPersona)==false}"
-                                           style="#{item.rol eq 'ESTUDIANTE'?'':'display:none;'}">
-                                <img  style="width: 26px;margin: 0;padding: 0;margin: auto;"     
-                                      src="#{request.contextPath}/resources/img/disable.png" ></img> 
-                            </p:commandLink>
-
+                            <img style="#{usuarioController.existePerfilPersona(item.idPersona) eq true and item.rol =='ESTUDIANTE'?'':'display:none;'} width: 30px;margin: 0;padding: 0;margin: auto;"     
+                                 src="#{request.contextPath}/resources/img/ok.png" ></img> 
+                            <img style="#{usuarioController.existePerfilPersona(item.idPersona) eq false and item.rol =='ESTUDIANTE'?'':'display:none;'} width: 30px;margin: 0;padding: 0;margin: auto;"     
+                                 src="#{request.contextPath}/resources/img/disable.png" ></img> 
                         </p:column>
                         <f:facet name="footer">
                             <h:outputLabel value="Total Usuarios registrados: " style="font-size: 17px; font-weight: normal"/>

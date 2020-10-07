@@ -38,7 +38,16 @@
                         <h:outputText value="#{bundle.ViewPersonaLabel_telefono}" style="font-weight: bold;"/>
                         <h:outputText value="#{personaController.selected.telefono}" title="#{bundle.ViewPersonaTitle_telefono}"/>
                         <h:outputText value="#{bundle.ViewPersonaLabel_genero}" style="font-weight: bold;"/>
-                        <h:outputText value="#{personaController.selected.genero ==0? 'MASCULINO':'FEMENINO'}" title="#{bundle.ViewPersonaTitle_genero}"/>
+                        <c:if test="#{personaController.selected.genero eq 0}">
+                        <h:outputText value="Masculino" title="#{bundle.ViewPersonaTitle_genero}"/>
+                        </c:if>
+                        <c:if test="#{personaController.selected.genero eq 1}">
+                        <h:outputText value="Femenino" title="#{bundle.ViewPersonaTitle_genero}"/>
+                        </c:if>
+                        <c:if test="#{personaController.selected.genero eq null}">
+                        <h:outputText value="" title="#{bundle.ViewPersonaTitle_genero}"/>
+                        </c:if>
+                        
                         <h:outputText value="#{bundle.ViewPersonaLabel_fechaNacimiento}" style="font-weight: bold;"/>
                         <h:outputText value="#{personaController.selected.fechaNacimiento}" title="#{bundle.ViewPersonaTitle_fechaNacimiento}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
