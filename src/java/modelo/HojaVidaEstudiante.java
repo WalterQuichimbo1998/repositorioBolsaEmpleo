@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "HojaVidaEstudiante.findAll", query = "SELECT h FROM HojaVidaEstudiante h")
     , @NamedQuery(name = "HojaVidaEstudiante.findByIdHojaVidaEstudiante", query = "SELECT h FROM HojaVidaEstudiante h WHERE h.idHojaVidaEstudiante = :idHojaVidaEstudiante")
      ,@NamedQuery(name = "HojaVidaEstudiante.findByIdPersona", query = "SELECT h FROM HojaVidaEstudiante h WHERE h.idPersona = :id")
-     ,@NamedQuery(name = "HojaVidaEstudiante.findByIdPersonaEstado", query = "SELECT h FROM HojaVidaEstudiante h WHERE h.idPersona = :id AND h.estado=:estado")
-
+     ,@NamedQuery(name = "HojaVidaEstudiante.findByIdPersona", query = "SELECT h FROM HojaVidaEstudiante h WHERE h.idPersona = :id")
+,@NamedQuery(name = "HojaVidaEstudiante.findByIdPersonaEstado", query = "SELECT h FROM HojaVidaEstudiante h WHERE h.idPersona = :id AND h.estado=:estado")
 })
 public class HojaVidaEstudiante implements Serializable {
 

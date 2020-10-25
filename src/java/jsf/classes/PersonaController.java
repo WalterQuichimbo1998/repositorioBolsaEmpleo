@@ -49,6 +49,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
 //import org.apache.commons.codec.binary.Base64;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -60,7 +61,7 @@ public class PersonaController implements Serializable {
 
     @EJB
     private sessions.beans.PersonaFacade ejbFacade;
-    
+
     @EJB
     private sessions.beans.ProvinciaFacade ejbFacadeP;
     @EJB
@@ -312,8 +313,7 @@ public class PersonaController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
-         }
-        
+        }
     }
 
     public List<Persona> getItems() {
@@ -522,10 +522,10 @@ public class PersonaController implements Serializable {
                         }
                         selected.setFoto("foto/" + nombre);
                         if (!"requerido/sin_foto_perfil.png".equals(selected.getFoto())) {
-                            cargar(nombre, event);
+                            cargar(nombre, event.getFile().getInputstream());
                             actualizarFoto();
                         } else {
-                            cargar(nombre, event);
+                            cargar(nombre, event.getFile().getInputstream());
                             actualizarFoto();
                         }
                     } catch (Exception exx) {
@@ -543,24 +543,21 @@ public class PersonaController implements Serializable {
         }
     }
 
-    public void cargar(String nombre, FileUploadEvent event) {
+    public void cargar(String nombreArchivo, InputStream original) {
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext(); 
+        String path = servletContext.getRealPath("") + File.separatorChar + "resources" + File.separatorChar + "foto" + File.separatorChar + nombreArchivo;
+        File f = null;
         try {
-            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-            String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
-            String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "foto" + File.separator + nombre;
-            FileOutputStream out = new FileOutputStream(pathDefinition);
-            InputStream in = event.getFile().getInputstream();
-            if ((in != null)) {
-                int read = 0;
-                byte[] bytes = new byte[1024];
-                while ((read = in.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
-                }
-                in.close();
-                out.flush();
-                out.close();
+            f = new File(path);
+            FileOutputStream out = new FileOutputStream(f.getAbsolutePath());
+            int c = 0;
+            while ((c = original.read()) >= 0) {
+                out.write(c);
             }
+            out.flush();
+            out.close();
         } catch (IOException e) {
+            System.out.println("No se pudo cargar la imagen");
         }
     }
 

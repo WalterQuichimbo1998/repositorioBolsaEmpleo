@@ -28,6 +28,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import org.primefaces.model.UploadedFile;
 
 @Named("imagenPortadaController")
@@ -220,26 +221,12 @@ public class ImagenPortadaController implements Serializable {
                             int n2 = (int) (Math.random() * file.getFileName().length());
                             nombre = String.valueOf(n) +String.valueOf(n2)+ "-PortadaSeguimiento" + extension;
                             this.selected.setImagen(nombre);
-                            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                            String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
-                            String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + nombre;
-                            FileOutputStream out = new FileOutputStream(pathDefinition);
-                            InputStream in = file.getInputstream();
-                            if ((in != null)) {
-                                int read = 0;
-                                byte[] bytes = new byte[1024];
-                                while ((read = in.read(bytes)) != -1) {
-                                    out.write(bytes, 0, read);
-                                }
-                                in.close();
-                                out.flush();
-                                out.close();
-                                create();
-                                file = null;
-
-                            }
-                        } catch (IOException e) {
-                        }
+                            cargar(nombre, file.getInputstream());
+                        create();
+                        file = null;
+                    } catch (IOException e) {
+                        System.out.println("No se pudo cargar la imagen");
+                    }
                     } else {
                         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Los píxeles de la imagen no son los requeridos. - Tamaño permitido 1300 x 500", ""));
                     }
@@ -286,26 +273,9 @@ public class ImagenPortadaController implements Serializable {
                             String[] ruta = selected.getImagen().split(Pattern.quote("."));
                             nombre = ruta[0] + extension;
                             this.selected.setImagen(nombre);
-                            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-                            String realPath = UtilPath.getPathDefinida(ec.getRealPath("/"));
-                            String pathDefinition = realPath + File.separator + "web" + File.separator + "resources" + File.separator + "portada" + File.separator + nombre;
-                            FileOutputStream out = new FileOutputStream(pathDefinition);
-                            InputStream in = file.getInputstream();
-
-                            if ((in != null)) {
-                                int read = 0;
-                                byte[] bytes = new byte[1024];
-                                while ((read = in.read(bytes)) != -1) {
-                                    out.write(bytes, 0, read);
-                                }
-                                in.close();
-                                out.flush();
-                                out.close();
-                                update();
-                                file = null;
-
-                            }
-
+                            cargar(nombre, file.getInputstream());
+                            update();
+                            file = null;
                         } catch (IOException e) {
                         }
                     } else {
@@ -322,6 +292,23 @@ public class ImagenPortadaController implements Serializable {
         }
     }
 
+    public void cargar(String nombreArchivo, InputStream original) {
+        ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext(); 
+        String path = servletContext.getRealPath("") + File.separatorChar + "resources" + File.separatorChar + "portada" + File.separatorChar + nombreArchivo;
+        File f = null;
+        try {
+            f = new File(path);
+            FileOutputStream out = new FileOutputStream(f.getAbsolutePath());
+            int c = 0;
+            while ((c = original.read()) >= 0) {
+                out.write(c);
+            }
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            System.out.println("No se pudo cargar la imagen");
+        }
+    }
     public void eliminarImagen() {
         ExternalContext ecDelete = FacesContext.getCurrentInstance().getExternalContext();
         String realPathDelete = UtilPath.getPathDefinida(ecDelete.getRealPath("/"));
