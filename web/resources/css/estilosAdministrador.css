@@ -1013,6 +1013,34 @@ margin: auto;
     -webkit-box-shadow: 0px 0px 1px 1px #454545;
     cursor: pointer;
 }
+.combo_send.ui-selectonemenu{
+    width: 100% !important;
+    padding: 4px 0px;
+   
+}
+.combo_send.ui-selectonemenu-label {
+    width: 100% !important;
+    font-weight: 100 !important;
+     font-size: 18px !important;
+}
+.caja_mensaje1{
+    width: auto;padding: 10px 10px;
+    margin-bottom: 10px;
+    background: #a5d8f1;border-radius: 4px 4px;
+    text-align: left;
+}
+.caja_mensaje1:hover{
+    background: #97d2ef;
+}
+.caja_mensaje2{
+    width: auto;padding: 10px 10px;
+    margin-bottom: 10px;
+    background: #e8db7d;border-radius: 4px 4px;
+    text-align: left;
+}
+.caja_mensaje2:hover{
+    background: #f2e16a;
+}
 @media only screen and (min-width: 1440px){ 
     .contenedor{
         width: 1366px;

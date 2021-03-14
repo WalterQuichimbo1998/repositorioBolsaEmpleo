@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../administrador.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Envió de Información" class="btn2 bbt" action="/administrador/information/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
+            </li>  
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Envió de Información" style="color: #086A87;" action="/administrador/information/List?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+
+            <h3 class="titulo_p">Envió de Información</h3>
+            <h:form id="send_form" style="text-align: left" enctype="multipart/form-data">
+                <p:panel style="width: 100% !important;">
+                    <br/>
+                    <div style="width: 90%;margin: auto;">
+
+                        <h3 class="texto" style="width: 100%;color:#445A6F;margin: auto;">Carrera</h3>
+                        <p:selectOneMenu id="idCarrera" value="#{informacion.carrera}" class="combo_send"
+                                         effect="fade" filter="true" filterMatchMode="contains" height="180" panelStyle="width:180px" 
+                                         required="true" requiredMessage="Seleccione una carrera">                   
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"
+                                           var="idCarreraItem"
+                                           itemValue="#{idCarreraItem}"/>
+
+                        </p:selectOneMenu>
+                        <br/>
+                        <br/>
+                        <h3 class="texto" style="width: 100%;color:#445A6F;margin: auto;">Promoción</h3>
+                        <p:selectOneMenu id="idPromocion" value="#{informacion.promocion}" class="combo_send"
+                                         effect="fade" filter="true" filterMatchMode="contains" height="180" panelStyle="width:180px"
+                                         required="true" requiredMessage="Seleccione una promación">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{promocionController.itemsAvailableSelectOne}"
+                                           var="idPromocionItem"
+                                           itemValue="#{idPromocionItem}"/>
+                        </p:selectOneMenu>
+
+                        <br/>
+                        <br/>
+                        <h3 class="texto" style="width: 100%;text-align: left;color:#445A6F;margin: auto;">Mensaje <p:outputLabel value="!" style="font-size: 17px !important;color: #039be5;font-weight: 600;padding: 0px 3px !important;" title="Ingrese un mensaje sin salto de línea."/></h3>
+                        <p:inputTextarea id="mensaje" value="#{informacion.mensaje}" maxlength="700" counter="con" autoResize="false" 
+                                         counterTemplate="Tiene {0} caracteres disponibles." style="width:100% !important;height: 100px !important;"
+                                         required="true" requiredMessage="Ingrese un mensaje"/>
+                        <h:outputText id="con" class="p-d-block" />
+                        <br/>
+                        <br/>
+                        <h3 class="texto" style="width: 100%;text-align: left;color:#445A6F;margin: auto;">Link</h3>
+                        <p:inputText id="link" value="#{informacion.link}" style="width:100% !important;padding: 6px 6px !important;" autocomplete="off"/>
+                        <br/>
+                        <br/>
+                        <p:commandButton styleClass="crear" value="Enviar Información" icon="ui-icon-document" 
+                                         oncomplete="PF('form_enviar').show()" update=":enviarMensaje"/>
+                    </div>
+                    <br/>
+                </p:panel>
+            </h:form>
+            <p:dialog id="form_enviar" widgetVar="form_enviar" modal="false" resizable="false" closeOnEscape="true"
+                      appendTo="@(body)"  showEffect="clip" hideEffect="clip" header="Enviar"
+                      style="background: #f2f2f2;box-shadow: none;box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.75) !important;" >
+                <h:form id="enviarMensaje">
+                    <h2 style="text-align: center; font-family: Arial">¿Está seguro de enviar?</h2>
+                    <p:commandButton styleClass="botonA" ajax="false" actionListener="#{informacion.enviarCorreo()}" 
+                                     value="Si"  oncomplete="PF('form_enviar').hide()"/>
+                    <p:commandButton styleClass="botonC" value="No" oncomplete="PF('form_enviar').hide()"/>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+
+</html>

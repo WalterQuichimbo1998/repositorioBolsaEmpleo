@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./Estudiante.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/estudiante/Estudiante?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Ofertas Laborales" class="btn2" actionListener="#{ofertaLaboralController.listaO()}" action="/estudiante/ofertaLaboral/List?faces-redirect=true" />
+            </li>
+            <li>
+                <p:commandButton value="Mensajes" class="btn2 bbt" action="/estudiante/mensajeIndividual?faces-redirect=true" />
+            </li>
+            <li id="ingresar0">
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_perfil').show()" />
+            </li>
+            <li id="ingresar1">                                   
+                <p:commandLink title="#{accesoBean.usuarioLogueado()}"  oncomplete="PF('form_perfil').show()" id="foto">
+                    <p:graphicImage styleClass="foto_perfil_inicio" name="#{personaController.selected.foto}">
+                        <div class="circulo_verde"></div>
+                    </p:graphicImage>
+                </p:commandLink>
+            </li>
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio"  action="/empleador/Empleador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mis Postulaciones"  action="/estudiante/postulante/List?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mensajes" style="color: #086A87;" action="/estudiante/mensajeIndividual?faces-redirect=true"/>
+        </ui:define>
+
+        <ui:define name="caja">
+            <h3 class="titulo_p">Mensajes</h3>
+            <p:panel>
+                <h:form id="form" rendered="#{mensajeController.postulante!=null}">
+                    <p:commandButton value="Nuevo Mensaje" styleClass="crear" actionListener="#{mensajeController.prepareCreate()}"
+                                     oncomplete="PF('mensajeDialog').show()" update=":mensajeForm"/>
+                    <br/>
+                    <br/>
+                     <p:poll interval="5" listener="#{mensajeController.recargar()}" update="list" />
+                    <h:panelGroup id="list">
+                        <ui:repeat value="#{mensajeController.items}" var="item">
+                            <p:outputPanel rendered="#{item.emisor==1}">
+                                <div class="caja_mensaje1">
+                                    <p:commandButton icon="ui-icon-trash" style="float: right;" rendered="#{item.estado==1}"
+                                                     actionListener="#{mensajeController.setSelected(item)}" 
+                                                     oncomplete="PF('delete_mensaje').show()" update=":DeleteMensaje"/>
+                                    <a style="color: #454545;font-style: italic;"><b>Enviado: </b>#{item.fechaEnvio()}</a> <br/><br/>
+                                    <h:outputText style="font-size: 14px;color: #024959" value="#{item.estado==1?item.mensaje:'Mensaje eliminado'}"/>
+                                </div>
+                            </p:outputPanel>
+                            <p:outputPanel rendered="#{item.emisor==2}">
+                                <div class="caja_mensaje2">
+                                    <a style="color: #454545;font-style: italic;"><b>Recibido: </b>#{item.fechaEnvio()}</a> <br/><br/>
+                                    <h:outputText style="font-size: 14px;color: #024959" value="#{item.estado==1?item.mensaje:'Mensaje eliminado'}"/>
+                                </div>
+                            </p:outputPanel>
+
+                        </ui:repeat>
+                    </h:panelGroup>
+                </h:form>
+            </p:panel>
+            <p:dialog id="mensajeDialog" widgetVar="mensajeDialog" modal="false" resizable="false" appendTo="@(body)" header="Nuevo Mensaje"
+                      closeOnEscape="true" showEffect="clip" hideEffect="clip">
+                <h:form id="mensajeForm">
+                    <h:panelGroup id="display">
+                        <h:panelGrid columns="1" rendered="#{mensajeController.selected != null}" style="border: none;">
+                            <p:outputLabel value="Mensaje:" for="mensaje" style="font-weight: bold"/>
+                            <p:inputTextarea id="mensaje" value="#{mensajeController.selected.mensaje}" maxlength="300" counter="con" autoResize="false" 
+                                             counterTemplate="{0} carácteres disponibles." style="width:500px !important;height: 100px !important;"
+                                             required="true" requiredMessage="Ingrese un mensaje"/>
+                            <h:outputText id="con" class="p-d-block" />
+                            <p:column/>
+                            <p:column>
+                                <p:commandButton styleClass="btn_g" actionListener="#{mensajeController.createEsutdiante()}" value="#{bundle.Save}" update="display,:form:list,:growl" oncomplete="handleSubmit(args,'mensajeDialog');"/>
+                                <p:commandButton styleClass="btn_s" value="#{bundle.Cancel}" immediate="true" oncomplete="PF('mensajeDialog').hide();"/>
+                            </p:column>
+                        </h:panelGrid>
+
+                    </h:panelGroup>
+                </h:form>
+                
+            </p:dialog>
+            <p:dialog id="delete_mensaje" widgetVar="delete_mensaje" modal="false" resizable="false" closeOnEscape="true"
+                      appendTo="@(body)"  showEffect="clip" hideEffect="clip" header="Aviso"
+                      style="background: #f2f2f2;box-shadow: none;box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.75) !important;" >
+                <h:form id="DeleteMensaje">
+                    <h2 style="text-align: center; font-family: Arial">Eliminar Mensaje</h2>
+                    <p:commandButton styleClass="botonA" actionListener="#{mensajeController.eliminar()}" 
+                                     update=":form:list,:growl" value="Si"  oncomplete="PF('delete_mensaje').hide()"/>
+                    <p:commandButton styleClass="botonC" value="No" oncomplete="PF('delete_mensaje').hide()"/>
+                </h:form>
+            </p:dialog>
+        </ui:define>
+
+    </ui:composition>
+</html>

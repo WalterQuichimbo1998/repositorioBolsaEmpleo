@@ -39,6 +39,7 @@ public class PostulanteController implements Serializable {
     private sessions.beans.HojaVidaEstudianteFacade ejbFacadeHoja;
 
     private List<Postulante> items = null;
+    private List<Postulante> listaConfirmada = null;
     private List<Postulante> lista = null;
     private List<Postulante> lista_2 = null;
     private List<Postulante> listaP = null;  
@@ -265,7 +266,7 @@ public class PostulanteController implements Serializable {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PostulanteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
-
+listaConfirmada=null;
         }
     }
 
@@ -277,6 +278,7 @@ public class PostulanteController implements Serializable {
             lista = getFacade().lista(AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona());
             listaPostulantes = null;
             listaPostulantes = getFacade().listaPostulantes2();
+            listaConfirmada=null;
         } else {
             this.selected.setConfirmacion(false);
             persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PostulanteDenegado"));
@@ -311,6 +313,7 @@ public class PostulanteController implements Serializable {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
             lista = null;
+            listaConfirmada=null;
             lista = getFacade().lista(AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona());
         }
     }
@@ -327,6 +330,18 @@ public class PostulanteController implements Serializable {
         }
         return lista;
     }
+
+    public List<Postulante> getListaConfirmada() {
+         if (listaConfirmada == null) {
+            listaConfirmada = getFacade().listaConfirmadas(AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona());
+        }
+        return listaConfirmada;
+    }
+
+    public void setListaConfirmada(List<Postulante> listaConfirmada) {
+        this.listaConfirmada = listaConfirmada;
+    }
+ 
   
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {

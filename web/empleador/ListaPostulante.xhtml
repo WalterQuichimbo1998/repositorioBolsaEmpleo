@@ -79,6 +79,10 @@
                             <br/>
                             <h:outputLabel rendered="#{item.estado_postulante==true}" value="#{item.confirmacion==true ? 'El puesto de trabajo ha sido confirmado.':'Por confirmar por parte del postulante.'}"
                                            style="margin-top:5px; #{item.confirmacion==true ? 'color:green;font-size:18px;':'color:#039BE5;font-size:16px;'}" />
+                            <br/>
+                            <p:commandButton rendered="#{item.confirmacion==true}" styleClass="editar" value="Enviar mensaje" 
+                                             actionListener="#{mensajeController.setPostulante(item)}"
+                                             action="/empleador/mensajeIndividual?faces-redirect=true"/>
                         </p:column>
 
                         <p:column style="width:110px" sortBy="#{item.estado_postulante}" filterBy="#{item.ofertaLaboralIdOferta.cargoSolicitado}"  filterMatchMode="contains"

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../administrador.xhtml">
+        <ui:define name="link">
+            <li>
+                <p:commandButton value="Inicio" class="btn2" action="/administrador/administrador?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Personas" class="btn2" action="/administrador/persona/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Usuarios" class="btn2" action="/administrador/usuario/List?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Ofertas Laborales" class="btn2 bbt" action="/administrador/empresa/ofertas?faces-redirect=true"/>
+            </li>
+            <li>
+                <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
+            </li>  
+         
+        </ui:define>
+        <ui:define name="dir">
+            <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Ofertas Laborales"  action="/administrador/empresa/ofertas?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Lista Postulantes" action="/administrador/empresa/ListaPostulantes?faces-redirect=true"/>
+            <h:commandLink class="prin" value="/" disabled="true"/>
+            <h:commandLink class="prin" value="Mensajes" style="color: #086A87;" action="/administrador/empresa/mensajeIndividual?faces-redirect=true"/>
+        </ui:define>
+        <ui:define name="caja">
+            <h3 class="titulo_p">Mensajes</h3>
+            <p:panel>
+                <h:form id="form" style="text-align: center;" rendered="#{mensajeController.postulante!=null}">
+                    <h2>#{mensajeController.postulante.ofertaLaboralIdOferta.cargoSolicitado}</h2>
+                   
+                    <br/>
+                  
+                    <h:panelGroup id="list">
+                        <ui:repeat value="#{mensajeController.items}" var="item">
+                            <p:outputPanel rendered="#{item.emisor==1}">
+                                <div class="caja_mensaje1">
+                                    <a style="color: #454545;font-style: italic;"><b>Estudiante: </b>#{item.fechaEnvio()}</a> <br/><br/>
+                                    <h:outputText style="font-size: 14px;color: #024959" value="#{item.estado==1?item.mensaje:'Mensaje eliminado'}"/>
+                                </div>
+                            </p:outputPanel>
+                            <p:outputPanel rendered="#{item.emisor==2}">
+                                <div class="caja_mensaje2">
+                                    <a style="color: #454545;font-style: italic;"><b>Empleador: </b>#{item.fechaEnvio()}</a> <br/><br/>
+                                    <h:outputText style="font-size: 14px;color: #024959" value="#{item.estado==1?item.mensaje:'Mensaje eliminado'}"/>
+                                </div>
+                            </p:outputPanel>
+                        </ui:repeat>
+                    </h:panelGroup>
+
+                </h:form>
+            </p:panel>
+            
+        </ui:define>
+
+    </ui:composition>
+</html>

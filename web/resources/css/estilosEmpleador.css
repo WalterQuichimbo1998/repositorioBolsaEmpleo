@@ -1261,6 +1261,54 @@ margin: auto;
     text-align: left;
 
 }
+.btn_g.ui-button{
+    background: #57a3f4;
+    font-size: 13px !important;
+    border:none;;
+    border-radius: 3px;
+    box-shadow: none;
+    text-shadow:none;
+    outline: none;
+    transition: all .3s ease;
+    color: #000;
+
+}
+.btn_g:hover{
+    color: white;
+}
+.btn_s.ui-button{
+    background: #e26c6c;
+    font-size: 13px !important;
+    border:none;;
+    border-radius: 3px;
+    box-shadow: none;
+    text-shadow:none;
+    outline: none;
+    transition: all .3s ease;
+    color: #000;
+
+}
+.btn_s:hover{
+    color: white;
+}
+.caja_mensaje1{
+    width: auto;padding: 10px 10px;
+    margin-bottom: 10px;
+    background: #a5d8f1;border-radius: 4px 4px;
+    text-align: left;
+}
+.caja_mensaje1:hover{
+    background: #97d2ef;
+}
+.caja_mensaje2{
+    width: auto;padding: 10px 10px;
+    margin-bottom: 10px;
+    background: #e8db7d;border-radius: 4px 4px;
+    text-align: left;
+}
+.caja_mensaje2:hover{
+    background: #f2e16a;
+}
 /*------------------Verificar eliminacion de empresa---------------->>>>>>>>>>*/
 .botonA.ui-button{
     width: 80px;

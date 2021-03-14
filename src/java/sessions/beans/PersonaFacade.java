@@ -40,6 +40,15 @@ public class PersonaFacade extends AbstractFacade<Persona> {
         }
         return lista;
     }
+    public List<Persona> listaPersonasCarreraPromocion(Integer idC,Integer idP) {
+        List<Persona> lista = null;
+        try {
+            Query q = em.createNativeQuery("SELECT id_persona,correo FROM persona WHERE id_carrera ='" + idC + "' AND id_promocion='"+idP+"';", Persona.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;
+    }
 
     public List<Persona> listaEstudiantes() {
         List<Persona> lista = null;

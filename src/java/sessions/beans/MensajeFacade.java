@@ -5,19 +5,19 @@
  */
 package sessions.beans;
 
-import modelo.HojaVidaEstudiante;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import modelo.Mensaje;
 
 /**
  *
- * @author TOSHIBA
+ * @author CyberMás
  */
 @Stateless
-public class HojaVidaEstudianteFacade extends AbstractFacade<HojaVidaEstudiante> {
+public class MensajeFacade extends AbstractFacade<Mensaje> {
 
     @PersistenceContext(unitName = "EmpleoISTLPU")
     private EntityManager em;
@@ -27,19 +27,16 @@ public class HojaVidaEstudianteFacade extends AbstractFacade<HojaVidaEstudiante>
         return em;
     }
 
-    public HojaVidaEstudianteFacade() {
-        super(HojaVidaEstudiante.class);
+    public MensajeFacade() {
+        super(Mensaje.class);
     }
-
-    public List<HojaVidaEstudiante> listaHojaEstudiante(Integer n) {
-        List<HojaVidaEstudiante> lista = null;
+    public List<Mensaje> listaMensajes(Integer idP,Integer idO) {
+        List<Mensaje> lista = null;
         try {
-            Query q = em.createNativeQuery("SELECT * FROM hoja_vida_estudiante WHERE id_persona =" + n + ";", HojaVidaEstudiante.class);
+            Query q = em.createNativeQuery("SELECT * FROM mensaje WHERE id_postulante ='" + idP + "' AND id_oferta='"+idO+"' ORDER BY fecha_registro DESC, id_mensaje DESC;", Mensaje.class);
             lista = q.getResultList();
         } catch (Exception e) {
         }
         return lista;
     }
-    
-
 }

@@ -108,7 +108,7 @@ public class OfertaLaboral implements Serializable {
       @Column(name = "fecha_creacion")
     @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
-      @Column(name = "estado")
+    @Column(name = "estado")
     private Boolean estado;
     public OfertaLaboral() {
     }

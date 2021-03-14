@@ -37,7 +37,16 @@ public class PostulanteFacade extends AbstractFacade<Postulante> {
     public List<Postulante> lista(Integer id) {
         List<Postulante> lista = null;
         try {
-            Query q = em.createNativeQuery("SELECT * FROM postulante WHERE persona_id_persona =" + id + ";", Postulante.class);
+            Query q = em.createNativeQuery("SELECT * FROM postulante WHERE persona_id_persona =" + id + " ORDER BY id_postulante DESC;", Postulante.class);
+            lista = q.getResultList();
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public List<Postulante> listaConfirmadas(Integer id) {
+        List<Postulante> lista = null;
+        try {
+            Query q = em.createNativeQuery("SELECT * FROM postulante WHERE persona_id_persona =" + id + " AND confirmacion=1 ORDER BY id_postulante DESC;", Postulante.class);
             lista = q.getResultList();
         } catch (Exception e) {
         }
@@ -71,7 +80,7 @@ public class PostulanteFacade extends AbstractFacade<Postulante> {
                     + "LEFT JOIN oferta_laboral ON oferta_laboral.id_oferta=postulante.oferta_laboral_id_oferta \n"
                     + "LEFT JOIN empresa ON empresa.id_empresa=oferta_laboral.id_empresa \n"
                     + "LEFT JOIN persona ON persona.id_persona=empresa.id_persona \n"
-                    + "WHERE persona.id_persona=" + AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona() + ";", Postulante.class);
+                    + "WHERE persona.id_persona=" + AccesoBean.obtenerIdPersona().getIdPersona().getIdPersona() + " ORDER BY postulante.id_postulante DESC;", Postulante.class);
             lista = q.getResultList();
         } catch (Exception e) {
         }
@@ -89,7 +98,7 @@ public class PostulanteFacade extends AbstractFacade<Postulante> {
                     + "LEFT JOIN oferta_laboral ON oferta_laboral.id_oferta=postulante.oferta_laboral_id_oferta \n"
                     + "LEFT JOIN empresa ON empresa.id_empresa=oferta_laboral.id_empresa \n"
                     + "LEFT JOIN persona ON persona.id_persona=empresa.id_persona \n"
-                    + "WHERE persona.id_persona=" + id + " AND fecha_postulante BETWEEN '" + f1 + "' AND '" + f2 + "';", Postulante.class);
+                    + "WHERE persona.id_persona=" + id + " AND fecha_postulante BETWEEN '" + f1 + "' AND '" + f2 + "' ORDER BY postulante.fecha_postulante DESC;", Postulante.class);
             lista = q.getResultList();
         } catch (Exception e) {
         }

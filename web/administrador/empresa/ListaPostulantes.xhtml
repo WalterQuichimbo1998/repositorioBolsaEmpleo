@@ -22,7 +22,7 @@
             <li>
                 <p:commandButton value="Cerrar Sesión" class="btn2 cs" oncomplete="PF('form_logout').show()" />
             </li>  
-            
+
         </ui:define>
         <ui:define name="dir">
             <h:commandLink class="prin" value="Inicio" action="/administrador/administrador?faces-redirect=true"/>
@@ -49,9 +49,9 @@
                                      sortOrder="descending">
                             <p:column style="width:110px;" sortBy="#{item.personaIdPersona.idPersona}" headerText="Foto">
                                 <p:graphicImage style="width: 92px;height: 92px;border-radius: 46px;margin: 0;padding: 0;margin: auto;
-                                     object-fit:cover;object-position:center center;
-                                     background-size: cover;"     
-                                     name="#{item.personaIdPersona.foto}"/> 
+                                                object-fit:cover;object-position:center center;
+                                                background-size: cover;"     
+                                                name="#{item.personaIdPersona.foto}"/> 
                             </p:column>
                             <p:column headerText="Postulante" sortBy="#{item.personaIdPersona.nombre}">
                                 <h:outputText value="#{item.personaIdPersona.nombre} #{item.personaIdPersona.apellido}" style="font-size: 18px;font-weight: bold"/>
@@ -64,7 +64,10 @@
                                 <h:outputText rendered="#{item.personaIdPersona.genero==1}" value="#{item.confirmacion==true ? 'Contratada':''}" style="font-size: 20px;font-weight: bold;color: #007bff"/>
                                 <h:outputText rendered="#{item.personaIdPersona.genero==0}" value="#{item.confirmacion==true ? 'Contratado':''}" style="font-size: 20px;font-weight: bold;color: #007bff"/>
                                 <h:outputText rendered="#{item.personaIdPersona.genero==null}" value="#{item.confirmacion==true ? 'Contratado':''}" style="font-size: 20px;font-weight: bold;color: #007bff"/>
-
+                                <br/>
+                                <p:commandButton rendered="#{item.confirmacion==true}" styleClass="editar" value="Ver mensajes" 
+                                                 actionListener="#{mensajeController.setPostulante(item)}"
+                                                 action="/administrador/empresa/mensajeIndividual?faces-redirect=true"/>
                                 <br/>
                             </p:column>
 

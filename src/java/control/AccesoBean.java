@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpServletResponse;
 import sessions.beans.HojaVidaEstudianteFacade;
 import sessions.beans.UsuarioFacade;
 
