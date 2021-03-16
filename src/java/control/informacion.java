@@ -27,7 +27,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import modelo.Carrera;
-import modelo.Persona;
 import modelo.Promocion;
 
 /**
@@ -42,6 +41,8 @@ public class informacion implements Serializable {
     private Promocion promocion = null;
     private String mensaje;
     private String link;
+    private String correo="tecnologicolimon@gmail.com";
+    private String clave="btidhxnmlqbkxdbs";
     @EJB
     private sessions.beans.PersonaFacade facadePersona;
 
@@ -72,6 +73,23 @@ public class informacion implements Serializable {
         this.mensaje = mensaje;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+    
+
     public String getLink() {
         return link;
     }
@@ -79,74 +97,11 @@ public class informacion implements Serializable {
     public void setLink(String link) {
         this.link = link;
     }
-//    public void mandarCorreo() throws IOException {
-//  // El correo gmail de envío
-//  String correoEnvia = "empleoistl2020@gmail.com";
-//  String claveCorreo = "awtzsoyoljctflic";
-// 
-//  // La configuración para enviar correo
-//  Properties properties = new Properties();
-//  properties.put("mail.smtp.host", "smtp.gmail.com");
-//  properties.put("mail.smtp.starttls.enable", "true");
-//  properties.put("mail.smtp.port", "587");
-//  properties.put("mail.smtp.auth", "true");
-//  properties.put("mail.user", correoEnvia);
-//  properties.put("mail.password", claveCorreo);
-// 
-//  // Obtener la sesion
-//  Session session = Session.getInstance(properties, null);
-// 
-//  try {
-//   // Crear el cuerpo del mensaje
-//   MimeMessage mimeMessage = new MimeMessage(session);
-// 
-//   // Agregar quien envía el correo
-//   mimeMessage.setFrom(new InternetAddress(correoEnvia, "Sistema de Seguimiento a egresados y graduados ISTL"));
-//    
-//   // Los destinatarios
-//   InternetAddress[] internetAddresses = {
-//     new InternetAddress("walterquichimbo@gmail.com")};
-// 
-//   // Agregar los destinatarios al mensaje
-//   mimeMessage.setRecipients(Message.RecipientType.TO,
-//     internetAddresses);
-// 
-//   // Agregar el asunto al correo
-//   mimeMessage.setSubject("Enviando Correo.");
-// 
-//   // Creo la parte del mensaje
-//   MimeBodyPart mimeBodyPart = new MimeBodyPart();
-//   mimeBodyPart.setText("Envío el correo.");
-// 
-//   // Crear el multipart para agregar la parte del mensaje anterior
-//   Multipart multipart = new MimeMultipart();
-//   multipart.addBodyPart(mimeBodyPart);
-// 
-//   // Agregar el multipart al cuerpo del mensaje
-//   mimeMessage.setContent(multipart);
-//   MimeBodyPart mimeBodyPartAdjunto = new MimeBodyPart();
-//mimeBodyPartAdjunto.attachFile("C:\\Users\\Cyber Más\\Desktop\\FICHA_ENCUENTROS.xlsx");
-//// Resto del codigo...
-////
-////
-//// Agregarlo al MultiPart
-//multipart.addBodyPart(mimeBodyPartAdjunto);
-// 
-//   // Enviar el mensaje
-//   Transport transport = session.getTransport("smtp");
-//   transport.connect(correoEnvia, claveCorreo);
-//   transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
-//   transport.close();
-// 
-//  } catch (UnsupportedEncodingException | MessagingException ex) {
-//  }
-//  System.out.println("Correo enviado");
-// }
-// 
+ 
     public void mandarCorreoInformativo1(InternetAddress[] address) {
         // El correo gmail de envío
-        String correoEnvia = "empleoistl2020@gmail.com";
-        String claveCorreo = "awtzsoyoljctflic";
+        String correoEnvia = correo;
+        String claveCorreo = clave;
         // La configuración para enviar correo
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -162,9 +117,6 @@ public class informacion implements Serializable {
             MimeMessage mimeMessage = new MimeMessage(session);
             // Agregar quien envía el correo
             mimeMessage.setFrom(new InternetAddress(correoEnvia, "ISTL"));
-//            // Los destinatarios
-//            InternetAddress[] internetAddresses = {new InternetAddress(
-//                "walterquichimbo@gmail.com")};
             // Agregar los destinatarios al mensaje
             mimeMessage.setRecipients(Message.RecipientType.TO, address);
             // Agregar el asunto al correo
@@ -213,8 +165,8 @@ public class informacion implements Serializable {
 
     public void mandarCorreoInformativo2(InternetAddress[] address) {
         // El correo gmail de envío
-        String correoEnvia = "empleoistl2020@gmail.com";
-        String claveCorreo = "awtzsoyoljctflic";
+        String correoEnvia = correo;
+        String claveCorreo = clave;
         // La configuración para enviar correo
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -230,9 +182,6 @@ public class informacion implements Serializable {
             MimeMessage mimeMessage = new MimeMessage(session);
             // Agregar quien envía el correo
             mimeMessage.setFrom(new InternetAddress(correoEnvia, "ISTL"));
-//            // Los destinatarios
-//            InternetAddress[] internetAddresses = {new InternetAddress(
-//                "walterquichimbo@gmail.com")};
             // Agregar los destinatarios al mensaje
             mimeMessage.setRecipients(Message.RecipientType.TO, address);
             // Agregar el asunto al correo
@@ -281,22 +230,13 @@ public class informacion implements Serializable {
 
     public void enviarCorreo() throws AddressException {
         if (carrera != null && promocion != null) {
-//            List<Persona> lista = new ArrayList<>();
         List<String> lista = new ArrayList<>();
         lista.add("walterquichimbo@gmail.com");
-//            lista = facadePersona.listaPersonasCarreraPromocion(carrera.getIdCarrera(), promocion.getIdPromocion());
             if(lista!=null){
                 InternetAddress[] address = new InternetAddress[lista.size()];
             for (int i = 0; i < lista.size(); i++) {
                     address[i] = new InternetAddress(lista.get(i));
             }
-//            if(lista!=null){
-//                InternetAddress[] address = new InternetAddress[lista.size()];
-//            for (int i = 0; i < lista.size(); i++) {
-//                if (lista.get(i).getCorreo() != null || !"".equals(lista.get(i).getCorreo())) {
-//                    address[i] = new InternetAddress(lista.get(i).getCorreo());
-//                }
-//            }
             if (link == null || "".equals(link)) {
                 mandarCorreoInformativo1(address);
             } else {
